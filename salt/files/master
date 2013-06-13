@@ -14,7 +14,7 @@
 #default_include: master.d/*.conf
 
 # The address of the interface to bind to
-#interface: 0.0.0.0
+interface: {{ salt['pillar.get']('salt_master:interface', '0.0.0.0') }}
 
 # The tcp port used by the publisher
 #publish_port: 4505
@@ -22,7 +22,7 @@
 # The user to run the salt-master as. Salt will update all permissions to
 # allow the specified user to run the master. If the modified files cause
 # conflicts set verify_env to False.
-#user: root
+user: {{ salt['pillar.get']('salt_master:user', 'root') }}
 
 # Max open files
 # Each minion connecting to the master uses AT LEAST one file descriptor, the
@@ -45,7 +45,7 @@
 # The number of worker threads to start, these threads are used to manage
 # return calls made from minions to the master, if the master seems to be
 # running slowly, increase the number of threads
-#worker_threads: 5
+worker_threads: {{ salt['pillar.get']('salt_master:worker_threads', '5') }}
 
 # The port used by the communication interface. The ret (return) port is the
 # interface used for the file server, authentication, job returnes, etc.
@@ -151,6 +151,8 @@
 #     - network.*
 #
 
+client_acl: {{ salt['pillar.get']('salt_master:client_acl', '{}') }}
+
 # Blacklist any of the following users or modules
 #
 # This example would blacklist all non sudo users, including root from
@@ -165,6 +167,7 @@
 #   modules:
 #     - cmd
 
+
 # The external auth system uses the Salt auth modules to authenticate and
 # validate users to access areas of the Salt system
 #
@@ -172,6 +175,9 @@
 #   pam:
 #     fred:
 #       - test.*
+
+external_auth: {{ salt['pillar.get']('salt_master:external_auth', '{}') }}
+
 #
 # Time (in seconds) for a newly generated token to live. Default: 12 hours
 # token_expire: 43200
@@ -296,6 +302,8 @@
 #   - git
 #   - roots
 
+fileserver_backend: {{ salt['pillar.get']('salt_master:fileserver_backend', '[]') }}
+
 # Git fileserver backend configuration
 # When using the git fileserver backend at least one git remote needs to be
 # defined. The user running the salt master will need read access to the repo.
@@ -308,6 +316,8 @@
 # environments.
 # Note:  file:// repos will be treated as a remote, so refs you want used must
 # exist in that repo as *local* refs.
+
+gitfs_remotes: {{ salt['pillar.get']('salt_master:gitfs_remotes', '[]') }}
 
 
 #####         Pillar settings        #####
