@@ -1,4 +1,6 @@
 # This file managed by Salt, do not edit!!
+{% set salt = pillar.get('salt', {}) -%}
+{% set master = salt.get('master', {}) -%}
 #
 #
 ##### Primary configuration settings #####
@@ -14,15 +16,15 @@
 #default_include: master.d/*.conf
 
 # The address of the interface to bind to
-interface: {{ salt['pillar.get']('salt_master:interface', '0.0.0.0') }}
+interface: {{ master.get('interface', '0.0.0.0') }}
 
 # The tcp port used by the publisher
-#publish_port: 4505
+#publish_port: {{ salt.get('publish_port', 4505) }}
 
 # The user to run the salt-master as. Salt will update all permissions to
 # allow the specified user to run the master. If the modified files cause
 # conflicts set verify_env to False.
-user: {{ salt['pillar.get']('salt_master:user', 'root') }}
+user: {{ master.get('user', 'root') }}
 
 # Max open files
 # Each minion connecting to the master uses AT LEAST one file descriptor, the
@@ -40,64 +42,65 @@ user: {{ salt['pillar.get']('salt_master:user', 'root') }}
 # a good way to find the limit is to search the internet for(for example):
 #   raise max open files hard limit debian
 #
-#max_open_files: 100000
+max_open_files: {{ salt.get('max_open_files', 100000) }}
 
 # The number of worker threads to start, these threads are used to manage
 # return calls made from minions to the master, if the master seems to be
 # running slowly, increase the number of threads
-worker_threads: {{ salt['pillar.get']('salt_master:worker_threads', '5') }}
+worker_threads: {{ master.get('worker_threads', '5') }}
 
 # The port used by the communication interface. The ret (return) port is the
 # interface used for the file server, authentication, job returnes, etc.
-#ret_port: 4506
+ret_port: {{ salt.get('ret_port', 4506) }}
 
 # Specify the location of the daemon process ID file
-#pidfile: /var/run/salt-master.pid
+pidfile: {{ master.get('pid_file', '/var/run/salt-master.pid') }}
 
 # The root directory prepended to these options: pki_dir, cachedir,
 # sock_dir, log_file, autosign_file, extension_modules, key_logfile, pidfile.
-#root_dir: /
+root_dir: {{ salt.get('root_dir', '/' ) }}
 
 # Directory used to store public key data
-#pki_dir: /etc/salt/pki/master
+pki_dir: {{ salt.get('pki_dir', '/etc/salt/pki/master') }}
 
 # Directory to store job and cache data
-#cachedir: /var/cache/salt/master
+cachedir: {{ salt.get('cachedir', '/var/cache/salt/master') }}
 
 # Verify and set permissions on configuration directories at startup
-#verify_env: True
+verify_env: {{ salt.get('verify_env', 'True') }}
 
 # Set the number of hours to keep old job information in the job cache
-#keep_jobs: 24
+keep_jobs: {{ salt.get('keep_jobs', 24) }}
 
 # Set the default timeout for the salt command and api, the default is 5
 # seconds
-#timeout: 5
+timeout: {{ salt.get('timeout', 5) }}
 
 # The loop_interval option controls the seconds for the master's maintinance
 # process check cycle. This process updates file server backends, cleans the
 # job cache and executes the scheduler.
-#loop_interval: 60
+loop_interval: {{ salt.get('loop_interval', 60) }}
 
 # Set the default outputter used by the salt command. The default is "nested"
-#output: nested
+output: {{ salt.get('output', 'nested') }}
 
 # By default output is colored, to disable colored output set the color value
 # to False
-#color: True
+color: {{ salt.geT('color', 'True') }}
 
 # Set the directory used to hold unix sockets
 #sock_dir: /var/run/salt/master
+sock_dir: {{ salt.get('sock_dir', '/var/run/salt/master') }}
 
 # The master maintains a job cache, while this is a great addition it can be
 # a burden on the master for larger deployments (over 5000 minions).
 # Disabling the job cache will make previously executed jobs unavailable to
 # the jobs system and is not generally recommended.
 #
-#job_cache: True
+job_cache: {{ salt.get('job_cache', True) }}
 
 # Cache minion grains and pillar data in the cachedir.
-#minion_data_cache: True
+minion_data_cache: {{ salt.get('minion_data_cache', True) }}
 
 # The master can include configuration from other files. To enable this,
 # pass a list of paths to this option. The paths can be either relative or
@@ -121,16 +124,16 @@ worker_threads: {{ salt['pillar.get']('salt_master:worker_threads', '5') }}
 # authentication, this is only intended for highly secure environments or for
 # the situation where your keys end up in a bad state. If you run in open mode
 # you do so at your own risk!
-#open_mode: False
+open_mode: {{ salt.get('open_mode', False) }}
 
 # Enable auto_accept, this setting will automatically accept all incoming
 # public keys from the minions. Note that this is insecure.
-#auto_accept: False
+auto_accept: {{ salt.get('auto_accept', False) }}
 
 # If the autosign_file is specified only incoming keys specified in
 # the autosign_file will be automatically accepted. This is insecure.
 # Regular expressions as well as globing lines are supported.
-#autosign_file: /etc/salt/autosign.conf
+autosign_file: {{ salt.get('autosign_file', '/etc/salt/autosign.conf') }}
 
 # Enable permissive access to the salt keys.  This allows you to run the
 # master or minion as root, but have a non-root group be given access to
@@ -138,7 +141,7 @@ worker_threads: {{ salt['pillar.get']('salt_master:worker_threads', '5') }}
 # you've given access to.  This is potentially quite insecure.
 # If an autosign_file is specified, enabling permissive_pki_access will allow group access
 # to that specific file.
-#permissive_pki_access: False
+permissive_pki_access: {{ salt.get('permissive_pki_access', False) }}
 
 # Allow users on the master access to execute specific commands on minions.
 # This setting should be treated with care since it opens up execution
@@ -151,7 +154,7 @@ worker_threads: {{ salt['pillar.get']('salt_master:worker_threads', '5') }}
 #     - network.*
 #
 
-client_acl: {{ salt['pillar.get']('salt_master:client_acl', '{}') }}
+client_acl: {{ master.get('client_acl', '{}')}}
 
 # Blacklist any of the following users or modules
 #
@@ -166,7 +169,17 @@ client_acl: {{ salt['pillar.get']('salt_master:client_acl', '{}') }}
 #     - '^(?!sudo_).*$'   #  all non sudo users
 #   modules:
 #     - cmd
-
+{% if master['client_acl_blacklist'] is defined -%}
+client_acl_blacklist:
+  users:
+  {% for user in master['client_acl_blacklist'].get('users', []) -%}
+    - {{ user }}
+  {% endfor -%}
+  modules:
+  {% for mod in master['client_acl_blacklist'].get('modules', []) -%}
+    - {{ mod }}
+  {% endfor -%}
+{% endif -%}
 
 # The external auth system uses the Salt auth modules to authenticate and
 # validate users to access areas of the Salt system
@@ -176,22 +189,22 @@ client_acl: {{ salt['pillar.get']('salt_master:client_acl', '{}') }}
 #     fred:
 #       - test.*
 
-external_auth: {{ salt['pillar.get']('salt_master:external_auth', '{}') }}
+external_auth: {{ master.get('external_auth', '{}') }}
 
 #
 # Time (in seconds) for a newly generated token to live. Default: 12 hours
 # token_expire: 43200
-
+token_expire: {{ salt.get('token_expire', 43200) }}
 
 #####    Master Module Management    #####
 ##########################################
 # Manage how master side modules are loaded
 
 # Add any additional locations to look for master runners
-#runner_dirs: []
+runner_dirs: {{ master.get('runner_dirs', '[]') }}
 
 # Enable Cython for master side modules
-#cython_enable: False
+cython_enable: {{ master.get('cython_enable', False) }}
 
 
 #####      State System settings     #####
@@ -199,7 +212,7 @@ external_auth: {{ salt['pillar.get']('salt_master:external_auth', '{}') }}
 # The state system uses a "top" file to tell the minions what environment to
 # use and what modules to use. The state_top file is defined relative to the
 # root of the base environment as defined in "File Server settings" below.
-#state_top: top.sls
+state_top: {{ salt.get('state_top', 'top.sls') }}
 
 # The master_tops option replaces the external_nodes option by creating
 # a plugable system for the generation of external top data. The external_nodes
@@ -216,26 +229,30 @@ external_auth: {{ salt['pillar.get']('salt_master:external_auth', '{}') }}
 # return the ENC data. Remember that Salt will look for external nodes AND top
 # files and combine the results if both are enabled!
 #external_nodes: None
+external_nodes: {{ salt.get('external_nodes', 'None') }}
 
 # The renderer to use on the minions to render the state data
 #renderer: yaml_jinja
+renderer: {{ salt.get('renderer', 'yaml_jinja') }}
 
 # The failhard option tells the minions to stop immediately after the first
 # failure detected in the state execution, defaults to False
 #failhard: False
+failhard: {{ salt.get('failhard', 'False') }}
 
 # The state_verbose and state_output settings can be used to change the way
 # state system data is printed to the display. By default all data is printed.
 # The state_verbose setting can be set to True or False, when set to False
 # all data that has a result of True and no changes will be suppressed.
 #state_verbose: True
+state_verbose: {{ salt.get('state_verbose', 'True') }}
 
 # The state_output setting changes if the output is the full multi line
 # output for each changed state if set to 'full', but if set to 'terse'
 # the output will be shortened to a single line.  If set to 'mixed', the output
 # will be terse unless a state failed, in which case that output will be full.
 #state_output: full
-
+state_output: {{ salt.get('state_output', 'full') }}
 
 #####      File Server settings      #####
 ##########################################
@@ -258,6 +275,15 @@ external_auth: {{ salt['pillar.get']('salt_master:external_auth', '{}') }}
 #     - /srv/salt/prod/services
 #     - /srv/salt/prod/states
 
+{% if salt['file_roots'] is defined -%}
+file_roots:
+  {% for name, roots in salt['file_roots'].items() -%}
+  {{ name }}:
+    {% for dir in roots -%}
+      - {{ dir }}
+    {% endfor -%}
+  {% endfor -%}
+{% endif -%}
 #file_roots:
 #  base:
 #    - /srv/salt
@@ -266,9 +292,11 @@ external_auth: {{ salt['pillar.get']('salt_master:external_auth', '{}') }}
 # the master server, the default is md5, but sha1, sha224, sha256, sha384
 # and sha512 are also supported.
 #hash_type: md5
+hash_type: {{ salt.get('hash_type', 'md5') }}
 
 # The buffer size in the file server can be adjusted here:
 #file_buffer_size: 1048576
+file_buffer_size: {{ salt.get('file_buffer_size', '1048576') }}
 
 # A regular expression (or a list of expressions) that will be matched
 # against the file path before syncing the modules and states to the minions.
@@ -302,7 +330,7 @@ external_auth: {{ salt['pillar.get']('salt_master:external_auth', '{}') }}
 #   - git
 #   - roots
 
-fileserver_backend: {{ salt['pillar.get']('salt_master:fileserver_backend', '[]') }}
+fileserver_backend: {{ master.get('fileserver_backend', '[]') }}
 
 # Git fileserver backend configuration
 # When using the git fileserver backend at least one git remote needs to be
@@ -317,7 +345,12 @@ fileserver_backend: {{ salt['pillar.get']('salt_master:fileserver_backend', '[]'
 # Note:  file:// repos will be treated as a remote, so refs you want used must
 # exist in that repo as *local* refs.
 
-gitfs_remotes: {{ salt['pillar.get']('salt_master:gitfs_remotes', '[]') }}
+{% if master['gitfs_remotes'] is defined -%}
+gitfs_remotes: 
+  {% for remote in master['gitfs_remotes'] -%}
+  - {{ remote }}
+  {% endfor -%}
+{% endif %}
 
 
 #####         Pillar settings        #####
@@ -328,6 +361,15 @@ gitfs_remotes: {{ salt['pillar.get']('salt_master:gitfs_remotes', '[]') }}
 # a top file and sls files. However, pillar data does not need to be in the
 # highstate format, and is generally just key/value pairs.
 
+{% if salt['pillar_roots'] is defined -%}
+pillar_roots:
+  {% for name, roots in salt['pillar_roots'].items() -%}
+  {{ name }}:
+    {% for dir in roots -%}
+      - {{ dir }}
+    {% endfor -%}
+  {% endfor -%}
+{% endif -%}
 #pillar_roots:
 #  base:
 #    - /srv/pillar
@@ -354,10 +396,11 @@ gitfs_remotes: {{ salt['pillar.get']('salt_master:gitfs_remotes', '[]') }}
 # Set the order_masters setting to True if this master will command lower
 # masters' syndic interfaces.
 #order_masters: False
+order_masters: {{ salt.get('order_masters', 'False') }}
 
 # If this master will be running a salt syndic daemon, syndic_master tells
 # this master where to receive commands from.
-#syndic_master: masterofmaster
+#syndic_master: {{ salt.get('syndic_master', 'masterofmaster') }}
 
 
 #####      Peer Publish settings     #####
@@ -382,6 +425,15 @@ gitfs_remotes: {{ salt['pillar.get']('salt_master:gitfs_remotes', '[]') }}
 #       - .*
 # This is not recommended, since it would allow anyone who gets root on any
 # single minion to instantly have root on all of the minions!
+{% if salt['peer'] is defined -%}
+peer:
+  {% for name, roots in salt['peer'].items() -%}
+  {{ name }}:
+    {% for mod in roots -%}
+      - {{ mod }}
+    {% endfor -%}
+  {% endfor -%}
+{% endif -%}
 
 # Minions can also be allowed to execute runners from the salt master.
 # Since executing a runner from the minion could be considered a security risk,
@@ -400,6 +452,15 @@ gitfs_remotes: {{ salt['pillar.get']('salt_master:gitfs_remotes', '[]') }}
 # peer_run:
 #   foo.example.com:
 #     - manage.up
+{% if salt['peer_run'] is defined -%}
+peer_run:
+  {% for name, roots in salt['peer_run'].items() -%}
+  {{ name }}:
+    {% for mod in roots -%}
+      - {{ mod }}
+    {% endfor -%}
+  {% endfor -%}
+{% endif -%}
 
 
 #####         Logging settings       #####
@@ -412,27 +473,27 @@ gitfs_remotes: {{ salt['pillar.get']('salt_master:gitfs_remotes', '[]') }}
 #log_file: /var/log/salt/master
 #log_file: file:///dev/log
 #log_file: udp://loghost:10514
+log_file: {{ salt.get('log_file', '/var/log/salt/master') }}
 
-#log_file: /var/log/salt/master
-#key_logfile: /var/log/salt/key
+key_logfile: {{ salt.get('key_logfile', '/var/log/salt/key') }}
 
 # The level of messages to send to the console.
 # One of 'garbage', 'trace', 'debug', info', 'warning', 'error', 'critical'.
-#log_level: warning
+log_level: {{ salt.get('log_level', 'warning') }}
 
 # The level of messages to send to the log file.
 # One of 'garbage', 'trace', 'debug', info', 'warning', 'error', 'critical'.
-#log_level_logfile: warning
+log_level_logfile: {{ salt.get('log_level_logfile', 'warning') }}
 
 # The date and time format used in log messages. Allowed date/time formating
 # can be seen here: http://docs.python.org/library/time.html#time.strftime
 #log_datefmt: '%H:%M:%S'
-#log_datefmt_logfile: '%Y-%m-%d %H:%M:%S'
+log_datefmt_logfile: {{ salt.get('log_datefmt_logfile', '%Y-%m-%d %H:%M:%S') }}
 
 # The format of the console logging messages. Allowed formatting options can
 # be seen here: http://docs.python.org/library/logging.html#logrecord-attributes
 #log_fmt_console: '[%(levelname)-8s] %(message)s'
-#log_fmt_logfile: '%(asctime)s,%(msecs)03.0f [%(name)-17s][%(levelname)-8s] %(message)s'
+log_fmt_logfile: {{ salt.get('log_fmt_logfile', '%(asctime)s,%(msecs)03.0f [%(name)-17s][%(levelname)-8s] %(message)s')}}
 
 # This can be used to control logging levels more specificically.  This
 # example sets the main salt library at the 'warning' level, but sets
@@ -442,7 +503,12 @@ gitfs_remotes: {{ salt['pillar.get']('salt_master:gitfs_remotes', '[]') }}
 #     'salt.modules': 'debug'
 #
 #log_granular_levels: {}
-
+{% if salt['log_granular_levels'] is defined %}
+log_granular_levels:
+  {% for name, lvl in salt['log_granular_levels'] %}
+  {{ name }}: {{ lvl }}
+  {% endfor -%}
+{% endif %}
 
 #####         Node Groups           #####
 ##########################################
@@ -452,7 +518,12 @@ gitfs_remotes: {{ salt['pillar.get']('salt_master:gitfs_remotes', '[]') }}
 # nodegroups:
 #   group1: 'L@foo.domain.com,bar.domain.com,baz.domain.com and bl*.domain.com'
 #   group2: 'G@os:Debian and foo.domain.com'
-
+{% if salt['nodegroups'] is defined %}
+nodegroups:
+  {% for name, lvl in salt['nodegroups'] %}
+  {{ name }}: {{ lvl }}
+  {% endfor -%}
+{% endif %}
 
 #####     Range Cluster settings     #####
 ##########################################
