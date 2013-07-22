@@ -141,6 +141,16 @@ tcp_pull_port: {{ minion.get('tcp_pull_port', '4511') }}
 # include:
 #  - /etc/salt/extra_config
 #  - /etc/roles/webserver
+{% if minion['include'] is defined -%}
+    {% if isinstance(minion['include'], list) -%}
+        include:
+        {% for include in minion['include'] -%}
+            - {{ include }}
+        {% endfor -%}
+    {% else -%}
+        include: minion['include']
+    {% endif -%}
+{% endif -%}
 
 #####   Minion module management     #####
 ##########################################
