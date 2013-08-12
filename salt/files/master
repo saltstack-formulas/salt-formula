@@ -86,7 +86,7 @@ output: {{ salt.get('output', 'nested') }}
 
 # By default output is colored, to disable colored output set the color value
 # to False
-color: {{ salt.geT('color', 'True') }}
+color: {{ salt.get('color', 'True') }}
 
 # Set the directory used to hold unix sockets
 #sock_dir: /var/run/salt/master
