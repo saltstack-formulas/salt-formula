@@ -1,0 +1,12 @@
+salt:
+  master:
+    fileserver_backend:
+      - git
+      - roots
+    gitfs_remotes:
+      - git://github.com/KennethWilke/salt-formula.git
+    file_roots:
+      - base:
+        - /srv/salt
+  minion:
+    master: salt
