@@ -1,7 +1,7 @@
 salt-master:
   pkg.installed:
     {% if grains['os_family'] in ['RedHat', 'Debian'] %}
-    - name: salt-minion
+    - name: salt-master
     {% else %}
     - name: salt
     {% endif %}
