@@ -11,7 +11,6 @@ salt-master:
     - source: salt://salt/files/master
   service.running:
     - enable: True
-    - require:
     - watch:
       - pkg: salt-master
       - file: salt-master
