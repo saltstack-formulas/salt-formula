@@ -12,6 +12,6 @@ salt-master:
   service.running:
     - enable: True
     - require:
-      - pkg: salt-minion
     - watch:
-      - file: salt-minion
+      - pkg: salt-master
+      - file: salt-master
