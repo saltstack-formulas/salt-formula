@@ -573,7 +573,7 @@ peer_run:
 
 # The date and time format used in log messages. Allowed date/time formating
 # can be seen here: http://docs.python.org/library/time.html#time.strftime
-{{ get_config('og_datefmt', "'%H:%M:%S'") }}
+{{ get_config('log_datefmt', "'%H:%M:%S'") }}
 {{ get_config('log_datefmt_logfile', "'%Y-%m-%d %H:%M:%S'") }}
 
 # The format of the console logging messages. Allowed formatting options can
