@@ -1,8 +1,7 @@
-# This file managed by Salt, do not edit!!
+# This file managed by Salt, do not edit by hand!!
+#  Based on salt version 0.16.3 default config
 {% set salt = pillar.get('salt', {}) -%}
 {% set master = salt.get('master', {}) -%}
-#
-#
 ##### Primary configuration settings #####
 ##########################################
 # This configuration file is used to manage the behavior of the Salt Master
@@ -13,10 +12,18 @@
 # Per default, the master will automatically include all config files
 # from master.d/*.conf (master.d is a directory in the same directory
 # as the main master config file)
+{%- if 'default_include' in master %}
+default_include: {{ master['default_include'] }}
+{% else %}
 #default_include: master.d/*.conf
+{%- endif %}
 
 # The address of the interface to bind to
-interface: {{ master.get('interface', '0.0.0.0') }}
+{%- if 'interface' in master %}
+interface: {{ master['interface'] }}
+{% else %}
+#interface: 0.0.0.0
+{%- endif %}
 
 # The tcp port used by the publisher
 #publish_port: {{ salt.get('publish_port', 4505) }}
