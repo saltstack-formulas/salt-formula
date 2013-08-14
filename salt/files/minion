@@ -294,7 +294,7 @@ id: {{ minion['id'] }}
 #
 # The failhard option tells the minions to stop immediately after the first
 # failure detected in the state execution, defaults to False
-{{ get_config(failhard'', 'False') }}
+{{ get_config('failhard', 'False') }}
 #
 # autoload_dynamic_modules Turns on automatic loading of modules found in the
 # environments on the master. This is turned on by default, to turn of
@@ -389,9 +389,9 @@ file_roots:
 # The Salt pillar is searched for locally if file_client is set to local. If
 # this is the case, and pillar data is defined, then the pillar_roots need to
 # also be configured on the minion:
-{% if 'pillar_roots' in master -%}
+{% if 'pillar_roots' in minion -%}
 pillar_roots:
-  {% for name, roots in master['pillar_roots'].items() -%}
+  {% for name, roots in minion['pillar_roots'].items() -%}
   {{ name }}:
     {% for dir in roots -%}
       - {{ dir }}
