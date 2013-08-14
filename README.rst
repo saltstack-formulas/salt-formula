@@ -11,7 +11,11 @@ Install a minion
 salt.master
 ===========
 
-Install a master. Every option available in the master template can be set in the pillar file:
+Install a master.
+
+Configuration
+=============
+Every option available in the templates can be set in pillar. Settings under 'salt' will be overridden by more specific settings under salt['master'] or salt['minion']
 
 ::
 
