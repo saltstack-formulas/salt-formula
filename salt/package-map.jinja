@@ -1,0 +1,12 @@
+{% set package_table = {
+    'Debian': {'salt-master': 'salt-master',
+               'salt-minion': 'salt-minion'},
+    'RedHat': {'salt-master': 'salt-master',
+               'salt-minion': 'salt-minion'}
+} %}
+
+{% if 'package_table' in pillar %}
+    {% set pkgs = pillar['package_table'] %}
+{% elif grains['os'] in package_table %}
+    {% set pkgs = package_table[grains['os']] %}
+{% endif %}

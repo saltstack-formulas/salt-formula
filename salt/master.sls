@@ -1,10 +1,8 @@
+{% from "salt/package-map.jinja" import pkgs with context %}
+
 salt-master:
   pkg.installed:
-    {% if grains['os_family'] in ['RedHat', 'Debian'] %}
-    - name: salt-master
-    {% else %}
-    - name: salt
-    {% endif %}
+    - name: {{ pkgs['salt-master'] }}
   file.managed:
     - name: /etc/salt/master
     - template: jinja
