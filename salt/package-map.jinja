@@ -8,7 +8,9 @@
     'Fedora': {'salt-master': 'salt-master',
                'salt-minion': 'salt-minion'},
     'RedHat': {'salt-master': 'salt-master',
-               'salt-minion': 'salt-minion'}
+               'salt-minion': 'salt-minion'},
+    'Gentoo': {'salt-master': 'app-admin/salt',
+               'salt-minion': 'app-admin/salt'}
 } %}
 
 {% if 'package_table' in pillar %}
