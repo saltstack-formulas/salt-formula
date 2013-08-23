@@ -403,6 +403,7 @@ gitfs_remotes:
   - {{ remote }}{% endfor -%}
 {%- endif %}
 
+
 #####         Pillar settings        #####
 ##########################################
 # Salt Pillars allow for the building of global data that can be made selectively
@@ -437,7 +438,7 @@ ext_pillar:
 {% for name, args in master['ext_pillar'].items() -%}
   - {{ name }}: {{ args }}
 {% endfor -%}
-{% elif 'pillar_roots' in salt -%}
+{% elif 'ext_pillar' in salt -%}
 ext_pillar:
 {% for name, args in salt['ext_pillar'].items() -%}
   - {{ name }}: {{ args }}
