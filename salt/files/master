@@ -381,7 +381,7 @@ file_ignore_glob:
 #   - roots
 {% if 'fileserver_backend' in master -%}
 fileserver_backend:
-{% for backend in master['fileserver_backend'] -%}
+{%- for backend in master['fileserver_backend'] %}
   - {{ backend }}
 {% endfor -%}
 {% endif %}
@@ -399,7 +399,7 @@ fileserver_backend:
 # exist in that repo as *local* refs.
 {% if 'gitfs_remotes' in master -%}
 gitfs_remotes:
-{% for remote in master['gitfs_remotes'] -%}
+{%- for remote in master['gitfs_remotes'] %}
   - {{ remote }}
 {% endfor -%}
 {% endif %}
