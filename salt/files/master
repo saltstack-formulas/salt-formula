@@ -400,9 +400,8 @@ fileserver_backend:
 {% if 'gitfs_remotes' in master -%}
 gitfs_remotes:
 {%- for remote in master['gitfs_remotes'] %}
-  - {{ remote }}
-{% endfor -%}
-{% endif %}
+  - {{ remote }}{% endfor -%}
+{%- endif %}
 
 #####         Pillar settings        #####
 ##########################################
