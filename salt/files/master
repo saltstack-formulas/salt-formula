@@ -383,7 +383,7 @@ file_ignore_glob:
 fileserver_backend:
 {% for backend in master['fileserver_backend'] -%}
   - {{ backend }}
-{%- endfor %}
+{% endfor -%}
 {% endif %}
 # Git fileserver backend configuration
 # When using the git fileserver backend at least one git remote needs to be
@@ -401,7 +401,7 @@ fileserver_backend:
 gitfs_remotes:
 {% for remote in master['gitfs_remotes'] -%}
   - {{ remote }}
-{%- endfor %}
+{% endfor -%}
 {% endif %}
 
 #####         Pillar settings        #####
