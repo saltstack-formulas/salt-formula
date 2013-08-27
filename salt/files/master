@@ -379,8 +379,12 @@ file_ignore_glob:
 # fileserver_backend:
 #   - git
 #   - roots
-{{ get_config('fileserver_backend', '[]') }}
-
+{% if 'fileserver_backend' in master -%}
+fileserver_backend:
+{%- for backend in master['fileserver_backend'] %}
+  - {{ backend }}
+{% endfor -%}
+{% endif %}
 # Git fileserver backend configuration
 # When using the git fileserver backend at least one git remote needs to be
 # defined. The user running the salt master will need read access to the repo.
@@ -393,7 +397,11 @@ file_ignore_glob:
 # environments.
 # Note:  file:// repos will be treated as a remote, so refs you want used must
 # exist in that repo as *local* refs.
-{{ get_config('gitfs_remotes', '[]') }}
+{% if 'gitfs_remotes' in master -%}
+gitfs_remotes:
+{%- for remote in master['gitfs_remotes'] %}
+  - {{ remote }}{% endfor -%}
+{%- endif %}
 
 
 #####         Pillar settings        #####
@@ -427,13 +435,13 @@ pillar_roots:
 
 {% if 'ext_pillar' in master -%}
 ext_pillar:
-{% for name, args in master['ext_pillar'].items() -%}
-  - {{ name }}: {{ args }}
+{% for pillar in master['ext_pillar'] %}
+  - {{ pillar.items()[0][0] }}: {{ pillar.items()[0][1] }}
 {% endfor -%}
-{% elif 'pillar_roots' in salt -%}
+{% elif 'ext_pillar' in salt -%}
 ext_pillar:
-{% for name, args in salt['ext_pillar'].items() -%}
-  - {{ name }}: {{ args }}
+{% for pillar in salt['ext_pillar'] %}
+  - {{ pillar.items()[0][0] }}: {{ pillar.items()[0][1] }}
 {% endfor -%}
 {% else %}
 # ext_pillar:
