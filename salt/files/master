@@ -436,12 +436,12 @@ pillar_roots:
 {% if 'ext_pillar' in master -%}
 ext_pillar:
 {% for pillar in master['ext_pillar'] %}
-  - {{ pillar }}
+  - {{ pillar.items()[0] }}: {{ pillar.items()[1]
 {% endfor -%}
 {% elif 'ext_pillar' in salt -%}
 ext_pillar:
 {% for pillar in salt['ext_pillar'] %}
-  - {{ pillar }}
+  - {{ pillar.items()[0] }}: {{ pillar.items()[1]
 {% endfor -%}
 {% else %}
 # ext_pillar:
