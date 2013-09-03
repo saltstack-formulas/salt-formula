@@ -509,7 +509,11 @@ pillar_roots:
 #
 # A dict for the test module:
 #test.baz: {spam: sausage, cheese: bread}
-
+{%- if 'module_config' in minion %}
+{%- for modkey, modval in minion.module_config.items() %}
+{{ modkey }}: {{ modval }}
+{%- endfor %}
+{%- endif %}
 
 ######      Update settings          ######
 ###########################################
