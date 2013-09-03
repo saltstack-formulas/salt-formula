@@ -10,3 +10,12 @@ salt:
         - /srv/salt
   minion:
     master: salt
+    module_config:
+      test: True
+      test.foo: foo
+      test.bar: 
+        - baz
+        - quo
+      test.baz:
+        spam: sausage
+        cheese: bread
