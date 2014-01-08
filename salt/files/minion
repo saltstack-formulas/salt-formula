@@ -1,5 +1,5 @@
 # This file managed by Salt, do not edit by hand!!
-#  Based on salt version 0.16.3 default config
+#  Based on salt version 0.17.4 default config
 {% set salt = pillar.get('salt', {}) -%}
 {% set minion = salt.get('minion', {}) -%}
 {%- macro get_config(configname, default_value) -%}
@@ -22,6 +22,7 @@
 # Set the location of the salt master server, if the master server cannot be
 # resolved, then the minion will fail to start.
 {{ get_config('master', 'salt') }}
+
 # Set whether the minion should connect to the master via IPv6
 {{ get_config('ipv6', 'False') }}
 
@@ -106,7 +107,7 @@ id: {{ minion['id'] }}
 # /etc/ssh/sshd_config:
 #   file.managed:
 #     - source: salt://ssh/sshd_config
-#       - backup: minion
+#     - backup: minion
 #
 {{ get_config('backup_mode', 'minion') }}
 
@@ -129,7 +130,7 @@ id: {{ minion['id'] }}
 {{ get_config('random_reauth_delay', '60') }}
 
 
-# If you dont have any problems with syn-floods, dont bother with the
+# If you don't have any problems with syn-floods, dont bother with the
 # three recon_* settings described below, just leave the defaults!
 #
 # The ZeroMQ pull-socket that binds to the masters publishing interface tries
@@ -166,9 +167,9 @@ id: {{ minion['id'] }}
 # The goal: have all minions reconnect within a 60 second timeframe on a disconnect
 #
 # The settings:
-# recon_default: 1000
-# recon_max: 59000
-# recon_randomize: True
+#recon_default: 1000
+#recon_max: 59000
+#recon_randomize: True
 #
 # Each minion will have a randomized reconnect value between 'recon_default'
 # and 'recon_default + recon_max', which in this example means between 1000ms
@@ -224,7 +225,7 @@ id: {{ minion['id'] }}
 # include: /etc/salt/extra_config
 #
 # Include config from several files and directories:
-# include:
+#include:
 #  - /etc/salt/extra_config
 #  - /etc/roles/webserver
 {% if 'include' in minion -%}
@@ -268,8 +269,8 @@ id: {{ minion['id'] }}
 # overwritten by the specified module. In this example the pkg module will
 # be provided by the yumpkg5 module instead of the system default.
 #
-# providers:
-#   pkg: yumpkg5
+#providers:
+#  pkg: yumpkg5
 {{ get_config('providers', '{}') }}
 #
 # Enable Cython modules searching and loading. (Default: False)
@@ -329,7 +330,7 @@ id: {{ minion['id'] }}
 #  - hyper
 {{ get_config('sls_list', '[]') }}
 # top file to execute if startup_states is 'top'
-{{ get_config('', "''") }}
+{{ get_config('top_file', "''") }}
 
 #####     File Directory Settings    #####
 ##########################################
@@ -338,7 +339,7 @@ id: {{ minion['id'] }}
 # copied completely onto the minion. This is a literal copy of the settings on
 # the master but used to reference a local directory on the minion.
 
-# Set the file client, the client defaults to looking on the master server for
+# Set the file client. The client defaults to looking on the master server for
 # files, but can be directed to look at the local file directory setting
 # defined below by setting it to local.
 {{ get_config('file_client', 'remote') }}
@@ -381,8 +382,18 @@ file_roots:
 #    - /srv/salt
 {%- endif %}
 
+# By default, the Salt fileserver recurses fully into all defined environments
+# to attempt to find files. To limit this behavior so that the fileserver only
+# traverses directories with SLS files and special Salt directories like _modules,
+# enable the option below. This might be useful for installations where a file root
+# has a very large number of files and performance is negatively impacted.
+#
+# Default is False.
+#
+{{ get_config('fileserver_limit_traversal', 'False') }}
+
 # The hash_type is the hash to use when discovering the hash of a file in
-# the minion directory, the default is md5, but sha1, sha224, sha256, sha384
+# the local fileserver. The default is md5, but sha1, sha224, sha256, sha384
 # and sha512 are also supported.
 {{ get_config('hash_type', 'md5') }}
 
@@ -469,7 +480,7 @@ pillar_roots:
 # The level of messages to send to the log file.
 # One of 'garbage', 'trace', 'debug', info', 'warning', 'error', 'critical'.
 # Default: 'warning'
-{{ get_config('log_level_logfile', 'warning') }}
+{{ get_config('log_level_logfile', '') }}
 
 # The date and time format used in log messages. Allowed date/time formating
 # can be seen here: http://docs.python.org/library/time.html#time.strftime
@@ -514,6 +525,7 @@ pillar_roots:
 {{ modkey }}: {{ modval }}
 {%- endfor %}
 {%- endif %}
+
 
 ######      Update settings          ######
 ###########################################

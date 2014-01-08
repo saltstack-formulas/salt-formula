@@ -1,5 +1,5 @@
 # This file managed by Salt, do not edit by hand!!
-#  Based on salt version 0.16.3 default config
+#  Based on salt version 0.17.4 default config
 {% set salt = pillar.get('salt', {}) -%}
 {% set master = salt.get('master', {}) -%}
 {%- macro get_config(configname, default_value) -%}
@@ -70,7 +70,6 @@
 
 # The root directory prepended to these options: pki_dir, cachedir,
 # sock_dir, log_file, autosign_file, extension_modules, key_logfile, pidfile.
-#root_dir: /
 {{ get_config('root_dir', '/') }}
 
 # Directory used to store public key data
@@ -104,6 +103,12 @@
 # Set the directory used to hold unix sockets
 {{ get_config('sock_dir', '/var/run/salt/master') }}
 
+# The master can take a while to start up when lspci and/or dmidecode is used
+# to populate the grains for the master. Enable if you want to see GPU hardware
+# data for your master.
+#
+{{ get_config('enable_gpu_grains', 'False') }}
+
 # The master maintains a job cache, while this is a great addition it can be
 # a burden on the master for larger deployments (over 5000 minions).
 # Disabling the job cache will make previously executed jobs unavailable to
@@ -123,11 +128,11 @@
 #
 #
 # Include a config file from some other path:
-# include: /etc/salt/extra_config
+#include: /etc/salt/extra_config
 #
 # Include config from several files and directories:
-# include:
-#   - /etc/salt/extra_config
+#include:
+#  - /etc/salt/extra_config
 {{ get_config('include', '[]') }}
 
 
@@ -161,10 +166,10 @@
 # capabilities to non root users. By default this capability is completely
 # disabled.
 #
-# client_acl:
-#   larry:
-#     - test.ping
-#     - network.*
+#client_acl:
+#  larry:
+#    - test.ping
+#    - network.*
 #
 {{ get_config('client_acl', '{}') }}
 
@@ -196,21 +201,21 @@ client_acl_blacklist:
     - {{ mod }}
   {% endfor -%}
 {% else -%}
-# client_acl_blacklist:
-#   users:
-#     - root
-#     - '^(?!sudo_).*$'   #  all non sudo users
-#   modules:
-#     - cmd
+#client_acl_blacklist:
+#  users:
+#    - root
+#    - '^(?!sudo_).*$'   #  all non sudo users
+#  modules:
+#    - cmd
 {%- endif %}
 
 # The external auth system uses the Salt auth modules to authenticate and
 # validate users to access areas of the Salt system.
 #
-# external_auth:
-#   pam:
-#     fred:
-#       - test.*
+#external_auth:
+#  pam:
+#    fred:
+#      - test.*
 #
 {{ get_config('external_auth', '{}') }}
 
@@ -273,6 +278,7 @@ client_acl_blacklist:
 # the output will be shortened to a single line.  If set to 'mixed', the output
 # will be terse unless a state failed, in which case that output will be full.
 {{ get_config('state_output', 'full') }}
+
 
 #####      File Server settings      #####
 ##########################################
@@ -361,9 +367,10 @@ file_ignore_glob:
   - {{ glob }}
   {% endfor -%}
 {% else -%}
-#file_ignore_glob:
+# file_ignore_glob:
 #  - '*.pyc'
 #  - '*/somefolder/*.bak'
+#  - '*.swp'
 {%- endif %}
 
 # File Server Backend
@@ -373,24 +380,38 @@ file_ignore_glob:
 # configured and will be searched for the requested file in the order in which
 # they are defined here. The default setting only enables the standard backend
 # "roots" which uses the "file_roots" option.
+#
 #fileserver_backend:
 #  - roots
+#
 # To use multiple backends list them in the order they are searched:
-# fileserver_backend:
-#   - git
-#   - roots
+#
+#fileserver_backend:
+#  - git
+#  - roots
 {% if 'fileserver_backend' in master -%}
 fileserver_backend:
 {%- for backend in master['fileserver_backend'] %}
   - {{ backend }}
 {% endfor -%}
 {% endif %}
+#
+# By default, the Salt fileserver recurses fully into all defined environments
+# to attempt to find files. To limit this behavior so that the fileserver only
+# traverses directories with SLS files and special Salt directories like _modules,
+# enable the option below. This might be useful for installations where a file root
+# has a very large number of files and performance is impacted. Default is False.
+#
+{{ get_config('fileserver_limit_traversal', 'False') }}
+#
 # Git fileserver backend configuration
 # When using the git fileserver backend at least one git remote needs to be
 # defined. The user running the salt master will need read access to the repo.
-# gitfs_remotes:
-#   - git://github.com/saltstack/salt-states.git
-#   - file:///var/git/saltmaster
+#
+#gitfs_remotes:
+#  - git://github.com/saltstack/salt-states.git
+#  - file:///var/git/saltmaster
+#
 # The repos will be searched in order to find the file requested by a client
 # and the first repo to have the file will return it.
 # When using the git backend branches and tags are translated into salt
@@ -402,6 +423,11 @@ gitfs_remotes:
 {%- for remote in master['gitfs_remotes'] %}
   - {{ remote }}{% endfor -%}
 {%- endif %}
+#
+# The gitfs_root option gives the ability to serve files from a subdirectory
+# within the repository. The path is defined relative to the root of the
+# repository and defaults to the repository root.
+{{ get_config('gitfs_root', 'somefolder/otherfolder') }}
 
 
 #####         Pillar settings        #####
@@ -444,9 +470,9 @@ ext_pillar:
   - {{ pillar.items()[0][0] }}: {{ pillar.items()[0][1] }}
 {% endfor -%}
 {% else %}
-# ext_pillar:
-#   - hiera: /etc/hiera.yaml
-#   - cmd_yaml: cat /etc/salt/yaml
+#ext_pillar:
+#  - hiera: /etc/hiera.yaml
+#  - cmd_yaml: cat /etc/salt/yaml
 {%- endif %}
 
 # The pillar_opts option adds the master configuration file data to a dict in
@@ -492,15 +518,18 @@ ext_pillar:
 # of regular expressions to match functions. The following will allow the
 # minion authenticated as foo.example.com to execute functions from the test
 # and pkg modules.
-# peer:
-#   foo.example.com:
-#       - test.*
-#       - pkg.*
+#
+#peer:
+#  foo.example.com:
+#    - test.*
+#    - pkg.*
 #
 # This will allow all minions to execute all commands:
-# peer:
-#   .*:
-#       - .*
+#
+#peer:
+#  .*:
+#    - .*
+#
 # This is not recommended, since it would allow anyone who gets root on any
 # single minion to instantly have root on all of the minions!
 {% if 'peer' in master -%}
@@ -529,15 +558,15 @@ peer:
 # All peer runner support is turned off by default and must be enabled before
 # using. This will enable all peer runners for all minions:
 #
-# peer_run:
-#   .*:
-#     - .*
+#peer_run:
+#  .*:
+#    - .*
 #
 # To enable just the manage.up runner for the minion foo.example.com:
 #
-# peer_run:
-#   foo.example.com:
-#     - manage.up
+#peer_run:
+#  foo.example.com:
+#    - manage.up
 {% if 'peer_run' in master -%}
 peer_run:
   {% for name, roots in master['peer_run'].items() -%}
@@ -610,14 +639,15 @@ log_granular_levels:
 #log_granular_levels: {}
 {% endif %}
 
+
 #####         Node Groups           #####
 ##########################################
 # Node groups allow for logical groupings of minion nodes.
 # A group consists of a group name and a compound target.
 #
-# nodegroups:
-#   group1: 'L@foo.domain.com,bar.domain.com,baz.domain.com and bl*.domain.com'
-#   group2: 'G@os:Debian and foo.domain.com'
+#nodegroups:
+#  group1: 'L@foo.domain.com,bar.domain.com,baz.domain.com and bl*.domain.com'
+#  group2: 'G@os:Debian and foo.domain.com'
 {% if 'nodegroups' in master %}
 nodegroups:
   {% for name, lvl in master['nodegroups'] %}
@@ -659,6 +689,6 @@ win_gitrepos:
   - {{ repo }}
   {% endfor -%}
 {% else %}
-# win_gitrepos:
-#   - 'https://github.com/saltstack/salt-winrepo.git'
+#win_gitrepos:
+#  - 'https://github.com/saltstack/salt-winrepo.git'
 {% endif %}
