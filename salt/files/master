@@ -692,3 +692,12 @@ win_gitrepos:
 #win_gitrepos:
 #  - 'https://github.com/saltstack/salt-winrepo.git'
 {% endif %}
+
+{% if 'halite' in master -%}
+#####             Halite             #####
+##########################################
+halite:
+  {%- for name, value in master['halite'].iteritems() %}
+  {{ name }}: {{ value }}
+  {%- endfor %}
+{%- endif %}
