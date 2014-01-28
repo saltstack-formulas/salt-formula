@@ -1,20 +1,26 @@
+====
 salt
 ====
 
 Yes, Salt can Salt itself!
 
-salt.minion
-===========
+.. note::
+
+    See the full `Salt Formulas installation and usage instructions
+    <http://docs.saltstack.com/topics/conventions/formulas.html>`_.
+
+``salt.minion``
+---------------
 
 Install a minion
 
-salt.master
-===========
+``salt.master``
+---------------
 
 Install a master.
 
-Configuration
-=============
+``Configuration``
+-----------------
 Every option available in the templates can be set in pillar. Settings under 'salt' will be overridden by more specific settings under salt['master'] or salt['minion']
 
 ::
