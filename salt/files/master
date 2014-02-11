@@ -69,7 +69,8 @@
 {{ get_config('pidfile', '/var/run/salt-master.pid') }}
 
 # The root directory prepended to these options: pki_dir, cachedir,
-# sock_dir, log_file, autosign_file, extension_modules, key_logfile, pidfile.
+# sock_dir, log_file, autosign_file, autoreject_file, extension_modules,
+# key_logfile, pidfile.
 {{ get_config('root_dir', '/') }}
 
 # Directory used to store public key data
@@ -88,7 +89,7 @@
 # seconds
 {{ get_config('timeout', '5') }}
 
-# The loop_interval option controls the seconds for the master's maintinance
+# The loop_interval option controls the seconds for the master's maintenance
 # process check cycle. This process updates file server backends, cleans the
 # job cache and executes the scheduler.
 {{ get_config('loop_interval', '60') }}
@@ -148,10 +149,15 @@
 # public keys from the minions. Note that this is insecure.
 {{ get_config('auto_accept', 'False') }}
 
-# If the autosign_file is specified only incoming keys specified in
-# the autosign_file will be automatically accepted. This is insecure.
-# Regular expressions as well as globing lines are supported.
+# If the autosign_file is specified, incoming keys specified in the
+# autosign_file will be automatically accepted. This is insecure.  Regular
+# expressions as well as globing lines are supported.
 {{ get_config('autosign_file', '/etc/salt/autosign.conf') }}
+
+# Works like autosign_file, but instead allows you to specify minion IDs for
+# which keys will automatically be rejected. Will override both membership in
+# the autosign_file and the auto_accept setting.
+{{ get_config('autorejecte_file', '/etc/salt/autosign.conf') }}
 
 # Enable permissive access to the salt keys.  This allows you to run the
 # master or minion as root, but have a non-root group be given access to
@@ -226,6 +232,28 @@ client_acl_blacklist:
 # security purposes.
 {{ get_config('file_recv', 'False') }}
 
+# Set a hard-limit on the size of the files that can be pushed to the master.
+# It will be interpreted as megabytes.
+# Default: 100
+{{ get_config('file_recv_max_size', '100') }}
+
+# Signature verification on messages published from the master.
+# This causes the master to cryptographically sign all messages published to its event
+# bus, and minions then verify that signature before acting on the message.
+#
+# This is False by default.
+#
+# Note that to facilitate interoperability with masters and minions that are different
+# versions, if sign_pub_messages is True but a message is received by a minion with
+# no signature, it will still be accepted, and a warning message will be logged.
+# Conversely, if sign_pub_messages is False, but a minion receives a signed
+# message it will be accepted, the signature will not be checked, and a warning message
+# will be logged.  This behavior will go away in Salt 0.17.6 (or Hydrogen RC1, whichever
+# comes first) and these two situations will cause minion to throw an exception and
+# drop the message.
+#
+{{ get_config('sign_pub_message', 'False') }}
+
 #####    Master Module Management    #####
 ##########################################
 # Manage how master side modules are loaded
@@ -262,6 +290,19 @@ client_acl_blacklist:
 
 # The renderer to use on the minions to render the state data
 {{ get_config('renderer', 'yaml_jinja') }}
+
+# The Jinja renderer can strip extra carriage returns and whitespace
+# See http://jinja.pocoo.org/docs/api/#high-level-api
+#
+# If this is set to True the first newline after a Jinja block is removed
+# (block, not variable tag!). Defaults to False, corresponds to the Jinja
+# environment init variable "trim_blocks".
+{{ get_config('jinja_trim_blocks', 'False') }}
+#
+# If this is set to True leading spaces and tabs are stripped from the start
+# of a line to a block. Defaults to False, corresponds to the Jinja
+# environment init variable "lstrip_blocks".
+{{ get_config('jinja_lstrip_blocks', 'False') }}
 
 # The failhard option tells the minions to stop immediately after the first
 # failure detected in the state execution, defaults to False
@@ -396,6 +437,21 @@ fileserver_backend:
 {% endfor -%}
 {% endif %}
 #
+# Uncomment the line below if you do not want the file_server to follow
+# symlinks when walking the filesystem tree. This is set to True
+# by default. Currently this only applies to the default roots
+# fileserver_backend.
+#
+{{ get_config('fileserver_followsymlinks', 'False') }}
+#
+# Uncomment the line below if you do not want symlinks to be
+# treated as the files they are pointing to. By default this is set to
+# False. By uncommenting the line below, any detected symlink while listing
+# files on the Master will not be returned to the Minion.
+#
+{{ get_config('fileserver_ignoresymlinks', 'True') }}
+
+#
 # By default, the Salt fileserver recurses fully into all defined environments
 # to attempt to find files. To limit this behavior so that the fileserver only
 # traverses directories with SLS files and special Salt directories like _modules,
@@ -404,13 +460,19 @@ fileserver_backend:
 #
 {{ get_config('fileserver_limit_traversal', 'False') }}
 #
+# The fileserver can fire events off every time the fileserver is updated,
+# these are disabled by default, but can be easily turned on by setting this
+# flag to True
+{{ get_config('fileserver_events', 'False') }}
+#
 # Git fileserver backend configuration
+#
+# Gitfs can be provided by one of two python modules: GitPython or pygit2. If
+# using pygit2, both libgit2 and git must also be installed.
+{{ get_config('gitfs_provider', 'gitpython') }}
+#
 # When using the git fileserver backend at least one git remote needs to be
 # defined. The user running the salt master will need read access to the repo.
-#
-#gitfs_remotes:
-#  - git://github.com/saltstack/salt-states.git
-#  - file:///var/git/saltmaster
 #
 # The repos will be searched in order to find the file requested by a client
 # and the first repo to have the file will return it.
@@ -423,6 +485,18 @@ gitfs_remotes:
 {%- for remote in master['gitfs_remotes'] %}
   - {{ remote }}{% endfor -%}
 {%- endif %}
+#
+#gitfs_remotes:
+#  - git://github.com/saltstack/salt-states.git
+#  - file:///var/git/saltmaster
+#
+# The gitfs_ssl_verify option specifies whether to ignore ssl certificate
+# errors when contacting the gitfs backend. You might want to set this to
+# false if you're using a git backend that uses a self-signed certificate but
+# keep in mind that setting this flag to anything other than the default of True
+# is a security concern, you may want to try using the ssh transport.
+{{ get_config('gitfs_ssl_verify', 'True') }}
+#
 #
 # The gitfs_root option gives the ability to serve files from a subdirectory
 # within the repository. The path is defined relative to the root of the
@@ -474,6 +548,13 @@ ext_pillar:
 #  - hiera: /etc/hiera.yaml
 #  - cmd_yaml: cat /etc/salt/yaml
 {%- endif %}
+
+# The pillar_gitfs_ssl_verify option specifies whether to ignore ssl certificate
+# errors when contacting the pillar gitfs backend. You might want to set this to
+# false if you're using a git backend that uses a self-signed certificate but
+# keep in mind that setting this flag to anything other than the default of True
+# is a security concern, you may want to try using the ssh transport.
+{{ get_config('pillar_gitfs_ssl_verify', 'True') }}
 
 # The pillar_opts option adds the master configuration file data to a dict in
 # the pillar called "master". This is used to set simple configurations in the
@@ -585,6 +666,26 @@ peer_run:
   {% endfor -%}
 {% endif -%}
 
+#####         Mine settings     #####
+##########################################
+# Restrict mine.get access from minions. By default any minion has a full access
+# to get all mine data from master cache. In acl definion below, only pcre matches
+# are allowed.
+#
+# mine_get:
+#   .*:
+#     - .*
+#
+# Example below enables minion foo.example.com to get  'network.interfaces' mine data only
+# , minions web* to get all network.* and disk.* mine data and all other minions won't get
+# any mine data.
+#
+# mine_get:
+#   foo.example.com:
+#     - network.inetrfaces
+#   web.*:
+#     - network.*
+#     - disk.*
 
 #####         Logging settings       #####
 ##########################################
@@ -701,3 +802,4 @@ halite:
   {{ name }}: {{ value }}
   {%- endfor %}
 {%- endif %}
+
