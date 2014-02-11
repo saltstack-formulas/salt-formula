@@ -10,7 +10,9 @@
     'RedHat': {'salt-master': 'salt-master',
                'salt-minion': 'salt-minion'},
     'Gentoo': {'salt-master': 'app-admin/salt',
-               'salt-minion': 'app-admin/salt'}
+               'salt-minion': 'app-admin/salt'},
+    'Arch':   {'salt-master': 'salt',
+               'salt-minion':  'salt'}
 } %}
 
 {% if 'package_table' in pillar %}
