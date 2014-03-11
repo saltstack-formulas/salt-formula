@@ -623,3 +623,4 @@ mine_functions:
   {{ name }}: {{ param }}
 {%- endfor %}
 {%- endif %}
+{{ get_config('mine_interval', '2') }}
