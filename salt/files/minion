@@ -614,3 +614,12 @@ pillar_roots:
 ############################################
 # Location of the repository cache file on the master
 {{ get_config('win_repo_cachefile', 'salt://win/repo/winrepo.p') }}
+
+######       Salt Mine settings       ######
+############################################
+{%- if 'mine_functions' in minion %}
+mine_functions:
+{%- for name, param in minion.mine_functions.items() %}
+  {{ name }}: {{ param }}
+{%- endfor %}
+{%- endif %}
