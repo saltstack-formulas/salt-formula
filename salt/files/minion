@@ -620,7 +620,7 @@ pillar_roots:
 {%- if 'mine_functions' in minion %}
 mine_functions:
 {%- for name, param in minion.mine_functions.items() %}
-  {{ name }}: {{ param }}
+  {{ name }}: {{ param | yaml }}
 {%- endfor %}
 {%- endif %}
 {{ get_config('mine_interval', '2') }}
