@@ -19,3 +19,7 @@ salt:
       test.baz:
         spam: sausage
         cheese: bread
+  package_table:
+    MyDistro:
+      salt-master: my-distro-salt-master
+      salt-minion: my-distro-salt-minion
