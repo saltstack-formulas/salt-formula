@@ -728,7 +728,7 @@ peer_run:
 #
 {% if 'log_granular_levels' in master %}
 log_granular_levels:
-  {% for name, lvl in salt['log_granular_levels'] %}
+  {% for name, lvl in master['log_granular_levels'] %}
   {{ name }}: {{ lvl }}
   {% endfor -%}
 {% elif 'log_granular_levels' in salt %}
