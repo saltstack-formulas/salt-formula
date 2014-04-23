@@ -1,5 +1,5 @@
 # This file managed by Salt, do not edit by hand!!
-#  Based on salt version 0.17.4 default config
+#  Based on salt version 2014.1.3 default config
 {% set salt = pillar.get('salt', {}) -%}
 {% set minion = salt.get('minion', {}) -%}
 {%- macro get_config(configname, default_value) -%}
@@ -22,13 +22,6 @@
 # Set the location of the salt master server, if the master server cannot be
 # resolved, then the minion will fail to start.
 {{ get_config('master', 'salt') }}
-
-# If multiple masters are specified in the 'master' setting, the default behavior
-# is to always try to connect to them in the order they are listed. If random_master is
-# set to True, the order will be randomized instead. This can be helpful in distributing
-# the load of many minions executing salt-call requests, for example from a cron job.
-# If only one master is listed, this setting is ignored and a warning will be logged.
-{{ get_config('random_master', 'False') }}
 
 # Set whether the minion should connect to the master via IPv6
 {{ get_config('ipv6', 'False') }}
@@ -127,6 +120,11 @@ id: {{ minion['id'] }}
 # acceptance_wait_time seconds per iteration, up to this maximum. If this is
 # set to zero, the time between reconnection attempts will stay constant.
 {{ get_config('acceptance_wait_time_max', '0') }}
+#acceptance_wait_time_max: 0
+
+# If the master rejects the minion's public key, retry instead exiting. Rejected keys
+# # will be handled the same as waiting on acceptance.
+{{ get_config('rejected_retry', 'False') }}
 
 # When the master key changes, the minion will try to re-auth itself to receive
 # the new master key. In larger environments this can cause a SYN flood on the
