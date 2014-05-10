@@ -343,20 +343,20 @@ client_acl_blacklist:
 #     - /srv/salt/prod/states
 {% if 'file_roots' in master -%}
 file_roots:
-  {% for name, roots in master['file_roots'].items() -%}
+{%- for name, roots in master['file_roots']|dictsort %}
   {{ name }}:
-    {% for dir in roots -%}
-      - {{ dir }}
-    {% endfor -%}
-  {% endfor -%}
+{%- for dir in roots %}
+    - {{ dir }}
+{%- endfor -%}
+{%- endfor -%}
 {% elif 'file_roots' in salt -%}
 file_roots:
-  {% for name, roots in salt['file_roots'].items() -%}
+{%- for name, roots in salt['file_roots']|dictsort %}
   {{ name }}:
-    {% for dir in roots -%}
-      - {{ dir }}
-    {% endfor -%}
-  {% endfor -%}
+{%- for dir in roots %}
+    - {{ dir }}
+{%- endfor -%}
+{%- endfor -%}
 {% else -%}
 #file_roots:
 #  base:
@@ -513,20 +513,20 @@ gitfs_remotes:
 # highstate format, and is generally just key/value pairs.
 {% if 'pillar_roots' in master -%}
 pillar_roots:
-  {% for name, roots in master['pillar_roots'].items() -%}
+{%- for name, roots in master['pillar_roots']|dictsort %}
   {{ name }}:
-    {% for dir in roots -%}
-      - {{ dir }}
-    {% endfor -%}
-  {% endfor -%}
+{%- for dir in roots %}
+    - {{ dir }}
+{%- endfor -%}
+{%- endfor -%}
 {% elif 'pillar_roots' in salt -%}
 pillar_roots:
-  {% for name, roots in salt['pillar_roots'].items() -%}
+{%- for name, roots in salt['pillar_roots'].items() -%}
   {{ name }}:
-    {% for dir in roots -%}
-      - {{ dir }}
-    {% endfor -%}
-  {% endfor -%}
+{%- for dir in roots -%}
+    - {{ dir }}
+{%- endfor -%}
+{%- endfor -%}
 {% else %}
 #pillar_roots:
 #  base:
