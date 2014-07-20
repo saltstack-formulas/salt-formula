@@ -1,0 +1,1 @@
+{{ pillar['salt_cloud_certs'][key][type] }}
