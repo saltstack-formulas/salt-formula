@@ -25,6 +25,11 @@ Install a minion
 
 Install a master.
 
+``salt.syndic``
+---------------
+
+Install a syndic.
+
 ``Configuration``
 -----------------
 Every option available in the templates can be set in pillar. Settings under 'salt' will be overridden by more specific settings under salt['master'] or salt['minion']
