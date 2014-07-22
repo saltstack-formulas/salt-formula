@@ -25,6 +25,11 @@ Install a minion
 
 Install a master.
 
+``salt.syndic``
+---------------
+
+Install a syndic.
+
 ``salt.cloud``
 ---------------
 
