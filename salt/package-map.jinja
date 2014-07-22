@@ -1,20 +1,28 @@
 {% set package_table = {
     'Debian': {'salt-master': 'salt-master',
-               'salt-minion': 'salt-minion'},
+               'salt-minion': 'salt-minion',
+               'salt-syndic': 'salt-syndic'},
     'Ubuntu': {'salt-master': 'salt-master',
-               'salt-minion': 'salt-minion'},
+               'salt-minion': 'salt-minion',
+               'salt-syndic': 'salt-syndic'},
     'CentOS': {'salt-master': 'salt-master',
-               'salt-minion': 'salt-minion'},
+               'salt-minion': 'salt-minion',
+               'salt-syndic': 'salt-syndic'},
     'Amazon': {'salt-master': 'salt-master',
-               'salt-minion': 'salt-minion'},
+               'salt-minion': 'salt-minion',
+               'salt-syndic': 'salt-syndic'},
     'Fedora': {'salt-master': 'salt-master',
-               'salt-minion': 'salt-minion'},
+               'salt-minion': 'salt-minion',
+               'salt-syndic': 'salt-syndic'},
     'RedHat': {'salt-master': 'salt-master',
-               'salt-minion': 'salt-minion'},
+               'salt-minion': 'salt-minion',
+               'salt-syndic': 'salt-syndic'},
     'Gentoo': {'salt-master': 'app-admin/salt',
-               'salt-minion': 'app-admin/salt'},
+               'salt-minion': 'app-admin/salt',
+               'salt-syndic': 'app-admin/salt'},
     'Arch':   {'salt-master': 'salt',
-               'salt-minion':  'salt'}
+               'salt-minion':  'salt',
+               'salt-syndic':  'salt'}
 } %}
 
 {% if 'package_table' in pillar %}
