@@ -30,9 +30,14 @@ Install a master.
 
 Install a syndic.
 
+``salt.cloud``
+---------------
+
+Install salt cloud.
+
 ``Configuration``
 -----------------
-Every option available in the templates can be set in pillar. Settings under 'salt' will be overridden by more specific settings under salt['master'] or salt['minion']
+Every option available in the templates can be set in pillar. Settings under 'salt' will be overridden by more specific settings under salt['master'], salt['minion'] or salt['cloud']
 
 ::
 
@@ -43,4 +48,7 @@ Every option available in the templates can be set in pillar. Settings under 'sa
         ...
       minion:
         user: saltuser
+        ...
+      cloud:
+        providers: ec2
         ...

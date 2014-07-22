@@ -19,3 +19,28 @@ salt:
       test.baz:
         spam: sausage
         cheese: bread
+  cloud:
+    master: salt
+    folders:
+      - cloud.providers.d/key
+      - cloud.profiles.d
+      - cloud.maps.d
+    providers:
+      - ec2
+      - gce
+    aws_key: AWSKEYIJSHJAIJS6JSH
+    aws_secret: AWSSECRETYkkDY1iQf9zRtl9+pW+Nm+aZY95
+    gce_project: test
+    gce_service_account_email_address: 867543072364-orl4h2tpp8jcn1tr9ipj@developer.gserviceaccount.com
+salt_cloud_certs:
+  aws:
+    pem: |
+      -----BEGIN RSA PRIVATE KEY-----
+      ...........
+      -----END RSA PRIVATE KEY-----
+
+  gce:
+    pem: |
+      -----BEGIN RSA PRIVATE KEY-----
+      ...........
+      -----END RSA PRIVATE KEY-----
