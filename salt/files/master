@@ -521,9 +521,9 @@ pillar_roots:
 {%- endfor -%}
 {% elif 'pillar_roots' in salt -%}
 pillar_roots:
-{%- for name, roots in salt['pillar_roots'].items() -%}
+{%- for name, roots in salt['pillar_roots']|dictsort %}
   {{ name }}:
-{%- for dir in roots -%}
+{%- for dir in roots %}
     - {{ dir }}
 {%- endfor -%}
 {%- endfor -%}
