@@ -404,20 +404,20 @@ id: {{ minion['id'] }}
 #
 {% if 'file_roots' in minion -%}
 file_roots:
-  {% for name, roots in minion['file_roots'].items() -%}
+{%- for name, roots in minion['file_roots']|dictsort %}
   {{ name }}:
-    {% for dir in roots -%}
-      - {{ dir }}
-    {% endfor -%}
-  {% endfor -%}
+{%- for dir in roots %}
+    - {{ dir }}
+{%- endfor -%}
+{%- endfor -%}
 {% elif 'file_roots' in salt -%}
 file_roots:
-  {% for name, roots in salt['file_roots'].items() -%}
+{%- for name, roots in salt['file_roots']|dictsort %}
   {{ name }}:
-    {% for dir in roots -%}
-      - {{ dir }}
-    {% endfor -%}
-  {% endfor -%}
+{%- for dir in roots %}
+    - {{ dir }}
+{%- endfor -%}
+{%- endfor -%}
 {% else -%}
 #file_roots:
 #  base:
@@ -444,24 +444,24 @@ file_roots:
 # also be configured on the minion:
 {% if 'pillar_roots' in minion -%}
 pillar_roots:
-  {% for name, roots in minion['pillar_roots'].items() -%}
+{%- for name, roots in minion['pillar_roots']|dictsort %}
   {{ name }}:
-    {% for dir in roots -%}
-      - {{ dir }}
-    {% endfor -%}
-  {% endfor -%}
+{%- for dir in roots %}
+    - {{ dir }}
+{%- endfor -%}
+{%- endfor -%}
 {% elif 'pillar_roots' in salt -%}
 pillar_roots:
-  {% for name, roots in salt['pillar_roots'].items() -%}
+{%- for name, roots in salt['pillar_roots']|dictsort %}
   {{ name }}:
-    {% for dir in roots -%}
-      - {{ dir }}
-    {% endfor -%}
-  {% endfor -%}
-{% else %}
+{%- for dir in roots %}
+    - {{ dir }}
+{%- endfor -%}
+{%- endfor -%}
+{% else -%}
 #pillar_roots:
 #  base:
-#    - /srv/pillar
+#    - /srv/salt
 {%- endif %}
 
 ######        Security settings       #####
