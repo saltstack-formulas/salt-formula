@@ -803,3 +803,11 @@ halite:
   {%- endfor %}
 {%- endif %}
 
+{% if 'rest_cherrypy' in master -%}
+#####         rest_cherrypy          #####
+##########################################
+rest_cherrypy:
+  {%- for name, value in master['rest_cherrypy'].iteritems() %}
+  {{ name }}: {{ value }}
+  {%- endfor %}
+{%- endif %}
