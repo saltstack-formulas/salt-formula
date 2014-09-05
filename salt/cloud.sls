@@ -55,30 +55,26 @@ cloud-cert-{{ cert }}-pem-foo:
 {% endfor %}
 {% endfor %}
 
-{% for providers in cloud['providers'] %}
-salt-cloud-profiles-{{ providers }}:
+{% for provider, options in cloud['providers'] %}
+salt-cloud-profiles-{{ provider }}:
   file.managed:
-    - name: /etc/salt/cloud.profiles.d/{{ providers['provider'] }}.conf
+    - name: /etc/salt/cloud.profiles.d/{{ options['provider'] }}.conf
     - template: jinja
-    - source: salt://salt/files/cloud.profiles.d/{{ providers['provider'] }}.conf
-{% endfor %}
+    - source: salt://salt/files/cloud.profiles.d/{{ options['provider'] }}.conf
 
-{% for providers in cloud['providers'] %}
-salt-cloud-providers-{{ providers }}:
+salt-cloud-providers-{{ provider }}:
   file.managed:
-    - name: /etc/salt/cloud.providers.d/{{ providers['provider'] }}.conf
+    - name: /etc/salt/cloud.providers.d/{{ options['provider'] }}.conf
     - template: jinja
-    - source: salt://salt/files/cloud.providers.d/{{ providers['provider'] }}.conf
+    - source: salt://salt/files/cloud.providers.d/{{ options['provider'] }}.conf
     - defaults:
-        master: {{ providers['master'] }}
-        project: {{ providers['project'] }}
-        service_account_email_address: {{ providers['service_account_email_address'] }}foo
-{% endfor %}
+        master: {{ options['master'] }}
+        project: {{ options['project'] }}
+        service_account_email_address: {{ options['service_account_email_address'] }}foo
 
-{% for providers in cloud['providers'] %}
-salt-cloud-maps-{{ providers }}foo:
+salt-cloud-maps-{{ provider }}foo:
   file.managed:
-    - name: /etc/salt/cloud.maps.d/{{ providers['master'] }}foo.conf
+    - name: /etc/salt/cloud.maps.d/{{ options['master'] }}foo.conf
     - template: jinja
-    - source: salt://salt/files/cloud.maps.d/{{ providers['provider'] }}.conf
+    - source: salt://salt/files/cloud.maps.d/{{ options['provider'] }}.conf
 {% endfor %}
