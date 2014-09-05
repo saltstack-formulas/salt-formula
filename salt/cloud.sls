@@ -55,7 +55,7 @@ cloud-cert-{{ cert }}-pem-foo:
 {% endfor %}
 {% endfor %}
 
-{% for provider, options in cloud['providers'] %}
+{% for provider, options in cloud['providers'].items() %}
 salt-cloud-profiles-{{ provider }}:
   file.managed:
     - name: /etc/salt/cloud.profiles.d/{{ options['provider'] }}.conf
