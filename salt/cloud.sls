@@ -56,7 +56,7 @@ cloud-cert-{{ cert }}-pem:
 {% endfor %}
 
 {% for providers in cloud['providers'] %}
-salt-cloud-profiles-{{ providers['name'] }}:
+salt-cloud-profiles-{{ providers.name }}:
   file.managed:
     - name: /etc/salt/cloud.profiles.d/{{ providers }}.conf
     - template: jinja
