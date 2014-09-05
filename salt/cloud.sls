@@ -41,7 +41,7 @@ salt-cloud:
 
 {% for cert in pillar.get('salt_cloud_certs', {}) %}
 {% for type in ['pem'] %}
-cloud-cert-{{ cert }}-pem-foo:
+cloud-cert-{{ cert }}-pem:
   file.managed:
     - name: /etc/salt/cloud.providers.d/key/{{ cert }}.pem
     - source: salt://salt/files/key
