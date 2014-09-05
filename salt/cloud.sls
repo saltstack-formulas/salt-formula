@@ -78,7 +78,7 @@ salt-cloud-providers-{{ providers }}:
 {% for providers in cloud['providers'] %}
 salt-cloud-maps-{{ providers }}:
   file.managed:
-    - name: /etc/salt/cloud.maps.d/{{ providers['master'] }}.conf
+    - name: /etc/salt/cloud.maps.d/{{ providers['master'] }}foo.conf
     - template: jinja
     - source: salt://salt/files/cloud.maps.d/{{ providers['provider'] }}.conf
 {% endfor %}
