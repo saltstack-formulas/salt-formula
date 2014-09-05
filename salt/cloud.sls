@@ -58,13 +58,13 @@ cloud-cert-{{ cert }}-pem-foo:
 {% for provider, options in cloud['providers'].items() %}
 salt-cloud-profiles-{{ provider }}:
   file.managed:
-    - name: /etc/salt/cloud.profiles.d/{{ options['provider'] }}.conf
+    - name: /etc/salt/cloud.profiles.d/{{ provider }}.conf
     - template: jinja
     - source: salt://salt/files/cloud.profiles.d/{{ options['provider'] }}.conf
 
 salt-cloud-providers-{{ provider }}:
   file.managed:
-    - name: /etc/salt/cloud.providers.d/{{ options['provider'] }}.conf
+    - name: /etc/salt/cloud.providers.d/{{ provider }}.conf
     - template: jinja
     - source: salt://salt/files/cloud.providers.d/{{ options['provider'] }}.conf
     - defaults:
@@ -74,7 +74,7 @@ salt-cloud-providers-{{ provider }}:
 
 salt-cloud-maps-{{ provider }}:
   file.managed:
-    - name: /etc/salt/cloud.maps.d/{{ options['master'] }}.conf
+    - name: /etc/salt/cloud.maps.d/{{ provider }}.conf
     - template: jinja
     - source: salt://salt/files/cloud.maps.d/{{ options['provider'] }}.conf
 {% endfor %}
