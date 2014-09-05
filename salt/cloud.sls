@@ -75,7 +75,7 @@ salt-cloud-providers-{{ providers }}:
     - defaults:
         master: {{ providers['master'] }}
         project: {{ providers['project'] }}
-        service_account_email_address:{{ providers['service_account_email_address'] }}
+        service_account_email_address: {{ providers['service_account_email_address'] }}
 {% endfor %}
 
 {% for providers in cloud['providers'] %}
