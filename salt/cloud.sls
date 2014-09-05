@@ -56,9 +56,9 @@ cloud-cert-{{ cert }}-pem:
 {% endfor %}
 
 {% for providers in cloud['providers'] %}
-salt-cloud-profiles-{{ providers.name }}:
+salt-cloud-profiles-{{ providers }}:
   file.managed:
-    - name: /etc/salt/cloud.profiles.d/{{ providers }}.conf
+    - name: /etc/salt/cloud.profiles.d/{{ providers['provider'] }}.conf
     - template: jinja
     - source: salt://salt/files/cloud.profiles.d/{{ providers['provider'] }}.conf
 {% endfor %}
@@ -66,9 +66,9 @@ salt-cloud-profiles-{{ providers.name }}:
 {% for providers in cloud['providers'] %}
 salt-cloud-providers-{{ providers }}:
   file.managed:
-    - name: /etc/salt/cloud.providers.d/{{ providers }}.conf
+    - name: /etc/salt/cloud.providers.d/{{ providers['provider'] }}.conf
     - template: jinja
-    - source: salt://salt/files/cloud.providers.d/{{ providers }}.conf
+    - source: salt://salt/files/cloud.providers.d/{{ providers['provider'] }}.conf
     - defaults:
         master: {{ providers['master'] }}
         project: {{ providers['project'] }}
@@ -78,7 +78,7 @@ salt-cloud-providers-{{ providers }}:
 {% for providers in cloud['providers'] %}
 salt-cloud-maps-{{ providers }}:
   file.managed:
-    - name: /etc/salt/cloud.maps.d/{{ providers }}.conf
+    - name: /etc/salt/cloud.maps.d/{{ providers['provider'] }}.conf
     - template: jinja
-    - source: salt://salt/files/cloud.maps.d/{{ providers }}.conf
+    - source: salt://salt/files/cloud.maps.d/{{ providers['provider'] }}.conf
 {% endfor %}
