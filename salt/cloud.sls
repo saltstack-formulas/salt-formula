@@ -70,11 +70,11 @@ salt-cloud-providers-{{ provider }}:
     - defaults:
         master: {{ options['master'] }}
         project: {{ options['project'] }}
-        service_account_email_address: {{ options['service_account_email_address'] }}foo
+        service_account_email_address: {{ options['service_account_email_address'] }}
 
-salt-cloud-maps-{{ provider }}foo:
+salt-cloud-maps-{{ provider }}:
   file.managed:
-    - name: /etc/salt/cloud.maps.d/{{ options['master'] }}foo.conf
+    - name: /etc/salt/cloud.maps.d/{{ options['master'] }}.conf
     - template: jinja
     - source: salt://salt/files/cloud.maps.d/{{ options['provider'] }}.conf
 {% endfor %}
