@@ -61,9 +61,6 @@ salt-cloud-profiles-{{ providers }}:
     - name: /etc/salt/cloud.profiles.d/{{ providers }}.conf
     - template: jinja
     - source: salt://salt/files/cloud.profiles.d/{{ providers['provider'] }}.conf
-    - defaults:
-        project: {{ providers['project'] }}
-        service_account_email_address:{{ providers['service_account_email_address'] }}
 {% endfor %}
 
 {% for providers in cloud['providers'] %}
@@ -75,7 +72,7 @@ salt-cloud-providers-{{ providers }}:
     - defaults:
         master: {{ providers['master'] }}
         project: {{ providers['project'] }}
-        service_account_email_address: {{ providers['service_account_email_address'] }}
+        service_account_email_address: {{ providers['service_account_email_address'] }}foo
 {% endfor %}
 
 {% for providers in cloud['providers'] %}
