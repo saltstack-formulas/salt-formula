@@ -55,18 +55,28 @@ cloud-cert-{{ cert }}-pem:
 {% endfor %}
 {% endfor %}
 
-{% for provider, options in cloud['providers'].items() %}
-salt-cloud-profiles-{{ provider }}:
+{% for profile, options in cloud['profiles'].items() %}
+salt-cloud-profiles-{{ profile }}:
   file.managed:
-    - name: /etc/salt/cloud.profiles.d/{{ provider }}.conf
+    - name: /etc/salt/cloud.profiles.d/{{ profile }}.conf
     - template: jinja
-    - source: salt://salt/files/cloud.profiles.d/{{ options['provider'] }}.conf
+    - source: salt://salt/files/cloud.profiles.d/{{ options['type'] }}.conf
     - defaults:
-        provider: {{ provider }}
-        master: {{ options['master'] }}
-        project: {{ options['project'] }}
-        service_account_email_address: {{ options['service_account_email_address'] }}
+        options: {{ options }}
+        profile: {{ profile }}
+        profextends: {{ options.get('extends', false) }}
+        image: {{ options.get('image', false) }}
+        provider: {{ options.get('provider', false) }}
+        location: {{ options.get('location', false) }}
+        type: {{ options.get('type', false) }}
+        size: {{ options.get('size', false) }}
+        deploy: {{ options.get('deploy', false) }}
+        network: {{ options.get('network', false) }}
+        tags: {{ options.get('tags', false) }}
+        
+{% endfor %}
 
+{% for provider, options in cloud['providers'].items() %}
 salt-cloud-providers-{{ provider }}:
   file.managed:
     - name: /etc/salt/cloud.providers.d/{{ provider }}.conf
