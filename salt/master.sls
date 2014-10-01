@@ -4,7 +4,7 @@ salt-master:
   pkg.installed:
     - name: {{ pkgs['salt-master'] }}
   file.managed:
-    - name: /etc/salt/master.d/master
+    - name: /etc/salt/master.d/master.conf
     - template: jinja
     - source: salt://salt/files/master
   service.running:
