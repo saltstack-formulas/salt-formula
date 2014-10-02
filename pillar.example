@@ -13,7 +13,7 @@ salt:
     module_config:
       test: True
       test.foo: foo
-      test.bar: 
+      test.bar:
         - baz
         - quo
       test.baz:
