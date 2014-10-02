@@ -34,7 +34,11 @@
     'FreeBSD': {'salt-master': 'py27-salt',
                 'salt-minion': 'py27-salt',
                 'salt-syndic': 'py27-salt',
-                'salt-cloud': 'py27-salt'}
+                'salt-cloud': 'py27-salt',
+                'config-path': '/usr/local/etc/salt',
+                'minion-service': 'salt_minion',
+                'master-service': 'salt_master',
+                'syndic-service': 'salt_syndic'}
 } %}
 
 {% if 'package_table' in pillar %}
