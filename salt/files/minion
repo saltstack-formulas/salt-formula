@@ -1,11 +1,12 @@
 # This file managed by Salt, do not edit by hand!!
 #  Based on salt version 0.17.4 default config
+{% set reserved_keys = ['master', 'minion', 'cloud', 'salt_cloud_certs'] -%}
 {% set salt = pillar.get('salt', {}) -%}
 {% set minion = salt.get('minion', {}) -%}
 {%- macro get_config(configname, default_value) -%}
 {%- if configname in minion -%}
 {{ configname }}: {{ minion[configname] }}
-{%- elif configname in salt -%}
+{%- elif configname in salt and configname not in reserved_keys -%}
 {{ configname }}: {{ salt[configname] }}
 {%- else -%}
 #{{ configname }}: {{ default_value }}
