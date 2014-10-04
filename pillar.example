@@ -32,6 +32,16 @@ salt:
     aws_secret: AWSSECRETYkkDY1iQf9zRtl9+pW+Nm+aZY95
     gce_project: test
     gce_service_account_email_address: 867543072364-orl4h2tpp8jcn1tr9ipj@developer.gserviceaccount.com
+    rsos_user: afeawofghob
+    rsos_tenant: tenant_id_number
+    rsos_apikey: WFJIOJEOIGHSOFHESO
+    rsos_regions:
+      - ORD
+      - DFW
+      - IAD
+      - SYD
+      - HKG
+
 salt_cloud_certs:
   aws:
     pem: |
