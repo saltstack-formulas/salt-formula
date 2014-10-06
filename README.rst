@@ -52,3 +52,7 @@ Every option available in the templates can be set in pillar. Settings under 'sa
       cloud:
         providers: ec2
         ...
+
+``Extending``
+=============
+Additional templates can be added by the user under salt/files/minion.d and master.d. This might be useful if, for example, a recently-added configuration option is not yet provided by the default template. 
