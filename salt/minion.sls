@@ -3,10 +3,11 @@
 salt-minion:
   pkg.installed:
     - name: {{ pkgs['salt-minion'] }}
-  file.managed:
-    - name: /etc/salt/minion.d/minion.conf
+  file.recurse:
+    - name: /etc/salt/minion.d
     - template: jinja
-    - source: salt://salt/files/minion
+    - source: salt://salt/files/minion.d
+    - clean: True
   service.running:
     - enable: True
     - watch:

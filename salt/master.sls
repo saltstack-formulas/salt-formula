@@ -3,10 +3,11 @@
 salt-master:
   pkg.installed:
     - name: {{ pkgs['salt-master'] }}
-  file.managed:
-    - name: /etc/salt/master.d/master.conf
+  file.recurse:
+    - name: /etc/salt/master.d
     - template: jinja
-    - source: salt://salt/files/master
+    - source: salt://salt/files/master.d
+    - clean: True
   service.running:
     - enable: True
     - watch:
