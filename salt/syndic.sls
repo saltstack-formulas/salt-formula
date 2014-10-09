@@ -9,7 +9,7 @@ salt-syndic:
   service:
     - running
     - require:
-      - service: salt-master
+      - service: {{ pkgs.get('syndic-service', 'salt-master') }}
     - watch:
       - pkg: salt-master
-      - file: /etc/salt/master
+      - file: {{ pkgs.get('config-path', '/etc/salt') }}/master
