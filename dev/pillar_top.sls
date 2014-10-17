@@ -1,0 +1,3 @@
+base:
+  'salt':
+    - salt
