@@ -5,6 +5,7 @@ salt:
       - roots
     gitfs_remotes:
       - git://github.com/saltstack-formulas/salt-formula.git
+        - base: develop
     file_roots:
       base:
         - /srv/salt
@@ -13,7 +14,7 @@ salt:
     module_config:
       test: True
       test.foo: foo
-      test.bar: 
+      test.bar:
         - baz
         - quo
       test.baz:
