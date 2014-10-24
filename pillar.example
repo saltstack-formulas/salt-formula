@@ -42,6 +42,9 @@ salt:
       - IAD
       - SYD
       - HKG
+  reactor:
+    - 'deploy':
+      - /srv/salt/reactors/deploy.sls
 
 salt_cloud_certs:
   aws:
