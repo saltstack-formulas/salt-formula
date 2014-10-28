@@ -35,6 +35,12 @@ Install a syndic.
 
 Install salt cloud.
 
+``salt.ssh``
+------------
+
+Install salt-ssh with roster file.
+Configure pillar data under salt:ssh_roster to feed the template.
+
 ``Configuration``
 =================
 Every option available in the templates can be set in pillar. Settings under 'salt' will be overridden by more specific settings under ``salt['master']``, ``salt['minion']`` or ``salt['cloud']``
