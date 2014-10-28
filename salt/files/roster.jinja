@@ -1,0 +1,12 @@
+#
+# This file is managed by Salt! Do not edit by hand!
+#
+{%- set roster = salt['pillar.get']('salt:ssh_roster') -%}
+{%- if roster %}
+  {%- for host, options in roster.items() %}
+{{ host }}:
+    {%- for k, v in options.items() %}
+  {{ k }}: {{ v }}
+    {%- endfor %}
+  {% endfor %}
+{%- endif -%}
