@@ -10,6 +10,11 @@ pycrypto:
     - require:
       - pkg: python-pip
 
+crypto:
+  pip.installed:
+    - require:
+      - pkg: python-pip
+
 apache-libcloud:
   pip.installed:
     - require:
@@ -21,6 +26,7 @@ salt-cloud:
     - require:
       - pip: apache-libcloud
       - pip: pycrypto
+      - pip: crypto
 
 {% for folder in cloud['folders'] %}
 {{ folder }}:
