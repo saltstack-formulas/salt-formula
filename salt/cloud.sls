@@ -10,10 +10,12 @@ pycrypto:
     - require:
       - pkg: python-pip
 
+{% if grains['os'] not in ['Ubuntu', 'Debian'] %}
 crypto:
   pip.installed:
     - require:
       - pkg: python-pip
+{% endif %}
 
 apache-libcloud:
   pip.installed:
@@ -26,7 +28,9 @@ salt-cloud:
     - require:
       - pip: apache-libcloud
       - pip: pycrypto
+      {% if grains['os'] not in ['Ubuntu', 'Debian'] %}
       - pip: crypto
+      {% endif %}
 
 {% for folder in cloud['folders'] %}
 {{ folder }}:
