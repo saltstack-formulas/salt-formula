@@ -4,7 +4,7 @@ salt:
       - git
       - roots
     gitfs_remotes:
-      - git://github.com/saltstack-formulas/salt-formula.git
+      - git://github.com/saltstack-formulas/salt-formula.git:
         - base: develop
     file_roots:
       base:
