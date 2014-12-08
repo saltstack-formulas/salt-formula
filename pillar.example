@@ -11,6 +11,15 @@ salt:
         - /srv/salt
   minion:
     master: salt
+    fileserver_backend:
+      - git
+      - roots
+    gitfs_remotes:
+      - git://github.com/saltstack-formulas/salt-formula.git:
+        - base: develop
+    file_roots:
+      base:
+        - /srv/salt
     module_config:
       test: True
       test.foo: foo
