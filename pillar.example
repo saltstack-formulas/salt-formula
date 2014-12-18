@@ -1,4 +1,6 @@
 salt:
+  # In case you install from git or pip
+  #no_install_packages: True
   master:
     fileserver_backend:
       - git
@@ -13,7 +15,7 @@ salt:
     module_config:
       test: True
       test.foo: foo
-      test.bar: 
+      test.bar:
         - baz
         - quo
       test.baz:

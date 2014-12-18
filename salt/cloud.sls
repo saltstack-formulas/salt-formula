@@ -2,6 +2,7 @@
 {% set salt = pillar.get('salt', {}) -%}
 {% set cloud = salt.get('cloud', {}) -%}
 
+{% if not salt['pillar.get']('salt:no_install_packages', False) %}
 python-pip:
   pkg.installed
 
@@ -10,10 +11,10 @@ pycrypto:
     - require:
       - pkg: python-pip
 
-crypto:
-  pip.installed:
-    - require:
-      - pkg: python-pip
+#crypto:
+  #pip.installed:
+    #- require:
+      #- pkg: python-pip
 
 apache-libcloud:
   pip.installed:
@@ -26,7 +27,8 @@ salt-cloud:
     - require:
       - pip: apache-libcloud
       - pip: pycrypto
-      - pip: crypto
+      #- pip: crypto
+{% endif %}
 
 {% for folder in cloud['folders'] %}
 {{ folder }}:
@@ -73,7 +75,7 @@ salt-cloud-profiles-{{ profile }}:
         deploy: {{ options.get('deploy', false) }}
         network: {{ options.get('network', false) }}
         tags: {{ options.get('tags', false) }}
-        
+
 {% endfor %}
 
 {% for provider, options in cloud['providers'].items() %}

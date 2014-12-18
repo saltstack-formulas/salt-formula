@@ -4,8 +4,10 @@ include:
   - salt.master
 
 salt-syndic:
+{% if not salt['pillar.get']('salt:no_install_packages', False) %}
   pkg.installed:
     - name: {{ pkgs['salt-syndic'] }}
+{% endif %}
   service:
     - running
     - require:
