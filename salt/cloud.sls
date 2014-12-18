@@ -1,6 +1,6 @@
 {% from "salt/package-map.jinja" import pkgs with context %}
-{% set salt = pillar.get('salt', {}) -%}
-{% set cloud = salt.get('cloud', {}) -%}
+{% set saltpillar = pillar.get('salt', {}) -%}
+{% set cloud = saltpillar.get('cloud', {}) -%}
 
 {% if not salt['pillar.get']('salt:no_install_packages', False) %}
 python-pip:
