@@ -41,6 +41,12 @@ Install salt cloud.
 Install salt-ssh with roster file.
 Configure pillar data under salt:ssh_roster to feed the template.
 
+``salt.standalone``
+------------
+
+Install a minion and configure it in `standalone mode
+<docs.saltstack.com/en/latest/topics/tutorials/standalone_minion.html>`_.
+
 ``Configuration``
 =================
 Every option available in the templates can be set in pillar. Settings under 'salt' will be overridden by more specific settings under ``salt['master']``, ``salt['minion']`` or ``salt['cloud']``
