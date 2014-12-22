@@ -42,10 +42,10 @@ Install salt-ssh with roster file.
 Configure pillar data under salt:ssh_roster to feed the template.
 
 ``salt.standalone``
-------------
+-------------------
 
 Install a minion and configure it in `standalone mode
-<docs.saltstack.com/en/latest/topics/tutorials/standalone_minion.html>`_.
+<http://docs.saltstack.com/en/latest/topics/tutorials/standalone_minion.html>`_.
 
 ``Configuration``
 =================
