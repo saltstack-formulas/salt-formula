@@ -47,6 +47,20 @@ Configure pillar data under salt:ssh_roster to feed the template.
 Install a minion and configure it in `standalone mode
 <docs.saltstack.com/en/latest/topics/tutorials/standalone_minion.html>`_.
 
+``salt.pkgrepo``
+----------------
+
+Enable the official saltstack package repository in order to always
+benefit from the latest version. This state currently only works on Debian
+and Ubuntu, and aims to implement the `installation recommendations of the
+official documentation
+<http://docs.saltstack.com/en/latest/topics/installation/index.html#platform-specific-installation-instructions>`_.
+
+``salt.pkgrepo.absent``
+-----------------------
+
+Undo the effects of ``salt.pkgrepo``.
+
 ``Configuration``
 =================
 Every option available in the templates can be set in pillar. Settings under 'salt' will be overridden by more specific settings under ``salt['master']``, ``salt['minion']`` or ``salt['cloud']``
