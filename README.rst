@@ -61,6 +61,39 @@ official documentation
 
 Undo the effects of ``salt.pkgrepo``.
 
+``salt.formulas``
+-----------------
+
+Clone selected `Salt formulas
+<http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html>`_
+Git repositories under ``/srv/formulas`` and makes them available in the
+relevant ``file_roots`` settings. Pillar data can be used to customize all
+paths, URLs, etc.
+
+Here's a minimal pillar sample installing two formulas in the base
+environment.
+
+::
+
+    salt_formulas:
+      list:
+        base:
+          - salt-formula
+          - openssh-formula
+
+See pillar.example for an exhaustive list of settings available via pillar. Note
+that by default this state:
+
+- downloads the latest formulas from the `saltstack-formulas project
+  <https://github.com/saltstack-formulas>`_ on GitHub.
+- does not update the local repositories after the initial clone.
+  This is a safety measure since you do not control how the official
+  repositories evolve.
+
+If you configure the state to download the formulas from repositories that
+you control, then you can safely enable the
+``salt_formulas:git_opts:default:update`` pillar setting to ``True``.
+
 ``Configuration``
 =================
 Every option available in the templates can be set in pillar. Settings under 'salt' will be overridden by more specific settings under ``salt['master']``, ``salt['minion']`` or ``salt['cloud']``
