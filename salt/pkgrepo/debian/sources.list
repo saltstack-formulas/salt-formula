@@ -1,0 +1,2 @@
+# saltstack
+deb http://debian.saltstack.com/debian {{ grains['oscodename'] }}-saltstack main

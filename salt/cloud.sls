@@ -10,7 +10,7 @@ pycrypto:
     - require:
       - pkg: python-pip
 
-{% if grains['os_family'] != 'Debian' %}
+{% if grains['os_family'] not in ['Debian', 'RedHat'] %}
 crypto:
   pip.installed:
     - require:
@@ -28,7 +28,7 @@ salt-cloud:
     - require:
       - pip: apache-libcloud
       - pip: pycrypto
-      {% if grains['os_family'] != 'Debian' %}
+      {% if grains['os_family'] not in ['Debian', 'RedHat'] %}
       - pip: crypto
       {% endif %}
 

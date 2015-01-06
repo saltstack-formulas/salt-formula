@@ -9,10 +9,10 @@ salt-minion:
     - source: salt://salt/files/minion.d
     - clean: True
     - context:
-        standalone: False
-  service.running:
-    - enable: True
+        standalone: True
+  service.dead:
+    - enable: False
     - name: {{ pkgs.get('minion-service', 'salt-minion') }}
-    - watch:
+    - require:
       - pkg: salt-minion
       - file: salt-minion
