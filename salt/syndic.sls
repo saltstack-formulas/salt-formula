@@ -1,15 +1,15 @@
-{% from "salt/map.jinja" import pkgs with context %}
+{% from "salt/map.jinja" import salt with context %}
 
 include:
   - salt.master
 
 salt-syndic:
   pkg.installed:
-    - name: {{ pkgs['salt-syndic'] }}
+    - name: {{ salt['salt-syndic'] }}
   service:
     - running
     - require:
-      - service: {{ pkgs.get('syndic-service', 'salt-master') }}
+      - service: {{ salt.get('syndic-service', 'salt-master') }}
     - watch:
       - pkg: salt-master
-      - file: {{ pkgs.get('config-path', '/etc/salt') }}/master
+      - file: {{ salt.get('config-path', '/etc/salt') }}/master

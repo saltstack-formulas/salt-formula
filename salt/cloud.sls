@@ -1,5 +1,5 @@
-{% from "salt/map.jinja" import pkgs with context %}
-{% set salt = pillar.get('salt', {}) -%}
+{% from "salt/map.jinja" import salt with context %}
+{% do salt.update(pillar.get('salt', {})) -%}
 {% set cloud = salt.get('cloud', {}) -%}
 
 python-pip:
@@ -24,7 +24,7 @@ apache-libcloud:
 
 salt-cloud:
   pkg.installed:
-    - name: {{ pkgs['salt-cloud'] }}
+    - name: {{ salt['salt-cloud'] }}
     - require:
       - pip: apache-libcloud
       - pip: pycrypto
