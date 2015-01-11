@@ -1,4 +1,4 @@
-{% set pkgs = salt['grains.filter_by']({
+{% set map = {
     'Debian':  {'salt-master': 'salt-master',
                 'salt-minion': 'salt-minion',
                 'salt-syndic': 'salt-syndic',
@@ -49,5 +49,10 @@
                 'minion-service': 'salt_minion',
                 'master-service': 'salt_master',
                 'syndic-service': 'salt_syndic'},
-},
-merge=salt['pillar.get']('salt:lookup'), base='default') %}
+} %}
+
+{% if grains.get('saltversion', '').startswith('0.17') %}
+{% set salt= salt['grains.filter_by'](map, merge=salt['pillar.get']('salt:lookup'), base='default') %}
+{% else %}
+{% set salt = map.get(grains.os_family) %}
+{% endif %}
