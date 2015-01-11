@@ -1,4 +1,4 @@
-{% set package_table = {
+{% set pkgs = salt['grains.filter_by']({
     'Debian':  {'salt-master': 'salt-master',
                 'salt-minion': 'salt-minion',
                 'salt-syndic': 'salt-syndic',
@@ -48,11 +48,6 @@
                 'config-path': '/usr/local/etc/salt',
                 'minion-service': 'salt_minion',
                 'master-service': 'salt_master',
-                'syndic-service': 'salt_syndic'}
-} %}
-
-{% if 'package_table' in pillar %}
-    {% set pkgs = pillar['package_table'] %}
-{% elif grains['os'] in package_table %}
-    {% set pkgs = package_table[grains['os']] %}
-{% endif %}
+                'syndic-service': 'salt_syndic'},
+},
+merge=salt['pillar.get']('salt:lookup'), base='default') %}

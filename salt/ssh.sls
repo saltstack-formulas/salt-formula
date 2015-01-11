@@ -1,4 +1,4 @@
-{% from "salt/package-map.jinja" import pkgs with context %}
+{% from "salt/map.jinja" import pkgs with context %}
 
 ensure salt-ssh is installed:
   pkg.installed:
