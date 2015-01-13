@@ -1,12 +1,12 @@
 # This file managed by Salt, do not edit by hand!!
 #  Based on salt version 0.17.4 default config
-{% set salt = pillar.get('salt', {}) -%}
-{% set master = salt.get('master', {}) -%}
+{% set saltpillar = pillar.get('salt', {}) -%}
+{% set master = saltpillar.get('master', {}) -%}
 {%- macro get_config(configname, default_value) -%}
 {%- if configname in master -%}
 {{ configname }}: {{ master[configname] }}
-{%- elif configname in salt -%}
-{{ configname }}: {{ salt[configname] }}
+{%- elif configname in saltpillar -%}
+{{ configname }}: {{ saltpillar[configname] }}
 {%- else -%}
 #{{ configname }}: {{ default_value }}
 {%- endif -%}
