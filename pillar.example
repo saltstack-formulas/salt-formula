@@ -9,11 +9,6 @@ salt:
     file_roots:
       base:
         - /srv/salt
-    mine_functions:
-      network.interfaces: []
-      network.ip_addrs: []
-      grains.items: []
-
   minion:
     master: salt
     fileserver_backend:
