@@ -1,4 +1,14 @@
 salt:
+
+  # to overwrite map.jinja salt packages
+  lookup:
+    salt-master: 'salt-master'
+    salt-minion: 'salt-minion'
+    salt-syndic: 'salt-syndic'
+    salt-cloud: 'salt-cloud'
+    salt-ssh: 'salt-ssh'
+
+  # salt master config
   master:
     fileserver_backend:
       - git
@@ -9,6 +19,8 @@ salt:
     file_roots:
       base:
         - /srv/salt
+ 
+  # salt minion config:
   minion:
     master: salt
     fileserver_backend:
@@ -29,6 +41,8 @@ salt:
       test.baz:
         spam: sausage
         cheese: bread
+
+  # salt cloud config
   cloud:
     master: salt
     folders:

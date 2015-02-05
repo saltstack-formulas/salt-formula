@@ -1,4 +1,4 @@
-{% set map = {
+{% set salt = salt['grains.filter_by']({
     'Debian':  {'salt-master': 'salt-master',
                 'salt-minion': 'salt-minion',
                 'salt-syndic': 'salt-syndic',
@@ -33,11 +33,11 @@
                 'salt-minion': 'app-admin/salt',
                 'salt-syndic': 'app-admin/salt',
                 'salt-cloud': 'app-admin/salt'},
-    'Arch':    {'salt-master': 'salt',
-                'salt-minion':  'salt',
-                'salt-syndic':  'salt',
-                'salt-cloud':  'salt',
-                'salt-ssh':  'salt'},
+    'Arch':    {'salt-master': 'salt-zmq',
+                'salt-minion':  'salt-zmq',
+                'salt-syndic':  'salt-zmq',
+                'salt-cloud':  'salt-zmq',
+                'salt-ssh':  'salt-zmq'},
     'openSUSE':{'salt-master': 'salt-master',
                 'salt-minion':  'salt-minion',
                 'salt-syndic':  'salt-syndic',
@@ -51,10 +51,4 @@
                 'minion-service': 'salt_minion',
                 'master-service': 'salt_master',
                 'syndic-service': 'salt_syndic'},
-} %}
-
-{% if grains.get('saltversion', '').startswith('0.17') %}
-{% set salt= salt['grains.filter_by'](map, merge=salt['pillar.get']('salt:lookup'), base='default') %}
-{% else %}
-{% set salt = map.get(grains.os_family) %}
-{% endif %}
+}, merge=salt['pillar.get']('salt:lookup')) %}
