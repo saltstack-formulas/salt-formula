@@ -19,6 +19,14 @@ salt:
     file_roots:
       base:
         - /srv/salt
+
+    # for salt-api with tornado rest interface
+    rest_tornado:
+      port: 8000
+      ssl_crt: /etc/pki/api/certs/server.crt
+      ssl_key: /etc/pki/api/certs/server.key
+      debug: False
+      disable_ssl: False
  
   # salt minion config:
   minion:
