@@ -30,7 +30,15 @@ salt:
  
   # salt minion config:
   minion:
+
+    # single master setup
     master: salt
+    
+    # multi master setup
+    master:
+      - salt_master_1
+      - salt_master_2
+    
     fileserver_backend:
       - git
       - roots
