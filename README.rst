@@ -41,6 +41,12 @@ Install salt cloud.
 Install salt-ssh with roster file.
 Configure pillar data under salt:ssh_roster to feed the template.
 
+``salt.api``
+------------
+
+Install salt api
+Requisite: Configure salt-master with rest_cherrypy or rest_tornado.
+
 ``salt.standalone``
 -------------------
 
