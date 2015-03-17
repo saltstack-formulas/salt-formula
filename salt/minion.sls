@@ -1,10 +1,10 @@
-{% from "salt/map.jinja" import salt with context %}
+{% from "salt/map.jinja" import salt_settings with context %}
 
 salt-minion:
   pkg.installed:
-    - name: {{ salt['salt-minion'] }}
+    - name: {{ salt_settings.salt_minion }}
   file.recurse:
-    - name: {{ salt.get('config-path', '/etc/salt') }}/minion.d
+    - name: {{ salt_settings.config_path }}/minion.d
     - template: jinja
     - source: salt://salt/files/minion.d
     - clean: True
@@ -12,7 +12,7 @@ salt-minion:
         standalone: False
   service.running:
     - enable: True
-    - name: {{ salt.get('minion-service', 'salt-minion') }}
+    - name: {{ salt_settings.minion_service }}
     - watch:
       - pkg: salt-minion
       - file: salt-minion

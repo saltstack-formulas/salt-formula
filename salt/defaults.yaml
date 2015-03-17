@@ -1,0 +1,12 @@
+salt:
+  config_path: /etc/salt
+  minion_service: salt-minion
+  master_service: salt-master
+  api_service: salt-api
+  syndic_service: salt-syndic
+  salt_master: salt-master
+  salt_minion: salt-minion
+  salt_syndic: salt-syndic
+  salt_cloud: salt-cloud
+  salt_api: salt-api
+  salt_ssh: salt-ssh
