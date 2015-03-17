@@ -22,6 +22,7 @@ apache-libcloud:
     - require:
       - pkg: python-pip
 
+{% if salt['pillar.get']('salt:install_pkgs', True) %}
 salt-cloud:
   pkg.installed:
     - name: {{ salt['salt-cloud'] }}
@@ -31,6 +32,7 @@ salt-cloud:
       {% if grains['os_family'] not in ['Debian', 'RedHat'] %}
       - pip: crypto
       {% endif %}
+{% endif %}
 
 {% for folder in cloud['folders'] %}
 {{ folder }}:
