@@ -1,14 +1,14 @@
-{% from "salt/map.jinja" import salt with context %}
+{% from "salt/map.jinja" import salt_settings with context %}
 
 include:
   - salt.master
 
 salt-api:
   pkg.installed:
-    - name: {{ salt['salt-api'] }}
+    - name: {{ salt_settings.salt_api }}
   service.running:
-    - name: {{ salt.get('api-service', 'salt-api') }}
+    - name: {{ salt_settings.api_service }}
     - require:
-      - service: {{ salt.get('api-service', 'salt-master') }}
+      - service: {{ salt_settings.api_service }}
     - watch:
       - pkg: salt-master
