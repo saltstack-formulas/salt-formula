@@ -1,8 +1,10 @@
 {% from "salt/map.jinja" import salt with context %}
 
+{% if salt['pillar.get']('salt:install_pkgs', True) %}
 ensure salt-ssh is installed:
   pkg.installed:
     - name: {{ salt['salt-ssh'] }}
+{% endif %}
 
 ensure roster config:
   file.managed:
