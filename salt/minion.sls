@@ -7,7 +7,7 @@ salt-minion:
     - name: {{ salt_settings.config_path }}/minion.d
     - template: jinja
     - source: salt://salt/files/minion.d
-    - clean: True
+    - clean: {{ salt_settings.clean_config_d_dir }}
     - context:
         standalone: False
   service.running:

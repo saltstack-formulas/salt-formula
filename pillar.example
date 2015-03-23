@@ -1,4 +1,5 @@
 salt:
+  clean_config_d_dir: False
 
   # to overwrite map.jinja salt packages
   lookup:
@@ -27,18 +28,18 @@ salt:
       ssl_key: /etc/pki/api/certs/server.key
       debug: False
       disable_ssl: False
- 
+
   # salt minion config:
   minion:
 
     # single master setup
     master: salt
-    
+
     # multi master setup
     master:
       - salt_master_1
       - salt_master_2
-    
+
     fileserver_backend:
       - git
       - roots
