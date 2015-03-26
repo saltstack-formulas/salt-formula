@@ -53,6 +53,21 @@ Requisite: Configure salt-master with rest_cherrypy or rest_tornado.
 Install a minion and configure it in `standalone mode
 <http://docs.saltstack.com/en/latest/topics/tutorials/standalone_minion.html>`_.
 
+``salt.gitfs.dulwich``
+----------------------
+
+Install gitfs backend dulwich dependencies. Set ``salt:master:gitfs_provider: dulwich`` in your pillar.
+
+``salt.gitfs.gitpython``
+----------------------
+
+Install gitfs backend GitPython dependenciess. Set ``salt:master:gitfs_provider: gitpython`` in your pillar.
+
+``salt.gitfs.pygit2``
+----------------------
+
+Install gitfs backend libgit2/pygit2 dependenciess. Set ``salt:master:gitfs_provider: pygit2`` in your pillar.
+
 ``salt.pkgrepo``
 ----------------
 
