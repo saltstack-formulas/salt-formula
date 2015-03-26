@@ -4,6 +4,10 @@ salt:
   # and up as it'll wipe out important files that Salt relies on.
   clean_config_d_dir: False
 
+  # Set this to False to not have the formula install packages (in the case you
+  # install Salt via git/pip/etc.)
+  install_packages: True
+
   # to overwrite map.jinja salt packages
   lookup:
     salt-master: 'salt-master'

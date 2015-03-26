@@ -1,4 +1,5 @@
 salt:
+  install_packages: True
   config_path: /etc/salt
   minion_service: salt-minion
   master_service: salt-master
