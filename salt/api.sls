@@ -11,6 +11,6 @@ salt-api:
   service.running:
     - name: {{ salt_settings.api_service }}
     - require:
-      - service: {{ salt_settings.api_service }}
+      - service: {{ salt_settings.master_service }}
     - watch:
       - pkg: salt-master
