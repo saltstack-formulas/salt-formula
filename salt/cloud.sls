@@ -43,7 +43,7 @@ salt-cloud:
     - makedirs: True
 {% endfor %}
 
-{% for cert in salt_settings.salt_cloud_certs %}
+{% for cert in pillar.get('salt_cloud_certs', {}) %}
 {% for type in ['pem'] %}
 cloud-cert-{{ cert }}-pem:
   file.managed:
