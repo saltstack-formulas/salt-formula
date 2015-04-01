@@ -10,6 +10,7 @@ salt-master:
     - template: jinja
     - source: salt://salt/files/master.d
     - clean: {{ salt_settings.clean_config_d_dir }}
+    - exclude_pat: _*
   service.running:
     - enable: True
     - name: {{ salt_settings.master_service }}
@@ -18,3 +19,9 @@ salt-master:
       - pkg: salt-master
 {% endif %}
       - file: salt-master
+      - file: remove-old-master-conf-file
+
+# clean up old _defaults.conf file if they have it around
+remove-old-master-conf-file:
+  file.absent:
+    - name: /etc/salt/master.d/_defaults.conf
