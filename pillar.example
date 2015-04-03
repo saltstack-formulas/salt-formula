@@ -82,6 +82,12 @@ salt:
       - cloud.providers.d/key
       - cloud.profiles.d
       - cloud.maps.d
+
+    # You can take profile and map templates from an alternate location
+    # if desired.
+    profiles_src: salt://templates/cloud.profiles.d
+    maps_src: salt://templates/cloud.maps.d
+
     providers:
       - ec2
       - gce

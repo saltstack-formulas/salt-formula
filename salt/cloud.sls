@@ -60,21 +60,19 @@ cloud-cert-{{ cert }}-pem:
 {% endfor %}
 
 {% for providers in salt_settings.cloud.providers %}
-salt-cloud-profiles-{{ providers }}:
-  file.managed:
-    - name: /etc/salt/cloud.profiles.d/{{ providers }}.conf
-    - template: jinja
-    - source: salt://salt/files/cloud.profiles.d/{{ providers }}.conf
-
 salt-cloud-providers-{{ providers }}:
   file.managed:
     - name: /etc/salt/cloud.providers.d/{{ providers }}.conf
     - template: jinja
     - source: salt://salt/files/cloud.providers.d/{{ providers }}.conf
-
-salt-cloud-maps-{{ providers }}:
-  file.managed:
-    - name: /etc/salt/cloud.maps.d/{{ providers }}.conf
-    - template: jinja
-    - source: salt://salt/files/cloud.maps.d/{{ providers }}.conf
 {% endfor %}
+
+{%- for dir in ['profiles', 'maps'] %}
+{%- set default_src = 'salt://salt/files/cloud.{}.d'.format(dir) %}
+{%- set source = salt_settings.cloud.get(dir + "_src", default_src) %}
+salt-cloud-{{ dir }}:
+  file.recurse:
+    - name: /etc/salt/cloud.{{ dir }}.d
+    - source: {{ source }}
+    - template: jinja
+{%- endfor %}
