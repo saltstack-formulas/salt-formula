@@ -66,6 +66,15 @@ salt:
         spam: sausage
         cheese: bread
 
+    # salt mine setup
+    mine_interval: 60
+    # mine_functions can be set at the top level of the pillar, and
+    # that is preferable because it doesn't affect the conf file and
+    # doesn't require a minion restart. However, you can configure it
+    # here instead if you really want to.
+    mine_functions:
+      network.interface_ip: [eth0]
+
   # salt cloud config
   cloud:
     master: salt
