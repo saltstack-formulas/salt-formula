@@ -78,19 +78,16 @@ salt:
   # salt cloud config
   cloud:
     master: salt
-    folders:
-      - cloud.providers.d/key
-      - cloud.profiles.d
-      - cloud.maps.d
 
     # You can take profile and map templates from an alternate location
-    # if desired.
-    profiles_src: salt://templates/cloud.profiles.d
-    maps_src: salt://templates/cloud.maps.d
+    # if you want to write your own.
+    template_sources:
+      providers: salt://templates/cloud.providers.d
+      profiles: salt://templates/cloud.profiles.d
+      maps: salt://templates/cloud.maps.d
 
-    providers:
-      - ec2
-      - gce
+    # These settings are used by the default provider templates and
+    # only need to be set for the ones you're using.
     aws_key: AWSKEYIJSHJAIJS6JSH
     aws_secret: AWSSECRETYkkDY1iQf9zRtl9+pW+Nm+aZY95
     gce_project: test
