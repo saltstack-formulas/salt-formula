@@ -56,9 +56,17 @@ salt-cloud-{{ dir }}:
     - name: /etc/salt/cloud.{{ dir }}.d
     - source: {{ source }}
     - template: jinja
-    - user: root
-    - group: root
-    - dir_mode: 755
-    - file_mode: 644
     - makedirs: True
 {%- endfor %}
+
+salt-cloud-providers-permissions:
+  file.directory:
+    - name: /etc/salt/cloud.providers.d
+    - user: root
+    - group: root
+    - file_mode: 600
+    - dir_mode: 700
+    - recurse:
+      - user
+      - group
+      - mode
