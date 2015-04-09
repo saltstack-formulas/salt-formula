@@ -11,7 +11,7 @@ ensure roster config:
     - name: {{ salt_settings.config_path }}/roster
     - source: salt://salt/files/roster.jinja
     - template: jinja
-    - require:
 {% if salt_settings.install_packages %}
+    - require:
       - pkg: ensure salt-ssh is installed
 {% endif %}
