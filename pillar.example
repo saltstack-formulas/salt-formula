@@ -82,9 +82,9 @@ salt:
     # You can take profile and map templates from an alternate location
     # if you want to write your own.
     template_sources:
-      providers: salt://templates/cloud.providers.d
-      profiles: salt://templates/cloud.profiles.d
-      maps: salt://templates/cloud.maps.d
+      providers: salt://salt/files/cloud.providers.d
+      profiles: salt://salt/files/cloud.profiles.d
+      maps: salt://salt/files/cloud.maps.d
 
     # These settings are used by the default provider templates and
     # only need to be set for the ones you're using.
