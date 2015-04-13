@@ -49,12 +49,11 @@ cloud-cert-{{ cert }}-pem:
 {% endfor %}
 {% endfor %}
 
-{%- for dir in ['providers', 'profiles', 'maps'] %}
-{%- set source = salt_settings.cloud.template_sources.get(dir) %}
+{%- for dir, templ_path in salt_settings.cloud.template_sources.items() %}
 salt-cloud-{{ dir }}:
   file.recurse:
     - name: /etc/salt/cloud.{{ dir }}.d
-    - source: {{ source }}
+    - source: {{ templ_path }}
     - template: jinja
     - makedirs: True
 {%- endfor %}
