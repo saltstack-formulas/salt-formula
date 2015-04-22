@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "boxcutter/ubuntu1410"
-  config.vm.hostname = "salt"
+  config.vm.hostname = "mimi"
   config.vm.synced_folder "./", "/srv/salt", id: "vagrant-root"
 
   config.ssh.forward_agent = true
