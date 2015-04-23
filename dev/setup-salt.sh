@@ -2,7 +2,6 @@
 sudo apt-get update -y
 sudo apt-get install python-software-properties pkg-config software-properties-common -y
 sudo add-apt-repository ppa:saltstack/salt -y
-sudo apt-get update -y
 sudo apt-get install salt-master -y
 sudo apt-get install salt-minion -y
 # setup top files to test the formula
