@@ -27,7 +27,9 @@ salt:
     file_roots:
       base:
         - /srv/salt
-
+    pillar_roots:
+      base:
+        - /srv/pillar
     # for salt-api with tornado rest interface
     rest_tornado:
       port: 8000
@@ -56,6 +58,9 @@ salt:
     file_roots:
       base:
         - /srv/salt
+    pillar_roots:
+      base:
+        - /srv/pillar
     module_config:
       test: True
       test.foo: foo
