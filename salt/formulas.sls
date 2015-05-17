@@ -4,7 +4,7 @@
 {% from "salt/formulas.jinja" import formulas_git_opt with context %}
 
 # Loop over all formulas listed in pillar data
-{% for env, entries in salt['pillar.get']('salt_formulas:list').iteritems() %}
+{% for env, entries in salt['pillar.get']('salt_formulas:list', {}).iteritems() %}
 {% for entry in entries %}
 
 {% set basedir = formulas_git_opt(env, 'basedir') %}
