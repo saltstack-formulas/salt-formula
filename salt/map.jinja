@@ -1,72 +1,60 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with  defaults from defaults.yaml ##}
 {% import_yaml "salt/defaults.yaml" as default_settings %}
 
-{% set distro_map = salt['grains.filter_by']({
-    'Debian':  {'salt_master': 'salt-master',
-                'salt_minion': 'salt-minion',
-                'salt_syndic': 'salt-syndic',
-                'salt_cloud': 'salt-cloud',
-                'salt_api': 'salt-api',
-                'salt_ssh': 'salt-ssh'},
-    'Ubuntu':  {'salt_master': 'salt-master',
-                'salt_minion': 'salt-minion',
-                'salt_syndic': 'salt-syndic',
-                'salt_cloud': 'salt-cloud',
-                'salt_api': 'salt-api',
-                'salt_ssh': 'salt-ssh'},
-    'CentOS':  {'salt_master': 'salt-master',
-                'salt_minion': 'salt-minion',
-                'salt_syndic': 'salt-syndic',
-                'salt_cloud': 'salt-cloud',
-                'salt_api': 'salt-api',
-                'salt_ssh': 'salt-ssh'},
-    'Amazon':  {'salt_master': 'salt-master',
-                'salt_minion': 'salt-minion',
-                'salt_syndic': 'salt-syndic',
-                'salt_cloud': 'salt-cloud',
-                'salt_api': 'salt-api',
-                'salt_ssh': 'salt-ssh'},
-    'Fedora':  {'salt_master': 'salt-master',
-                'salt_minion': 'salt-minion',
-                'salt_syndic': 'salt-syndic',
-                'salt_cloud': 'salt-cloud',
-                'salt_api': 'salt-api',
-                'salt_ssh': 'salt-ssh'},
-    'RedHat':  {'salt_master': 'salt-master',
-                'salt_minion': 'salt-minion',
-                'salt_syndic': 'salt-syndic',
-                'salt_cloud': 'salt-cloud',
-                'salt_api': 'salt-api',
-                'salt_ssh': 'salt-ssh'},
-    'Gentoo':  {'salt_master': 'app-admin/salt',
-                'salt_minion': 'app-admin/salt',
-                'salt_syndic': 'app-admin/salt',
-                'salt_api': 'app-admin/salt',
-                'salt_cloud': 'app-admin/salt'},
-    'Arch':    {'salt_master': 'salt-zmq',
-                'salt_minion':  'salt-zmq',
-                'salt_syndic':  'salt-zmq',
-                'salt_cloud':  'salt-zmq',
-                'salt_api': 'salt-zmq',
-                'salt_ssh':  'salt-zmq'},
-    'Suse':    {'salt_master': 'salt-master',
-                'salt_minion':  'salt-minion',
-                'salt_syndic':  'salt-syndic',
-                'salt_api': 'salt-api',
-                'salt_cloud':  'salt-cloud',
-                'salt_ssh':  'salt-ssh'},
-    'FreeBSD': {'salt_master': 'py27-salt',
-                'salt_minion': 'py27-salt',
-                'salt_syndic': 'py27-salt',
-                'salt_cloud': 'py27-salt',
-                'salt_api': 'py27-salt',
-                'config_path': '/usr/local/etc/salt',
-                'minion_service': 'salt_minion',
-                'master_service': 'salt_master',
-                'api_service': 'salt_api',
-                'syndic_service': 'salt_syndic'},
-}, merge=salt['pillar.get']('salt:lookup')) %}
+{## 
+Setup variable using grains['os_family'] based logic, only add key:values here
+that differ from whats in defaults.yaml
+##}
+{% set os_family_map = salt['grains.filter_by']({
+    'Debian':  {},
+    'Ubuntu':  {},
+    'CentOS':  {},
+    'Amazon':  {},
+    'Fedora':  {},
+    'RedHat':  {},
+    'Suse':    {},
+    'Gentoo':  {
+      'salt_master': 'app-admin/salt',
+      'salt_minion': 'app-admin/salt',
+      'salt_syndic': 'app-admin/salt',
+      'salt_api': 'app-admin/salt',
+      'salt_cloud': 'app-admin/salt'
+    },
+    'Arch':    {
+      'salt_master': 'salt-zmq',
+      'salt_minion':  'salt-zmq',
+      'salt_syndic':  'salt-zmq',
+      'salt_cloud':  'salt-zmq',
+      'salt_api': 'salt-zmq',
+      'salt_ssh':  'salt-zmq'
+    },
+    'FreeBSD': {
+      'salt_master': 'py27-salt',
+      'salt_minion': 'py27-salt',
+      'salt_syndic': 'py27-salt',
+      'salt_cloud': 'py27-salt',
+      'salt_api': 'py27-salt',
+      'config_path': '/usr/local/etc/salt',
+      'minion_service': 'salt_minion',
+      'master_service': 'salt_master',
+      'api_service': 'salt_api',
+      'syndic_service': 'salt_syndic'
+    },
+  }
+  , grain="os_family"
+  , merge=salt['pillar.get']('salt:lookup'))
+%}
 
-{% do default_settings.salt.update(distro_map) %}
-
-{% set salt_settings = salt['pillar.get']('salt', default=default_settings.salt,
-  merge=True) %}
+{## Merge the flavor_map to the default settings ##}
+{% do default_settings.salt.update(os_family_map) %}
+    
+{## Merge in salt:lookup pillar ##}
+{% set salt_settings = salt['pillar.get'](
+    'salt',
+    default=default_settings.salt,
+    merge=True
+  )
+%}
