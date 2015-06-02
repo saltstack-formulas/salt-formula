@@ -1,4 +1,6 @@
-{% if grains['os_family'] == 'Debian' %}
+{% set name = {
+    'RedHat': 'redhat',
+    'Debian': grains['os']|lower,
+}.get(grains.os_family) %}
 include:
-  - .{{ grains['os']|lower }}
-{% endif %}
+  - .{{ name }}
