@@ -14,7 +14,18 @@ that differ from whats in defaults.yaml
     'CentOS':  {},
     'Amazon':  {},
     'Fedora':  {},
-    'RedHat':  {},
+    'RedHat':  {
+      'pygit2': 'python-pygit2',
+      'gitfs': {
+        'pygit2': {
+           'install_from_source': False
+        },
+      },
+      'master': {
+        'gitfs_provider': 'pygit2'
+      },
+      'repotype': 'epel'
+    },
     'Suse':    {},
     'Gentoo':  {
       'salt_master': 'app-admin/salt',

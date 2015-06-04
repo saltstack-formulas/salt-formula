@@ -53,8 +53,7 @@ install-pygit2:
     - name: pygit2
 
 {% else %}
-# install from package
-# TODO haven't actually found a distro that has a good version to test
-# debian jessie will have libgit2-21
+{{ salt_settings.pygit2 }}:
+  pkg.installed
 
 {% endif %}

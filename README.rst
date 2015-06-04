@@ -67,6 +67,7 @@ Install gitfs backend GitPython dependenciess. Set ``salt:master:gitfs_provider:
 ----------------------
 
 Install gitfs backend libgit2/pygit2 dependenciess. Set ``salt:master:gitfs_provider: pygit2`` in your pillar.
+For EL distributions, pygit is installed from packages from `EPEL <https://github.com/saltstack-formulas/epel-formula>`_.
 
 ``salt.pkgrepo``
 ----------------
@@ -76,6 +77,8 @@ benefit from the latest version. This state currently only works on Debian
 and Ubuntu, and aims to implement the `installation recommendations of the
 official documentation
 <http://docs.saltstack.com/en/latest/topics/installation/index.html#platform-specific-installation-instructions>`_.
+
+On EL distributions, the official Salt `COPR for ZeroMQ 4 <http://copr.fedoraproject.org/coprs/saltstack/zeromq4/>`_. Salt itself is installed via `EPEL <https://github.com/saltstack-formulas/epel-formula>`_.
 
 ``salt.pkgrepo.absent``
 -----------------------
