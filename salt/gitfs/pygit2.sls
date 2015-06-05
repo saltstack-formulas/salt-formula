@@ -1,5 +1,8 @@
 {% from "salt/map.jinja" import salt_settings with context %}
 
+git:
+  pkg.installed
+
 {% if salt_settings.gitfs.pygit2.install_from_source %}
 # we probably don't have a package or it's not a high enough version
 # install latest from source/pip
