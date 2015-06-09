@@ -9,7 +9,7 @@ ensure-salt-ssh-is-installed:
 ensure-roster-config:
   file.managed:
     - name: {{ salt_settings.config_path }}/roster
-    - source: salt://salt/files/roster.jinja
+    - source: salt://{{ slspath }}/files/roster.jinja
     - template: jinja
 {% if salt_settings.install_packages %}
     - require:
