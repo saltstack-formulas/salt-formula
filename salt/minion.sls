@@ -8,7 +8,7 @@ salt-minion:
   file.recurse:
     - name: {{ salt_settings.config_path }}/minion.d
     - template: jinja
-    - source: salt://salt/files/minion.d
+    - source: salt://{{ slspath }}/files/minion.d
     - clean: {{ salt_settings.clean_config_d_dir }}
     - exclude_pat: _*
     - context:

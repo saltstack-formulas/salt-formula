@@ -37,7 +37,7 @@ salt-cloud:
 cloud-cert-{{ cert }}-pem:
   file.managed:
     - name: /etc/salt/pki/cloud/{{ cert }}.pem
-    - source: salt://salt/files/key
+    - source: salt://{{ slspath }}/files/key
     - template: jinja
     - user: root
     - group: root
