@@ -8,12 +8,11 @@ salt-syndic:
   pkg.installed:
     - name: {{ salt_settings.salt_syndic }}
 {% endif %}
-  service:
-    - running
+  service.running
     - require:
-      - service: {{ salt_settings.syndic_service }}
+      - service: salt-master
     - watch:
 {% if salt_settings.install_packages %}
       - pkg: salt-master
 {% endif %}
-      - file: {{ salt_settings.config_path }}/master
+      - file: salt-master
