@@ -8,8 +8,8 @@
 {% set formulas = salt['pillar.get']('salt_formulas:list', {}) %}
 
 {%- macro formulas_git_opt(env, opt) -%}
-{%- set value = salt['pillar.get']('salt_formulas:git_opts:{}:{}'.format(env, opt),
-     salt['pillar.get']('salt_formulas:git_opts:default:{}'.format(opt),
+{%- set value = salt['pillar.get']('salt_formulas:git_opts:{0}:{1}'.format(env, opt),
+     salt['pillar.get']('salt_formulas:git_opts:default:{0}'.format(opt),
        defaults[opt])) -%}
 {%- if value is mapping -%}
 {{ value|yaml }}
@@ -21,7 +21,7 @@
 {%- macro formulas_roots(env) -%}
 {%- set value = [] -%}
 {%- for dir in formulas.get(env, []) -%}
-{%- do value.append('{}/{}'.format(formulas_git_opt(env, 'basedir'), dir)) -%}
+{%- do value.append('{0}/{1}'.format(formulas_git_opt(env, 'basedir'), dir)) -%}
 {%- endfor -%}
 {{ value|yaml }}
 {%- endmacro -%}
