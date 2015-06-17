@@ -8,7 +8,7 @@
 {% for entry in entries %}
 
 {% set basedir = formulas_git_opt(env, 'basedir') %}
-{% set gitdir = '{}/{}'.format(basedir, entry) %}
+{% set gitdir = '{0}/{1}'.format(basedir, entry) %}
 {% set update = formulas_git_opt(env, 'update')|load_yaml %}
 
 # Setup the directory hosting the Git repository
