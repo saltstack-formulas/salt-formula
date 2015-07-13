@@ -46,6 +46,7 @@ Configure pillar data under salt:ssh_roster to feed the template.
 
 Install salt api
 Requisite: Configure salt-master with rest_cherrypy or rest_tornado.
+Requires: pip.extensions as it installs the latest version from pip.
 
 ``salt.standalone``
 -------------------
