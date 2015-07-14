@@ -38,9 +38,9 @@ salt_api_install:
 {%- if use_pip %}
 {%- if 'rest_cherrypy' in cfg_master %}
 salt_api_cherrypy:
-  pkg.purged
+  pkg.purged:
     - name: {{ salt_settings.python_cherrypy }}
-  pip.installed
+  pip.installed:
     - name: cherrypy
     - require:
       - pkg: salt_api_cherrypy
@@ -49,9 +49,9 @@ salt_api_cherrypy:
 
 {%- if 'rest_tornado' in cfg_master %}
 salt_api_tornado:
-  pkg.purged
+  pkg.purged:
     - name: {{ salt_settings.python_tornado }}
-  pip.installed
+  pip.installed:
     - name: tornado
     - require:
       - pkg: salt_api_tornado
@@ -62,13 +62,13 @@ salt_api_tornado:
 
 {% if 'rest_cherrypy' in cfg_master %}
 salt_api_cherrypy:
-  pkg.installed
+  pkg.installed:
     - name: {{ salt_settings.python_cherrypy }}
 {% endif %}
 
 {% if 'rest_tornado' in cfg_master %}
 salt_api_tornado:
-  pkg.installed
+  pkg.installed:
     - name: {{ salt_settings.python_tornado }}
 {% endif %}
 {%- endif %}
