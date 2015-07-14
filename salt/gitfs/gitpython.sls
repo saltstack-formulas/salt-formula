@@ -9,6 +9,6 @@ GitPython:
 
 python-git:
   pkg.installed:
-    - name: {{ salt_settings['python_git'] }}
+    - name: {{ salt_settings.python_git }}
 
 {% endif %}
