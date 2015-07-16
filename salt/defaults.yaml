@@ -2,7 +2,7 @@
 # vim: ft=yaml
 salt:
   install_packages: True
-  clean_config_d_dir: True
+  clean_config_d_dir: False
 
   config_path: /etc/salt
 
