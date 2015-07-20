@@ -38,10 +38,6 @@ salt:
       debug: False
       disable_ssl: False
 
-  api:
-    # Installs the latest version of cherrpy/tornado from pip.
-    use_pip: True
-
   # salt minion config:
   minion:
 
