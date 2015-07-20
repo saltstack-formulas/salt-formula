@@ -8,7 +8,6 @@ GitPython:
 {% else %}
 
 python-git:
-  pkg.installed:
-    - name: {{ salt_settings.python_git }}
+  pkg.installed
 
 {% endif %}

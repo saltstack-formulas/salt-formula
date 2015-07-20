@@ -18,10 +18,6 @@ salt:
   salt_api: salt-api
   salt_ssh: salt-ssh
 
-  python_git: python-git
-  python_cherrypy: python-cherrypy
-  python_tornado: python-tornado
-
   master:
     gitfs_provider: gitpython
 
