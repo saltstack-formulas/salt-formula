@@ -9,39 +9,40 @@ include:
 {%- set cfg_salt = pillar.get('salt', {}) %}
 {%- set cfg_master = cfg_salt.get('master', {}) %}
 
-salt_api_install:
+salt-api:
   pkg.installed:
-    - name: {{ salt_settings['salt_api'] }}
+    - name: {{ salt_settings['salt-api'] }}
   service.running:
     - name: {{ salt_settings.get('api_service', 'salt-api') }}
     - require:
+      - service: {{ salt_settings.get('api_service', 'salt-api') }}
 {%- if 'rest_cherrypy' in cfg_master %}
-      - pip: salt_api_cherrypy
+      - pip: salt-api-cherrypy
 {% elif 'rest_tornado' in cfg_master %}
-      - pip: salt_api_tornado
+      - pip: salt-api-tornado
 {% endif %}
     - watch:
       - pkg: salt-master
       - file: salt-master
 
 {%- if 'rest_cherrypy' in cfg_master %}
-salt_api_cherrypy:
+salt-api-cherrypy:
   pkg.purged:
     - name: {{ salt_settings['python-cherrypy'] }}
   pip.installed:
     - name: cherrypy
     - require:
-      - pkg: salt_api_cherrypy
+      - pkg: salt-api-cherrypy
       - pkg: pip_extensions
 {% endif %}
 
 {%- if 'rest_tornado' in cfg_master %}
-salt_api_tornado:
+salt-api-tornado:
   pkg.purged:
     - name: {{ salt_settings['python-tornado'] }}
   pip.installed:
     - name: tornado
     - require:
-      - pkg: salt_api_tornado
+      - pkg: salt-api-tornado
       - pkg: pip_extensions
 {% endif %}
