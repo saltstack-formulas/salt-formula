@@ -18,6 +18,8 @@ salt:
   salt_api: salt-api
   salt_ssh: salt-ssh
 
+  python_git: python-git
+
   master:
     gitfs_provider: gitpython
 
