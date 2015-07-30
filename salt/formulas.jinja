@@ -11,7 +11,7 @@
 {%- set value = salt['pillar.get']('salt_formulas:git_opts:{0}:{1}'.format(env, opt),
      salt['pillar.get']('salt_formulas:git_opts:default:{0}'.format(opt),
        defaults[opt])) -%}
-{%- if value is mapping -%}
+{%- if value is iterable -%}
 {{ value|yaml }}
 {%- else -%}
 {{ value }}
