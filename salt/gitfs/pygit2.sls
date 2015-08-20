@@ -1,9 +1,16 @@
 {% from "salt/map.jinja" import salt_settings with context %}
+{% set pygit2_settings = salt_settings.gitfs.pygit2 %}
 
 git:
   pkg.installed
 
-{% if salt_settings.gitfs.pygit2.install_from_source %}
+{% if pygit2_settings.install_from_source %}
+{% set libgit2_settings = pygit2_settings.libgit2 %}
+
+{% if libgit2_settings.install_from_source %}
+{% set libgit2_src_dir = libgit2_settings.build_parent_dir + 'libgit2-' + libgit2_settings.version %}
+{% set libgit2_build_dir = libgit2_src_dir + '/_build' %}
+
 # we probably don't have a package or it's not a high enough version
 # install latest from source/pip
 pygit-deps:
@@ -17,32 +24,32 @@ pygit-deps:
 
 dl-libgit2-src:
   archive.extracted:
-    - name: /usr/src
-    - source: https://github.com/libgit2/libgit2/archive/v0.22.1.tar.gz
-    - source_hash: md5=dbf516d18e176bbb131de3efccfee533
+    - name: {{ libgit2_settings.build_parent_dir }}
+    - source: https://github.com/libgit2/libgit2/archive/v{{ libgit2_settings.version }}.tar.gz
+    - source_hash: md5={{ libgit2_settings.download_hash }}
     - archive_format: tar
     - keep: True
-    - if_missing: /usr/src/libgit2-0.22.1
+    - if_missing: /usr/src/libgit2-{{ libgit2_settings.version }}
 
-/usr/src/libgit2-0.22.1/_build:
+{{ libgit2_build_dir }}:
   file.directory
 
 configure-libgit2:
   cmd.run:
     - name: cmake ..
-    - cwd: /usr/src/libgit2-0.22.1/_build
-    - creates: /usr/src/libgit2-0.22.1/_build/Makefile
+    - cwd: {{ libgit2_build_dir }}
+    - creates: {{ libgit2_build_dir }}/Makefile
 
 build-libgit2:
   cmd.run:
     - name: make -j4
-    - cwd: /usr/src/libgit2-0.22.1/_build
-    - creates: /usr/src/libgit2-0.22.1/_build/libgit2.so
+    - cwd: {{ libgit2_build_dir }}
+    - creates: {{ libgit2_build_dir }}/libgit2.so
 
 install-libgit2:
   cmd.run:
     - name: make install
-    - cwd: /usr/src/libgit2-0.22.1/_build
+    - cwd: {{ libgit2_build_dir }}
     - creates: /usr/local/lib/libgit2.so
 
 run-ldconfig-after-lib-install:
@@ -51,9 +58,15 @@ run-ldconfig-after-lib-install:
     - onchanges:
       - cmd: install-libgit2
 
+{% else %}
+{{ salt_settings.libgit2 }}:
+  pkg.installed
+
+{% endif %}
+
 install-pygit2:
   pip.installed:
-    - name: pygit2
+    - name: pygit2 == {{ pygit2_settings.version }}
 
 {% else %}
 {{ salt_settings.pygit2 }}:
