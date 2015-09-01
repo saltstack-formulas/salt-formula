@@ -1,8 +1,14 @@
 {% from "salt/map.jinja" import salt_settings with context %}
 {% set pygit2_settings = salt_settings.gitfs.pygit2 %}
 
-git:
-  pkg.installed
+{% if pygit2_settings.git.get('require_state', False) %}
+include:
+  - {{ pygit2_settings.git.require_state }}
+{% elif pygit2_settings.git.get('install_from_package', 'git') %}
+pygit2-git:
+  pkg.installed:
+    - name: {{ pygit2_settings.git.install_from_package }}
+{% endif %}
 
 {% if pygit2_settings.install_from_source %}
 {% set libgit2_settings = pygit2_settings.libgit2 %}

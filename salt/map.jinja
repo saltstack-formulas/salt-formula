@@ -15,6 +15,10 @@ that differ from whats in defaults.yaml
         'pygit2': {
           'install_from_source': True,
           'version': '0.22.1',
+          'git': {
+            'require_state': False,
+            'install_from_package': 'git',
+          },
           'libgit2': {
             'install_from_source': False,
           },
@@ -25,7 +29,11 @@ that differ from whats in defaults.yaml
       'pygit2': 'python-pygit2',
       'gitfs': {
         'pygit2': {
-           'install_from_source': False,
+          'install_from_source': False,
+          'git': {
+            'require_state': False,
+            'install_from_package': 'git',
+          },
         },
       },
       'master': {
