@@ -29,6 +29,10 @@ salt:
     pygit2:
       install_from_source: True
       version: 0.23.0
+      git:
+        # if not false, should be state name
+        require_state: False
+        install_from_package: git
       libgit2:
         version: 0.23.0
         install_from_source: True
