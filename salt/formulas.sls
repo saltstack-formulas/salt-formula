@@ -4,7 +4,7 @@
 {% from "salt/formulas.jinja" import formulas_git_opt with context %}
 
 # Loop over all formulas listed in pillar data
-{% for env, entries in salt['pillar.get']('salt_formulas:list', {}).iteritems() %}
+{% for env, entries in salt['pillar.get']('salt_formulas:list', {}).items() %}
 {% for entry in entries %}
 
 {% set basedir = formulas_git_opt(env, 'basedir')|load_yaml %}
@@ -17,7 +17,7 @@
 {{ basedir }}:
   file.directory:
     {%- for key, value in salt['pillar.get']('salt_formulas:basedir_opts',
-                                             {'makedirs': True}).iteritems() %}
+                                             {'makedirs': True}).items() %}
     - {{ key }}: {{ value }}
     {%- endfor %}
 {% endif %}
@@ -31,7 +31,7 @@
   git.latest:
     - name: {{ baseurl }}/{{ entry }}.git
     - target: {{ gitdir }}
-    {%- for key, value in options.iteritems() %}
+    {%- for key, value in options.items() %}
     - {{ key }}: {{ value }}
     {%- endfor %}
     - require:
