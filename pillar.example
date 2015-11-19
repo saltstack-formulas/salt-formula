@@ -106,6 +106,23 @@ salt:
       - IAD
       - SYD
       - HKG
+
+    # Configure the proxmox providers you want to use (one per cluster, normally)
+    proxmox_providers:
+      test:
+        user: root@pam
+        password: password
+        url: prox-test.mydomain
+      live:
+        user: root@pam
+        password: password
+        url: prox-live.mydomain
+
+    # You'll need to hand-edit your profiles, but you can insert a default root password
+    # from here
+    proxmox_profile_defaults:
+      default_password: somesecretpassword
+
   reactor:
     - 'deploy':
       - /srv/salt/reactors/deploy.sls
