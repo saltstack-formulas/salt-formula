@@ -4,12 +4,14 @@
 {## Start with  defaults from defaults.yaml ##}
 {% import_yaml "salt/defaults.yaml" as default_settings %}
 
-{## 
+{##
 Setup variable using grains['os_family'] based logic, only add key:values here
 that differ from whats in defaults.yaml
 ##}
 {% set os_family_map = salt['grains.filter_by']({
     'Debian':  {
+      'pkgrepo': 'deb http://debian.saltstack.com/debian ' + salt['grains.get']('oscodename') + '-saltstack main',
+      'key_url': 'salt://' + slspath + '/saltstack.gpg',
       'libgit2': 'libgit2-22',
       'gitfs': {
         'pygit2': {
