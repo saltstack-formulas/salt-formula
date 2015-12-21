@@ -28,6 +28,17 @@ salt:
       install_from_source: True
     pygit2:
       install_from_source: True
+      version: 0.23.0
+      git:
+        # if not false, should be state name
+        require_state: False
+        install_from_package: git
+      libgit2:
+        version: 0.23.0
+        install_from_source: True
+        build_parent_dir: /usr/src/
+        # hash necessary until github issue #9272 is addressed
+        download_hash: 683d1164e361e2a0a8d52652840e2340
     gitpython:
       install_from_source: False
 

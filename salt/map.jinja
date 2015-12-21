@@ -4,27 +4,44 @@
 {## Start with  defaults from defaults.yaml ##}
 {% import_yaml "salt/defaults.yaml" as default_settings %}
 
-{## 
+{##
 Setup variable using grains['os_family'] based logic, only add key:values here
 that differ from whats in defaults.yaml
 ##}
 {% set os_family_map = salt['grains.filter_by']({
-    'Debian':  {},
-    'Ubuntu':  {},
-    'CentOS':  {},
-    'Amazon':  {},
-    'Fedora':  {},
+    'Debian':  {
+      'pkgrepo': 'deb http://debian.saltstack.com/debian ' + salt['grains.get']('oscodename') + '-saltstack main',
+      'key_url': 'salt://' + slspath + '/saltstack.gpg',
+      'libgit2': 'libgit2-22',
+      'gitfs': {
+        'pygit2': {
+          'install_from_source': True,
+          'version': '0.22.1',
+          'git': {
+            'require_state': False,
+            'install_from_package': 'git',
+          },
+          'libgit2': {
+            'install_from_source': False,
+          },
+        },
+      },
+    },
     'RedHat':  {
       'pygit2': 'python-pygit2',
       'gitfs': {
         'pygit2': {
-           'install_from_source': False
+          'install_from_source': False,
+          'git': {
+            'require_state': False,
+            'install_from_package': 'git',
+          },
         },
       },
       'master': {
         'gitfs_provider': 'pygit2'
       },
-      'repotype': 'epel'
+      'repotype': 'epel',
     },
     'Suse':    {},
     'Gentoo':  {
@@ -32,7 +49,7 @@ that differ from whats in defaults.yaml
       'salt_minion': 'app-admin/salt',
       'salt_syndic': 'app-admin/salt',
       'salt_api': 'app-admin/salt',
-      'salt_cloud': 'app-admin/salt'
+      'salt_cloud': 'app-admin/salt',
     },
     'Arch':    {
       'salt_master': 'salt-zmq',
@@ -40,7 +57,7 @@ that differ from whats in defaults.yaml
       'salt_syndic':  'salt-zmq',
       'salt_cloud':  'salt-zmq',
       'salt_api': 'salt-zmq',
-      'salt_ssh':  'salt-zmq'
+      'salt_ssh':  'salt-zmq',
     },
     'FreeBSD': {
       'salt_master': 'py27-salt',
@@ -55,20 +72,17 @@ that differ from whats in defaults.yaml
       'minion_service': 'salt_minion',
       'master_service': 'salt_master',
       'api_service': 'salt_api',
-      'syndic_service': 'salt_syndic'
+      'syndic_service': 'salt_syndic',
     },
-  }
-  , grain="os_family"
-  , merge=salt['pillar.get']('salt:lookup'))
+  }, grain="os_family", merge=salt['pillar.get']('salt:lookup'))
 %}
 
 {## Merge the flavor_map to the default settings ##}
 {% do default_settings.salt.update(os_family_map) %}
-    
+
 {## Merge in salt:lookup pillar ##}
 {% set salt_settings = salt['pillar.get'](
     'salt',
     default=default_settings.salt,
-    merge=True
-  )
+    merge=True)
 %}

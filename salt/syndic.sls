@@ -9,6 +9,7 @@ salt-syndic:
     - name: {{ salt_settings.salt_syndic }}
 {% endif %}
   service.running:
+    - name: {{ salt_settings.syndic_service }}
     - require:
       - service: salt-master
     - watch:
