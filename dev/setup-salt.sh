@@ -1,7 +1,8 @@
 #!/bin/sh
 sudo apt-get update -y
-sudo apt-get install python-software-properties pkg-config software-properties-common -y
-sudo add-apt-repository ppa:saltstack/salt -y
+echo 'deb http://repo.saltstack.com/apt/ubuntu/ubuntu14 trusty main' | sudo tee /etc/apt/sources.list.d/saltstack.list
+wget -O - https://repo.saltstack.com/apt/ubuntu/ubuntu14/SALTSTACK-GPG-KEY.pub | sudo apt-key add -
+sudo apt-get update -y
 sudo apt-get install salt-master -y
 sudo apt-get install salt-minion -y
 # setup top files to test the formula
