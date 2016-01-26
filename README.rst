@@ -73,12 +73,7 @@ For EL distributions, pygit is installed from packages from `EPEL <https://githu
 ----------------
 
 Enable the official saltstack package repository in order to always
-benefit from the latest version. This state currently only works on Debian
-and Ubuntu, and aims to implement the `installation recommendations of the
-official documentation
-<http://docs.saltstack.com/en/latest/topics/installation/index.html#platform-specific-installation-instructions>`_.
-
-On EL distributions, the official Salt `COPR for ZeroMQ 4 <http://copr.fedoraproject.org/coprs/saltstack/zeromq4/>`_. Salt itself is installed via `EPEL <https://github.com/saltstack-formulas/epel-formula>`_.
+benefit from the latest version. This state currently only works on Debian, Ubuntu, RHEL 6/7 and aims to implement the `installation recommendations of the official documentation <http://docs.saltstack.com/en/latest/topics/installation/index.html#platform-specific-installation-instructions>`_.
 
 ``salt.pkgrepo.absent``
 -----------------------
