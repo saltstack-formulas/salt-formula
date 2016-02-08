@@ -160,9 +160,11 @@ salt_formulas:
   # List of formulas to enable in each environment
   list:
     base:
-      - salt-formula
-      - postfix-formula
+      https://github.com/saltstack-formulas:
+        - salt-formula
+        - postfix-formula
     dev:
-      - salt-formula
-      - postfix-formula
-      - openssh-formula
+      https://github.com/saltstack-formulas
+        - salt-formula
+        - postfix-formula
+        - openssh-formula
