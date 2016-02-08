@@ -135,9 +135,6 @@ salt_formulas:
     # environment, if an option is missing in a given environment, the
     # value from "default" is used instead.
     default:
-      # URL where the formulas git repositories are downloaded from
-      # it will be suffixed with <formula-name>.git
-      baseurl: https://github.com/saltstack-formulas
       # Directory where Git repositories are downloaded
       basedir: /srv/formulas
       # Update the git repository to the latest version (False by default)
@@ -160,9 +157,11 @@ salt_formulas:
   # List of formulas to enable in each environment
   list:
     base:
-      - salt-formula
-      - postfix-formula
+      https://github.com/saltstack-formulas:
+        - salt-formula
+        - postfix-formula
     dev:
-      - salt-formula
-      - postfix-formula
-      - openssh-formula
+      https://github.com/saltstack-formulas:
+        - salt-formula
+        - postfix-formula
+        - openssh-formula
