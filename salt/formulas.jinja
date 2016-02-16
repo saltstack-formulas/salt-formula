@@ -16,11 +16,9 @@
 
 {%- macro formulas_roots(env) -%}
 {%- set value = [] -%}
-{%- for repo,f_name in formulas.get(env, {}).items() -%}
-{%- for dir in f_name -%}
+{%- for dir in formulas.get(env, []) -%}
 {%- set basedir = formulas_git_opt(env, 'basedir')|load_yaml -%}
 {%- do value.append('{0}/{1}'.format(basedir, dir)) -%}
-{%- endfor -%}
 {%- endfor -%}
 {{ value|yaml }}
 {%- endmacro -%}
