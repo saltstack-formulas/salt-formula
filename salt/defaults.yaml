@@ -17,6 +17,7 @@ salt:
   salt_cloud: salt-cloud
   salt_api: salt-api
   salt_ssh: salt-ssh
+  python_tornado: python-tornado
 
   python_git: python-git
 
