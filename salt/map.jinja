@@ -74,6 +74,11 @@ that differ from whats in defaults.yaml
       'api_service': 'salt_api',
       'syndic_service': 'salt_syndic',
     },
+    'Windows': {
+      'salt_minion': 'saltstack.minion',
+      'config_path': 'C:\salt\conf',
+      'minion_service': 'salt-minion',
+    },
   }, grain="os_family", merge=salt['pillar.get']('salt:lookup'))
 %}
 
