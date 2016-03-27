@@ -1,0 +1,8 @@
+name: salt
+os: Debian, Redhat, Suse, Arch, Gentoo, FreeBSD, Windows
+os_family: Debian, Redhat, Suse, Arch, Gentoo, FreeBSD, Windows
+version: 201603
+release: 1
+minimum_version: 2015.8
+summary: Formula for install Saltstack
+description: Formula for installing Saltstack
