@@ -24,4 +24,4 @@ salt-master:
 # clean up old _defaults.conf file if they have it around
 remove-old-master-conf-file:
   file.absent:
-    - name: /etc/salt/master.d/_defaults.conf
+    - name: {{ salt_settings.config_path }}/master.d/_defaults.conf
