@@ -36,7 +36,7 @@ salt-cloud:
 {% for type in ['pem'] %}
 cloud-cert-{{ cert }}-pem:
   file.managed:
-    - name: /etc/salt/pki/cloud/{{ cert }}.pem
+    - name: {{ salt_settings.config_path }}/pki/cloud/{{ cert }}.pem
     - source: salt://{{ slspath }}/files/key
     - template: jinja
     - user: root
@@ -52,7 +52,7 @@ cloud-cert-{{ cert }}-pem:
 {%- for dir, templ_path in salt_settings.cloud.template_sources.items() %}
 salt-cloud-{{ dir }}:
   file.recurse:
-    - name: /etc/salt/cloud.{{ dir }}.d
+    - name: {{ salt_settings.config_path }}/cloud.{{ dir }}.d
     - source: {{ templ_path }}
     - template: jinja
     - makedirs: True
@@ -60,7 +60,7 @@ salt-cloud-{{ dir }}:
 
 salt-cloud-providers-permissions:
   file.directory:
-    - name: /etc/salt/cloud.providers.d
+    - name: {{ salt_settings.config_path }}/cloud.providers.d
     - user: root
     - group: root
     - file_mode: 600
