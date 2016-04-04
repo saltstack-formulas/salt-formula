@@ -1,7 +1,8 @@
 #!/bin/sh
 sudo apt-get update -y
 sudo apt-get install python-software-properties pkg-config software-properties-common -y
-sudo add-apt-repository ppa:saltstack/salt -y
+curl -L https://bootstrap.saltstack.com -o install_salt.sh
+sudo sh ./install_salt.sh
 sudo apt-get install salt-master -y
 sudo apt-get install salt-minion -y
 # setup top files to test the formula
