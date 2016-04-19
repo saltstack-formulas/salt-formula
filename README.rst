@@ -63,6 +63,11 @@ Install gitfs backend dulwich dependencies. Set ``salt:master:gitfs_provider: du
 
 Install gitfs backend GitPython dependenciess. Set ``salt:master:gitfs_provider: gitpython`` in your pillar.
 
+``salt.gitfs.keys``
+----------------------
+
+Install ssh keys to be used by gitfs
+
 ``salt.gitfs.pygit2``
 ----------------------
 

@@ -115,6 +115,16 @@ salt:
       user: ubuntu
       sudo: True
       priv: /etc/salt/ssh_keys/sshkey.pem
+  gitfs:
+    keys:
+      global:
+        # key and pub end up being the extension used on the key file. values other than key and pub are possible
+        key: |
+          -----BEGIN RSA PRIVATE KEY-----
+          ...........
+          -----END RSA PRIVATE KEY-----
+        pub: |
+          ...........
 
 salt_cloud_certs:
   aws:
