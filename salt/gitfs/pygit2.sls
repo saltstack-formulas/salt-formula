@@ -1,4 +1,4 @@
-{% from "salt/map.jinja" import salt_settings with context %}
+{% from slspath.split('/')[:-1] + "/map.jinja" import salt_settings with context %}
 {% set pygit2_settings = salt_settings.gitfs.pygit2 %}
 
 {% if pygit2_settings.git.get('require_state', False) %}

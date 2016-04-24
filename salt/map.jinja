@@ -2,7 +2,7 @@
 # vim: ft=jinja
 
 {## Start with  defaults from defaults.yaml ##}
-{% import_yaml "salt/defaults.yaml" as default_settings %}
+{% import_yaml slspath + "/defaults.yaml" as default_settings %}
 
 {##
 Setup variable using grains['os_family'] based logic, only add key:values here

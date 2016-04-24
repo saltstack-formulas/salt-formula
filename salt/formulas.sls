@@ -1,7 +1,7 @@
 {% set processed_gitdirs = [] %}
 {% set processed_basedirs = [] %}
 
-{% from "salt/formulas.jinja" import formulas_git_opt with context %}
+{% from slspath + "/formulas.jinja" import formulas_git_opt with context %}
 
 # Loop over all formulas listed in pillar data
 {% for env, entries in salt['pillar.get']('salt_formulas:list', {}).items() %}

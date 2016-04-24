@@ -1,4 +1,4 @@
-{% from "salt/map.jinja" import salt_settings with context %}
+{% from slspath + "/map.jinja" import salt_settings with context %}
 
 salt-master:
 {% if salt_settings.install_packages %}
@@ -11,6 +11,8 @@ salt-master:
     - source: salt://{{ slspath }}/files/master.d
     - clean: {{ salt_settings.clean_config_d_dir }}
     - exclude_pat: _*
+    - defaults:
+        uri_formulas: {{ slspath + "/formulas.jinja" }}
   service.running:
     - enable: True
     - name: {{ salt_settings.master_service }}

@@ -1,4 +1,4 @@
-{% from "salt/map.jinja" import salt_settings with context %}
+{% from slspath.split('/')[:-1] + "/map.jinja" import salt_settings with context %}
 
 saltstack-pkgrepo:
   pkgrepo.managed:
