@@ -1,6 +1,6 @@
 {%- from "salt/map.jinja" import salt_settings with context %}
 
-{%- set gitfs_keys=salt['pillar.get']('salt:gitfs:keys') %}
+{%- set gitfs_keys=salt['pillar.get']('salt:gitfs:keys', {}) %}
 
 {%- for key, keyvalues in gitfs_keys.items() %}
 {%- for type, keydata in keyvalues.items() %}
