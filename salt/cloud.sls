@@ -1,5 +1,9 @@
 {% from "salt/map.jinja" import salt_settings with context %}
 
+{% set cloudmaps = salt['pillar.get']('salt:cloud:maps', {}) -%}
+{% set cloudprofiles = salt['pillar.get']('salt:cloud:profiles', {}) -%}
+{% set cloudproviders = salt['pillar.get']('salt:cloud:providers', {}) -%}
+
 python-pip:
   pkg.installed
 
@@ -57,6 +61,27 @@ salt-cloud-{{ dir }}:
     - template: jinja
     - makedirs: True
 {%- endfor %}
+
+{% for key, value in cloudmaps.items() %}
+/etc/salt/cloud.maps.d/{{ key }}:
+  file.managed:
+    - contents: |
+        {{ value|yaml(False) | indent(8) }}
+{% endfor %}
+
+{% for key, value in cloudprofiles.items() %}
+/etc/salt/cloud.profiles.d/{{ key }}:
+  file.managed:
+    - contents: |
+        {{ value|yaml(False) | indent(8) }}
+{% endfor %}
+
+{% for key, value in cloudproviders.items() %}
+/etc/salt/cloud.providers.d/{{ key }}:
+  file.managed:
+    - contents: |
+        {{ value|yaml(False) | indent(8) }}
+{% endfor %}
 
 salt-cloud-providers-permissions:
   file.directory:

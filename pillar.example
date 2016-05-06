@@ -83,6 +83,37 @@ salt:
   # salt cloud config
   cloud:
     master: salt
+    
+    # For non-templated custom cloud provider/profile/map files
+    providers:
+      provider-filename1.conf:
+        vmware-prod:
+          driver: vmware
+          user: myusernameprod
+          password: mypassword
+        vmware-nonprod:
+          driver: vmware
+          user: myusernamenonprod
+          password: mypassword
+    profiles:
+      profile-filename1.conf:
+        server-non-prod:
+          clonefrom: rhel6xtemplatenp
+          grains:
+            platform:
+              name: salt
+              realm: lab
+            subscription_level: standard
+          memory: 8GB
+          num_cpus: 4
+          password: sUpErsecretey
+          provider: vmware-nonprod
+    maps:
+      map-filename1.map:
+        server-non-prod:
+          - host.mycompany.com:
+              grains: 
+                environment: dev1
 
     # You can take profile and map templates from an alternate location
     # if you want to write your own.
