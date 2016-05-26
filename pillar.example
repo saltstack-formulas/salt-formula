@@ -37,6 +37,11 @@ salt:
       ssl_key: /etc/pki/api/certs/server.key
       debug: False
       disable_ssl: False
+    ## for external auth - LDAP
+      # filter to use for Active Directory LDAP
+    auth.ldap.filter: {% raw %}'sAMAccountName={{username}}'{% endraw %}
+      # filter to use for Most other LDAP servers
+    auth.ldap.filter: {% raw %}'uid={{ username }}'{% endraw %}
 
   # salt minion config:
   minion:
