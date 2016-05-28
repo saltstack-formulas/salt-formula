@@ -43,6 +43,22 @@ salt:
       # filter to use for Most other LDAP servers
     auth.ldap.filter: {% raw %}'uid={{ username }}'{% endraw %}
 
+    # optional engine configuration
+    engines:
+      slack:
+        token: xoxp-XXXXX-XXXXXXX
+        control: True
+        valid_users:
+          - someuser
+          - otheruser
+        valid_commands:
+          - test.ping
+          - list_jobs
+        aliases:
+          list_jobs:
+            type: runner
+            cmd: jobs.list_jobs
+
   # salt minion config:
   minion:
 
