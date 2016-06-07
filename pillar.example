@@ -37,6 +37,23 @@ salt:
       ssl_key: /etc/pki/api/certs/server.key
       debug: False
       disable_ssl: False
+    # for profile configuration as https://docs.saltstack.com/en/latest/topics/tutorials/lxc.html#tutorial-lxc-profiles
+    lxc.container_profile:
+      debian:
+        template: download
+        options:
+          dist: debian
+          release: jessie
+          arch: amd64
+        backing: lvm
+        vgname: kimsufi
+        size: 10G
+    lxc.network_profile:
+      basic:
+        eth0:
+          link: lxcbr0
+          type: veth
+          flags: up
     ## for external auth - LDAP
       # filter to use for Active Directory LDAP
     auth.ldap.filter: {% raw %}'sAMAccountName={{username}}'{% endraw %}
