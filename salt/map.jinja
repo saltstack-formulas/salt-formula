@@ -8,10 +8,12 @@
 Setup variable using grains['os_family'] based logic, only add key:values here
 that differ from whats in defaults.yaml
 ##}
+{% set osrelease = salt['grains.get']('osrelease') %}
 {% set os_family_map = salt['grains.filter_by']({
     'Debian':  {
-      'pkgrepo': 'deb http://debian.saltstack.com/debian ' + salt['grains.get']('oscodename') + '-saltstack main',
-      'key_url': 'salt://salt/pkgrepo/debian/saltstack.gpg',
+      'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
+      salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/amd64/latest ' + salt['grains.get']('oscodename') + ' main',
+      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/amd64/latest/SALTSTACK-GPG-KEY.pub',
       'libgit2': 'libgit2-22',
       'gitfs': {
         'pygit2': {
