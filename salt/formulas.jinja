@@ -2,7 +2,9 @@
     'baseurl': 'https://github.com/saltstack-formulas',
     'basedir': '/srv/formulas',
     'update': False,
-    'options': {},
+    'options': {
+      'branch': 'master',
+    },
    }
 %}
 {% set formulas = salt['pillar.get']('salt_formulas:list', {}) %}
