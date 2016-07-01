@@ -195,3 +195,10 @@ that differ from whats in defaults.yaml
     default=default_settings.salt,
     merge=True)
 %}
+
+{## Merge in salt_formulas pillar ##}
+{% set formulas_settings = salt['pillar.get'](
+    'salt_formulas',
+    default=default_settings.salt_formulas,
+    merge=True)
+%}
