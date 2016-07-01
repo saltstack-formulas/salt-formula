@@ -1,4 +1,4 @@
-{% set processed_gitdirs = [] %}
+{% set processed_gitdir_envs = [] %}
 {% set processed_basedirs = [] %}
 
 {% from "salt/formulas.jinja" import formulas_git_opt with context %}
@@ -24,11 +24,12 @@
 {% endif %}
 
 # Setup the formula Git repository
-{% if gitdir not in processed_gitdirs %}
-{% do processed_gitdirs.append(gitdir) %}
+{% set gitdir_env = '{0}_{1}'.format(gitdir, env) %}
+{% if gitdir_env not in processed_gitdir_envs %}
+{% do processed_gitdir_envs.append(gitdir_env) %}
 {% set options = formulas_opts_for_git_latest(env)|load_yaml %}
 {% set baseurl = formulas_git_opt(env, 'baseurl')|load_yaml %}
-{{ gitdir }}:
+{{ gitdir_env }}:
   git.latest:
     - name: {{ baseurl }}/{{ entry }}.git
     - target: {{ gitdir }}
