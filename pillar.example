@@ -20,10 +20,18 @@ salt:
   master:
     fileserver_backend:
       - git
+      - s3fs
       - roots
     gitfs_remotes:
       - git://github.com/saltstack-formulas/salt-formula.git:
         - base: develop
+    s3.keyid: GKTADJGHEIQSXMKKRBJ08H
+    s3.key: askdjghsdfjkghWupUjasdflkdfklgjsdfjajkghs
+    s3.buckets:
+      - bucket1
+      - bucket2
+      - bucket3
+      - bucket4
     file_roots:
       base:
         - /srv/salt
