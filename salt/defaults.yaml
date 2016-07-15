@@ -6,6 +6,9 @@ salt:
 
   config_path: /etc/salt
 
+  minion_remove_config: False
+  master_remove_config: False
+
   minion_service: salt-minion
   master_service: salt-master
   api_service: salt-api

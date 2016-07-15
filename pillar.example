@@ -4,6 +4,12 @@ salt:
   # and up as it'll wipe out important files that Salt relies on.
   clean_config_d_dir: False
 
+  # This state will remove "/etc/salt/minion" when you set this to true.
+  minion_remove_config: True
+
+  # This state will remove "/etc/salt/master" when you set this to true.
+  master_remove_config: True
+
   # Set this to False to not have the formula install packages (in the case you
   # install Salt via git/pip/etc.)
   install_packages: True
@@ -129,7 +135,7 @@ salt:
   # salt cloud config
   cloud:
     master: salt
-    
+
     # For non-templated custom cloud provider/profile/map files
     providers:
       provider-filename1.conf:
@@ -158,7 +164,7 @@ salt:
       map-filename1.map:
         server-non-prod:
           - host.mycompany.com:
-              grains: 
+              grains:
                 environment: dev1
 
     # You can take profile and map templates from an alternate location
