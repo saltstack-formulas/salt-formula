@@ -21,6 +21,12 @@ salt-master:
       - file: salt-master
       - file: remove-old-master-conf-file
 
+{% if salt_settings.master_remove_config %}
+remove-default-master-conf-file:
+  file.absent:
+    - name: {{ salt_settings.config_path }}/master
+{% endif %}
+
 # clean up old _defaults.conf file if they have it around
 remove-old-master-conf-file:
   file.absent:
