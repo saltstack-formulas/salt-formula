@@ -1,6 +1,6 @@
 {% set name = {
     'RedHat': 'redhat',
-    'Debian': grains['os']|lower,
+    'Debian': grains['os_family']|lower,
 }.get(grains.os_family) %}
 include:
   - .{{ name }}

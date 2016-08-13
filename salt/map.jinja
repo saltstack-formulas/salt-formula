@@ -94,7 +94,18 @@ that differ from whats in defaults.yaml
       'config_path': 'C:\salt\conf',
       'minion_service': 'salt-minion',
     },
-  }, grain="os_family", merge=salt['pillar.get']('salt:lookup'))
+  }, merge=salt['grains.filter_by']({
+    'Ubuntu':  {
+      'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
+      salt['grains.get']('os')|lower + '/' + osrelease + '/amd64/latest ' + salt['grains.get']('oscodename') + ' main',
+      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os')|lower + '/' + osrelease + '/amd64/latest/SALTSTACK-GPG-KEY.pub',
+    },
+    'Raspbian': {
+      'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
+      salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/latest ' + salt['grains.get']('oscodename') + ' main',
+      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/latest/SALTSTACK-GPG-KEY.pub',
+    },
+  }, grain='os', merge=salt['pillar.get']('salt:lookup')))
 %}
 
 {## Merge the flavor_map to the default settings ##}
