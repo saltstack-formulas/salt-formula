@@ -132,6 +132,10 @@ salt:
     mine_functions:
       network.interface_ip: [eth0]
 
+    # other 'non-default' config
+    auth_keytab: /root/auth.keytab
+    auth_principal: kadmin/admin
+
   # salt cloud config
   cloud:
     master: salt
