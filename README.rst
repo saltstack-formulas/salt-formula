@@ -120,7 +120,7 @@ you control, then you can safely enable the
 
 ``Configuration``
 =================
-Every option available in the templates can be set in pillar. Settings under 'salt' will be overridden by more specific settings under ``salt['master']``, ``salt['minion']`` or ``salt['cloud']``
+Every option available in the templates can be set in pillar. Settings under 'salt' will be overridden by more specific settings under ``salt['master']``, ``salt['minion']`` or ``salt['cloud']``. Options specified in ``salt['minion']`` which are not present in the default configuration file will be added to the end of the configuration file.
 
 ::
 
