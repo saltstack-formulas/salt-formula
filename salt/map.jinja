@@ -8,8 +8,24 @@
 Setup variable using grains['os_family'] based logic, only add key:values here
 that differ from whats in defaults.yaml
 ##}
+
+{## Fetch grains 'os' and 'os_family' ##}
+{% set os = salt['grains.get']('os') %}
 {% set osrelease = salt['grains.get']('osrelease') %}
-{% set os_family_map = salt['grains.filter_by']({
+{% set os_family = salt['grains.get']('os_family') %}
+
+{## Initialize os_filterkey with grain value of grain 'os_family' ##}
+{% set os_filterkey = os_family %}
+{% if os in ('Ubuntu', 'Raspbian') %}
+    {##
+        In case of certain distributions that report a not-so-useful os_family,
+        override the os_filterkey with the value of grain 'os'.
+    ##}
+    {% set os_filterkey = os %}
+{% endif %}
+
+{## Initialize os_family_map for later lookup based on os_filterkey. ##}
+{% set os_family_map = {
     'Debian':  {
       'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
       salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/amd64/latest ' + salt['grains.get']('oscodename') + ' main',
@@ -94,7 +110,6 @@ that differ from whats in defaults.yaml
       'config_path': 'C:\salt\conf',
       'minion_service': 'salt-minion',
     },
-  }, merge=salt['grains.filter_by']({
     'Ubuntu':  {
       'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
       salt['grains.get']('os')|lower + '/' + osrelease + '/amd64/latest ' + salt['grains.get']('oscodename') + ' main',
@@ -105,11 +120,20 @@ that differ from whats in defaults.yaml
       salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/latest ' + salt['grains.get']('oscodename') + ' main',
       'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/latest/SALTSTACK-GPG-KEY.pub',
     },
-  }, grain='os', merge=salt['pillar.get']('salt:lookup')))
+  }
 %}
 
+{## Now create flavor_map by filtering the os_family_map using os_filterkey ##}
+{% set flavor_map = os_family_map[os_filterkey] %}
+
+{##
+    ... and merge it with salt['pillar.get']('salt:lookup')
+    to allow overriding values through pillar
+##}
+salt['grains.filter_by'](flavor_map, merge=salt['pillar.get']('salt:lookup'))
+
 {## Merge the flavor_map to the default settings ##}
-{% do default_settings.salt.update(os_family_map) %}
+{% do default_settings.salt.update(flavor_map) %}
 
 {## Merge in salt:lookup pillar ##}
 {% set salt_settings = salt['pillar.get'](
