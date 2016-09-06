@@ -74,6 +74,11 @@ salt:
       # filter to use for Most other LDAP servers
     auth.ldap.filter: {% raw %}'uid={{ username }}'{% endraw %}
 
+    # Define winrepo provider, by default support order is pygit2, gitpython
+    # Set to gitpython for Debian & Ubuntu to get around saltstack/salt#35993
+    # where pygit2 is not compiled with pygit2.GIT_FEATURE_HTTPS support
+    winrepo_provider: gitpython
+
     # optional engine configuration
     engines:
       slack:
