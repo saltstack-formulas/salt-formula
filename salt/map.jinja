@@ -126,6 +126,16 @@ that differ from whats in defaults.yaml
       'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
       salt['grains.get']('os')|lower + '/' + osrelease + '/amd64/latest ' + salt['grains.get']('oscodename') + ' main',
       'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os')|lower + '/' + osrelease + '/amd64/latest/SALTSTACK-GPG-KEY.pub',
+      'pygit2': 'python-pygit2',
+      'gitfs': {
+        'pygit2': {
+          'install_from_source': False,
+          'git': {
+            'require_state': False,
+            'install_from_package': None,
+          },
+        },
+      },
     },
     'Raspbian': {
       'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
