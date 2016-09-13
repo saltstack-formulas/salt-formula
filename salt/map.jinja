@@ -1,6 +1,33 @@
 # -*- coding: utf-8 -*-
 # vim: ft=jinja
 
+{%- macro deep_merge(a, b) %}
+{%-     for k,v in b.iteritems() %}
+{%-         if v is string or v is number %}
+{%-             do a.update({ k: v }) %}
+{%-         elif v is not mapping %}
+{%-             if a[k] is not defined %}
+{%-                 do a.update({ k: v }) %}
+{%-             elif a[k] is iterable and a[k] is not mapping and a[k] is not string %}
+{%-                 do a.update({ k: v|list + a[k]|list}) %}
+{%-             else %}
+{%-                 do a.update({ k: v }) %}
+{%-             endif %}
+{%-         elif v is mapping %}
+{%-             if a[k] is not defined %}
+{%-                 do a.update({ k: v }) %}
+{%-             elif a[k] is not mapping %}
+{%-                 do a.update({ k: v }) %}
+{%-             else %}
+{%-                 do deep_merge(a[k], v) %}
+{%-             endif %}
+{%-         else %}
+{%-            do a.update({ k: 'ERROR: case not contempled in merging!' }) %}
+{%-         endif %}
+{%-     endfor %}
+{%- endmacro %}
+
+
 {## Start with  defaults from defaults.yaml ##}
 {% import_yaml "salt/defaults.yaml" as default_settings %}
 
@@ -99,6 +126,16 @@ that differ from whats in defaults.yaml
       'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
       salt['grains.get']('os')|lower + '/' + osrelease + '/amd64/latest ' + salt['grains.get']('oscodename') + ' main',
       'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os')|lower + '/' + osrelease + '/amd64/latest/SALTSTACK-GPG-KEY.pub',
+      'pygit2': 'python-pygit2',
+      'gitfs': {
+        'pygit2': {
+          'install_from_source': False,
+          'git': {
+            'require_state': False,
+            'install_from_package': None,
+          },
+        },
+      },
     },
     'Raspbian': {
       'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
@@ -109,7 +146,7 @@ that differ from whats in defaults.yaml
 %}
 
 {## Merge the flavor_map to the default settings ##}
-{% do default_settings.salt.update(os_family_map) %}
+{% do deep_merge(default_settings.salt,os_family_map) %}
 
 {## Merge in salt:lookup pillar ##}
 {% set salt_settings = salt['pillar.get'](
