@@ -4,6 +4,7 @@
 {% set cloudprofiles = salt['pillar.get']('salt:cloud:profiles', {}) -%}
 {% set cloudproviders = salt['pillar.get']('salt:cloud:providers', {}) -%}
 
+{%- if salt_settings.use_pip %}
 python-pip:
   pkg.installed
 
@@ -23,17 +24,20 @@ apache-libcloud:
   pip.installed:
     - require:
       - pkg: python-pip
+{%- endif %}
 
 {% if salt_settings.install_packages %}
 salt-cloud:
   pkg.installed:
     - name: {{ salt_settings.salt_cloud }}
+    {%- if salt_settings.use_pip %}
     - require:
       - pip: apache-libcloud
       - pip: pycrypto
       {% if grains['os_family'] not in ['Debian', 'RedHat'] %}
       - pip: crypto
       {% endif %}
+    {%- endif %}
 {% endif %}
 
 {% for cert in pillar.get('salt_cloud_certs', {}) %}
