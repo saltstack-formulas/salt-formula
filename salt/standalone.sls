@@ -13,7 +13,11 @@ salt-minion:
     - exclude_pat: _*
     - context:
         standalone: True
+{%- if salt_settings.minion.master_type is defined and salt_settings.minion.master_type == 'disable' %}
+  service.running:
+{%- else %}
   service.dead:
+{%- endif %}
     - enable: False
     - name: {{ salt_settings.minion_service }}
     - require:
