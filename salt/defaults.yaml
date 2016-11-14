@@ -23,6 +23,7 @@ salt:
   salt_ssh: salt-ssh
 
   python_git: python-git
+  python_dulwich: python-dulwich
 
   master:
     gitfs_provider: gitpython
