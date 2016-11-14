@@ -142,6 +142,25 @@ that differ from whats in defaults.yaml
       salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/latest ' + salt['grains.get']('oscodename') + ' main',
       'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/latest/SALTSTACK-GPG-KEY.pub',
     },
+    'SmartOS': {
+      'salt_master': 'salt',
+      'salt_minion': 'salt',
+      'salt_syndic': 'salt',
+      'salt_cloud': 'salt',
+      'salt_api': 'salt',
+      'salt_ssh': 'salt',
+      'minion_service': 'salt:minion',
+      'master_service': 'salt:master',
+      'python_dulwich': 'py27-dulwich',
+      'gitfs': {
+        'dulwich': {
+          'install_from_source': False,
+        }
+      },
+      'master': {
+        'gitfs_provider': 'dulwich'
+      },
+    }
   }, grain='os', merge=salt['pillar.get']('salt:lookup')))
 %}
 

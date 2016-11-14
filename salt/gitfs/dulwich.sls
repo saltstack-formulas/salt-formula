@@ -15,7 +15,9 @@ install-dulwich:
     - name: dulwich
 
 {% else %}
-# install from package
-# TODO haven't actually found a distro that has a good version to test
+
+python-dulwich:
+  pkg.installed:
+    - name: {{ salt_settings.python_dulwich }}
 
 {% endif %}
