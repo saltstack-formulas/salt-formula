@@ -1,2 +1,2 @@
 include:
-  - .{{ grains['os']|lower }}.absent
+  - .{{ grains['os_family']|lower }}.absent
