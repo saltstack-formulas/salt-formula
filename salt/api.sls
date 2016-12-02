@@ -13,7 +13,8 @@ salt-api:
     - name: {{ salt_settings.api_service }}
     - require:
       - service: {{ salt_settings.master_service }}
-{% if salt_settings.install_packages %}
     - watch:
+{% if salt_settings.install_packages %}
       - pkg: salt-api
 {% endif %}
+      - file: salt-master
