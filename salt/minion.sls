@@ -4,7 +4,7 @@ salt-minion:
 {% if salt_settings.install_packages %}
   pkg.installed:
     - name: {{ salt_settings.salt_minion }}
-{% if salt_settings.version %}
+{% if salt_settings.version is defined %}
     - version:  {{ salt_settings.version  }}
 {% endif %}
 {% endif %}
