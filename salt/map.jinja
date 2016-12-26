@@ -57,7 +57,10 @@ that differ from whats in defaults.yaml
       },
     },
     'RedHat':  {
-      'pygit2': 'python-pygit2',
+      'pygit2': salt['grains.filter_by']({
+        'Fedora': 'python2-pygit2',
+        'default': 'python-pygit2',
+      }, grain='os'),
       'python_git': 'GitPython',
       'gitfs': {
         'pygit2': {
