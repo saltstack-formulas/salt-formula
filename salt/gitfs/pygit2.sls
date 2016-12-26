@@ -23,6 +23,7 @@ pygit-deps:
   pkg.installed:
     - pkgs:
       - build-essential
+      - pkg-config
       - python-dev
       - libssh-dev
       - libffi-dev
