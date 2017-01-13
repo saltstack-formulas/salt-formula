@@ -141,7 +141,7 @@ salt:
     auth_keytab: /root/auth.keytab
     auth_principal: kadmin/admin
 
-		# optional engine configuration
+    # optional engine configuration
     engines:
       slack:
         token: xoxp-XXXXX-XXXXXXX
@@ -156,6 +156,20 @@ salt:
           list_jobs:
             type: runner
             cmd: jobs.list_jobs
+
+    # optional beacons configuration
+    beacons:
+      load:
+        1m:
+          - 0.0
+          - 2.0
+        5m:
+          - 0.0
+          - 1.5
+        15m:
+          - 0.1
+          - 1.0
+        interval: 10
 
 
   # salt cloud config
