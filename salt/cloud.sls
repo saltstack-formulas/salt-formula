@@ -48,7 +48,12 @@ cloud-cert-{{ cert }}-pem:
     - source: salt://{{ slspath }}/files/key
     - template: jinja
     - user: root
-    - group: root
+    - group:
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        wheel
+        {%- else %}
+        root
+        {%- endif %}
     - mode: 600
     - makedirs: True
     - defaults:
@@ -91,7 +96,12 @@ salt-cloud-providers-permissions:
   file.directory:
     - name: {{ salt_settings.config_path }}/cloud.providers.d
     - user: root
-    - group: root
+    - group:
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        wheel
+        {%- else %}
+        root
+        {%- endif %}
     - file_mode: 600
     - dir_mode: 700
     - recurse:
