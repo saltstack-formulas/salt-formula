@@ -10,7 +10,7 @@ gitfs-key-{{ key }}-{{ type }}:
     - source: salt://salt/files/gitfs_key.jinja
     - template: jinja
     - user: root
-    - group: root
+    - group: 0
     - mode: 600
     - makedirs: True
     - defaults:
