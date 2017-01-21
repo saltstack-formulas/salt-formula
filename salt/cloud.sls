@@ -48,7 +48,7 @@ cloud-cert-{{ cert }}-pem:
     - source: salt://{{ slspath }}/files/key
     - template: jinja
     - user: root
-    - group: root
+    - group: 0
     - mode: 600
     - makedirs: True
     - defaults:
@@ -91,7 +91,7 @@ salt-cloud-providers-permissions:
   file.directory:
     - name: {{ salt_settings.config_path }}/cloud.providers.d
     - user: root
-    - group: root
+    - group: 0
     - file_mode: 600
     - dir_mode: 700
     - recurse:
