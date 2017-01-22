@@ -4,6 +4,12 @@ salt:
   # and up as it'll wipe out important files that Salt relies on.
   clean_config_d_dir: False
 
+  # This state will remove "/etc/salt/minion" when you set this to true.
+  minion_remove_config: True
+
+  # This state will remove "/etc/salt/master" when you set this to true.
+  master_remove_config: True
+
   # Set this to False to not have the formula install packages (in the case you
   # install Salt via git/pip/etc.)
   install_packages: True
@@ -20,14 +26,24 @@ salt:
   master:
     fileserver_backend:
       - git
+      - s3fs
       - roots
     gitfs_remotes:
       - git://github.com/saltstack-formulas/salt-formula.git:
         - base: develop
+    s3.keyid: GKTADJGHEIQSXMKKRBJ08H
+    s3.key: askdjghsdfjkghWupUjasdflkdfklgjsdfjajkghs
+    s3.buckets:
+      - bucket1
+      - bucket2
+      - bucket3
+      - bucket4
     file_roots:
       base:
         - /srv/salt
-
+    pillar_roots:
+      base:
+        - /srv/pillar
     # for salt-api with tornado rest interface
     rest_tornado:
       port: 8000
@@ -35,6 +51,49 @@ salt:
       ssl_key: /etc/pki/api/certs/server.key
       debug: False
       disable_ssl: False
+    # for profile configuration as https://docs.saltstack.com/en/latest/topics/tutorials/lxc.html#tutorial-lxc-profiles
+    lxc.container_profile:
+      debian:
+        template: download
+        options:
+          dist: debian
+          release: jessie
+          arch: amd64
+        backing: lvm
+        vgname: kimsufi
+        size: 10G
+    lxc.network_profile:
+      basic:
+        eth0:
+          link: lxcbr0
+          type: veth
+          flags: up
+    ## for external auth - LDAP
+      # filter to use for Active Directory LDAP
+    auth.ldap.filter: {% raw %}'sAMAccountName={{username}}'{% endraw %}
+      # filter to use for Most other LDAP servers
+    auth.ldap.filter: {% raw %}'uid={{ username }}'{% endraw %}
+
+    # Define winrepo provider, by default support order is pygit2, gitpython
+    # Set to gitpython for Debian & Ubuntu to get around saltstack/salt#35993
+    # where pygit2 is not compiled with pygit2.GIT_FEATURE_HTTPS support
+    winrepo_provider: gitpython
+
+    # optional engine configuration
+    engines:
+      slack:
+        token: xoxp-XXXXX-XXXXXXX
+        control: True
+        valid_users:
+          - someuser
+          - otheruser
+        valid_commands:
+          - test.ping
+          - list_jobs
+        aliases:
+          list_jobs:
+            type: runner
+            cmd: jobs.list_jobs
 
   # salt minion config:
   minion:
@@ -43,9 +102,9 @@ salt:
     master: salt
 
     # multi master setup
-    master:
-      - salt_master_1
-      - salt_master_2
+    #master:
+      #- salt_master_1
+      #- salt_master_2
 
     fileserver_backend:
       - git
@@ -56,6 +115,9 @@ salt:
     file_roots:
       base:
         - /srv/salt
+    pillar_roots:
+      base:
+        - /srv/pillar
     module_config:
       test: True
       test.foo: foo
@@ -75,16 +137,85 @@ salt:
     mine_functions:
       network.interface_ip: [eth0]
 
+    # other 'non-default' config
+    auth_keytab: /root/auth.keytab
+    auth_principal: kadmin/admin
+
+    # optional engine configuration
+    engines:
+      slack:
+        token: xoxp-XXXXX-XXXXXXX
+        control: True
+        valid_users:
+          - someuser
+          - otheruser
+        valid_commands:
+          - test.ping
+          - list_jobs
+        aliases:
+          list_jobs:
+            type: runner
+            cmd: jobs.list_jobs
+
+    # optional beacons configuration
+    beacons:
+      load:
+        1m:
+          - 0.0
+          - 2.0
+        5m:
+          - 0.0
+          - 1.5
+        15m:
+          - 0.1
+          - 1.0
+        interval: 10
+
+
   # salt cloud config
   cloud:
     master: salt
-    folders:
-      - cloud.providers.d/key
-      - cloud.profiles.d
-      - cloud.maps.d
+
+    # For non-templated custom cloud provider/profile/map files
     providers:
-      - ec2
-      - gce
+      provider-filename1.conf:
+        vmware-prod:
+          driver: vmware
+          user: myusernameprod
+          password: mypassword
+        vmware-nonprod:
+          driver: vmware
+          user: myusernamenonprod
+          password: mypassword
+    profiles:
+      profile-filename1.conf:
+        server-non-prod:
+          clonefrom: rhel6xtemplatenp
+          grains:
+            platform:
+              name: salt
+              realm: lab
+            subscription_level: standard
+          memory: 8GB
+          num_cpus: 4
+          password: sUpErsecretey
+          provider: vmware-nonprod
+    maps:
+      map-filename1.map:
+        server-non-prod:
+          - host.mycompany.com:
+              grains:
+                environment: dev1
+
+    # You can take profile and map templates from an alternate location
+    # if you want to write your own.
+    template_sources:
+      providers: salt://salt/files/cloud.providers.d
+      profiles: salt://salt/files/cloud.profiles.d
+      maps: salt://salt/files/cloud.maps.d
+
+    # These settings are used by the default provider templates and
+    # only need to be set for the ones you're using.
     aws_key: AWSKEYIJSHJAIJS6JSH
     aws_secret: AWSSECRETYkkDY1iQf9zRtl9+pW+Nm+aZY95
     gce_project: test
@@ -107,6 +238,16 @@ salt:
       user: ubuntu
       sudo: True
       priv: /etc/salt/ssh_keys/sshkey.pem
+  gitfs:
+    keys:
+      global:
+        # key and pub end up being the extension used on the key file. values other than key and pub are possible
+        key: |
+          -----BEGIN RSA PRIVATE KEY-----
+          ...........
+          -----END RSA PRIVATE KEY-----
+        pub: |
+          ...........
 
 salt_cloud_certs:
   aws:

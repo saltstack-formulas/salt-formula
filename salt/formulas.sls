@@ -4,11 +4,11 @@
 {% from "salt/formulas.jinja" import formulas_git_opt with context %}
 
 # Loop over all formulas listed in pillar data
-{% for env, entries in salt['pillar.get']('salt_formulas:list').iteritems() %}
+{% for env, entries in salt['pillar.get']('salt_formulas:list', {}).items() %}
 {% for entry in entries %}
 
-{% set basedir = formulas_git_opt(env, 'basedir') %}
-{% set gitdir = '{}/{}'.format(basedir, entry) %}
+{% set basedir = formulas_git_opt(env, 'basedir')|load_yaml %}
+{% set gitdir = '{0}/{1}'.format(basedir, entry) %}
 {% set update = formulas_git_opt(env, 'update')|load_yaml %}
 
 # Setup the directory hosting the Git repository
@@ -17,7 +17,7 @@
 {{ basedir }}:
   file.directory:
     {%- for key, value in salt['pillar.get']('salt_formulas:basedir_opts',
-                                             {'makedirs': True}).iteritems() %}
+                                             {'makedirs': True}).items() %}
     - {{ key }}: {{ value }}
     {%- endfor %}
 {% endif %}
@@ -26,11 +26,12 @@
 {% if gitdir not in processed_gitdirs %}
 {% do processed_gitdirs.append(gitdir) %}
 {% set options = formulas_git_opt(env, 'options')|load_yaml %}
+{% set baseurl = formulas_git_opt(env, 'baseurl')|load_yaml %}
 {{ gitdir }}:
   git.latest:
-    - name: {{ formulas_git_opt(env, 'baseurl') }}/{{ entry }}.git
+    - name: {{ baseurl }}/{{ entry }}.git
     - target: {{ gitdir }}
-    {%- for key, value in options.iteritems() %}
+    {%- for key, value in options.items() %}
     - {{ key }}: {{ value }}
     {%- endfor %}
     - require:

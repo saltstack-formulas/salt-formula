@@ -1,72 +1,190 @@
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{%- macro deep_merge(a, b) %}
+{%-     for k,v in b.iteritems() %}
+{%-         if v is string or v is number %}
+{%-             do a.update({ k: v }) %}
+{%-         elif v is not mapping %}
+{%-             if a[k] is not defined %}
+{%-                 do a.update({ k: v }) %}
+{%-             elif a[k] is iterable and a[k] is not mapping and a[k] is not string %}
+{%-                 do a.update({ k: v|list + a[k]|list}) %}
+{%-             else %}
+{%-                 do a.update({ k: v }) %}
+{%-             endif %}
+{%-         elif v is mapping %}
+{%-             if a[k] is not defined %}
+{%-                 do a.update({ k: v }) %}
+{%-             elif a[k] is not mapping %}
+{%-                 do a.update({ k: v }) %}
+{%-             else %}
+{%-                 do deep_merge(a[k], v) %}
+{%-             endif %}
+{%-         else %}
+{%-            do a.update({ k: 'ERROR: case not contempled in merging!' }) %}
+{%-         endif %}
+{%-     endfor %}
+{%- endmacro %}
+
+
+{## Start with  defaults from defaults.yaml ##}
 {% import_yaml "salt/defaults.yaml" as default_settings %}
 
-{% set distro_map = salt['grains.filter_by']({
-    'Debian':  {'salt_master': 'salt-master',
-                'salt_minion': 'salt-minion',
-                'salt_syndic': 'salt-syndic',
-                'salt_cloud': 'salt-cloud',
-                'salt_api': 'salt-api',
-                'salt_ssh': 'salt-ssh'},
-    'Ubuntu':  {'salt_master': 'salt-master',
-                'salt_minion': 'salt-minion',
-                'salt_syndic': 'salt-syndic',
-                'salt_cloud': 'salt-cloud',
-                'salt_api': 'salt-api',
-                'salt_ssh': 'salt-ssh'},
-    'CentOS':  {'salt_master': 'salt-master',
-                'salt_minion': 'salt-minion',
-                'salt_syndic': 'salt-syndic',
-                'salt_cloud': 'salt-cloud',
-                'salt_api': 'salt-api',
-                'salt_ssh': 'salt-ssh'},
-    'Amazon':  {'salt_master': 'salt-master',
-                'salt_minion': 'salt-minion',
-                'salt_syndic': 'salt-syndic',
-                'salt_cloud': 'salt-cloud',
-                'salt_api': 'salt-api',
-                'salt_ssh': 'salt-ssh'},
-    'Fedora':  {'salt_master': 'salt-master',
-                'salt_minion': 'salt-minion',
-                'salt_syndic': 'salt-syndic',
-                'salt_cloud': 'salt-cloud',
-                'salt_api': 'salt-api',
-                'salt_ssh': 'salt-ssh'},
-    'RedHat':  {'salt_master': 'salt-master',
-                'salt_minion': 'salt-minion',
-                'salt_syndic': 'salt-syndic',
-                'salt_cloud': 'salt-cloud',
-                'salt_api': 'salt-api',
-                'salt_ssh': 'salt-ssh'},
-    'Gentoo':  {'salt_master': 'app-admin/salt',
-                'salt_minion': 'app-admin/salt',
-                'salt_syndic': 'app-admin/salt',
-                'salt_api': 'app-admin/salt',
-                'salt_cloud': 'app-admin/salt'},
-    'Arch':    {'salt_master': 'salt-zmq',
-                'salt_minion':  'salt-zmq',
-                'salt_syndic':  'salt-zmq',
-                'salt_cloud':  'salt-zmq',
-                'salt_api': 'salt-zmq',
-                'salt_ssh':  'salt-zmq'},
-    'Suse':    {'salt_master': 'salt-master',
-                'salt_minion':  'salt-minion',
-                'salt_syndic':  'salt-syndic',
-                'salt_api': 'salt-api',
-                'salt_cloud':  'salt-cloud',
-                'salt_ssh':  'salt-ssh'},
-    'FreeBSD': {'salt_master': 'py27-salt',
-                'salt_minion': 'py27-salt',
-                'salt_syndic': 'py27-salt',
-                'salt_cloud': 'py27-salt',
-                'salt_api': 'py27-salt',
-                'config_path': '/usr/local/etc/salt',
-                'minion_service': 'salt_minion',
-                'master_service': 'salt_master',
-                'api_service': 'salt_api',
-                'syndic_service': 'salt_syndic'},
-}, merge=salt['pillar.get']('salt:lookup')) %}
+{##
+Setup variable using grains['os_family'] based logic, only add key:values here
+that differ from whats in defaults.yaml
+##}
+{% set osrelease = salt['grains.get']('osrelease') %}
+{% set os_family_map = salt['grains.filter_by']({
+    'Debian':  {
+      'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
+      salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/amd64/latest ' + salt['grains.get']('oscodename') + ' main',
+      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/amd64/latest/SALTSTACK-GPG-KEY.pub',
+      'libgit2': 'libgit2-22',
+      'gitfs': {
+        'pygit2': {
+          'install_from_source': True,
+          'version': '0.22.1',
+          'git': {
+            'require_state': False,
+            'install_from_package': 'git',
+          },
+          'libgit2': {
+            'install_from_source': False,
+          },
+        },
+      },
+    },
+    'RedHat':  {
+      'pygit2': salt['grains.filter_by']({
+        'Fedora': 'python2-pygit2',
+        'default': 'python-pygit2',
+      }, grain='os'),
+      'python_git': 'GitPython',
+      'gitfs': {
+        'pygit2': {
+          'install_from_source': False,
+          'git': {
+            'require_state': False,
+            'install_from_package': 'git',
+          },
+        },
+      },
+      'master': {
+        'gitfs_provider': 'pygit2'
+      },
+    },
+    'Suse':    {},
+    'Gentoo':  {
+      'salt_master': 'app-admin/salt',
+      'salt_minion': 'app-admin/salt',
+      'salt_syndic': 'app-admin/salt',
+      'salt_api': 'app-admin/salt',
+      'salt_cloud': 'app-admin/salt',
+    },
+    'Arch':    {
+      'salt_master': 'salt',
+      'salt_minion':  'salt',
+      'salt_syndic':  'salt',
+      'salt_cloud':  'salt',
+      'salt_api': 'salt',
+      'salt_ssh':  'salt',
+      'pygit2': 'python2-pygit2',
+      'libgit2': 'libgit2',
+    },
+    'Alpine': {
+      'salt_master': 'salt-master',
+      'salt_minion': 'salt-minion',
+      'salt_syndic': 'salt-syndic',
+      'salt_cloud': 'salt-cloud',
+      'salt_api': 'salt-api',
+      'salt_ssh': 'salt-ssh',
+      'pygit2': 'py2-pygit2',
+      'libgit2': 'libgit2',
+    },
+    'FreeBSD': {
+      'salt_master': 'py27-salt',
+      'salt_minion': 'py27-salt',
+      'salt_syndic': 'py27-salt',
+      'salt_cloud': 'py27-salt',
+      'salt_api': 'py27-salt',
+      'salt_ssh': 'py27-salt',
+      'python_git': 'py27-GitPython',
+      'pygit2': 'py27-pygit2',
+      'config_path': '/usr/local/etc/salt',
+      'minion_service': 'salt_minion',
+      'master_service': 'salt_master',
+      'api_service': 'salt_api',
+      'syndic_service': 'salt_syndic',
+    },
+    'OpenBSD': {
+      'salt_master': 'salt',
+      'salt_minion': 'salt',
+      'salt_syndic': 'salt',
+      'salt_cloud': 'salt',
+      'salt_api': 'salt',
+      'salt_ssh': 'salt',
+      'config_path': '/etc/salt',
+      'minion_service': 'salt_minion',
+      'master_service': 'salt_master',
+      'python_git': 'py-GitPython',
+    },
+    'Windows': {
+      'salt_minion': 'saltstack.minion',
+      'config_path': 'C:\salt\conf',
+      'minion_service': 'salt-minion',
+    },
+  }, merge=salt['grains.filter_by']({
+    'Ubuntu':  {
+      'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
+      salt['grains.get']('os')|lower + '/' + osrelease + '/amd64/latest ' + salt['grains.get']('oscodename') + ' main',
+      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os')|lower + '/' + osrelease + '/amd64/latest/SALTSTACK-GPG-KEY.pub',
+      'pygit2': 'python-pygit2',
+      'gitfs': {
+        'pygit2': {
+          'install_from_source': False,
+          'git': {
+            'require_state': False,
+            'install_from_package': None,
+          },
+        },
+      },
+    },
+    'Raspbian': {
+      'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
+      salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/latest ' + salt['grains.get']('oscodename') + ' main',
+      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/latest/SALTSTACK-GPG-KEY.pub',
+    },
+    'SmartOS': {
+      'salt_master': 'salt',
+      'salt_minion': 'salt',
+      'salt_syndic': 'salt',
+      'salt_cloud': 'salt',
+      'salt_api': 'salt',
+      'salt_ssh': 'salt',
+      'minion_service': 'salt:minion',
+      'master_service': 'salt:master',
+      'python_dulwich': 'py27-dulwich',
+      'gitfs': {
+        'dulwich': {
+          'install_from_source': False,
+        }
+      },
+      'config_path': '/opt/local/etc/salt',
+      'master': {
+        'gitfs_provider': 'dulwich'
+      },
+    }
+  }, grain='os', merge=salt['pillar.get']('salt:lookup')))
+%}
 
-{% do default_settings.salt.update(distro_map) %}
+{## Merge the flavor_map to the default settings ##}
+{% do deep_merge(default_settings.salt,os_family_map) %}
 
-{% set salt_settings = salt['pillar.get']('salt', default=default_settings.salt,
-  merge=True) %}
+{## Merge in salt:lookup pillar ##}
+{% set salt_settings = salt['pillar.get'](
+    'salt',
+    default=default_settings.salt,
+    merge=True)
+%}

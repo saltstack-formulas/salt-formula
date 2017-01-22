@@ -63,19 +63,22 @@ Install gitfs backend dulwich dependencies. Set ``salt:master:gitfs_provider: du
 
 Install gitfs backend GitPython dependenciess. Set ``salt:master:gitfs_provider: gitpython`` in your pillar.
 
+``salt.gitfs.keys``
+----------------------
+
+Install ssh keys to be used by gitfs
+
 ``salt.gitfs.pygit2``
 ----------------------
 
 Install gitfs backend libgit2/pygit2 dependenciess. Set ``salt:master:gitfs_provider: pygit2`` in your pillar.
+For EL distributions, pygit is installed from packages from `EPEL <https://github.com/saltstack-formulas/epel-formula>`_.
 
 ``salt.pkgrepo``
 ----------------
 
 Enable the official saltstack package repository in order to always
-benefit from the latest version. This state currently only works on Debian
-and Ubuntu, and aims to implement the `installation recommendations of the
-official documentation
-<http://docs.saltstack.com/en/latest/topics/installation/index.html#platform-specific-installation-instructions>`_.
+benefit from the latest version. This state currently only works on Debian, Ubuntu, RHEL 6/7 and aims to implement the `installation recommendations of the official documentation <http://docs.saltstack.com/en/latest/topics/installation/index.html#platform-specific-installation-instructions>`_.
 
 ``salt.pkgrepo.absent``
 -----------------------
@@ -117,7 +120,7 @@ you control, then you can safely enable the
 
 ``Configuration``
 =================
-Every option available in the templates can be set in pillar. Settings under 'salt' will be overridden by more specific settings under ``salt['master']``, ``salt['minion']`` or ``salt['cloud']``
+Every option available in the templates can be set in pillar. Settings under 'salt' will be overridden by more specific settings under ``salt['master']``, ``salt['minion']`` or ``salt['cloud']``. Options specified in ``salt['minion']`` which are not present in the default configuration file will be added to the end of the configuration file.
 
 ::
 
