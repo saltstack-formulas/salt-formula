@@ -10,7 +10,12 @@ gitfs-key-{{ key }}-{{ type }}:
     - source: salt://salt/files/gitfs_key.jinja
     - template: jinja
     - user: root
-    - group: root
+    - group:
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        wheel
+        {%- else %}
+        root
+        {%- endif %}
     - mode: 600
     - makedirs: True
     - defaults:
