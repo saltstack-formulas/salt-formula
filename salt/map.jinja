@@ -2,21 +2,25 @@
 # vim: ft=jinja
 
 {%- macro deep_merge(a, b) %}
+{#-     This whole `'dict' in x.__class__.__name__` mess is a 
+        workaround for the missing mapping test in CentOS 6's 
+        ancient Jinja2, see #193  #}
 {%-     for k,v in b.iteritems() %}
 {%-         if v is string or v is number %}
 {%-             do a.update({ k: v }) %}
-{%-         elif v is not mapping %}
+{%-         elif 'dict' not in v.__class__.__name__ %}
 {%-             if a[k] is not defined %}
 {%-                 do a.update({ k: v }) %}
-{%-             elif a[k] is iterable and a[k] is not mapping and a[k] is not string %}
+{%-             elif a[k] is iterable and 'dict' not in a[k].__class__.__name__ and 
+                a[k] is not string %}
 {%-                 do a.update({ k: v|list + a[k]|list}) %}
 {%-             else %}
 {%-                 do a.update({ k: v }) %}
 {%-             endif %}
-{%-         elif v is mapping %}
+{%-         elif 'dict' in v.__class__.__name__ %}
 {%-             if a[k] is not defined %}
 {%-                 do a.update({ k: v }) %}
-{%-             elif a[k] is not mapping %}
+{%-             elif 'dict' in a[k].__class__.__name__ %}
 {%-                 do a.update({ k: v }) %}
 {%-             else %}
 {%-                 do deep_merge(a[k], v) %}
