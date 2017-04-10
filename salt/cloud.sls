@@ -8,20 +8,14 @@
 python-pip:
   pkg.installed
 
-pycrypto:
+salt-cloud-pip-packages:
   pip.installed:
-    - require:
-      - pkg: python-pip
-
-{% if grains['os_family'] not in ['Debian', 'RedHat'] %}
-crypto:
-  pip.installed:
-    - require:
-      - pkg: python-pip
-{% endif %}
-
-apache-libcloud:
-  pip.installed:
+    - pkgs:
+      - apache-libcloud
+      {%- if grains['os_family'] not in ['Debian', 'RedHat'] %}
+      - crypto
+      {%- endif %}
+      - pycrypto
     - require:
       - pkg: python-pip
 {%- endif %}
@@ -32,11 +26,7 @@ salt-cloud:
     - name: {{ salt_settings.salt_cloud }}
     {%- if salt_settings.use_pip %}
     - require:
-      - pip: apache-libcloud
-      - pip: pycrypto
-      {% if grains['os_family'] not in ['Debian', 'RedHat'] %}
-      - pip: crypto
-      {% endif %}
+      - pip: salt-cloud-pip-packages
     {%- endif %}
 {% endif %}
 
