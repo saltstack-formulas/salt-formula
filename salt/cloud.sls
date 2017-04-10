@@ -1,9 +1,5 @@
 {% from "salt/map.jinja" import salt_settings with context %}
 
-{% set cloudmaps = salt['pillar.get']('salt:cloud:maps', {}) -%}
-{% set cloudprofiles = salt['pillar.get']('salt:cloud:profiles', {}) -%}
-{% set cloudproviders = salt['pillar.get']('salt:cloud:providers', {}) -%}
-
 {%- if salt_settings.use_pip %}
 python-pip:
   pkg.installed
@@ -52,34 +48,26 @@ cloud-cert-{{ cert }}-pem:
 {% endfor %}
 {% endfor %}
 
-{%- for dir, templ_path in salt_settings.cloud.template_sources.items() %}
-salt-cloud-{{ dir }}:
+{% for cloud_section in ["maps", "profiles", "providers"] %}
+salt-cloud-{{ cloud_section }}:
   file.recurse:
-    - name: {{ salt_settings.config_path }}/cloud.{{ dir }}.d
-    - source: {{ templ_path }}
+    - name: {{ salt_settings.config_path }}/cloud.{{ cloud_section }}.d
+    - source: {{ salt_settings.cloud.template_sources[cloud_section] }}
     - template: jinja
     - makedirs: True
-{%- endfor %}
 
-{% for key, value in cloudmaps.items() %}
-/etc/salt/cloud.maps.d/{{ key }}:
-  file.managed:
-    - contents: |
-        {{ value|yaml(False) | indent(8) }}
+{% for filename in salt['pillar.get']("salt:cloud:" ~ cloud_section, {}).keys() %}
+/etc/salt/cloud.{{ cloud_section }}.d/{{ filename }}:
+  file.serialize:
+    - dataset_pillar: salt:cloud:{{ cloud_section }}:{{ filename }}
+    - formatter: yaml
+    - require:
+      - file: salt-cloud-{{ cloud_section }}
+    {%- if cloud_section == "providers" %}
+    - require_in:
+      - file: salt-cloud-providers-permissions
+    {%- endif %}
 {% endfor %}
-
-{% for key, value in cloudprofiles.items() %}
-/etc/salt/cloud.profiles.d/{{ key }}:
-  file.managed:
-    - contents: |
-        {{ value|yaml(False) | indent(8) }}
-{% endfor %}
-
-{% for key, value in cloudproviders.items() %}
-/etc/salt/cloud.providers.d/{{ key }}:
-  file.managed:
-    - contents: |
-        {{ value|yaml(False) | indent(8) }}
 {% endfor %}
 
 salt-cloud-providers-permissions:
@@ -98,3 +86,5 @@ salt-cloud-providers-permissions:
       - user
       - group
       - mode
+    - require:
+      - file: salt-cloud-providers
