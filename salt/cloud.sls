@@ -55,6 +55,7 @@ salt-cloud-{{ cloud_section }}:
     - source: {{ salt_settings.cloud.template_sources[cloud_section] }}
     - template: jinja
     - makedirs: True
+    - exclude_pat: _*
 
 {% for filename in salt['pillar.get']("salt:cloud:" ~ cloud_section, {}).keys() %}
 /etc/salt/cloud.{{ cloud_section }}.d/{{ filename }}:
