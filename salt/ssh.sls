@@ -1,4 +1,4 @@
-{% from "salt/map.jinja" import salt_settings with context %}
+{% from slspath + "/map.jinja" import salt_settings with context %}
 
 {% if salt_settings.install_packages %}
 ensure-salt-ssh-is-installed:

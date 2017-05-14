@@ -1,4 +1,4 @@
-{% from "salt/map.jinja" import salt_settings with context %}
+{% from slspath.split('/')[:-1] + "/map.jinja" import salt_settings with context %}
 # issue 34
 
 {% if salt_settings.gitfs.dulwich.install_from_source %}
