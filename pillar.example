@@ -182,7 +182,7 @@ salt:
     # They override reactors configured in
     # 'salt:reactors' or the old 'salt:reactor' parameters
     reactors:
-      - 'master/deploy':
+      - 'minion/deploy':
       - /srv/salt/reactors/deploy.sls
 
   # salt cloud config
@@ -260,7 +260,7 @@ salt:
         pub: |
           ...........
 
-  # These reactors will be configured both to the minion and the master
+  # These reactors will be configured both in the minion and the master
   reactors:
     - 'deploy':
       - /srv/salt/reactors/deploy.sls
