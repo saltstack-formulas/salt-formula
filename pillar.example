@@ -95,6 +95,13 @@ salt:
             type: runner
             cmd: jobs.list_jobs
 
+    # optional: these reactors will be configured on the master
+    # They override reactors configured in
+    # 'salt:reactors' or the old 'salt:reactor' parameters
+    reactors:
+      - 'master/deploy':
+      - /srv/salt/reactors/deploy.sls
+
   # salt minion config:
   minion:
 
@@ -171,6 +178,12 @@ salt:
           - 1.0
         interval: 10
 
+    # Optional reactors: these reactors will be configured on the minion
+    # They override reactors configured in
+    # 'salt:reactors' or the old 'salt:reactor' parameters
+    reactors:
+      - 'master/deploy':
+      - /srv/salt/reactors/deploy.sls
 
   # salt cloud config
   cloud:
@@ -229,9 +242,7 @@ salt:
       - IAD
       - SYD
       - HKG
-  reactor:
-    - 'deploy':
-      - /srv/salt/reactors/deploy.sls
+
   ssh_roster:
     prod1:
       host: host.example.com
@@ -248,6 +259,11 @@ salt:
           -----END RSA PRIVATE KEY-----
         pub: |
           ...........
+
+  # These reactors will be configured both to the minion and the master
+  reactors:
+    - 'deploy':
+      - /srv/salt/reactors/deploy.sls
 
 salt_cloud_certs:
   aws:
