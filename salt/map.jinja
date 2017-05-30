@@ -40,11 +40,12 @@ Setup variable using grains['os_family'] based logic, only add key:values here
 that differ from whats in defaults.yaml
 ##}
 {% set osrelease = salt['grains.get']('osrelease') %}
+{% set salt_release = salt['pillar.get']('salt:release', 'latest') %}
 {% set os_family_map = salt['grains.filter_by']({
     'Debian':  {
       'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
-      salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/amd64/latest ' + salt['grains.get']('oscodename') + ' main',
-      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/amd64/latest/SALTSTACK-GPG-KEY.pub',
+      salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/amd64/' + salt_release + ' ' + salt['grains.get']('oscodename') + ' main',
+      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/amd64/' + salt_release  + '/SALTSTACK-GPG-KEY.pub',
       'libgit2': 'libgit2-22',
       'gitfs': {
         'pygit2': {
@@ -61,6 +62,8 @@ that differ from whats in defaults.yaml
       },
     },
     'RedHat':  {
+      'pkgrepo': 'https://repo.saltstack.com/yum/redhat/$releasever/$basearch/' + salt_release
+      'key_url': 'https://repo.saltstack.com/yum/redhat/$releasever/$basearch/' + salt_release + '/SALTSTACK-GPG-KEY.pub'
       'pygit2': salt['grains.filter_by']({
         'Fedora': 'python2-pygit2',
         'default': 'python-pygit2',
@@ -142,8 +145,8 @@ that differ from whats in defaults.yaml
   }, merge=salt['grains.filter_by']({
     'Ubuntu':  {
       'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
-      salt['grains.get']('os')|lower + '/' + osrelease + '/amd64/latest ' + salt['grains.get']('oscodename') + ' main',
-      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os')|lower + '/' + osrelease + '/amd64/latest/SALTSTACK-GPG-KEY.pub',
+      salt['grains.get']('os')|lower + '/' + osrelease + '/amd64/' + salt_release  + ' ' + salt['grains.get']('oscodename') + ' main',
+      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os')|lower + '/' + osrelease + '/amd64/' + salt_release + '/SALTSTACK-GPG-KEY.pub',
       'pygit2': 'python-pygit2',
       'gitfs': {
         'pygit2': {
@@ -157,8 +160,8 @@ that differ from whats in defaults.yaml
     },
     'Raspbian': {
       'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
-      salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/latest ' + salt['grains.get']('oscodename') + ' main',
-      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/latest/SALTSTACK-GPG-KEY.pub',
+      salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/' + salt_release + ' ' + salt['grains.get']('oscodename') + ' main',
+      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/' + salt_release + '/SALTSTACK-GPG-KEY.pub',
     },
     'SmartOS': {
       'salt_master': 'salt',

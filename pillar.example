@@ -22,6 +22,12 @@ salt:
     salt-cloud: 'salt-cloud'
     salt-ssh: 'salt-ssh'
 
+  # Set which release of SaltStack to use, default to 'latest'
+  # To get the available releases:
+  # * http://repo.saltstack.com/yum/redhat/7/x86_64/
+  # * http://repo.saltstack.com/apt/debian/8/amd64/
+  release: 2016.11
+
   # salt master config
   master:
     fileserver_backend:
