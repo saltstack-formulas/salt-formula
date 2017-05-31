@@ -3,7 +3,7 @@
 saltstack-pkgrepo:
   pkgrepo.managed:
     - humanname: SaltStack repo for RHEL/CentOS $releasever
-    - baseurl: https://repo.saltstack.com/yum/redhat/$releasever/$basearch/latest
+    - baseurl: {{ salt_settings.pkgrepo }}
     - enabled: 1
     - gpgcheck: 1
-    - gpgkey: https://repo.saltstack.com/yum/redhat/$releasever/$basearch/latest/SALTSTACK-GPG-KEY.pub
+    - gpgkey: {{ salt_settings.key_url }}
