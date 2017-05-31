@@ -62,8 +62,8 @@ that differ from whats in defaults.yaml
       },
     },
     'RedHat':  {
-      'pkgrepo': 'https://repo.saltstack.com/yum/redhat/$releasever/$basearch/' + salt_release
-      'key_url': 'https://repo.saltstack.com/yum/redhat/$releasever/$basearch/' + salt_release + '/SALTSTACK-GPG-KEY.pub'
+      'pkgrepo': 'https://repo.saltstack.com/yum/redhat/$releasever/$basearch/' + salt_release,
+      'key_url': 'https://repo.saltstack.com/yum/redhat/$releasever/$basearch/' + salt_release + '/SALTSTACK-GPG-KEY.pub',
       'pygit2': salt['grains.filter_by']({
         'Fedora': 'python2-pygit2',
         'default': 'python-pygit2',
