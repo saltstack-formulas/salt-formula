@@ -22,6 +22,11 @@ salt:
     salt-cloud: 'salt-cloud'
     salt-ssh: 'salt-ssh'
 
+  # Set pkg.installed options
+  package:
+    opts:
+      version: 2016.11.5
+
   # Set which release of SaltStack to use, default to 'latest'
   # To get the available releases:
   # * http://repo.saltstack.com/yum/redhat/7/x86_64/

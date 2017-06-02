@@ -25,6 +25,9 @@ salt:
   python_git: python-git
   python_dulwich: python-dulwich
 
+  package:
+    opts: {}
+
   master:
     gitfs_provider: gitpython
 

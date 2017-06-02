@@ -1,9 +1,10 @@
-{% from "salt/map.jinja" import salt_settings with context %}
+{% from "salt/map.jinja" import salt_settings, sls_block with context %}
 
 salt-master:
 {% if salt_settings.install_packages %}
   pkg.installed:
     - name: {{ salt_settings.salt_master }}
+    {{ sls_block(salt_settings.package.opts) }}
 {% endif %}
   file.recurse:
     - name: {{ salt_settings.config_path }}/master.d

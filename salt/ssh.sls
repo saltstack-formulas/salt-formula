@@ -1,9 +1,10 @@
-{% from "salt/map.jinja" import salt_settings with context %}
+{% from "salt/map.jinja" import salt_settings, sls_block with context %}
 
 {% if salt_settings.install_packages %}
 ensure-salt-ssh-is-installed:
   pkg.installed:
     - name: {{ salt_settings.salt_ssh }}
+    {{ sls_block(salt_settings.package.opts) }}
 {% endif %}
 
 ensure-roster-config:

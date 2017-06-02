@@ -1,4 +1,4 @@
-{% from "salt/map.jinja" import salt_settings with context %}
+{% from "salt/map.jinja" import salt_settings, sls_block with context %}
 
 {%- if salt_settings.use_pip %}
 python-pip:
@@ -20,6 +20,7 @@ salt-cloud-pip-packages:
 salt-cloud:
   pkg.installed:
     - name: {{ salt_settings.salt_cloud }}
+    {{ sls_block(salt_settings.package.opts) }}
     {%- if salt_settings.use_pip %}
     - require:
       - pip: salt-cloud-pip-packages
