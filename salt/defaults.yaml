@@ -4,6 +4,7 @@ salt:
   install_packages: True
   use_pip: False
   clean_config_d_dir: True
+  restart_via_at: False
 
   config_path: /etc/salt
 

@@ -16,12 +16,30 @@ salt-minion:
   service.running:
     - enable: True
     - name: {{ salt_settings.minion_service }}
+{%- if not salt_settings.restart_via_at %}
     - watch:
-{% if salt_settings.install_packages %}
+  {%- if salt_settings.install_packages %}
       - pkg: salt-minion
-{% endif %}
+  {%- endif %}
       - file: salt-minion
       - file: remove-old-minion-conf-file
+{%- else %}
+at:
+  pkg.installed: []
+
+restart-salt-minion:
+  cmd.wait:
+    - name: echo salt-call --local service.restart salt-minion | at now + 1 minute
+    - order: last
+    - reqiure:
+        - pkg: at
+    - watch:
+  {%- if salt_settings.install_packages %}
+      - pkg: salt-minion
+  {%- endif %}
+      - file: salt-minion
+      - file: remove-old-minion-conf-file
+{%- endif %}
 
 {% if salt_settings.minion_remove_config %}
 remove-default-minion-conf-file:
