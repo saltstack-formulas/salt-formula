@@ -31,7 +31,7 @@ restart-salt-minion:
   cmd.wait:
     - name: echo salt-call --local service.restart salt-minion | at now + 1 minute
     - order: last
-    - reqiure:
+    - require:
         - pkg: at
     - watch:
   {%- if salt_settings.install_packages %}
