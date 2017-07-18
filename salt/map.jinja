@@ -44,8 +44,8 @@ that differ from whats in defaults.yaml
 {% set os_family_map = salt['grains.filter_by']({
     'Debian':  {
       'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
-      salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/amd64/' + salt_release + ' ' + salt['grains.get']('oscodename') + ' main',
-      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/amd64/' + salt_release  + '/SALTSTACK-GPG-KEY.pub',
+      salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease)|string + '/amd64/' + salt_release + ' ' + salt['grains.get']('oscodename') + ' main',
+      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease)|string + '/amd64/' + salt_release  + '/SALTSTACK-GPG-KEY.pub',
       'libgit2': 'libgit2-22',
       'gitfs': {
         'pygit2': {
@@ -160,8 +160,8 @@ that differ from whats in defaults.yaml
     },
     'Raspbian': {
       'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
-      salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/' + salt_release + ' ' + salt['grains.get']('oscodename') + ' main',
-      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease) + '/armhf/' + salt_release + '/SALTSTACK-GPG-KEY.pub',
+      salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease)|string + '/armhf/' + salt_release + ' ' + salt['grains.get']('oscodename') + ' main',
+      'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os_family')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease)|string + '/armhf/' + salt_release + '/SALTSTACK-GPG-KEY.pub',
     },
     'SmartOS': {
       'salt_master': 'salt',
