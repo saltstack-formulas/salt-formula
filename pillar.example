@@ -150,6 +150,13 @@ salt:
     mine_functions:
       network.interface_ip: [eth0]
 
+    # Define a minion scheduler
+    schedule:
+      - highstate:
+        - function: state.apply
+        - minutes: 60
+        - returner: redis
+
     # other 'non-default' config
     auth_keytab: /root/auth.keytab
     auth_principal: kadmin/admin
