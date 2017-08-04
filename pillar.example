@@ -106,7 +106,7 @@ salt:
     # 'salt:reactors' or the old 'salt:reactor' parameters
     reactors:
       - 'master/deploy':
-      - /srv/salt/reactors/deploy.sls
+        - /srv/salt/reactors/deploy.sls
 
   # salt minion config:
   minion:
@@ -196,7 +196,7 @@ salt:
     # 'salt:reactors' or the old 'salt:reactor' parameters
     reactors:
       - 'minion/deploy':
-      - /srv/salt/reactors/deploy.sls
+        - /srv/salt/reactors/deploy.sls
 
   # salt cloud config
   cloud:
