@@ -26,7 +26,7 @@ salt:
   # To get the available releases:
   # * http://repo.saltstack.com/yum/redhat/7/x86_64/
   # * http://repo.saltstack.com/apt/debian/8/amd64/
-  release: 2016.11
+  release: "2016.11"
 
   # salt master config
   master:
