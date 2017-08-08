@@ -16,8 +16,30 @@ salt-minion:
   service.running:
     - enable: True
     - name: {{ salt_settings.minion_service }}
+    - require:
+      - file: salt-minion
 {%- if not salt_settings.restart_via_at %}
-    - watch:
+  cmd.run:
+  {%- if grains['saltversioninfo'][0] >= 2016 and grains['saltversioninfo'][1] >= 3 %}
+    {%- if grains['kernel'] == 'Windows' %}
+    - name: '{{ salt_settings.config_path }}\salt-call.bat --local service.restart {{ salt_settings.minion_service }}'
+    {%- else %}
+    - name: 'salt-call --local service.restart {{ salt_settings.minion_service }} --out-file /dev/null'
+    - bg: True
+    {%- endif %}
+  {%- else %}
+    {%- if grains['kernel'] == 'Windows' %}
+    - name: 'start powershell "Restart-Service -Name {{ salt_settings.minion_service }}"'
+    {%- else %}
+    # old style, pre 2016.3. fork and disown the process
+    - name: |-
+        exec 0>&- # close stdin
+        exec 1>&- # close stdout
+        exec 2>&- # close stderr
+        nohup salt-call --local service.restart {{ salt_settings.minion_service }} --out-file /dev/null &
+    {%- endif %}
+  {%- endif %}
+    - onchanges:
   {%- if salt_settings.install_packages %}
       - pkg: salt-minion
   {%- endif %}
