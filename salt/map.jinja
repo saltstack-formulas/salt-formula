@@ -5,7 +5,7 @@
 {#-     This whole `'dict' in x.__class__.__name__` mess is a 
         workaround for the missing mapping test in CentOS 6's 
         ancient Jinja2, see #193  #}
-{%-     for k,v in b.iteritems() %}
+{%-     for k,v in b.items() %}
 {%-         if v is string or v is number %}
 {%-             do a.update({ k: v }) %}
 {%-         elif 'dict' not in v.__class__.__name__ %}
