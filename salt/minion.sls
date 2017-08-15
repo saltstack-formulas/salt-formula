@@ -63,6 +63,16 @@ restart-salt-minion:
       - file: remove-old-minion-conf-file
 {%- endif %}
 
+{% if 'inotify' in  salt_settings.get('minion', {}).get('beacons', {}) and salt_settings.get('pyinotify', False) %}
+salt-minion-beacon-inotify:
+  pkg.installed:
+    - name: {{ salt_settings.pyinotify }}
+    - require_in:
+      - service: salt-minion
+    - watch_in:
+      - service: salt-minion
+{% endif %}
+
 {% if salt_settings.minion_remove_config %}
 remove-default-minion-conf-file:
   file.absent:

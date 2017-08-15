@@ -47,6 +47,7 @@ that differ from whats in defaults.yaml
       salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease)|string + '/amd64/' + salt_release + ' ' + salt['grains.get']('oscodename') + ' main',
       'key_url': 'https://repo.saltstack.com/apt/' + salt['grains.get']('os')|lower + '/' + salt['grains.get']('osmajorrelease', osrelease)|string + '/amd64/' + salt_release  + '/SALTSTACK-GPG-KEY.pub',
       'libgit2': 'libgit2-22',
+      'pyinotify': 'python-pyinotify',
       'gitfs': {
         'pygit2': {
           'install_from_source': True,
