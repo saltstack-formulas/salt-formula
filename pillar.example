@@ -21,6 +21,7 @@ salt:
     salt-syndic: 'salt-syndic'
     salt-cloud: 'salt-cloud'
     salt-ssh: 'salt-ssh'
+    pyinotify: 'python-pyinotify' the package to be installed for pyinotify
 
   # Set which release of SaltStack to use, default to 'latest'
   # To get the available releases:
