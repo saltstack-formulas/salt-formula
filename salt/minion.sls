@@ -50,12 +50,12 @@ at:
   pkg.installed: []
 
 restart-salt-minion:
-  cmd.wait:
+  cmd.run:
     - name: echo salt-call --local service.restart salt-minion | at now + 1 minute
     - order: last
     - require:
         - pkg: at
-    - watch:
+    - onchanges:
   {%- if salt_settings.install_packages %}
       - pkg: salt-minion
   {%- endif %}
