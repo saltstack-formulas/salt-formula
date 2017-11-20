@@ -83,7 +83,18 @@ that differ from whats in defaults.yaml
         'gitfs_provider': 'pygit2'
       },
     },
-    'Suse':    {},
+    'Suse':  {
+      'pygit2': 'python-pygit2',
+      'pyinotify': 'python-pyinotify',
+      'gitfs': {
+        'pygit2': {
+          'install_from_source': False,
+        },
+      },
+      'master': {
+        'gitfs_provider': 'pygit2'
+      },
+    },
     'Gentoo':  {
       'salt_master': 'app-admin/salt',
       'salt_minion': 'app-admin/salt',
