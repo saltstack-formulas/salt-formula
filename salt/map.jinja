@@ -89,6 +89,10 @@ that differ from whats in defaults.yaml
       'gitfs': {
         'pygit2': {
           'install_from_source': False,
+          'git': {
+            'require_state': False,
+            'install_from_package': 'git',
+          },
         },
       },
       'master': {
