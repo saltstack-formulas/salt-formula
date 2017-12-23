@@ -88,19 +88,19 @@ salt:
 
     # optional engine configuration
     engines:
-      slack:
-        token: xoxp-XXXXX-XXXXXXX
-        control: True
-        valid_users:
-          - someuser
-          - otheruser
-        valid_commands:
-          - test.ping
-          - list_jobs
-        aliases:
-          list_jobs:
-            type: runner
-            cmd: jobs.list_jobs
+      - slack:
+          token: xoxp-XXXXX-XXXXXXX   # use Slack's legacy API token
+          control: True
+          valid_users:
+            - someuser
+            - otheruser
+          valid_commands:
+            - test.ping
+            - list_jobs
+          aliases:
+            list_jobs:
+              type: runner
+              cmd: jobs.list_jobs
 
     # optional: these reactors will be configured on the master
     # They override reactors configured in
@@ -164,19 +164,19 @@ salt:
 
     # optional engine configuration
     engines:
-      slack:
-        token: xoxp-XXXXX-XXXXXXX
-        control: True
-        valid_users:
-          - someuser
-          - otheruser
-        valid_commands:
-          - test.ping
-          - list_jobs
-        aliases:
-          list_jobs:
-            type: runner
-            cmd: jobs.list_jobs
+      - slack:
+          token: xoxp-XXXXX-XXXXXXX   # use Slack's legacy API token
+          control: True
+          valid_users:
+            - someuser
+            - otheruser
+          valid_commands:
+            - test.ping
+            - list_jobs
+          aliases:
+            list_jobs:
+              type: runner
+              cmd: jobs.list_jobs
 
     # optional beacons configuration
     beacons:
