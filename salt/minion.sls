@@ -22,11 +22,11 @@ salt-minion:
   cmd.run:
   {%- if grains['saltversioninfo'][0] >= 2016 and grains['saltversioninfo'][1] >= 3 %}
     {%- if grains['kernel'] == 'Windows' %}
-    - name: '{{ salt_settings.config_path }}\salt-call.bat --local service.restart {{ salt_settings.minion_service }}'
+    - name: 'salt-call.bat --local service.restart {{ salt_settings.minion_service }}'
     {%- else %}
     - name: 'salt-call --local service.restart {{ salt_settings.minion_service }} --out-file /dev/null'
-    - bg: True
     {%- endif %}
+    - bg: True
   {%- else %}
     {%- if grains['kernel'] == 'Windows' %}
     - name: 'start powershell "Restart-Service -Name {{ salt_settings.minion_service }}"'
