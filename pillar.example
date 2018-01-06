@@ -16,11 +16,11 @@ salt:
 
   # to overwrite map.jinja salt packages
   lookup:
-    salt-master: 'salt-master'
-    salt-minion: 'salt-minion'
-    salt-syndic: 'salt-syndic'
-    salt-cloud: 'salt-cloud'
-    salt-ssh: 'salt-ssh'
+    salt_master: 'salt-master'
+    salt_minion: 'salt-minion'
+    salt_syndic: 'salt-syndic'
+    salt_cloud: 'salt-cloud'
+    salt_ssh: 'salt-ssh'
     pyinotify: 'python-pyinotify' the package to be installed for pyinotify
 
   # Set which release of SaltStack to use, default to 'latest'
