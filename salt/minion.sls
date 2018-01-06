@@ -1,5 +1,6 @@
 {% from "salt/map.jinja" import salt_settings with context %}
 
+{% if grains.os != "MacOS" %}
 salt-minion:
 {% if salt_settings.install_packages %}
   pkg.installed:
@@ -83,3 +84,5 @@ remove-default-minion-conf-file:
 remove-old-minion-conf-file:
   file.absent:
     - name: {{ salt_settings.config_path }}/minion.d/_defaults.conf
+
+{% endif %}

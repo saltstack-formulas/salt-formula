@@ -160,6 +160,11 @@ that differ from whats in defaults.yaml
       'config_path': 'C:\salt\conf',
       'minion_service': 'salt-minion',
     },
+    'MacOS': {
+      'salt_minion': 'com.saltstack.salt',
+      'config_path': '/private/etc/salt',
+      'minion_service': 'com.saltstack.salt.minion',
+    },
   }, merge=salt['grains.filter_by']({
     'Ubuntu':  {
       'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
