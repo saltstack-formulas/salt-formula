@@ -2,8 +2,8 @@
 # vim: ft=jinja
 
 {%- macro deep_merge(a, b) %}
-{#-     This whole `'dict' in x.__class__.__name__` mess is a 
-        workaround for the missing mapping test in CentOS 6's 
+{#-     This whole `'dict' in x.__class__.__name__` mess is a
+        workaround for the missing mapping test in CentOS 6's
         ancient Jinja2, see #193  #}
 {%-     for k,v in b.items() %}
 {%-         if v is string or v is number %}
@@ -11,7 +11,7 @@
 {%-         elif 'dict' not in v.__class__.__name__ %}
 {%-             if a[k] is not defined %}
 {%-                 do a.update({ k: v }) %}
-{%-             elif a[k] is iterable and 'dict' not in a[k].__class__.__name__ and 
+{%-             elif a[k] is iterable and 'dict' not in a[k].__class__.__name__ and
                 a[k] is not string %}
 {%-                 do a.update({ k: v|list + a[k]|list}) %}
 {%-             else %}
@@ -156,9 +156,16 @@ that differ from whats in defaults.yaml
       'python_git': 'py-GitPython',
     },
     'Windows': {
-      'salt_minion': 'saltstack.minion',
+      'salt_minion': 'salt-minion',
       'config_path': 'C:\salt\conf',
       'minion_service': 'salt-minion',
+    },
+    'MacOS': {
+      'salt_minion': 'com.saltstack.salt',
+      'salt_minion_pkg_source': 'https://repo.saltstack.com/osx/salt-' + salt_release + '-py2-x86_64.pkg',
+      'salt_minion_pkg_hash': '',
+      'config_path': '/private/etc/salt',
+      'minion_service': 'com.saltstack.salt.minion',
     },
   }, merge=salt['grains.filter_by']({
     'Ubuntu':  {
