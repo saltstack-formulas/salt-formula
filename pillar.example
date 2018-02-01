@@ -14,6 +14,9 @@ salt:
   # install Salt via git/pip/etc.)
   install_packages: True
 
+  # Optional: set salt version (if install_packages is set to True)
+  version: 2017.7.2-1.el7
+
   # to overwrite map.jinja salt packages
   lookup:
     salt_master: 'salt-master'
