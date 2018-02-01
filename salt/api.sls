@@ -7,6 +7,9 @@ salt-api:
 {% if salt_settings.install_packages %}
   pkg.installed:
     - name: {{ salt_settings.salt_api }}
+  {%- if salt_settings.version is defined %}
+    - version: {{ salt_settings.version }}
+  {%- endif %}
 {% endif %}
   service.running:
     - enable: True
