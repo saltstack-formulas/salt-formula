@@ -202,6 +202,24 @@ salt:
       - 'minion/deploy':
         - /srv/salt/reactors/deploy.sls
 
+    # Optional: Configure an elasticsearch returner
+    return: elasticsearch
+    elasticsearch:
+      hosts:
+        - example.elasticsearch.host:9200
+        - example.elasticsearch.host2:9200
+      index_date: True
+      index: salt
+      number_of_shards: 5
+      number_of_replicas: 2
+      debug_returner_payload: True
+      states_count: True
+      states_order_output: True
+      states_single_index: True
+      functions_blacklist:
+        - test.ping
+        - saltutil.find_job
+
   # salt cloud config
   cloud:
     master: salt
@@ -332,3 +350,4 @@ salt_formulas:
       - salt-formula
       - postfix-formula
       - openssh-formula
+
