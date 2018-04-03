@@ -41,6 +41,12 @@ that differ from whats in defaults.yaml
 ##}
 {% set osrelease = salt['grains.get']('osrelease') %}
 {% set salt_release = salt['pillar.get']('salt:release', 'latest') %}
+{% if salt_release != 'latest' %}
+{% set check_version = salt_release.split('.') %}
+{% if check_version|length > 1 %}
+{% set salt_release = 'archive/' + salt_release %}
+{% endif %}
+{% endif %}
 {% set os_family_map = salt['grains.filter_by']({
     'Debian':  {
       'pkgrepo': 'deb http://repo.saltstack.com/apt/' +
