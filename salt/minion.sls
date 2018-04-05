@@ -1,6 +1,6 @@
 {% from "salt/map.jinja" import salt_settings with context %}
 
-{% if grains.os == 'MacOS' and salt_settings.salt_minion_pkg_source != '' and salt_settings.version != '' %}
+{% if salt_settings.install_packages and grains.os == 'MacOS' and salt_settings.salt_minion_pkg_source != '' and salt_settings.version != '' %}
 {# only download IF we know where to get the pkg from and if we know what version to check the current install (if installed) against #}
 {# e.g. don't download unless it appears as though we're about to try and upgrade the minion #}
 download-salt-minion:
