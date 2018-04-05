@@ -154,7 +154,7 @@ Remember, you will have to run ``state.highstate`` or ``state.sls salt.(master|m
 
 As MacOS has no native package management that pkg.installed can leverage appropriately, and brew does not count, the salt.minion state  manages salt minion package upgrades by way of .pkg file download which is then installed using the macpackage.installed state.
 
-salt-minion packages on MacOS will not upgraded by default. To enable package management you must set the following at a minimum,
+salt-minion packages on MacOS will not be upgraded by default. To enable package management you must set the following at a minimum,
 
 ::
 
