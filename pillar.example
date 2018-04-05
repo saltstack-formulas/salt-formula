@@ -31,6 +31,16 @@ salt:
   # * http://repo.saltstack.com/yum/redhat/7/x86_64/
   # * http://repo.saltstack.com/apt/debian/8/amd64/
   release: "2016.11"
+  
+  # MacOS has no package management. 
+  # Instead, we use file.managed to download an appropriate .pkg file and macpackage.installed to install it
+  # 'version', if set (see above), will be used to check the .pkg version to determine if it should be installed
+  #
+  # NOTE: if 'version' is not set version comparison will not occur and the .pkg WILL NOT be installed if a salt
+  # .pkg is already installed
+  # NOTE: salt_minion_pkg_hash, if set, will be passed into file.managed's source_hash, use URL or hash string
+  salt_minion_pkg_source: 'https://repo.saltstack.com/osx/salt-2017.7.4-py3-x86_64.pkg'
+  salt_minion_pkg_hash: 'https://repo.saltstack.com/osx/salt-2017.7.4-py3-x86_64.pkg.md5'
 
   # salt master config
   master:
