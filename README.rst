@@ -148,3 +148,22 @@ Executing the provided `Vagrantfile <http://www.vagrantup.com/>`_  will create a
 The folders inside the VM will be set up in a way that enables you to simply execute 'sudo salt "*" state.highstate' to apply the salt formula to the VM, using the pillar.example config. You can check /etc/salt/ for results.
 
 Remember, you will have to run ``state.highstate`` or ``state.sls salt.(master|minion|cloud)`` manually.
+
+``MacOS Support``
+=================
+
+As MacOS has no native package management that pkg.installed can leverage appropriately, and brew does not count, the salt.minion state  manages salt minion package upgrades by way of .pkg file download which is then installed using the macpackage.installed state.
+
+salt-minion packages on MacOS will not be upgraded by default. To enable package management you must set the following at a minimum,
+
+::
+
+    install_packages: True
+    version: 2017.7.4
+    salt_minion_pkg_source: https://repo.saltstack.com/osx/salt-2017.7.4-py3-x86_64.pkg
+
+install_packages must indicate that the installation of a package is desired. If so, version will be used to compare the version of the installed .pkg against the downloaded one. If version is not set and a salt.pkg is already installed the .pkg will not be installed again.
+
+A future update to the formula may include extraction of version from the downloaded .pkg itself; but for the time being you MUST set version to indicate what you believe it to be.
+
+Refer to pillar.example for more information.
