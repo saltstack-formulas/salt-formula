@@ -53,3 +53,6 @@ salt:
       providers: salt://salt/files/cloud.providers.d
       profiles: salt://salt/files/cloud.profiles.d
       maps: salt://salt/files/cloud.maps.d
+
+salt_formulas:
+  checkout_orig_branch: False

@@ -2,7 +2,9 @@
     'baseurl': 'https://github.com/saltstack-formulas',
     'basedir': '/srv/formulas',
     'update': False,
-    'options': {},
+    'options': {
+      'branch': 'master',
+    },
    }
 %}
 {% set formulas = salt['pillar.get']('salt_formulas:list', {}) %}
@@ -12,6 +14,13 @@
      salt['pillar.get']('salt_formulas:git_opts:default:{0}'.format(opt),
        defaults[opt])) -%}
 {{ value|yaml }}
+{%- endmacro -%}
+
+{%- macro formulas_opts_for_git_latest(env) -%}
+{%- set options = defaults['options'] or {} -%}
+{%- do options.update(salt['pillar.get']('salt_formulas:git_opts:default:options') or {}) -%}
+{%- do options.update(salt['pillar.get']('salt_formulas:git_opts:{0}:options'.format(env)) or {}) -%}
+{{ options|yaml }}
 {%- endmacro -%}
 
 {%- macro formulas_roots(env) -%}

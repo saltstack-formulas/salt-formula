@@ -351,6 +351,9 @@ salt_formulas:
     user: root
     group: root
     mode: 755
+  # Explicitly checkout the original branch for repos after the
+  # git.latest states have been processed (False by default)
+  checkout_orig_branch: False
   # List of formulas to enable in each environment
   list:
     base:
