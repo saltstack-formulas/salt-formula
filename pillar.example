@@ -24,15 +24,15 @@ salt:
     salt_syndic: 'salt-syndic'
     salt_cloud: 'salt-cloud'
     salt_ssh: 'salt-ssh'
-    pyinotify: 'python-pyinotify' the package to be installed for pyinotify
+    pyinotify: 'python-pyinotify'  # the package to be installed for pyinotify
 
   # Set which release of SaltStack to use, default to 'latest'
   # To get the available releases:
   # * http://repo.saltstack.com/yum/redhat/7/x86_64/
   # * http://repo.saltstack.com/apt/debian/8/amd64/
-  release: "2016.11"
-  
-  # MacOS has no package management. 
+  release: '2018.3'
+
+  # MacOS has no package management.
   # Instead, we use file.managed to download an appropriate .pkg file and macpackage.installed to install it
   # 'version', if set (see above), will be used to check the .pkg version to determine if it should be installed
   #
@@ -339,11 +339,35 @@ salt_formulas:
       # Options passed directly to the git.latest state
       options:
         rev: master
+        user: username
+        identity: /path/to/.ssh/id_rsa_github_username
     dev:
       basedir: /srv/formulas/dev
       update: True
       options:
         rev: develop
+    # Alternatively, a single directory with multiple branches can be used
+    # E.g. It is strongly recommended to fork saltstack-formula repositories
+    #      to avoid unexpected changes to your infrastructure
+    # Then upstream changes can be merged in manually with due consideration
+    # Specific values for `rev`, `user` & `identity` will override the defaults
+    production:
+      baseurl: git@github.com:username
+      options:
+        branch: master
+        remote: origin
+    staging:
+      baseurl: git@github.com:username
+      options:
+        branch: staging
+        remote: origin
+        rev: staging
+    upstream:
+      baseurl: git@github.com:saltstack-formulas
+      update: True
+      options:
+        branch: upstream
+        remote: upstream
   # Options of the file.directory state that creates the directory where
   # the git repositories of the formulas are stored
   basedir_opts:
@@ -353,13 +377,26 @@ salt_formulas:
     mode: 755
   # Explicitly checkout the original branch for repos after the
   # git.latest states have been processed (False by default)
-  checkout_orig_branch: False
+  # Enable if using the alternative method (single directory, multiple branches)
+  checkout_orig_branch: True
   # List of formulas to enable in each environment
   list:
     base:
       - salt-formula
       - postfix-formula
     dev:
+      - salt-formula
+      - postfix-formula
+      - openssh-formula
+    # Likewise for the alternative method (single directory, multiple branches)
+    production:
+      - salt-formula
+      - openssh-formula
+    staging:
+      - salt-formula
+      - postfix-formula
+      - openssh-formula
+    upstream:
       - salt-formula
       - postfix-formula
       - openssh-formula
