@@ -51,7 +51,7 @@
     - require:
       - file: {{ basedir }}
     {%- if not update %}
-    - unless: test -e {{ gitdir }}
+    - unless: test -e {{ gitdir }} >/dev/null 2>&1
     {%- endif %}
 {% endif %}
 {% endfor %}
