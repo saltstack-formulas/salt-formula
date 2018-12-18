@@ -63,3 +63,4 @@ salt_formulas:
       update: False
       options:
         rev: master
+        output_loglevel: 'quiet'
