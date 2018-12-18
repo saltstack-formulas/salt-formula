@@ -56,3 +56,10 @@ salt:
 
 salt_formulas:
   checkout_orig_branch: False
+  git_opts:
+    default:
+      baseurl: https://github.com/saltstack-formulas
+      basedir: /srv/formulas
+      update: False
+      options:
+        rev: master
