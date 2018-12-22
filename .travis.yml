@@ -1,0 +1,19 @@
+sudo: required
+cache: bundler
+language: ruby
+
+services:
+  - docker
+
+before_install:
+  - bundle install
+
+env:
+  matrix:
+    - INSTANCE: salt-debian-9
+    - INSTANCE: salt-ubuntu-1804
+    - INSTANCE: salt-centos-7
+
+script:
+  - bundle exec kitchen verify ${INSTANCE}
+

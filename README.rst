@@ -2,12 +2,16 @@
 salt
 ====
 
+.. image:: https://travis-ci.com/saltstack-formulas/salt-formula.svg?branch=master
+    :target: https://travis-ci.com/saltstack-formulas
+
 Yes, Salt can Salt itself!
 
 .. note::
 
     See the full `Salt Formulas installation and usage instructions
     <http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html>`_.
+
 
 Available states
 ================
