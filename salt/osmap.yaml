@@ -44,7 +44,7 @@ SmartOS:
       install_from_source: False
   config_path: /opt/local/etc/salt
   master:
-    gitfs_provider: dulwhich
+    gitfs_provider: dulwich
 
 
 
