@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 
+{% import_yaml "salt/ospyvermap.yaml" as ospyvermap %}
+{% set ospyver = salt['grains.filter_by'](ospyvermap, grain='os_family') or {} %}
+{% set py_ver_dir = salt['pillar.filter_by'](ospyver, pillar='salt:py_ver', default='py2') %}
+
 {% set osrelease = salt['grains.get']('osrelease') %}
 {% set salt_release = salt['pillar.get']('salt:release', 'latest') %}
 {% if salt_release.split('.')|length >= 3 %}
@@ -11,8 +15,8 @@
 {% set oscodename = salt['grains.get']('oscodename') %}
 
 Debian:
-  pkgrepo: 'deb http://repo.saltstack.com/apt/{{ os_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
-  key_url: 'https://repo.saltstack.com/apt/{{ os_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_dir }}/{{ os_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
+  key_url: 'https://repo.saltstack.com/{{ py_ver_dir }}/{{ os_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
   libgit2: libgit2-22
   pyinotify: python-pyinotify
   gitfs:
@@ -26,8 +30,8 @@ Debian:
         install_from_source: False
 
 RedHat:
-  pkgrepo: 'https://repo.saltstack.com/yum/redhat/$releasever/$basearch/{{ salt_release }}'
-  key_url: 'https://repo.saltstack.com/yum/redhat/$releasever/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: 'https://repo.saltstack.com/{{ py_ver_dir }}/redhat/$releasever/$basearch/{{ salt_release }}'
+  key_url: 'https://repo.saltstack.com/{{ py_ver_dir }}/redhat/$releasever/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
   pygit2: python-pygit2
   python_git: GitPython
   gitfs:

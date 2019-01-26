@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+
+Debian:
+  py2: 'apt'
+  py3: 'py3'
+
+RedHat:
+  py2: 'yum'
+  py3: 'py3'
+
+Suse: {}
+
+Gentoo: {}
+
+Arch: {}
+
+Alpine: {}
+
+FreeBSD: {}
+
+OpenBSD: {}
+
+Windows:
+  py2: 'Py2'
+  py3: 'Py3'
+
+MacOS:
+  py2: 'py2'
+  py3: 'py3'
