@@ -11,11 +11,11 @@
 
 {# merge the osfamilymap #}
 {% set osfamily = salt['grains.filter_by'](osfamilymap, grain='os_family') or{} %}
-{% do defaults.salt.update(osfamily) %}
+{% do salt['defaults.merge'](defaults['salt'], osfamily) %}
 
 {# merge the osmap #}
 {% set osmap = salt['grains.filter_by'](osmap, grain='os') or{} %}
-{% do defaults.salt.update(osmap) %}
+{% do salt['defaults.merge'](defaults['salt'], osmap) %}
 
 {## Merge in salt pillar ##}
 {% set salt_settings = salt['pillar.get']('salt', default=defaults['salt'], merge=True) %}

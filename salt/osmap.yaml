@@ -22,7 +22,7 @@ Ubuntu:
       install_from_source: False
       git:
         require_state: False
-        install_from_package: None
+        install_from_package: Null
 
 Raspbian:
   pkgrepo: 'deb http://repo.saltstack.com/apt/{{ os_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }} {{ oscodename }} main'
