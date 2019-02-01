@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 
+{% import_yaml "salt/ospyvermap.yaml" as ospyvermap %}
+{% set ospyver = salt['grains.filter_by'](ospyvermap, grain='os_family') or {} %}
+{% set py_ver_dir = salt['pillar.filter_by'](ospyver, pillar='salt:py_ver', default='py2') %}
+
 {% set osrelease = salt['grains.get']('osrelease') %}
 {% set salt_release = salt['pillar.get']('salt:release', 'latest') %}
 {% if salt_release.split('.')|length >= 3 %}
@@ -14,8 +18,8 @@ Fedora:
   pygit2: python2-pygit2
 
 Ubuntu:
-  pkgrepo: 'deb http://repo.saltstack.com/apt/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
-  key_url: 'https://repo.saltstack.com/apt/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_dir }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
+  key_url: 'https://repo.saltstack.com/{{ py_ver_dir }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
   pygit2: python-pygit2
   gitfs:
     pygit2:
@@ -25,8 +29,8 @@ Ubuntu:
         install_from_package: Null
 
 Raspbian:
-  pkgrepo: 'deb http://repo.saltstack.com/apt/{{ os_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }} {{ oscodename }} main'
-  key_url: 'https://repo.saltstack.com/apt/{{ os_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_dir }}/{{ os_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }} {{ oscodename }} main'
+  key_url: 'https://repo.saltstack.com/{{ py_ver_dir }}/{{ os_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
 
 SmartOS:
   salt_master: salt
@@ -45,6 +49,3 @@ SmartOS:
   config_path: /opt/local/etc/salt
   master:
     gitfs_provider: dulwich
-
-
-

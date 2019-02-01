@@ -10,6 +10,10 @@ salt:
   # This state will remove "/etc/salt/master" when you set this to true.
   master_remove_config: True
 
+  # Set this to 'py3' to install the Python 3 packages.
+  # If this is not set, the Python 2 packages will be installed by default.
+  py_ver: 'py3'
+
   # Set this to False to not have the formula install packages (in the case you
   # install Salt via git/pip/etc.)
   install_packages: True
