@@ -16,7 +16,7 @@ salt-minion:
     - exclude_pat: _*
     - context:
         standalone: True
-{%- if salt_settings.minion.master_type is defined and salt_settings.minion.master_type == 'disable' %}
+{%- if salt_settings.minion.master_type is defined and salt_settings.minion.master_type != 'disable' %}
   service.running:
     - enable: True
 {%- else %}
