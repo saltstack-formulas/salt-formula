@@ -10,13 +10,13 @@
 {% if salt_release.split('.')|length >= 3 %}
 {% set salt_release = 'archive/' ~ salt_release %}
 {% endif %}
-{% set os_lower =  salt['grains.get']('os')|lower %}
+{% set osfamily_lower =  salt['grains.get']('os_family')|lower %}
 {% set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
 {% set oscodename = salt['grains.get']('oscodename') %}
 
 Debian:
-  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_dir }}/{{ os_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
-  key_url: 'https://repo.saltstack.com/{{ py_ver_dir }}/{{ os_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_dir }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
+  key_url: 'https://repo.saltstack.com/{{ py_ver_dir }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
   libgit2: libgit2-22
   pyinotify: python-pyinotify
   gitfs:
