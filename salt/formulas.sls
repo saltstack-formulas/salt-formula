@@ -28,10 +28,8 @@
 {%-       do processed_basedirs.append(basedir) %}
 {{ basedir }}:
   file.directory:
-    {%-   for key, value in salt['pillar.get'](
-            'salt_formulas:basedir_opts',
-            {'makedirs': True}
-          ).items() %}
+    {%-   for key, value in salt['pillar.get']('salt_formulas:basedir_opts',
+                                               {'makedirs': True}).items() %}
     - {{ key }}: {{ value }}
     {%-   endfor %}
 {%-     endif %}
@@ -52,9 +50,9 @@
     {%-   endfor %}
     - require:
       - file: {{ basedir }}
-    {%- if not update %}
+    {%-   if not update %}
     - onlyif: rm -fr {{ gitdir }} >/dev/null 2>&1 | true
-    {%- endif %}
+    {%-   endif %}
 {%-     endif %}
 {%-   endfor %}
 {%- endfor %}
