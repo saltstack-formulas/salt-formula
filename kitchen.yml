@@ -30,6 +30,7 @@ platforms:
 
 provisioner:
   name: salt_solo
+  salt_bootstrap_options: -X -d
   log_level: info
   require_chef: false
   formula: salt
@@ -151,7 +152,7 @@ suites:
 
   # To tests fedora 28 & salt v2018.2, we need to force the package version
   # otherwise the image, which includes the 'updates' repo, will install 2019.2
-  - name: v2018-3-py2-forced
+  - name: v2018-3-py2-forced-version
     includes:
       - fedora-28
     provisioner:
@@ -174,7 +175,6 @@ suites:
     includes:
       - debian-8
       - ubuntu-16.04
-      - centos-6
     provisioner:
       # We require an old version of salt in the provisioner or,
       # the salt formula fails to downgrade to the desired version to test
