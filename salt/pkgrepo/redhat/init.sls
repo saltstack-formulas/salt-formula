@@ -1,6 +1,6 @@
 {% from "salt/map.jinja" import salt_settings with context %}
 
-{%- if grains['os']|lower not in ('amazon', 'fedora', 'suse',) %}
+{%- if grains['os']|lower not in ('amazon', 'fedora') %}
 saltstack-pkgrepo:
   pkgrepo.managed:
     - humanname: SaltStack repo for RHEL/CentOS $releasever
