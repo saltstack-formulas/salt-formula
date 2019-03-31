@@ -8,13 +8,13 @@ end
 control 'salt packages' do
   title 'should be installed'
 
-  describe package('salt-master') do
-    it { should be_installed }
-    its('version') { should eq version }
-  end
-
-  describe package('salt-minion') do
-    it { should be_installed }
-    its('version') { should eq version }
+  %w(
+    salt-master
+    salt-minion
+  ).each do |p|
+    describe package(p) do
+      it { should be_installed }
+      its('version') { should eq version }
+    end
   end
 end

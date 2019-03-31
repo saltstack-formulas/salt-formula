@@ -30,7 +30,7 @@ platforms:
 
 provisioner:
   name: salt_solo
-  salt_bootstrap_options: -X -d
+  salt_bootstrap_options: -X -d git %s
   log_level: info
   require_chef: false
   formula: salt
@@ -85,7 +85,7 @@ suites:
       - ubuntu-18.04
       - centos-7
     provisioner:
-      salt_version: '2019.2.0'
+      salt_version: '2019.2'
       pillars:
         salt.sls:
           salt:
@@ -102,7 +102,7 @@ suites:
     includes:
       - fedora-29
     provisioner:
-      salt_version: '2019.2.0'
+      salt_version: '2019.2'
       pillars:
         salt.sls:
           salt:
@@ -122,7 +122,7 @@ suites:
     provisioner:
       # We require an old version of salt in the provisioner or,
       # the salt formula fails to downgrade to the desired version to test
-      salt_version: '2018.3.3'
+      salt_version: '2018.3'
       pillars:
         salt.sls:
           salt:
@@ -140,7 +140,7 @@ suites:
     provisioner:
       # We require an old version of salt in the provisioner or,
       # the salt formula fails to downgrade to the desired version to test
-      salt_version: '2016.11.10'
+      salt_version: '2016.11'
       pillars:
         salt.sls:
           salt:
@@ -158,7 +158,7 @@ suites:
     provisioner:
       # We require an old version of salt in the provisioner or,
       # the salt formula fails to downgrade to the desired version to test
-      salt_version: '2018.3.3'
+      salt_version: '2018.3'
       pillars:
         salt.sls:
           salt:
@@ -178,7 +178,7 @@ suites:
     provisioner:
       # We require an old version of salt in the provisioner or,
       # the salt formula fails to downgrade to the desired version to test
-      salt_version: '2017.7.8'
+      salt_version: '2017.7'
       pillars:
         salt.sls:
           salt:
@@ -196,7 +196,7 @@ suites:
     provisioner:
       # We require an old version of salt in the provisioner or,
       # the salt formula fails to downgrade to the desired version to test
-      salt_version: '2016.11.10'
+      salt_version: '2016.11'
       pillars:
         salt.sls:
           salt:
