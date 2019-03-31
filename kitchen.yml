@@ -117,10 +117,9 @@ suites:
     includes:
       - debian-8
       - ubuntu-16.04
-      - centos-6
       - opensuse-42.3
     provisioner:
-      # We need to require an old version of salt in the provisioner or, 
+      # We require an old version of salt in the provisioner or,
       # the salt formula fails to downgrade to the desired version to test
       salt_version: '2018.3.3'
       pillars:
@@ -131,14 +130,32 @@ suites:
     verifier:
       inspec_tests:
         - path: test/integration/2018-3
-    
+
+  # To test salt on centos-6 we need to first use a python-2.6 version of salt (2016.11)
+  # and then upgrade it. See https://github.com/saltstack/salt/issues/47864
+  - name: v2018-3-py2-bootstrap-2016-11
+    includes:
+      - centos-6
+    provisioner:
+      # We require an old version of salt in the provisioner or,
+      # the salt formula fails to downgrade to the desired version to test
+      salt_version: '2016.11.10'
+      pillars:
+        salt.sls:
+          salt:
+            release: '2018.3'
+            py_ver: 'py2'
+    verifier:
+      inspec_tests:
+        - path: test/integration/2018-3
+
   # To tests fedora 28 & salt v2018.2, we need to force the package version
   # otherwise the image, which includes the 'updates' repo, will install 2019.2
   - name: v2018-3-py2-forced
     includes:
       - fedora-28
     provisioner:
-      # We need to require an old version of salt in the provisioner or, 
+      # We require an old version of salt in the provisioner or,
       # the salt formula fails to downgrade to the desired version to test
       salt_version: '2018.3.3'
       pillars:
@@ -151,7 +168,7 @@ suites:
     verifier:
       inspec_tests:
         - path: test/integration/2018-3
-    
+
   # Previous distros, oldest salt, python2
   - name: v2017-7-py2
     includes:
@@ -159,7 +176,7 @@ suites:
       - ubuntu-16.04
       - centos-6
     provisioner:
-      # We need to require an old version of salt in the provisioner or, 
+      # We require an old version of salt in the provisioner or,
       # the salt formula fails to downgrade to the desired version to test
       salt_version: '2017.7.8'
       pillars:
@@ -170,4 +187,22 @@ suites:
     verifier:
       inspec_tests:
         - path: test/integration/2017-7
-    
+
+  # To test salt on centos-6 we need to first use a python-2.6 version of salt (2016.11)
+  # and then upgrade it. See https://github.com/saltstack/salt/issues/47864
+  - name: v2017-7-py2-bootstrap-2016-11
+    includes:
+      - centos-6
+    provisioner:
+      # We require an old version of salt in the provisioner or,
+      # the salt formula fails to downgrade to the desired version to test
+      salt_version: '2016.11.10'
+      pillars:
+        salt.sls:
+          salt:
+            release: '2017.7'
+            py_ver: 'py2'
+    verifier:
+      inspec_tests:
+        - path: test/integration/2017-7
+

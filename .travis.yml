@@ -18,12 +18,13 @@ env:
     - INSTANCE: v2018-3-py2-opensuse-423
     - INSTANCE: v2018-3-py2-debian-8
     - INSTANCE: v2018-3-py2-ubuntu-1604
-    - INSTANCE: v2018-3-py2-centos-6
+    - INSTANCE: v2018-3-py2-bootstrap-2016-11-centos-6
     - INSTANCE: v2018-3-py2-forced-fedora-28
 
     - INSTANCE: v2017-7-py2-debian-8
     - INSTANCE: v2017-7-py2-ubuntu-1604
     - INSTANCE: v2017-7-py2-centos-6
+    - INSTANCE: v2017-7-py2-bootstrap-2016-11-centos-6
 
 script:
   - bundle exec kitchen verify ${INSTANCE}
