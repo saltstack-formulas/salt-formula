@@ -134,13 +134,13 @@ suites:
 
   # To test salt on centos-6 we need to first use a python-2.6 version of salt (2016.11)
   # and then upgrade it. See https://github.com/saltstack/salt/issues/47864
-  - name: v2018-3-py2-bootstrap-2016-11
+  - name: v2018-3-py2-bootstrap
     includes:
       - centos-6
     provisioner:
-      # We require an old version of salt in the provisioner or,
-      # the salt formula fails to downgrade to the desired version to test
-      salt_version: '2016.11'
+      # As centos-6 ships with python2.6, we use the bootstrapper to install python2.7
+      salt_bootstrap_options: -X -d stable %s
+      salt_version: '2018.3'
       pillars:
         salt.sls:
           salt:
@@ -190,13 +190,13 @@ suites:
 
   # To test salt on centos-6 we need to first use a python-2.6 version of salt (2016.11)
   # and then upgrade it. See https://github.com/saltstack/salt/issues/47864
-  - name: v2017-7-py2-bootstrap-2016-11
+  - name: v2017-7-py2-bootstrap
     includes:
       - centos-6
     provisioner:
-      # We require an old version of salt in the provisioner or,
-      # the salt formula fails to downgrade to the desired version to test
-      salt_version: '2016.11'
+      # As centos-6 ships with python2.6, we use the bootstrapper to install python2.7
+      salt_bootstrap_options: -X -d stable %s
+      salt_version: '2017.7'
       pillars:
         salt.sls:
           salt:
