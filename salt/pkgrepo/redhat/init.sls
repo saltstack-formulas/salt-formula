@@ -3,6 +3,7 @@
 {%- if grains['os']|lower not in ('amazon', 'fedora') %}
 saltstack-pkgrepo:
   pkgrepo.managed:
+    - name: saltstack
     - humanname: SaltStack repo for RHEL/CentOS $releasever
     - baseurl: {{ salt_settings.pkgrepo }}
     - enabled: 1

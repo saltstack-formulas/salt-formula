@@ -22,7 +22,7 @@ platforms:
   - name: debian-8
   - name: ubuntu-16.04
   - name: fedora-28
-  # Fails on Debian due to vsyscall issues, see
+  # centos-6 guest fails on Debian hosts due to vsyscall issues, see
   # https://hub.docker.com/_/centos, "A note about vsyscall"
   - name: centos-6
     driver:
@@ -85,6 +85,13 @@ suites:
       - ubuntu-18.04
       - centos-7
     provisioner:
+      # If we don't force bootstrapping with python3, centos bootstraps using python2
+      # and then, when switching the repo to python3 and tries to install
+      # the packages, complains with
+      # Downloading packages:
+      #   https://repo.saltstack.com/py3/re.........rpm: [Errno -1] Package does not
+      # match intended download. Suggestion: run yum --enablerepo=saltstack clean metadata
+      salt_bootstrap_options: -X -x python3 -d git %s
       salt_version: '2019.2'
       pillars:
         salt.sls:
@@ -132,13 +139,12 @@ suites:
       inspec_tests:
         - path: test/integration/2018-3
 
-  # To test salt on centos-6 we need to first use a python-2.6 version of salt (2016.11)
-  # and then upgrade it. See https://github.com/saltstack/salt/issues/47864
+  # centos-6 ships with python2.6, so it requires extra bootstrapping parameters
+  # to install python2.7
   - name: v2018-3-py2-bootstrap
     includes:
       - centos-6
     provisioner:
-      # As centos-6 ships with python2.6, we use the bootstrapper to install python2.7
       salt_bootstrap_options: -X -d stable %s
       salt_version: '2018.3'
       pillars:
@@ -188,8 +194,8 @@ suites:
       inspec_tests:
         - path: test/integration/2017-7
 
-  # To test salt on centos-6 we need to first use a python-2.6 version of salt (2016.11)
-  # and then upgrade it. See https://github.com/saltstack/salt/issues/47864
+  # centos-6 ships with python2.6, so it requires extra bootstrapping parameters
+  # to install python2.7
   - name: v2017-7-py2-bootstrap
     includes:
       - centos-6
