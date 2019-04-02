@@ -1,0 +1,214 @@
+---
+driver:
+  name: docker
+  use_sudo: false
+  privileged: true
+  provision_command: mkdir -p /run/sshd
+  run_command: /lib/systemd/systemd
+
+platforms:
+  # Latest distros
+  - name: debian-9
+  - name: ubuntu-18.04
+  - name: centos-7
+  - name: fedora-29
+  - name: opensuse-42.3
+    driver:
+      run_command: /usr/lib/systemd/systemd
+      provision_command:
+        - systemctl enable sshd.service
+
+  # Previous distros
+  - name: debian-8
+  - name: ubuntu-16.04
+  - name: fedora-28
+  # centos-6 guest fails on Debian hosts due to vsyscall issues, see
+  # https://hub.docker.com/_/centos, "A note about vsyscall"
+  - name: centos-6
+    driver:
+      run_command: /sbin/init
+
+provisioner:
+  name: salt_solo
+  salt_bootstrap_options: -X -d git %s
+  log_level: info
+  require_chef: false
+  formula: salt
+  salt_copy_filter:
+    - .kitchen
+    - .git
+  state_top:
+    base:
+     '*':
+       - salt.pkgrepo
+       - salt.master
+       - salt.minion
+  pillars:
+    top.sls:
+      base:
+        '*':
+          - salt
+    salt.sls:
+      salt:
+        master:
+          fileserver_backend:
+            - rootfs
+          file_roots:
+            base:
+              - /srv/salt
+          pillar_roots:
+            base:
+              - /srv/pillar
+        minion:
+          master: localhost
+          fileserver_backend:
+            - rootfs
+          file_roots:
+            base:
+              - /srv/salt
+          pillar_roots:
+            base:
+              - /srv/pillar
+
+verifier:
+  name: inspec
+  sudo: true
+  reporter:
+    - cli
+
+suites:
+  # Latest distros, latest salt, python3
+  # These distros have py3 packages available in salt's repo
+  - name: v2019-2-py3
+    includes:
+      - debian-9
+      - ubuntu-18.04
+      - centos-7
+    provisioner:
+      # If we don't force bootstrapping with python3, centos bootstraps using python2
+      # and then, when switching the repo to python3 and tries to install
+      # the packages, complains with
+      # Downloading packages:
+      #   https://repo.saltstack.com/py3/re.........rpm: [Errno -1] Package does not
+      # match intended download. Suggestion: run yum --enablerepo=saltstack clean metadata
+      salt_bootstrap_options: -X -x python3 -d git %s
+      salt_version: '2019.2'
+      pillars:
+        salt.sls:
+          salt:
+            release: '2019.2'
+            py_ver: 'py3'
+
+    verifier:
+      inspec_tests:
+        - path: test/integration/2019-2
+
+  # Latest distros, latest salt, python2
+  # Fedora ships updated py2 versions in their own repos
+  - name: v2019-2-py2
+    includes:
+      - fedora-29
+    provisioner:
+      salt_version: '2019.2'
+      pillars:
+        salt.sls:
+          salt:
+            release: '2019.2'
+            py_ver: 'py2'
+
+    verifier:
+      inspec_tests:
+        - path: test/integration/2019-2
+
+  # Previous distros, previous salt, python2
+  - name: v2018-3-py2
+    includes:
+      - debian-8
+      - ubuntu-16.04
+      - opensuse-42.3
+    provisioner:
+      # We require an old version of salt in the provisioner or,
+      # the salt formula fails to downgrade to the desired version to test
+      salt_version: '2018.3'
+      pillars:
+        salt.sls:
+          salt:
+            release: '2018.3'
+            py_ver: 'py2'
+    verifier:
+      inspec_tests:
+        - path: test/integration/2018-3
+
+  # centos-6 ships with python2.6, so it requires extra bootstrapping parameters
+  # to install python2.7
+  - name: v2018-3-py2-bootstrap
+    includes:
+      - centos-6
+    provisioner:
+      salt_bootstrap_options: -X -d stable %s
+      salt_version: '2018.3'
+      pillars:
+        salt.sls:
+          salt:
+            release: '2018.3'
+            py_ver: 'py2'
+    verifier:
+      inspec_tests:
+        - path: test/integration/2018-3
+
+  # To tests fedora 28 & salt v2018.2, we need to force the package version
+  # otherwise the image, which includes the 'updates' repo, will install 2019.2
+  - name: v2018-3-py2-forced-version
+    includes:
+      - fedora-28
+    provisioner:
+      # We require an old version of salt in the provisioner or,
+      # the salt formula fails to downgrade to the desired version to test
+      salt_version: '2018.3'
+      pillars:
+        salt.sls:
+          salt:
+            release: '2018.3'
+            py_ver: 'py2'
+            version: '2018.3.0-1.fc28'
+
+    verifier:
+      inspec_tests:
+        - path: test/integration/2018-3
+
+  # Previous distros, oldest salt, python2
+  - name: v2017-7-py2
+    includes:
+      - debian-8
+      - ubuntu-16.04
+    provisioner:
+      # We require an old version of salt in the provisioner or,
+      # the salt formula fails to downgrade to the desired version to test
+      salt_version: '2017.7'
+      pillars:
+        salt.sls:
+          salt:
+            release: '2017.7'
+            py_ver: 'py2'
+    verifier:
+      inspec_tests:
+        - path: test/integration/2017-7
+
+  # centos-6 ships with python2.6, so it requires extra bootstrapping parameters
+  # to install python2.7
+  - name: v2017-7-py2-bootstrap
+    includes:
+      - centos-6
+    provisioner:
+      # As centos-6 ships with python2.6, we use the bootstrapper to install python2.7
+      salt_bootstrap_options: -X -d stable %s
+      salt_version: '2017.7'
+      pillars:
+        salt.sls:
+          salt:
+            release: '2017.7'
+            py_ver: 'py2'
+    verifier:
+      inspec_tests:
+        - path: test/integration/2017-7
+

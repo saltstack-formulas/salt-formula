@@ -7,6 +7,10 @@ salt-master:
   {%- if salt_settings.version is defined %}
     - version: {{ salt_settings.version }}
   {%- endif %}
+    - require_in:
+      - service: salt-master
+    - watch_in:
+      - service: salt-master
 {% endif %}
   file.recurse:
     - name: {{ salt_settings.config_path }}/master.d
@@ -18,9 +22,6 @@ salt-master:
     - enable: True
     - name: {{ salt_settings.master_service }}
     - watch:
-{% if salt_settings.install_packages %}
-      - pkg: salt-master
-{% endif %}
       - file: salt-master
       - file: remove-old-master-conf-file
 

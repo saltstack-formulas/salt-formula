@@ -10,10 +10,20 @@ before_install:
 
 env:
   matrix:
-    - INSTANCE: salt-debian-9
-    - INSTANCE: salt-ubuntu-1804
-    - INSTANCE: salt-centos-7
+    - INSTANCE: v2019-2-py3-debian-9
+    - INSTANCE: v2019-2-py3-ubuntu-1804
+    - INSTANCE: v2019-2-py3-centos-7
+    - INSTANCE: v2019-2-py2-fedora-29
+
+    - INSTANCE: v2018-3-py2-debian-8
+    - INSTANCE: v2018-3-py2-ubuntu-1604
+    - INSTANCE: v2018-3-py2-bootstrap-centos-6
+    - INSTANCE: v2018-3-py2-forced-version-fedora-28
+    - INSTANCE: v2018-3-py2-opensuse-423
+
+    - INSTANCE: v2017-7-py2-debian-8
+    - INSTANCE: v2017-7-py2-ubuntu-1604
+    - INSTANCE: v2017-7-py2-bootstrap-centos-6
 
 script:
   - bundle exec kitchen verify ${INSTANCE}
-

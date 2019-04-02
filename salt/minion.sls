@@ -31,12 +31,16 @@ salt-minion:
     {# use force == True as workaround #}
     - force: True
     - version_check: /opt/salt/bin/salt-minion --version=.*{{ salt_settings.version }}.*
+    - require_in:
+      - service: salt-minion
   {%- else %}
   pkg.installed:
     - name: {{ salt_settings.salt_minion }}
   {%- if salt_settings.version is defined %}
     - version: {{ salt_settings.version }}
   {%- endif %}
+    - require_in:
+      - service: salt-minion
   {%- endif %}
 {% endif %}
   file.recurse:

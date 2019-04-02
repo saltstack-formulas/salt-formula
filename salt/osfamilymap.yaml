@@ -46,6 +46,8 @@ RedHat:
     gitfs_provider: pygit2
 
 Suse:
+  pkgrepo: 'http://repo.saltstack.com/opensuse/openSUSE_Leap_{{ osrelease }}/'
+  key_url: 'http://repo.saltstack.com/opensuse/openSUSE_Leap_{{ osrelease }}/repodata/repomd.xml.key'
   pygit2: python-pygit2
   pyinotify: python-pyinotify
   gitfs:
