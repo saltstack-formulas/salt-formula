@@ -1,7 +1,7 @@
 {% from "salt/map.jinja" import salt_settings with context %}
 
 {% if salt_settings.install_packages %}
-master_installed:
+salt_ssh_installed:
   module_and_function: pkg.version
   args:
     - {{ salt_settings.salt_ssh }}
