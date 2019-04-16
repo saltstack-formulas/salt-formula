@@ -21,9 +21,13 @@ FreeBSD: {}
 
 OpenBSD: {}
 
+# This is *not* used directly with https://repo.saltstack.com
+# Rather, this is used with `salt-winrepo-ng`, where the package names are:
+# * py2: salt-minion
+# * py3: salt-minion-py3
 Windows:
-  py2: 'Py2'
-  py3: 'Py3'
+  py2: ''
+  py3: '-py3'
 
 MacOS:
   py2: 'py2'
