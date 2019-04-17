@@ -51,7 +51,7 @@
     - require:
       - file: {{ basedir }}
     {%-   if not update %}
-    - onlyif: rm -fr {{ gitdir }} >/dev/null 2>&1 | true
+    - unless: test -e {{ gitdir }} >/dev/null 2>&1
     {%-   endif %}
 {%-     endif %}
 {%-   endfor %}
