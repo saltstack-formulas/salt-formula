@@ -83,14 +83,7 @@ suites:
     includes:
       - debian-9
       - ubuntu-18.04
-      - centos-7
     provisioner:
-      # If we don't force bootstrapping with python3, centos bootstraps using python2
-      # and then, when switching the repo to python3 and tries to install
-      # the packages, complains with
-      # Downloading packages:
-      #   https://repo.saltstack.com/py3/re.........rpm: [Errno -1] Package does not
-      # match intended download. Suggestion: run yum --enablerepo=saltstack clean metadata
       salt_bootstrap_options: -X -x python3 -d git %s
       salt_version: '2019.2'
       pillars:
@@ -107,6 +100,7 @@ suites:
   # Fedora ships updated py2 versions in their own repos
   - name: v2019-2-py2
     includes:
+      - centos-7
       - fedora-29
     provisioner:
       salt_version: '2019.2'
