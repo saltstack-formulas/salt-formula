@@ -13,6 +13,7 @@
 {% set os_lower =  salt['grains.get']('os')|lower %}
 {% set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
 {% set oscodename = salt['grains.get']('oscodename') %}
+{% set os_family_lower =  salt['grains.get']('os_family')|lower %}
 
 Fedora:
   pygit2: python2-pygit2
@@ -29,8 +30,8 @@ Ubuntu:
         install_from_package: Null
 
 Raspbian:
-  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_dir }}/{{ os_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }} {{ oscodename }} main'
-  key_url: 'https://repo.saltstack.com/{{ py_ver_dir }}/{{ os_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_dir }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }} {{ oscodename }} main'
+  key_url: 'https://repo.saltstack.com/{{ py_ver_dir }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
 
 SmartOS:
   salt_master: salt
