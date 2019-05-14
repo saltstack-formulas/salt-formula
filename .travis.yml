@@ -1,3 +1,9 @@
+stages:
+  - test
+  - commitlint
+  - name: release
+    if: branch = master AND type != pull_request
+
 sudo: required
 cache: bundler
 language: ruby
@@ -5,9 +11,8 @@ language: ruby
 services:
   - docker
 
-before_install:
-  - bundle install
-
+# Make sure the instances listed below match up with
+# the `platforms` defined in `kitchen.yml`
 env:
   matrix:
     - INSTANCE: v2019-2-py3-debian-9
@@ -27,3 +32,36 @@ env:
 
 script:
   - bundle exec kitchen verify ${INSTANCE}
+
+jobs:
+  include:
+    # Define the commitlint stage
+    - stage: commitlint
+      language: node_js
+      node_js: lts/*
+      before_install: skip
+      script:
+        - npm install @commitlint/config-conventional -D
+        - npm install @commitlint/travis-cli -D
+        - commitlint-travis
+    # Define the release stage that runs semantic-release
+    - stage: release
+      language: node_js
+      node_js: lts/*
+      before_install: skip
+      script:
+        # Update `AUTHORS.md`
+        - export MAINTAINER_TOKEN=${GH_TOKEN}
+        - go get github.com/myii/maintainer
+        - maintainer contributor
+
+        # Install all dependencies required for `semantic-release`
+        - npm install @semantic-release/changelog@3 -D
+        - npm install @semantic-release/exec@3 -D
+        - npm install @semantic-release/git@7 -D
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          # Run `semantic-release`
+          - npx semantic-release@15
