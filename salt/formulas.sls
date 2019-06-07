@@ -13,9 +13,11 @@
 # Loop over all formulas listed in pillar data
 {%- for env, entries in salt['pillar.get']('salt_formulas:list', {}).items() %}
 {%-   for entry in entries %}
+{%-     set f_name = entry | first if entry is mapping else entry %}
+{%-     set f_opts = entry[f_name] if entry is mapping else {}    %}
 
 {%-     set basedir = formulas_git_opt(env, 'basedir')|load_yaml %}
-{%-     set gitdir = '{0}/{1}'.format(basedir, entry) %}
+{%-     set gitdir = '{0}/{1}'.format(basedir, f_name) %}
 {%-     set update = formulas_git_opt(env, 'update')|load_yaml %}
 
 {%-     if formulas_settings.checkout_orig_branch %}
@@ -45,11 +47,12 @@
 {%-     if gitdir_env not in processed_gitdir_envs %}
 {%-       do processed_gitdir_envs.append(gitdir_env) %}
 {%-       set options = formulas_opts_for_git_latest(env)|load_yaml %}
+{%-       do options.update(f_opts) %}
 {%-       set baseurl = formulas_git_opt(env, 'baseurl')|load_yaml %}
 
 {{ gitdir_env }}:
   git.latest:
-    - name: {{ baseurl }}/{{ entry }}.git
+    - name: {{ baseurl }}/{{ f_name }}.git
     - target: {{ gitdir }}
     {%-   for key, value in options.items() %}
     - {{ key }}: {{ value }}
