@@ -67,6 +67,8 @@ salt:
   #   source_files:
   #     salt-master:
   #       - 'alt_master.d'
+  #     salt-minion:
+  #       - 'alt_minion.d'
 
   # salt master config
   master_config_use_TOFS: True
@@ -150,6 +152,7 @@ salt:
         - /srv/salt/reactors/deploy.sls
 
   # salt minion config:
+  minion_config_use_TOFS: True
   minion:
 
     # single master setup
