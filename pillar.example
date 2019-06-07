@@ -424,10 +424,18 @@ salt_formulas:
     base:
       - salt-formula
       - postfix-formula
+      - nginx-formula:  # We can also override some options per formula
+          rev: 'v1.1.0'  # Pin a version
+      - openssh-formula:
+          rev: '3e01ad8'  # or pin a commit id
     dev:
       - salt-formula
       - postfix-formula
       - openssh-formula
+      - nginx-formula:
+          # You can also pull from another location
+          name: 'https://github.com/another-fork-location/salt-formula.git'
+          rev: 'feat/feature'
     # Likewise for the alternative method (single directory, multiple branches)
     production:
       - salt-formula
