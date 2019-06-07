@@ -64,9 +64,12 @@ salt:
   #   dirs:
   #     files: files_alt
   #     default: default_alt
-  #   source_files: {}
+  #   source_files:
+  #     salt-master:
+  #       - 'alt_master.d'
 
   # salt master config
+  master_config_use_TOFS: True
   master:
     fileserver_backend:
       - git

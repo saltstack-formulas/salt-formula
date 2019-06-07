@@ -10,6 +10,7 @@ salt:
 
   minion_remove_config: False
   master_remove_config: False
+  master_config_use_TOFS: False
 
   minion_service: salt-minion
   master_service: salt-master
