@@ -46,7 +46,32 @@ salt:
   salt_minion_pkg_source: 'https://repo.saltstack.com/osx/salt-2017.7.4-py3-x86_64.pkg'
   salt_minion_pkg_hash: 'https://repo.saltstack.com/osx/salt-2017.7.4-py3-x86_64.pkg.md5'
 
+  # tofs:
+  #   The files_switch key serves as a selector for alternative
+  #   directories under the formula files directory. See TOFS pattern
+  #   doc for more info.
+  #   Note: Any value not evaluated by `config.get` will be used literally.
+  #   This can be used to set custom paths, as many levels deep as required.
+  #   files_switch:
+  #     - any/path/can/be/used/here
+  #     - id
+  #     - osfinger
+  #     - os
+  #     - os_family
+  #   All aspects of path/file resolution are customisable using the options below.
+  #   This is unnecessary in most cases; there are sensible defaults.
+  #   path_prefix: template_alt
+  #   dirs:
+  #     files: files_alt
+  #     default: default_alt
+  #   source_files:
+  #     salt-master:
+  #       - 'alt_master.d'
+  #     salt-minion:
+  #       - 'alt_minion.d'
+
   # salt master config
+  master_config_use_TOFS: True
   master:
     fileserver_backend:
       - git
@@ -127,6 +152,7 @@ salt:
         - /srv/salt/reactors/deploy.sls
 
   # salt minion config:
+  minion_config_use_TOFS: True
   minion:
 
     # single master setup

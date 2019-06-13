@@ -1,0 +1,101 @@
+{%- macro files_switch(source_files,
+                       lookup=None,
+                       default_files_switch=['id', 'os_family'],
+                       indent_width=6,
+                       v1_path_prefix='') %}
+  {#-
+    Returns a valid value for the "source" parameter of a "file.managed"
+    state function. This makes easier the usage of the Template Override and
+    Files Switch (TOFS) pattern.
+
+    Params:
+      * source_files: ordered list of files to look for
+      * lookup: key under '<tplroot>:tofs:source_files' to override
+        list of source files
+      * default_files_switch: if there's no config (e.g. pillar)
+        '<tplroot>:tofs:files_switch' this is the ordered list of grains to
+        use as selector switch of the directories under
+        "<path_prefix>/files"
+      * indent_witdh: indentation of the result value to conform to YAML
+      * v1_path_prefix: (deprecated) only used for injecting a path prefix into
+        the source, to support older TOFS configs
+
+    Example (based on a `tplroot` of `xxx`):
+
+    If we have a state:
+
+      Deploy configuration:
+        file.managed:
+          - name: /etc/yyy/zzz.conf
+          - source: {{ files_switch(['/etc/yyy/zzz.conf', '/etc/yyy/zzz.conf.jinja'],
+                                    lookup='Deploy configuration'
+                    ) }}
+          - template: jinja
+
+    In a minion with id=theminion and os_family=RedHat, it's going to be
+    rendered as:
+
+      Deploy configuration:
+        file.managed:
+          - name: /etc/yyy/zzz.conf
+          - source:
+            - salt://xxx/files/theminion/etc/yyy/zzz.conf
+            - salt://xxx/files/theminion/etc/yyy/zzz.conf.jinja
+            - salt://xxx/files/RedHat/etc/yyy/zzz.conf
+            - salt://xxx/files/RedHat/etc/yyy/zzz.conf.jinja
+            - salt://xxx/files/default/etc/yyy/zzz.conf
+            - salt://xxx/files/default/etc/yyy/zzz.conf.jinja
+          - template: jinja
+  #}
+  {#- Get the `tplroot` from `tpldir` #}
+  {%- set tplroot = tpldir.split('/')[0] %}
+  {%- set path_prefix = salt['config.get'](tplroot ~ ':tofs:path_prefix', tplroot) %}
+  {%- set files_dir = salt['config.get'](tplroot ~ ':tofs:dirs:files', 'files') %}
+  {%- set files_switch_list = salt['config.get'](
+      tplroot ~ ':tofs:files_switch',
+      default_files_switch
+  ) %}
+  {#- Lookup source_files (v2), files (v1), or fallback to source_files parameter #}
+  {%- set src_files = salt['config.get'](
+      tplroot ~ ':tofs:source_files:' ~ lookup,
+      salt['config.get'](
+          tplroot ~ ':tofs:files:' ~ lookup,
+          source_files
+      )
+  ) %}
+  {#- Only add to [''] when supporting older TOFS implementations #}
+  {%- set path_prefix_exts = [''] %}
+  {%- if v1_path_prefix != '' %}
+    {%- do path_prefix_exts.append(v1_path_prefix) %}
+  {%- endif %}
+  {%- for path_prefix_ext in path_prefix_exts %}
+    {%- set path_prefix_inc_ext = path_prefix ~ path_prefix_ext %}
+    {#- For older TOFS implementation, use `files_switch` from the config #}
+    {#- Use the default, new method otherwise #}
+    {%- set fsl = salt['config.get'](
+        tplroot ~ path_prefix_ext|replace('/', ':') ~ ':files_switch',
+        files_switch_list
+    ) %}
+    {#- Append an empty value to evaluate as `default` in the loop below #}
+    {%- if '' not in fsl %}
+      {%- do fsl.append('') %}
+    {%- endif %}
+    {%- for fs in fsl %}
+      {%- for src_file in src_files %}
+        {%- if fs %}
+          {%- set fs_dir = salt['config.get'](fs, fs) %}
+        {%- else %}
+          {%- set fs_dir = salt['config.get'](tplroot ~ ':tofs:dirs:default', 'default') %}
+        {%- endif %}
+        {%- set url = [
+            '- salt:/',
+            path_prefix_inc_ext.strip('/'),
+            files_dir.strip('/'),
+            fs_dir.strip('/'),
+            src_file.strip('/'),
+        ] | select | join('/') %}
+{{ url | indent(indent_width, true) }}
+      {%- endfor %}
+    {%- endfor %}
+  {%- endfor %}
+{%- endmacro %}

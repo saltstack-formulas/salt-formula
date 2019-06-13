@@ -1,4 +1,6 @@
-{% from "salt/map.jinja" import salt_settings with context %}
+{%- set tplroot = tpldir.split('/')[0] %}
+{%- from tplroot ~ "/map.jinja" import salt_settings with context %}
+{%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
 
 salt-master:
 {% if salt_settings.install_packages %}
@@ -14,8 +16,16 @@ salt-master:
 {% endif %}
   file.recurse:
     - name: {{ salt_settings.config_path }}/master.d
+    {%- if salt_settings.master_config_use_TOFS %}
+    - template: ''
+    - source: {{ files_switch(['master.d'],
+                              lookup='salt-master'
+                 )
+              }}
+    {%- else %}
     - template: jinja
     - source: salt://{{ slspath }}/files/master.d
+    {%- endif %}
     - clean: {{ salt_settings.clean_config_d_dir }}
     - exclude_pat: _*
   service.running:
