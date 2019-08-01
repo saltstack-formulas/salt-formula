@@ -96,6 +96,7 @@ Alpine:
   libgit2: libgit2
 
 FreeBSD:
+  rootgroup: wheel
   salt_master: py27-salt
   salt_minion: py27-salt
   salt_syndic: py27-salt
