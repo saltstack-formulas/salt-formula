@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 salt:
+  version: ''
+  rootuser: root
   install_packages: True
   use_pip: False
   clean_config_d_dir: True

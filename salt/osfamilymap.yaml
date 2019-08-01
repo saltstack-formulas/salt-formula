@@ -14,6 +14,12 @@
 {% set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
 {% set oscodename = salt['grains.get']('oscodename') %}
 
+#from template-formula
+{%- if grains.os == 'MacOS' %}
+    {%- set macos_rootuser = salt['cmd.run']("stat -f '%Su' /dev/console") %}
+    {%- set macos_rootgroup = salt['cmd.run']("stat -f '%Sg' /dev/console") %}
+{%- endif %}
+
 Debian:
   pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_repr }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
   key_url: 'https://repo.saltstack.com/{{ py_ver_repr }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
@@ -122,8 +128,11 @@ Windows:
   minion_service: salt-minion
 
 MacOS:
-  salt_minion: com.saltstack.salt
+  salt_minion: salt
   salt_minion_pkg_source: ''
   salt_minion_pkg_hash: ''
   config_path: /private/etc/salt
   minion_service: com.saltstack.salt.minion
+  ## from template-formula
+  rootuser: {{ macos_rootuser | d('') }}
+  rootgroup: {{ macos_rootgroup | d('') }}
