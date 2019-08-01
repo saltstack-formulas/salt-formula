@@ -2,6 +2,8 @@
 # vim: ft=yaml
 salt:
   version: ''
+  rootuser: root
+  rootgroup: root
   install_packages: True
   use_pip: False
   clean_config_d_dir: True

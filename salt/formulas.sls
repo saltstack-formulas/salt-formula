@@ -6,6 +6,10 @@
 {%- from "salt/formulas.jinja" import formulas_git_opt with context %}
 {%- from "salt/formulas.jinja" import formulas_opts_for_git_latest with context %}
 
+## from template-formula
+{%- set tplroot = tpldir.split('/')[0] %}
+{%- from tplroot ~ "/map.jinja" import salt_settings with context %}
+
 # Loop over all formulas listed in pillar data
 {%- for env, entries in salt['pillar.get']('salt_formulas:list', {}).items() %}
 {%-   for entry in entries %}
@@ -31,6 +35,8 @@
     {%-   for key, value in salt['pillar.get']('salt_formulas:basedir_opts',
                                                {'makedirs': True}).items() %}
     - {{ key }}: {{ value }}
+    - user: {{ salt_settings.rootuser }}
+    - group: {{ salt_settings.rootgroup }}
     {%-   endfor %}
 {%-     endif %}
 
