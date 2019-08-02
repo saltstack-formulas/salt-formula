@@ -1,12 +1,5 @@
-{% from "salt/map.jinja" import salt_settings with context %}
+# -*- coding: utf-8 -*-
+# vim: ft=sls
 
-{%- if grains['os']|lower not in ('amazon', 'fedora') %}
-saltstack-pkgrepo:
-  pkgrepo.managed:
-    - name: saltstack
-    - humanname: SaltStack repo for RHEL/CentOS $releasever
-    - baseurl: {{ salt_settings.pkgrepo }}
-    - enabled: 1
-    - gpgcheck: 1
-    - gpgkey: {{ salt_settings.key_url }}
-{% endif %}
+include:
+  - .install

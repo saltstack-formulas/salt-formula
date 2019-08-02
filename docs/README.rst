@@ -107,13 +107,12 @@ For EL distributions, pygit is installed from packages from `EPEL <https://githu
 ``salt.pkgrepo``
 ^^^^^^^^^^^^^^^^
 
-Enable the official saltstack package repository in order to always
-benefit from the latest version. This state currently only works on Debian, Ubuntu, RHEL 6/7 and aims to implement the `installation recommendations of the official documentation <http://docs.saltstack.com/en/latest/topics/installation/index.html#platform-specific-installation-instructions>`_.
+It is recommended to use SaltStack repository for Debian, RedHat, and SuSE, to benefit from the latest stable salt release. Refer to official documentation at <http://docs.saltstack.com/en/latest/topics/installation/index.html#platform-specific-installation-instructions>`_.
 
-``salt.pkgrepo.absent``
+``salt.pkgrepo.clean``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Undo the effects of ``salt.pkgrepo``.
+Undo the effects of ``salt.pkgrepo`` on Debian, RedHat, and SuSE.
 
 ``salt.formulas``
 ^^^^^^^^^^^^^^^^^
