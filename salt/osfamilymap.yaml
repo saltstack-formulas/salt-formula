@@ -21,8 +21,8 @@
 {%- endif %}
 
 Debian:
-  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_repr }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
-  key_url: 'https://repo.saltstack.com/{{ py_ver_repr }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_repr }}/{{ osfamily_lower }}/{{ '' if not 'osmajorrelease' in grains else osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
+  key_url: 'https://repo.saltstack.com/{{ py_ver_repr }}/{{ osfamily_lower }}/{{ '' if not 'osmajorrelease' in grains else osmajorrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
   libgit2: libgit2-22
   pyinotify: python-pyinotify
   gitfs:

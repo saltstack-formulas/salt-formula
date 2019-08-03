@@ -30,8 +30,8 @@ Ubuntu:
         install_from_package: Null
 
 Raspbian:
-  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_dir }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }} {{ oscodename }} main'
-  key_url: 'https://repo.saltstack.com/{{ py_ver_dir }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_dir }}/{{ os_family_lower }}/{{ '' if not 'osmajorrelease' in grains else osmajorrelease }}/armhf/{{ salt_release }} {{ oscodename }} main'
+  key_url: 'https://repo.saltstack.com/{{ py_ver_dir }}/{{ os_family_lower }}/{{ '' if not 'osmajorrelease' in grains else osmajorrelease }}/armhf/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
 
 SmartOS:
   salt_master: salt
