@@ -78,7 +78,7 @@ salt-minion:
       - file: salt-minion
 {%- if not salt_settings.restart_via_at %}
   cmd.run:
-  {%- if grains['saltversioninfo'][0] >= 2016 and grains['saltversioninfo'][1] >= 3 %}
+  {%- if grains['saltversioninfo'] >= [ 2016, 3 ] %}
     {%- if grains['kernel'] == 'Windows' %}
     - name: 'salt-call.bat --local service.restart {{ salt_settings.minion_service }}'
     {%- else %}
