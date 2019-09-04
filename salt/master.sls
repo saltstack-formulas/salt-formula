@@ -1,6 +1,7 @@
 {%- set tplroot = tpldir.split('/')[0] %}
 {%- from tplroot ~ "/map.jinja" import salt_settings with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
+{%- from tplroot ~ "/formulas.jinja" import file_roots, formulas with context %}
 
 salt-master:
 {% if salt_settings.install_packages %}
@@ -25,6 +26,9 @@ salt-master:
     {%- else %}
     - template: jinja
     - source: salt://{{ slspath }}/files/master.d
+    - context:
+        file_roots: {{ file_roots }}
+        formulas: {{ formulas|json }}
     {%- endif %}
     - clean: {{ salt_settings.clean_config_d_dir }}
     - exclude_pat: _*

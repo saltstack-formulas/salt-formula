@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
-{% from "salt/map.jinja" import salt_settings with context %}
+{%- set tplroot = tpldir.split('/')[0] %}
+{%- from tplroot ~ "/map.jinja" import salt_settings with context %}
 
 salt-pkgrepo-install-saltstack-debian:
   pkgrepo.managed:

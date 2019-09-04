@@ -1,4 +1,6 @@
-{% from "salt/map.jinja" import salt_settings with context %}
+## from template-formula
+{%- set tplroot = tpldir.split('/')[0] %}
+{% from tplroot ~ "/map.jinja" import salt_settings with context %}
 
 {% if salt_settings.install_packages %}
 ensure-salt-ssh-is-installed:

@@ -2,9 +2,10 @@
 # vim: ft=jinja
 
 {## Start imports ##}
-{% import_yaml "salt/defaults.yaml" as defaults %}
-{% import_yaml "salt/osfamilymap.yaml" as osfamilymap %}
-{% import_yaml "salt/osmap.yaml" as osmap %}
+{%- set tplroot = tpldir.split('/')[0] %}
+{% import_yaml tplroot ~ "/defaults.yaml" or {} as defaults %}
+{% import_yaml tplroot ~ "/osfamilymap.yaml" or {} as osfamilymap %}
+{% import_yaml tplroot ~ "/osmap.yaml" or {} as osmap %}
 
 {# merge the osfamilymap #}
 {% set osfamily = salt['grains.filter_by'](osfamilymap, grain='os_family') or{} %}

@@ -1,6 +1,7 @@
 {%- set tplroot = tpldir.split('/')[0] %}
 {%- from tplroot ~ "/map.jinja" import salt_settings with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
+{%- from tplroot ~ "/formulas.jinja" import file_roots, formulas with context %}
 
 {% if salt_settings.install_packages and grains.os == 'MacOS' %}
 download-salt-minion:
@@ -68,6 +69,8 @@ salt-minion:
     - source: salt://{{ slspath }}/files/minion.d
     - context:
         standalone: False
+        file_roots: {{ file_roots }}
+        formulas: {{ formulas|json }}
     {%- endif %}
     - clean: {{ salt_settings.clean_config_d_dir }}
     - exclude_pat: _*

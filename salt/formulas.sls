@@ -2,13 +2,10 @@
 {%- set processed_gitdir_envs = [] %}
 {%- set processed_basedirs = [] %}
 
-{%- from "salt/map.jinja" import formulas_settings with context %}
-{%- from "salt/formulas.jinja" import formulas_git_opt with context %}
-{%- from "salt/formulas.jinja" import formulas_opts_for_git_latest with context %}
-
 ## from template-formula
 {%- set tplroot = tpldir.split('/')[0] %}
-{%- from tplroot ~ "/map.jinja" import salt_settings with context %}
+{%- from tplroot ~ "/map.jinja" import salt_settings, formulas_settings with context %}
+{%- from tplroot ~ "/formulas.jinja" import formulas_git_opt, formulas_opts_for_git_latest with context %}
 
 # Loop over all formulas listed in pillar data
 {%- for env, entries in salt['pillar.get']('salt_formulas:list', {}).items() %}

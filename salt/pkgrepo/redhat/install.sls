@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 # vim: ft=sls
-{% from "salt/map.jinja" import salt_settings with context %}
+{%- set tplroot = tpldir.split('/')[0] %}
+{%- from tplroot ~ "/map.jinja" import salt_settings with context %}
 
-  {%- if grains['os']|lower not in ('amazon', 'fedora') %}
+{%- if grains['os']|lower not in ('amazon', 'fedora') %}
 salt-pkgrepo-install-saltstack-redhat:
   pkgrepo.managed:
     - name: saltstack
@@ -11,4 +12,4 @@ salt-pkgrepo-install-saltstack-redhat:
     - enabled: 1
     - gpgcheck: 1
     - gpgkey: {{ salt_settings.key_url }}
-  {% endif %}
+{% endif %}

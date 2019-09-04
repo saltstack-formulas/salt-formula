@@ -1,4 +1,5 @@
-{% from "salt/map.jinja" import salt_settings with context %}
+{%- set tplroot = tpldir.split('/')[0] %}
+{%- from tplroot ~ "/map.jinja" import salt_settings with context %}
 
 {%- if salt_settings.use_pip %}
 python-pip:
@@ -59,6 +60,8 @@ salt-cloud-{{ cloud_section }}:
     - template: jinja
     - makedirs: True
     - exclude_pat: _*
+    - context:
+          salt_settings: {{ salt_settings|json }}
 
 {% for filename in salt['pillar.get']("salt:cloud:" ~ cloud_section, {}).keys() %}
 /etc/salt/cloud.{{ cloud_section }}.d/{{ filename }}:
