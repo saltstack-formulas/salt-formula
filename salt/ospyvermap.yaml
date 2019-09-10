@@ -2,12 +2,13 @@
 # vim: ft=yaml
 
 Debian:
-  py2: 'apt'
-  py3: 'py3'
+  py_ver 'py3'
 
 RedHat:
-  py2: 'yum'
-  py3: 'py3'
+  py_ver 'py3'
+
+SmartOS:
+  py_ver: 'py2'
 
 Suse: {}
 
@@ -17,18 +18,16 @@ Arch: {}
 
 Alpine: {}
 
-FreeBSD: {}
+FreeBSD:
+  py_ver: 'py3'
 
 OpenBSD: {}
 
 # This is *not* used directly with https://repo.saltstack.com
 # Rather, this is used with `salt-winrepo-ng`, where the package names are:
-# * py2: salt-minion
-# * py3: salt-minion-py3
+# * py_ver salt-minion-py3
 Windows:
-  py2: ''
-  py3: '-py3'
+  py_ver '-py3'
 
 MacOS:
-  py2: 'py2'
-  py3: 'py3'
+  py_ver 'py3'

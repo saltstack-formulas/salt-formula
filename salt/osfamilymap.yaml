@@ -97,14 +97,14 @@ Alpine:
 
 FreeBSD:
   rootgroup: wheel
-  salt_master: py27-salt
-  salt_minion: py27-salt
-  salt_syndic: py27-salt
-  salt_cloud: py27-salt
-  salt_api: py27-salt
-  salt_ssh: py27-salt
-  python_git: py27-GitPython
-  pygit2: py27-pygit2
+  salt_master: {{ py_ver_repr }}-salt
+  salt_minion: {{ py_ver_repr }}-salt
+  salt_syndic: {{ py_ver_repr }}-salt
+  salt_cloud: {{ py_ver_repr }}-salt
+  salt_api: {{ py_ver_repr }}-salt
+  salt_ssh: {{ py_ver_repr }}-salt
+  python_git: {{ py_ver_repr }}-GitPython
+  pygit2: {{ py_ver_repr }}-pygit2
   config_path: /usr/local/etc/salt
   minion_service: salt_minion
   master_service: salt_master
