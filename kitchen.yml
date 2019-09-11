@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
 ---
 driver:
   name: docker
@@ -11,17 +13,22 @@ platforms:
   - name: debian-9
   - name: ubuntu-18.04
   - name: centos-7
-  - name: fedora-29
-  - name: opensuse-42.3
+  - name: fedora-30
+  - name: opensuse-15.0
     driver:
+      image: opensuse/leap:15.0
       run_command: /usr/lib/systemd/systemd
       provision_command:
         - systemctl enable sshd.service
+    # Workaround to avoid intermittent failures on `opensuse-leap-15`:
+    # => SCP did not finish successfully (255):  (Net::SCP::Error)
+    transport:
+      max_ssh_sessions: 1
 
   # Previous distros
   - name: debian-8
   - name: ubuntu-16.04
-  - name: fedora-28
+  - name: fedora-29
   # centos-6 guest fails on Debian hosts due to vsyscall issues, see
   # https://hub.docker.com/_/centos, "A note about vsyscall"
   - name: centos-6
@@ -39,59 +46,62 @@ provisioner:
     - .git
   state_top:
     base:
-     '*':
-       - salt.pkgrepo
-       - salt.master
-       - salt.minion
-  pillars:
-    top.sls:
-      base:
-        '*':
-          - salt
-    salt.sls:
-      salt:
-        master:
-          fileserver_backend:
-            - rootfs
-          file_roots:
-            base:
-              - /srv/salt
-          pillar_roots:
-            base:
-              - /srv/pillar
-        minion:
-          master: localhost
-          fileserver_backend:
-            - rootfs
-          file_roots:
-            base:
-              - /srv/salt
-          pillar_roots:
-            base:
-              - /srv/pillar
+      '*':
+        - salt.pkgrepo
+        - salt.master
+        - salt.minion
 
 verifier:
+  # https://www.inspec.io/
   name: inspec
   sudo: true
+  # cli, documentation, html, progress, json, json-min, json-rspec, junit
   reporter:
     - cli
 
 suites:
+  # Latest distros, salt develop, python3
+  # These distros have py3 packages available in salt's repo
+  - name: develop-py3
+    includes:
+      - debian-9
+      - ubuntu-18.04
+      - opensuse-15.0
+    provisioner:
+      salt_bootstrap_options: -X -x python3 -d git %s
+      salt_version: 'develop'
+      pillars:
+        top.sls:
+          base:
+            '*':
+              - salt
+              - develop-py3
+      pillars_from_files:
+        salt.sls: test/salt/pillar/salt.sls
+        develop-py3.sls: test/salt/pillar/develop-py3.sls
+    verifier:
+      inspec_tests:
+        - path: test/integration/develop
+
   # Latest distros, latest salt, python3
   # These distros have py3 packages available in salt's repo
   - name: v2019-2-py3
     includes:
       - debian-9
       - ubuntu-18.04
+      - opensuse-15.0
     provisioner:
       salt_bootstrap_options: -X -x python3 -d git %s
       salt_version: '2019.2'
       pillars:
-        salt.sls:
-          salt:
-            release: '2019.2'
-            py_ver: 'py3'
-
+        top.sls:
+          base:
+            '*':
+              - salt
+              - v2019-2-py3
+      pillars_from_files:
+        salt.sls: test/salt/pillar/salt.sls
+        v2019-2-py3.sls: test/salt/pillar/v2019-2-py3.sls
     verifier:
       inspec_tests:
         - path: test/integration/2019-2
@@ -101,15 +111,18 @@ suites:
   - name: v2019-2-py2
     includes:
       - centos-7
-      - fedora-29
+      - fedora-30
     provisioner:
       salt_version: '2019.2'
       pillars:
-        salt.sls:
-          salt:
-            release: '2019.2'
-            py_ver: 'py2'
-
+        top.sls:
+          base:
+            '*':
+              - salt
+              - v2019-2-py2
+      pillars_from_files:
+        salt.sls: test/salt/pillar/salt.sls
+        v2019-2-py2.sls: test/salt/pillar/v2019-2-py2.sls
     verifier:
       inspec_tests:
         - path: test/integration/2019-2
@@ -119,53 +132,42 @@ suites:
     includes:
       - debian-8
       - ubuntu-16.04
-      - opensuse-42.3
+      - centos-7
     provisioner:
       # We require an old version of salt in the provisioner or,
       # the salt formula fails to downgrade to the desired version to test
       salt_version: '2018.3'
       pillars:
-        salt.sls:
-          salt:
-            release: '2018.3'
-            py_ver: 'py2'
+        top.sls:
+          base:
+            '*':
+              - salt
+              - v2018-3-py2
+      pillars_from_files:
+        salt.sls: test/salt/pillar/salt.sls
+        v2018-3-py2.sls: test/salt/pillar/v2018-3-py2.sls
     verifier:
       inspec_tests:
         - path: test/integration/2018-3
 
-  # centos-6 ships with python2.6, so it requires extra bootstrapping parameters
-  # to install python2.7
-  - name: v2018-3-py2-bootstrap
-    includes:
-      - centos-6
-    provisioner:
-      salt_bootstrap_options: -X -d stable %s
-      salt_version: '2018.3'
-      pillars:
-        salt.sls:
-          salt:
-            release: '2018.3'
-            py_ver: 'py2'
-    verifier:
-      inspec_tests:
-        - path: test/integration/2018-3
-
-  # To tests fedora 28 & salt v2018.2, we need to force the package version
+  # To test fedora 29 & salt v2018.3, we need to force the package version
   # otherwise the image, which includes the 'updates' repo, will install 2019.2
   - name: v2018-3-py2-forced-version
     includes:
-      - fedora-28
+      - fedora-29
     provisioner:
       # We require an old version of salt in the provisioner or,
       # the salt formula fails to downgrade to the desired version to test
       salt_version: '2018.3'
       pillars:
-        salt.sls:
-          salt:
-            release: '2018.3'
-            py_ver: 'py2'
-            version: '2018.3.0-1.fc28'
-
+        top.sls:
+          base:
+            '*':
+              - salt
+              - v2018-3-py2-forced-version
+      pillars_from_files:
+        salt.sls: test/salt/pillar/salt.sls
+        v2018-3-py2-forced-version.sls: test/salt/pillar/v2018-3-py2-forced-version.sls
     verifier:
       inspec_tests:
         - path: test/integration/2018-3
@@ -180,10 +182,14 @@ suites:
       # the salt formula fails to downgrade to the desired version to test
       salt_version: '2017.7'
       pillars:
-        salt.sls:
-          salt:
-            release: '2017.7'
-            py_ver: 'py2'
+        top.sls:
+          base:
+            '*':
+              - salt
+              - v2017-7-py2
+      pillars_from_files:
+        salt.sls: test/salt/pillar/salt.sls
+        v2017-7-py2.sls: test/salt/pillar/v2017-7-py2.sls
     verifier:
       inspec_tests:
         - path: test/integration/2017-7
@@ -198,11 +204,14 @@ suites:
       salt_bootstrap_options: -X -d stable %s
       salt_version: '2017.7'
       pillars:
-        salt.sls:
-          salt:
-            release: '2017.7'
-            py_ver: 'py2'
+        top.sls:
+          base:
+            '*':
+              - salt
+              - v2017-7-py2
+      pillars_from_files:
+        salt.sls: test/salt/pillar/salt.sls
+        v2017-7-py2.sls: test/salt/pillar/v2017-7-py2.sls
     verifier:
       inspec_tests:
         - path: test/integration/2017-7
-

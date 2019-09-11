@@ -6,3 +6,4 @@ release: 1
 minimum_version: 2015.8
 summary: Formula for install Saltstack
 description: Formula for installing Saltstack
+top_level_dir: salt

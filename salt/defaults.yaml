@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
+---
 salt:
   version: ''
   rootuser: root
   rootgroup: root
-  install_packages: True
-  use_pip: False
-  clean_config_d_dir: True
-  restart_via_at: False
+  install_packages: true
+  use_pip: false
+  clean_config_d_dir: true
+  restart_via_at: false
 
   config_path: /etc/salt
 
-  minion_remove_config: False
-  master_remove_config: False
-  minion_config_use_TOFS: False
-  master_config_use_TOFS: False
+  minion_remove_config: false
+  master_remove_config: false
+  minion_config_use_TOFS: false
+  master_config_use_TOFS: false
 
   minion_service: salt-minion
   master_service: salt-master
@@ -36,22 +37,22 @@ salt:
 
   gitfs:
     dulwich:
-      install_from_source: True
+      install_from_source: true
     pygit2:
-      install_from_source: True
+      install_from_source: true
       version: 0.23.0
       git:
         # if not false, should be state name
-        require_state: False
+        require_state: false
         install_from_package: git
       libgit2:
         version: 0.23.0
-        install_from_source: True
+        install_from_source: true
         build_parent_dir: /usr/src/
         # hash necessary until github issue #9272 is addressed
         download_hash: 683d1164e361e2a0a8d52652840e2340
     gitpython:
-      install_from_source: False
+      install_from_source: false
 
   cloud:
     template_sources:
@@ -60,12 +61,12 @@ salt:
       maps: salt://salt/files/cloud.maps.d
 
 salt_formulas:
-  checkout_orig_branch: False
+  checkout_orig_branch: false
   git_opts:
     default:
       baseurl: https://github.com/saltstack-formulas
       basedir: /srv/formulas
-      update: False
+      update: false
       options:
         rev: master
         output_loglevel: 'quiet'
