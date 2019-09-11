@@ -157,5 +157,3 @@ An example of that:
    `template package`, this formula no longer supports the installation of
    packages.
 
-
-

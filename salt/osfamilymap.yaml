@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
+---
 
 {% import_yaml "salt/ospyvermap.yaml" as ospyvermap %}
 {% set ospyver = salt['grains.filter_by'](ospyvermap, grain='os_family') or {} %}
@@ -27,13 +28,13 @@ Debian:
   pyinotify: python-pyinotify
   gitfs:
     pygit2:
-      install_from_source: True
+      install_from_source: true
       version: 0.22.1
       git:
-        require_state: False
+        require_state: false
         install_from_package: git
       libgit2:
-        install_from_source: False
+        install_from_source: false
 
 RedHat:
   pkgrepo: 'https://repo.saltstack.com/{{ py_ver_repr }}/redhat/$releasever/$basearch/{{ salt_release }}'
@@ -42,11 +43,11 @@ RedHat:
   python_git: GitPython
   gitfs:
     gitpython:
-      install_from_source: False
+      install_from_source: false
     pygit2:
-      install_from_source: False
+      install_from_source: false
       git:
-        require_state: False
+        require_state: false
         install_from_package: git
   master:
     gitfs_provider: pygit2
@@ -58,9 +59,9 @@ Suse:
   pyinotify: python-pyinotify
   gitfs:
     pygit2:
-      install_from_source: False
+      install_from_source: false
       git:
-        require_state: False
+        require_state: false
         install_from_package: git
   master:
     gitfs_provider: pygit2
@@ -71,7 +72,7 @@ Gentoo:
   salt_syndic: app-admin/salt
   salt_api: app-admin/salt
   salt_cloud: app-admin/salt
-  pyinotify:  dev-python/pyinotify
+  pyinotify: dev-python/pyinotify
 
 Arch:
   salt_master: salt
