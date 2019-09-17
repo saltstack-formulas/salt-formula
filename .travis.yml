@@ -24,31 +24,24 @@ env:
     # slow down the entire run at the end (i.e. `centos-6` and `opensuse`)
     # However, the groupings needed to be maintained in some semblance of order
     # so this is a best-effort matrix, in the circumstances
-
-    # develop-py3
-    - INSTANCE: develop-py3-debian-9
-    - INSTANCE: develop-py3-opensuse-150
-    # - INSTANCE: develop-py3-ubuntu-1804
-
-    # 2017.7-py2
-    - INSTANCE: v2017-7-py2-bootstrap-centos-6
-    # - INSTANCE: v2017-7-py2-debian-8
-    - INSTANCE: v2017-7-py2-ubuntu-1604
-
-    # 2018.3-py2
-    # - INSTANCE: v2018-3-py2-centos-7
-    - INSTANCE: v2018-3-py2-debian-8
-    - INSTANCE: v2018-3-py2-forced-version-fedora-29
-    # - INSTANCE: v2018-3-py2-ubuntu-1604
-
-    # 2019.2-py2
-    - INSTANCE: v2019-2-py2-centos-7
-    - INSTANCE: v2019-2-py2-fedora-30
-
-    # 2019.2-py3
-    # - INSTANCE: v2019-2-py3-debian-9
-    - INSTANCE: v2019-2-py3-opensuse-150
-    - INSTANCE: v2019-2-py3-ubuntu-1804
+    # - INSTANCE: v201707-py2-debian-8-2017-7-py2
+    - INSTANCE: v201707-py2-ubuntu-1604-2017-7-py2
+    - INSTANCE: v201707-py2-centos-6-2017-7-py2
+    # - INSTANCE: v201707-py2-amazonlinux-2-2017-7-py2
+    # - INSTANCE: v201803-py2-debian-9-2018-3-py2
+    # - INSTANCE: v201803-py2-ubuntu-1604-2018-3-py2
+    - INSTANCE: v201803-py2-centos-7-2018-3-py2
+    - INSTANCE: v201803-py2-amazonlinux-2-2018-3-py2
+    - INSTANCE: v201902-py2-debian-9-2019-2-py2
+    - INSTANCE: v201902-py2-ubuntu-1804-2019-2-py2
+    # - INSTANCE: v201902-py2-centos-7-2019-2-py2
+    # - INSTANCE: v201902-py2-opensuse-leap-15-2019-2-py2
+    # - INSTANCE: v201902-py2-amazonlinux-2-2019-2-py2
+    # - INSTANCE: v201902-py3-debian-9-2019-2-py3
+    # - INSTANCE: v201902-py3-ubuntu-1804-2019-2-py3
+    # - INSTANCE: v201902-py3-centos-7-2019-2-py3
+    - INSTANCE: v201902-py3-fedora-30-2019-2-py3
+    - INSTANCE: v201902-py3-opensuse-leap-15-2019-2-py3
 
 script:
   - bin/kitchen verify ${INSTANCE}
