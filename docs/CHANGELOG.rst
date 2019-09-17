@@ -2,6 +2,15 @@
 Changelog
 =========
 
+`0.59.0 <https://github.com/saltstack-formulas/salt-formula/compare/v0.58.4...v0.59.0>`_ (2019-09-17)
+---------------------------------------------------------------------------------------------------------
+
+Features
+^^^^^^^^
+
+
+* use ``semantic-release`` cross-formula standard structure (\ `ebfeba2 <https://github.com/saltstack-formulas/salt-formula/commit/ebfeba2>`_\ )
+
 `0.58.4 <https://github.com/saltstack-formulas/salt-formula/compare/v0.58.3...v0.58.4>`_ (2019-08-25)
 ---------------------------------------------------------------------------------------------------------
 
