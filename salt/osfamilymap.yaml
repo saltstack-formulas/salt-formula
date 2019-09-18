@@ -41,6 +41,8 @@ Debian:
         install_from_source: false
 
 RedHat:
+  pkgrepo_name: saltstack
+  pkgrepo_humanname: SaltStack repo for RHEL/CentOS $releasever
   pkgrepo: 'https://repo.saltstack.com/{{ py_ver_repr }}/redhat/$releasever/$basearch/{{ salt_release }}'
   key_url: 'https://repo.saltstack.com/{{ py_ver_repr }}/redhat/$releasever/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
   pygit2: python-pygit2
