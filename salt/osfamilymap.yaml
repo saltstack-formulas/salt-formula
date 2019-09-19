@@ -6,19 +6,23 @@
 {% set ospyver = salt['grains.filter_by'](ospyvermap, grain='os_family') or {} %}
 {% set py_ver_repr = salt['pillar.filter_by'](ospyvermap, pillar='salt:py_ver', default='py2') %}
 
-{% set osrelease = salt['grains.get']('osrelease') %}
-{% set salt_release = salt['pillar.get']('salt:release', 'latest') %}
-{% if salt_release.split('.')|length >= 3 %}
-{% set salt_release = 'archive/' ~ salt_release %}
-{% endif %}
-{% set osfamily_lower =  salt['grains.get']('os_family')|lower %}
-{% set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
-{% set oscodename = salt['grains.get']('oscodename') %}
+{%- set osrelease = salt['grains.get']('osrelease') %}
+{#- Workaround for OpenSuse Leap 15.1 until the repo is available #}
+{%- if [grains.os_family, osrelease] == ['Suse', '15.1'] %}
+{%-   set osrelease = '15.0' %}
+{%- endif %}
+{%- set salt_release = salt['pillar.get']('salt:release', 'latest') %}
+{%- if salt_release.split('.')|length >= 3 %}
+{%-   set salt_release = 'archive/' ~ salt_release %}
+{%- endif %}
+{%- set osfamily_lower =  salt['grains.get']('os_family')|lower %}
+{%- set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
+{%- set oscodename = salt['grains.get']('oscodename') %}
 
 #from template-formula
 {%- if grains.os == 'MacOS' %}
-    {%- set macos_rootuser = salt['cmd.run']("stat -f '%Su' /dev/console") %}
-    {%- set macos_rootgroup = salt['cmd.run']("stat -f '%Sg' /dev/console") %}
+{%-   set macos_rootuser = salt['cmd.run']("stat -f '%Su' /dev/console") %}
+{%-   set macos_rootgroup = salt['cmd.run']("stat -f '%Sg' /dev/console") %}
 {%- endif %}
 
 Debian:
@@ -53,6 +57,7 @@ RedHat:
     gitfs_provider: pygit2
 
 Suse:
+  pkgrepo_humanname: 'Salt releases for SLE-based SUSE products (openSUSE_Leap_{{ osrelease }})'
   pkgrepo: 'http://repo.saltstack.com/opensuse/openSUSE_Leap_{{ osrelease }}/'
   key_url: 'http://repo.saltstack.com/opensuse/openSUSE_Leap_{{ osrelease }}/repodata/repomd.xml.key'
   pygit2: python-pygit2
