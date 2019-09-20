@@ -43,11 +43,11 @@ This list is sorted by the number of commits per contributor in *descending* ord
    * - :raw-html-m2r:`<img class='float-left rounded-1' src='https://avatars2.githubusercontent.com/u/91293?v=4' width='36' height='36' alt='@whiteinge'>`
      - `@whiteinge <https://github.com/whiteinge>`_
      - 12
-   * - :raw-html-m2r:`<img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/1013915?v=4' width='36' height='36' alt='@rhertzog'>`
-     - `@rhertzog <https://github.com/rhertzog>`_
-     - 11
    * - :raw-html-m2r:`<img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/13322818?v=4' width='36' height='36' alt='@noelmcloughlin'>`
      - `@noelmcloughlin <https://github.com/noelmcloughlin>`_
+     - 12
+   * - :raw-html-m2r:`<img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/1013915?v=4' width='36' height='36' alt='@rhertzog'>`
+     - `@rhertzog <https://github.com/rhertzog>`_
      - 11
    * - :raw-html-m2r:`<img class='float-left rounded-1' src='https://avatars2.githubusercontent.com/u/358074?v=4' width='36' height='36' alt='@pcdummy'>`
      - `@pcdummy <https://github.com/pcdummy>`_
