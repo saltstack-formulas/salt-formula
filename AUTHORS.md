@@ -14,8 +14,8 @@ Avatar|Contributor|Contributions
 <img class='float-left rounded-1' src='https://avatars0.githubusercontent.com/u/7139195?v=4' width='36' height='36' alt='@xenophonf'>|[@xenophonf](https://github.com/xenophonf)|18
 <img class='float-left rounded-1' src='https://avatars2.githubusercontent.com/u/7460036?v=4' width='36' height='36' alt='@andrew-vant'>|[@andrew-vant](https://github.com/andrew-vant)|13
 <img class='float-left rounded-1' src='https://avatars2.githubusercontent.com/u/91293?v=4' width='36' height='36' alt='@whiteinge'>|[@whiteinge](https://github.com/whiteinge)|12
+<img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/13322818?v=4' width='36' height='36' alt='@noelmcloughlin'>|[@noelmcloughlin](https://github.com/noelmcloughlin)|12
 <img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/1013915?v=4' width='36' height='36' alt='@rhertzog'>|[@rhertzog](https://github.com/rhertzog)|11
-<img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/13322818?v=4' width='36' height='36' alt='@noelmcloughlin'>|[@noelmcloughlin](https://github.com/noelmcloughlin)|11
 <img class='float-left rounded-1' src='https://avatars2.githubusercontent.com/u/358074?v=4' width='36' height='36' alt='@pcdummy'>|[@pcdummy](https://github.com/pcdummy)|11
 <img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/117961?v=4' width='36' height='36' alt='@babilen5'>|[@babilen5](https://github.com/babilen5)|8
 <img class='float-left rounded-1' src='https://avatars0.githubusercontent.com/u/306240?v=4' width='36' height='36' alt='@UtahDave'>|[@UtahDave](https://github.com/UtahDave)|8
