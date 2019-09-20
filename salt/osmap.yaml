@@ -19,6 +19,12 @@
 Fedora:
   pygit2: python2-pygit2
 
+Amazon:
+  pkgrepo_name: saltstack-amzn-repo
+  pkgrepo_humanname: SaltStack repo for Amazon Linux 2
+  pkgrepo: 'https://repo.saltstack.com/yum/amazon/2/$basearch/{{ salt_release }}'
+  key_url: 'https://repo.saltstack.com/yum/amazon/2/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+
 Ubuntu:
   pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_dir }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
   key_url: 'https://repo.saltstack.com/{{ py_ver_dir }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
