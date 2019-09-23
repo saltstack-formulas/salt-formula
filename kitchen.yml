@@ -84,7 +84,7 @@ platforms:
 
 provisioner:
   name: salt_solo
-  log_level: info
+  log_level: debug
   salt_install: none
   require_chef: false
   formula: salt
