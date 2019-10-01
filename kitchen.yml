@@ -62,6 +62,8 @@ platforms:
     driver:
       image: opensuse/leap:15
       provision_command:
+        # yamllint disable-line rule:line-length
+        - zypper install -y glibc-locale net-tools net-tools-deprecated python-xml python2-pip
         - systemctl enable sshd.service
       run_command: /usr/lib/systemd/systemd
     provisioner:
@@ -94,6 +96,8 @@ platforms:
     driver:
       image: opensuse/leap:15
       provision_command:
+        # yamllint disable-line rule:line-length
+        - zypper install -y glibc-locale net-tools net-tools-deprecated python-xml python3-pip
         - systemctl enable sshd.service
       run_command: /usr/lib/systemd/systemd
     provisioner:
