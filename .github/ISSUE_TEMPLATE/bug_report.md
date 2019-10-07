@@ -14,41 +14,55 @@ Notes:
 3. Please direct questions to the [`#formulas` channel on Slack](https://saltstackcommunity.slack.com/messages/C7LG8SV54/), which is bridged to `#saltstack-formulas` on Freenode.
 -->
 
-#### Describe the bug
-<!-- A clear and concise description of what the bug is. -->
+## Your setup
+### Formula commit hash / release tag
+<!-- Please specify the formula's commit hash and/or release tag that you are using. -->
 
 
 
-#### Setup
+### Versions reports (master & minion)
+<!-- Provided by running `salt --versions-report`. Please also mention any differences in master/minion versions. -->
+
+
+
+### Pillar / config used
 <!-- Provide links to the SLS files and/or relevant configs (be sure to remove sensitive info). -->
 
 
 
-#### Steps to reproduce the bug
+---
+
+## Bug details
+### Describe the bug
+<!-- A clear and concise description of what the bug is. -->
+
+
+
+### Steps to reproduce the bug
 <!-- Include debug logs if possible and relevant, e.g. using `salt-minion -l debug`. -->
 <!-- Alternatively, linking to Kitchen debug logs is useful, e.g. via. Travis CI. -->
 <!-- Most useful is providing a failing InSpec test, which can be used to verify any proposed fix. -->
 
 
 
-#### Expected behaviour
+### Expected behaviour
 <!-- A clear and concise description of what you expected to happen. -->
 
 
 
-#### Versions report
-<!-- Provided by running `salt --versions-report`. Please also mention any differences in master/minion versions. -->
+### Attempts to fix the bug
+<!-- Please mention any attempts you have made to fix the bug and what the results were. -->
 
 
 
-#### Additional context
+### Additional context
 <!-- Add any other context about the problem here. -->
 
 
 
 ---
 
-#### Optional: How can this template be improved?
+### Meta: How can this template be improved?
 <!-- Feel free to suggest how this template can be improved. -->
 
 
