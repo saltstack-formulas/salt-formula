@@ -20,6 +20,7 @@ yaml-files:
   # Default settings
   - '*.yaml'
   - '*.yml'
+  - .salt-lint
   - .yamllint
   # SaltStack Formulas additional settings
   - '*.example'
