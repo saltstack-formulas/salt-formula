@@ -1,62 +1,43 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 ---
+## Machine config
 dist: bionic
-stages:
-  - test
-  - lint
-  - name: release
-    if: branch = master AND type != pull_request
-
 sudo: required
-cache: bundler
-language: ruby
-
 services:
   - docker
 
-# Make sure the instances listed below match up with
-# the `platforms` defined in `kitchen.yml`
-env:
-  matrix:
-    # The ordering used below has been selected based on the time required in Travis
-    # The slower ones are kept as high up as possible, to run concurrently rather than
-    # slow down the entire run at the end (i.e. `centos-6` and `opensuse`)
-    # However, the groupings needed to be maintained in some semblance of order
-    # so this is a best-effort matrix, in the circumstances
-    # - INSTANCE: v201707-py2-debian-8-2017-7-py2
-    - INSTANCE: v201707-py2-ubuntu-1604-2017-7-py2
-    - INSTANCE: v201707-py2-centos-6-2017-7-py2
-    # - INSTANCE: v201707-py2-amazonlinux-2-2017-7-py2
-    # - INSTANCE: v201707-py2-arch-base-latest-2017-7-py2
-    # - INSTANCE: v201803-py2-debian-9-2018-3-py2
-    # - INSTANCE: v201803-py2-ubuntu-1604-2018-3-py2
-    - INSTANCE: v201803-py2-centos-7-2018-3-py2
-    - INSTANCE: v201803-py2-amazonlinux-2-2018-3-py2
-    # - INSTANCE: v201803-py2-arch-base-latest-2018-3-py2
-    - INSTANCE: v201902-py2-debian-9-2019-2-py2
-    - INSTANCE: v201902-py2-ubuntu-1804-2019-2-py2
-    # - INSTANCE: v201902-py2-centos-7-2019-2-py2
-    # - INSTANCE: v201902-py2-opensuse-leap-15-2019-2-py2
-    # - INSTANCE: v201902-py2-amazonlinux-2-2019-2-py2
-    # - INSTANCE: v201902-py2-arch-base-latest-2019-2-py2
-    # - INSTANCE: v201902-py3-debian-9-2019-2-py3
-    # - INSTANCE: v201902-py3-ubuntu-1804-2019-2-py3
-    # - INSTANCE: v201902-py3-centos-7-2019-2-py3
-    - INSTANCE: v201902-py3-fedora-30-2019-2-py3
-    - INSTANCE: v201902-py3-opensuse-leap-15-2019-2-py3
+## Language and cache config
+language: ruby
+cache: bundler
 
+## Script to run for the test stage
 script:
-  - bin/kitchen verify ${INSTANCE}
+  - bin/kitchen verify "${INSTANCE}"
 
+## Stages and jobs matrix
+stages:
+  - test
+  - name: release
+    if: branch = master AND type != pull_request
 jobs:
+  allow_failures:
+    - env: Lint_rubocop
+  fast_finish: true
   include:
-    # Define the `lint` stage (runs `yamllint` and `commitlint`)
-    - stage: lint
-      language: node_js
+    ## Define the test stage that runs the linters (and testing matrix, if applicable)
+
+    # Run all of the linters in a single job (except `rubocop`)
+    - language: node_js
       node_js: lts/*
+      env: Lint
+      name: 'Lint: salt-lint, yamllint & commitlint'
       before_install: skip
       script:
+        # Install and run `salt-lint`
+        - pip install --user salt-lint
+        - git ls-files | grep '\.sls$\|\.jinja$\|\.j2$\|\.tmpl$'
+                       | xargs -I {} salt-lint {}
         # Install and run `yamllint`
         # Need at least `v1.17.0` for the `yaml-files` setting
         - pip install --user yamllint>=1.17.0
@@ -65,10 +46,54 @@ jobs:
         - npm install @commitlint/config-conventional -D
         - npm install @commitlint/travis-cli -D
         - commitlint-travis
-    # Define the release stage that runs `semantic-release`
+    # Run the `rubocop` linter in a separate job that is allowed to fail
+    # Once these lint errors are fixed, this can be merged into a single job
+    - language: node_js
+      node_js: lts/*
+      env: Lint_rubocop
+      name: 'Lint: rubocop'
+      before_install: skip
+      script:
+        # Install and run `rubocop`
+        - gem install rubocop
+        - rubocop -d
+
+    ## Define the rest of the matrix based on Kitchen testing
+    # Make sure the instances listed below match up with
+    # the `platforms` defined in `kitchen.yml`
+    # The ordering used below has been selected based on the time required in Travis
+    # The slower ones are kept as high up as possible, to run concurrently rather than
+    # slow down the entire run at the end (i.e. `centos-6` and `opensuse`)
+    # However, the groupings needed to be maintained in some semblance of order
+    # so this is a best-effort matrix, in the circumstances
+    # - env: INSTANCE=v201707-py2-debian-8-2017-7-py2
+    - env: INSTANCE=v201707-py2-ubuntu-1604-2017-7-py2
+    - env: INSTANCE=v201707-py2-centos-6-2017-7-py2
+    # - env: INSTANCE=v201707-py2-amazonlinux-2-2017-7-py2
+    # - env: INSTANCE=v201707-py2-arch-base-latest-2017-7-py2
+    # - env: INSTANCE=v201803-py2-debian-9-2018-3-py2
+    # - env: INSTANCE=v201803-py2-ubuntu-1604-2018-3-py2
+    - env: INSTANCE=v201803-py2-centos-7-2018-3-py2
+    - env: INSTANCE=v201803-py2-amazonlinux-2-2018-3-py2
+    # - env: INSTANCE=v201803-py2-arch-base-latest-2018-3-py2
+    - env: INSTANCE=v201902-py2-debian-9-2019-2-py2
+    - env: INSTANCE=v201902-py2-ubuntu-1804-2019-2-py2
+    # - env: INSTANCE=v201902-py2-centos-7-2019-2-py2
+    # - env: INSTANCE=v201902-py2-opensuse-leap-15-2019-2-py2
+    # - env: INSTANCE=v201902-py2-amazonlinux-2-2019-2-py2
+    # - env: INSTANCE=v201902-py2-arch-base-latest-2019-2-py2
+    # - env: INSTANCE=v201902-py3-debian-9-2019-2-py3
+    # - env: INSTANCE=v201902-py3-ubuntu-1804-2019-2-py3
+    # - env: INSTANCE=v201902-py3-centos-7-2019-2-py3
+    - env: INSTANCE=v201902-py3-fedora-30-2019-2-py3
+    - env: INSTANCE=v201902-py3-opensuse-leap-15-2019-2-py3
+
+    ## Define the release stage that runs `semantic-release`
     - stage: release
       language: node_js
       node_js: lts/*
+      env: Release
+      name: 'Run semantic-release inc. file updates to AUTHORS, CHANGELOG & FORMULA'
       before_install: skip
       script:
         # Update `AUTHORS.md`

@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.59.4](https://github.com/saltstack-formulas/salt-formula/compare/v0.59.3...v0.59.4) (2019-10-10)
+
+
+### Bug Fixes
+
+* **map.jinja:** fix `salt-lint` errors ([](https://github.com/saltstack-formulas/salt-formula/commit/5b348eb))
+* **minion.sls:** fix `salt-lint` errors ([](https://github.com/saltstack-formulas/salt-formula/commit/3e63977))
+* **syndic.sls:** fix `salt-lint` errors ([](https://github.com/saltstack-formulas/salt-formula/commit/ef4ad1e))
+
+
+### Continuous Integration
+
+* **kitchen:** install required packages to bootstrapped `opensuse` [skip ci] ([](https://github.com/saltstack-formulas/salt-formula/commit/8cc5952))
+* **kitchen:** use bootstrapped `opensuse` images until `2019.2.2` [skip ci] ([](https://github.com/saltstack-formulas/salt-formula/commit/0c5eb7e))
+* **platform:** add `arch-base-latest` (commented out for now) [skip ci] ([](https://github.com/saltstack-formulas/salt-formula/commit/8f36788))
+* merge travis matrix, add `salt-lint` & `rubocop` to `lint` job ([](https://github.com/saltstack-formulas/salt-formula/commit/e815eaa))
+
 ## [0.59.3](https://github.com/saltstack-formulas/salt-formula/compare/v0.59.2...v0.59.3) (2019-09-25)
 
 
