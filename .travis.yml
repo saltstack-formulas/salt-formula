@@ -21,17 +21,14 @@ stages:
   - name: release
     if: branch = master AND type != pull_request
 jobs:
-  allow_failures:
-    - env: Lint_rubocop
-  fast_finish: true
   include:
     ## Define the test stage that runs the linters (and testing matrix, if applicable)
 
-    # Run all of the linters in a single job (except `rubocop`)
+    # Run all of the linters in a single job
     - language: node_js
       node_js: lts/*
       env: Lint
-      name: 'Lint: salt-lint, yamllint & commitlint'
+      name: 'Lint: salt-lint, yamllint, rubocop & commitlint'
       before_install: skip
       script:
         # Install and run `salt-lint`
@@ -42,21 +39,13 @@ jobs:
         # Need at least `v1.17.0` for the `yaml-files` setting
         - pip install --user yamllint>=1.17.0
         - yamllint -s .
+        # Install and run `rubocop`
+        - gem install rubocop
+        - rubocop -d
         # Install and run `commitlint`
         - npm install @commitlint/config-conventional -D
         - npm install @commitlint/travis-cli -D
         - commitlint-travis
-    # Run the `rubocop` linter in a separate job that is allowed to fail
-    # Once these lint errors are fixed, this can be merged into a single job
-    - language: node_js
-      node_js: lts/*
-      env: Lint_rubocop
-      name: 'Lint: rubocop'
-      before_install: skip
-      script:
-        # Install and run `rubocop`
-        - gem install rubocop
-        - rubocop -d
 
     ## Define the rest of the matrix based on Kitchen testing
     # Make sure the instances listed below match up with
