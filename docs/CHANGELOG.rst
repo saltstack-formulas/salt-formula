@@ -2,6 +2,15 @@
 Changelog
 =========
 
+`0.59.6 <https://github.com/saltstack-formulas/salt-formula/compare/v0.59.5...v0.59.6>`_ (2019-10-11)
+---------------------------------------------------------------------------------------------------------
+
+Tests
+^^^^^
+
+
+* **pkgs_spec:** reset version from ``2019.2.1`` back to ``2019.2.0`` (\ ` <https://github.com/saltstack-formulas/salt-formula/commit/4787ce7>`_\ )
+
 `0.59.5 <https://github.com/saltstack-formulas/salt-formula/compare/v0.59.4...v0.59.5>`_ (2019-10-11)
 ---------------------------------------------------------------------------------------------------------
 
