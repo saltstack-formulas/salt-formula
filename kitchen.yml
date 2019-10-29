@@ -49,30 +49,12 @@ platforms:
       run_command: /usr/lib/systemd/systemd
 
   ## SALT `2019.2`
-  - name: debian-9-2019-2-py2
-    driver:
-      image: netmanagers/salt-2019.2-py2:debian-9
   - name: ubuntu-1804-2019-2-py2
     driver:
       image: netmanagers/salt-2019.2-py2:ubuntu-18.04
   - name: centos-7-2019-2-py2
     driver:
       image: netmanagers/salt-2019.2-py2:centos-7
-  - name: opensuse-leap-15-2019-2-py2
-    driver:
-      image: opensuse/leap:15
-      provision_command:
-        # yamllint disable-line rule:line-length
-        - zypper install -y glibc-locale net-tools net-tools-deprecated python-xml python2-pip
-        - systemctl enable sshd.service
-      run_command: /usr/lib/systemd/systemd
-    provisioner:
-      salt_bootstrap_options: -XdPfrq -x python2 git 2019.2
-      salt_install: bootstrap
-    # Workaround to avoid intermittent failures on `opensuse-leap-15`:
-    # => SCP did not finish successfully (255):  (Net::SCP::Error)
-    transport:
-      max_ssh_sessions: 1
   - name: amazonlinux-2-2019-2-py2
     driver:
       image: netmanagers/salt-2019.2-py2:amazonlinux-2
@@ -80,30 +62,26 @@ platforms:
     driver:
       image: netmanagers/salt-2019.2-py2:arch-base-latest
       run_command: /usr/lib/systemd/systemd
+  - name: debian-10-2019-2-py3
+    driver:
+      image: netmanagers/salt-2019.2-py3:debian-10
   - name: debian-9-2019-2-py3
     driver:
       image: netmanagers/salt-2019.2-py3:debian-9
   - name: ubuntu-1804-2019-2-py3
     driver:
       image: netmanagers/salt-2019.2-py3:ubuntu-18.04
-  - name: centos-7-2019-2-py3
+  - name: centos-8-2019-2-py3
     driver:
-      image: netmanagers/salt-2019.2-py3:centos-7
-  - name: fedora-30-2019-2-py3
+      image: netmanagers/salt-2019.2-py3:centos-8
+  - name: fedora-31-2019-2-py3
     driver:
-      image: netmanagers/salt-2019.2-py3:fedora-30
-  - name: opensuse-leap-15-2019-2-py3
+      image: netmanagers/salt-2019.2-py3:fedora-31
+  - name: opensuse-leap-151-2019-2-py3
     driver:
-      image: opensuse/leap:15
-      provision_command:
-        # yamllint disable-line rule:line-length
-        - zypper install -y glibc-locale net-tools net-tools-deprecated python-xml python3-pip
-        - systemctl enable sshd.service
+      image: netmanagers/salt-2019.2-py3:opensuse-leap-15.1
       run_command: /usr/lib/systemd/systemd
-    provisioner:
-      salt_bootstrap_options: -XdPfrq -x python3 git 2019.2
-      salt_install: bootstrap
-    # Workaround to avoid intermittent failures on `opensuse-leap-15`:
+    # Workaround to avoid intermittent failures on `opensuse-leap-15.1`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
@@ -129,11 +107,11 @@ verifier:
 suites:
   - name: v201902-py3
     includes:
+      - debian-10-2019-2-py3
       - debian-9-2019-2-py3
       - ubuntu-1804-2019-2-py3
-      - centos-7-2019-2-py3
-      - fedora-30-2019-2-py3
-      - opensuse-leap-15-2019-2-py3
+      - centos-8-2019-2-py3
+      - opensuse-leap-151-2019-2-py3
     provisioner:
       state_top:
         base:
@@ -155,10 +133,8 @@ suites:
         - path: test/integration/v201902-py3
   - name: v201902-py2
     includes:
-      - debian-9-2019-2-py2
       - ubuntu-1804-2019-2-py2
       - centos-7-2019-2-py2
-      - opensuse-leap-15-2019-2-py2
       - amazonlinux-2-2019-2-py2
       - arch-base-latest-2019-2-py2
     provisioner:
