@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.59.7](https://github.com/saltstack-formulas/salt-formula/compare/v0.59.6...v0.59.7) (2019-10-29)
+
+
+### Continuous Integration
+
+* **kitchen+travis:** upgrade matrix after `2019.2.2` release ([](https://github.com/saltstack-formulas/salt-formula/commit/b6e3a83))
+* **travis:** update `salt-lint` config for `v0.0.10` [skip ci] ([](https://github.com/saltstack-formulas/salt-formula/commit/4cbf0b2))
+
+
+### Documentation
+
+* **contributing:** remove to use org-level file instead [skip ci] ([](https://github.com/saltstack-formulas/salt-formula/commit/78d0fee))
+* **readme:** update link to `CONTRIBUTING` [skip ci] ([](https://github.com/saltstack-formulas/salt-formula/commit/924817b))
+
+
+### Tests
+
+* **pkgs_spec:** update for `2019.2.2` release ([](https://github.com/saltstack-formulas/salt-formula/commit/acbc238))
+
 ## [0.59.6](https://github.com/saltstack-formulas/salt-formula/compare/v0.59.5...v0.59.6) (2019-10-11)
 
 
