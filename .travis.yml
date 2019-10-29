@@ -33,7 +33,7 @@ jobs:
       script:
         # Install and run `salt-lint`
         - pip install --user salt-lint
-        - git ls-files | grep '\.sls$\|\.jinja$\|\.j2$\|\.tmpl$'
+        - git ls-files | grep '\.sls$\|\.jinja$\|\.j2$\|\.tmpl$\|\.tst$'
                        | xargs -I {} salt-lint {}
         # Install and run `yamllint`
         # Need at least `v1.17.0` for the `yaml-files` setting
@@ -60,22 +60,20 @@ jobs:
     - env: INSTANCE=v201707-py2-centos-6-2017-7-py2
     # - env: INSTANCE=v201707-py2-amazonlinux-2-2017-7-py2
     # - env: INSTANCE=v201707-py2-arch-base-latest-2017-7-py2
-    # - env: INSTANCE=v201803-py2-debian-9-2018-3-py2
+    - env: INSTANCE=v201803-py2-debian-9-2018-3-py2
     # - env: INSTANCE=v201803-py2-ubuntu-1604-2018-3-py2
     - env: INSTANCE=v201803-py2-centos-7-2018-3-py2
-    - env: INSTANCE=v201803-py2-amazonlinux-2-2018-3-py2
+    # - env: INSTANCE=v201803-py2-amazonlinux-2-2018-3-py2
     # - env: INSTANCE=v201803-py2-arch-base-latest-2018-3-py2
-    - env: INSTANCE=v201902-py2-debian-9-2019-2-py2
     - env: INSTANCE=v201902-py2-ubuntu-1804-2019-2-py2
     # - env: INSTANCE=v201902-py2-centos-7-2019-2-py2
-    # - env: INSTANCE=v201902-py2-opensuse-leap-15-2019-2-py2
-    # - env: INSTANCE=v201902-py2-amazonlinux-2-2019-2-py2
+    - env: INSTANCE=v201902-py2-amazonlinux-2-2019-2-py2
     # - env: INSTANCE=v201902-py2-arch-base-latest-2019-2-py2
+    - env: INSTANCE=v201902-py3-debian-10-2019-2-py3
     # - env: INSTANCE=v201902-py3-debian-9-2019-2-py3
     # - env: INSTANCE=v201902-py3-ubuntu-1804-2019-2-py3
-    # - env: INSTANCE=v201902-py3-centos-7-2019-2-py3
-    - env: INSTANCE=v201902-py3-fedora-30-2019-2-py3
-    - env: INSTANCE=v201902-py3-opensuse-leap-15-2019-2-py3
+    # - env: INSTANCE=v201902-py3-centos-8-2019-2-py3
+    - env: INSTANCE=v201902-py3-opensuse-leap-151-2019-2-py3
 
     ## Define the release stage that runs `semantic-release`
     - stage: release
