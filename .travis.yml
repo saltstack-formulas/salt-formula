@@ -3,6 +3,7 @@
 ---
 ## Machine config
 dist: bionic
+version: '~> 1.0'
 sudo: required
 services:
   - docker
