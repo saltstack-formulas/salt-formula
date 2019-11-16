@@ -2,15 +2,18 @@
 # vim: ft=yaml
 ---
 ## Machine config
-dist: bionic
+os: 'linux'
+arch: 'amd64'
+dist: 'bionic'
 version: '~> 1.0'
-sudo: required
-services:
-  - docker
 
 ## Language and cache config
-language: ruby
-cache: bundler
+language: 'ruby'
+cache: 'bundler'
+
+## Services config
+services:
+  - docker
 
 ## Script to run for the test stage
 script:
@@ -19,18 +22,18 @@ script:
 ## Stages and jobs matrix
 stages:
   - test
-  - name: release
-    if: branch = master AND type != pull_request
+  - name: 'release'
+    if: 'branch = master AND type != pull_request'
 jobs:
   include:
     ## Define the test stage that runs the linters (and testing matrix, if applicable)
 
     # Run all of the linters in a single job
-    - language: node_js
-      node_js: lts/*
-      env: Lint
+    - language: 'node_js'
+      node_js: 'lts/*'
+      env: 'Lint'
       name: 'Lint: salt-lint, yamllint, rubocop & commitlint'
-      before_install: skip
+      before_install: 'skip'
       script:
         # Install and run `salt-lint`
         - pip install --user salt-lint
@@ -77,12 +80,12 @@ jobs:
     - env: INSTANCE=v201902-py3-opensuse-leap-151-2019-2-py3
 
     ## Define the release stage that runs `semantic-release`
-    - stage: release
-      language: node_js
-      node_js: lts/*
-      env: Release
+    - stage: 'release'
+      language: 'node_js'
+      node_js: 'lts/*'
+      env: 'Release'
       name: 'Run semantic-release inc. file updates to AUTHORS, CHANGELOG & FORMULA'
-      before_install: skip
+      before_install: 'skip'
       script:
         # Update `AUTHORS.md`
         - export MAINTAINER_TOKEN=${GH_TOKEN}
@@ -94,8 +97,9 @@ jobs:
                    @semantic-release/exec@3
                    @semantic-release/git@7
       deploy:
-        provider: script
+        provider: 'script'
+        # Using deprecated `skip_cleanup` until `cleanup: false` works reliably
+        # cleanup: false
         skip_cleanup: true
-        script:
-          # Run `semantic-release`
-          - npx semantic-release@15
+        # Run `semantic-release`
+        script: 'npx semantic-release@15'
