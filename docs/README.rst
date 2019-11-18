@@ -37,7 +37,7 @@ Contributing to this repo
 
 **Commit message formatting is significant!!**
 
-Please see :ref:`How to contribute <CONTRIBUTING>` for more details.
+Please see `How to contribute <https://github.com/saltstack-formulas/.github/blob/master/CONTRIBUTING.rst>`_ for more details.
 
 Available states
 ----------------
@@ -205,28 +205,42 @@ Testing
 
 Linux testing is done with ``kitchen-salt``.
 
-``kitchen converge``
-^^^^^^^^^^^^^^^^^^^^
+Requirements
+^^^^^^^^^^^^
 
-Creates the docker instance and runs the ``template`` main state, ready for testing.
+* Ruby
+* Docker
 
-``kitchen verify``
-^^^^^^^^^^^^^^^^^^
+.. code-block:: bash
+
+   $ gem install bundler
+   $ bundle install
+   $ bin/kitchen test [platform]
+
+Where ``[platform]`` is the platform name defined in ``kitchen.yml``,
+e.g. ``debian-9-2019-2-py3``.
+
+``bin/kitchen converge``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Creates the docker instance and runs the ``salt`` main states, ready for testing.
+
+``bin/kitchen verify``
+^^^^^^^^^^^^^^^^^^^^^^
 
 Runs the ``inspec`` tests on the actual instance.
 
-``kitchen destroy``
-^^^^^^^^^^^^^^^^^^^
+``bin/kitchen destroy``
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Removes the docker instance.
 
-``kitchen test``
-^^^^^^^^^^^^^^^^
+``bin/kitchen test``
+^^^^^^^^^^^^^^^^^^^^
 
 Runs all of the stages above in one go: i.e. ``destroy`` + ``converge`` + ``verify`` + ``destroy``.
 
-``kitchen login``
-^^^^^^^^^^^^^^^^^
+``bin/kitchen login``
+^^^^^^^^^^^^^^^^^^^^^
 
 Gives you SSH access to the instance for manual testing.
-

@@ -7,15 +7,15 @@ Avatar|Contributor|Contributions
 <img class='float-left rounded-1' src='https://avatars0.githubusercontent.com/u/1800660?v=4' width='36' height='36' alt='@aboe76'>|[@aboe76](https://github.com/aboe76)|98
 <img class='float-left rounded-1' src='https://avatars2.githubusercontent.com/u/1396878?v=4' width='36' height='36' alt='@gravyboat'>|[@gravyboat](https://github.com/gravyboat)|71
 <img class='float-left rounded-1' src='https://avatars0.githubusercontent.com/u/3374962?v=4' width='36' height='36' alt='@nmadhok'>|[@nmadhok](https://github.com/nmadhok)|54
-<img class='float-left rounded-1' src='https://avatars2.githubusercontent.com/u/10231489?v=4' width='36' height='36' alt='@myii'>|[@myii](https://github.com/myii)|23
+<img class='float-left rounded-1' src='https://avatars2.githubusercontent.com/u/10231489?v=4' width='36' height='36' alt='@myii'>|[@myii](https://github.com/myii)|54
 <img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/20441?v=4' width='36' height='36' alt='@iggy'>|[@iggy](https://github.com/iggy)|22
 <img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/528061?v=4' width='36' height='36' alt='@puneetk'>|[@puneetk](https://github.com/puneetk)|21
 <img class='float-left rounded-1' src='https://avatars2.githubusercontent.com/u/242396?v=4' width='36' height='36' alt='@javierbertoli'>|[@javierbertoli](https://github.com/javierbertoli)|20
 <img class='float-left rounded-1' src='https://avatars0.githubusercontent.com/u/7139195?v=4' width='36' height='36' alt='@xenophonf'>|[@xenophonf](https://github.com/xenophonf)|18
 <img class='float-left rounded-1' src='https://avatars2.githubusercontent.com/u/7460036?v=4' width='36' height='36' alt='@andrew-vant'>|[@andrew-vant](https://github.com/andrew-vant)|13
 <img class='float-left rounded-1' src='https://avatars2.githubusercontent.com/u/91293?v=4' width='36' height='36' alt='@whiteinge'>|[@whiteinge](https://github.com/whiteinge)|12
+<img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/13322818?v=4' width='36' height='36' alt='@noelmcloughlin'>|[@noelmcloughlin](https://github.com/noelmcloughlin)|12
 <img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/1013915?v=4' width='36' height='36' alt='@rhertzog'>|[@rhertzog](https://github.com/rhertzog)|11
-<img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/13322818?v=4' width='36' height='36' alt='@noelmcloughlin'>|[@noelmcloughlin](https://github.com/noelmcloughlin)|11
 <img class='float-left rounded-1' src='https://avatars2.githubusercontent.com/u/358074?v=4' width='36' height='36' alt='@pcdummy'>|[@pcdummy](https://github.com/pcdummy)|11
 <img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/117961?v=4' width='36' height='36' alt='@babilen5'>|[@babilen5](https://github.com/babilen5)|8
 <img class='float-left rounded-1' src='https://avatars0.githubusercontent.com/u/306240?v=4' width='36' height='36' alt='@UtahDave'>|[@UtahDave](https://github.com/UtahDave)|8
@@ -61,6 +61,7 @@ Avatar|Contributor|Contributions
 <img class='float-left rounded-1' src='https://avatars0.githubusercontent.com/u/3762852?v=4' width='36' height='36' alt='@tobias-m'>|[@tobias-m](https://github.com/tobias-m)|2
 <img class='float-left rounded-1' src='https://avatars0.githubusercontent.com/u/17393048?v=4' width='36' height='36' alt='@ek9'>|[@ek9](https://github.com/ek9)|2
 <img class='float-left rounded-1' src='https://avatars3.githubusercontent.com/u/398720?v=4' width='36' height='36' alt='@tiger-seo'>|[@tiger-seo](https://github.com/tiger-seo)|2
+<img class='float-left rounded-1' src='https://avatars3.githubusercontent.com/u/52996?v=4' width='36' height='36' alt='@daks'>|[@daks](https://github.com/daks)|2
 <img class='float-left rounded-1' src='https://avatars3.githubusercontent.com/u/2061751?v=4' width='36' height='36' alt='@matthew-parlette'>|[@matthew-parlette](https://github.com/matthew-parlette)|2
 <img class='float-left rounded-1' src='https://avatars0.githubusercontent.com/u/8395913?v=4' width='36' height='36' alt='@aanriot'>|[@aanriot](https://github.com/aanriot)|1
 <img class='float-left rounded-1' src='https://avatars0.githubusercontent.com/u/9849167?v=4' width='36' height='36' alt='@alejdg'>|[@alejdg](https://github.com/alejdg)|1
@@ -72,7 +73,6 @@ Avatar|Contributor|Contributions
 <img class='float-left rounded-1' src='https://avatars0.githubusercontent.com/u/16338056?v=4' width='36' height='36' alt='@vutny'>|[@vutny](https://github.com/vutny)|1
 <img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/278900?v=4' width='36' height='36' alt='@blast-hardcheese'>|[@blast-hardcheese](https://github.com/blast-hardcheese)|1
 <img class='float-left rounded-1' src='https://avatars2.githubusercontent.com/u/2487617?v=4' width='36' height='36' alt='@mecavity'>|[@mecavity](https://github.com/mecavity)|1
-<img class='float-left rounded-1' src='https://avatars3.githubusercontent.com/u/52996?v=4' width='36' height='36' alt='@daks'>|[@daks](https://github.com/daks)|1
 <img class='float-left rounded-1' src='https://avatars1.githubusercontent.com/u/30061305?v=4' width='36' height='36' alt='@felix-russell'>|[@felix-russell](https://github.com/felix-russell)|1
 <img class='float-left rounded-1' src='https://avatars3.githubusercontent.com/u/12703819?v=4' width='36' height='36' alt='@Furlot'>|[@Furlot](https://github.com/Furlot)|1
 <img class='float-left rounded-1' src='https://avatars3.githubusercontent.com/u/2692848?v=4' width='36' height='36' alt='@iondulgheru'>|[@iondulgheru](https://github.com/iondulgheru)|1
@@ -106,4 +106,4 @@ Avatar|Contributor|Contributions
 
 ---
 
-Auto-generated by a [forked version](https://github.com/myii/maintainer) of [gaocegege/maintainer](https://github.com/gaocegege/maintainer) on 2019-08-25.
+Auto-generated by a [forked version](https://github.com/myii/maintainer) of [gaocegege/maintainer](https://github.com/gaocegege/maintainer) on 2019-10-29.

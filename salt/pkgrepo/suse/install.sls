@@ -6,8 +6,9 @@
 salt-pkgrepo-install-saltstack-suse:
   pkgrepo.managed:
     - name: systemsmanagement_saltstack_products
-    - humanname: SaltStack repo for Opensuse 42.3
+    - humanname: {{ salt_settings.pkgrepo_humanname }}
     - baseurl: {{ salt_settings.pkgrepo }}
     - enabled: 1
     - gpgcheck: 1
     - gpgkey: {{ salt_settings.key_url }}
+    - gpgautoimport: true

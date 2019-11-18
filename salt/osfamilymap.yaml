@@ -1,23 +1,28 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
+---
 
-{% import_yaml "salt/ospyvermap.yaml" as ospyvermap %}
-{% set ospyver = salt['grains.filter_by'](ospyvermap, grain='os_family') or {} %}
-{% set py_ver_repr = salt['pillar.filter_by'](ospyver, pillar='salt:py_ver', default='py2') %}
+{%- import_yaml "salt/ospyvermap.yaml" as ospyvermap %}
+{%- set ospyver = salt['grains.filter_by'](ospyvermap, grain='os_family') or {} %}
+{%- set py_ver_repr = salt['pillar.filter_by'](ospyver, pillar='salt:py_ver', default='py2') %}
 
-{% set osrelease = salt['grains.get']('osrelease') %}
-{% set salt_release = salt['pillar.get']('salt:release', 'latest') %}
-{% if salt_release.split('.')|length >= 3 %}
-{% set salt_release = 'archive/' ~ salt_release %}
-{% endif %}
-{% set osfamily_lower =  salt['grains.get']('os_family')|lower %}
-{% set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
-{% set oscodename = salt['grains.get']('oscodename') %}
+{%- set osrelease = salt['grains.get']('osrelease') %}
+{#- Workaround for OpenSuse Leap 15.1 until the repo is available #}
+{%- if [grains.os_family, osrelease] == ['Suse', '15.1'] %}
+{%-   set osrelease = '15.0' %}
+{%- endif %}
+{%- set salt_release = salt['pillar.get']('salt:release', 'latest') %}
+{%- if salt_release.split('.')|length >= 3 %}
+{%-   set salt_release = 'archive/' ~ salt_release %}
+{%- endif %}
+{%- set osfamily_lower =  salt['grains.get']('os_family')|lower %}
+{%- set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
+{%- set oscodename = salt['grains.get']('oscodename') %}
 
 #from template-formula
 {%- if grains.os == 'MacOS' %}
-    {%- set macos_rootuser = salt['cmd.run']("stat -f '%Su' /dev/console") %}
-    {%- set macos_rootgroup = salt['cmd.run']("stat -f '%Sg' /dev/console") %}
+{%-   set macos_rootuser = salt['cmd.run']("stat -f '%Su' /dev/console") %}
+{%-   set macos_rootgroup = salt['cmd.run']("stat -f '%Sg' /dev/console") %}
 {%- endif %}
 
 Debian:
@@ -27,40 +32,43 @@ Debian:
   pyinotify: python-pyinotify
   gitfs:
     pygit2:
-      install_from_source: True
+      install_from_source: true
       version: 0.22.1
       git:
-        require_state: False
+        require_state: false
         install_from_package: git
       libgit2:
-        install_from_source: False
+        install_from_source: false
 
 RedHat:
+  pkgrepo_name: saltstack
+  pkgrepo_humanname: SaltStack repo for RHEL/CentOS $releasever
   pkgrepo: 'https://repo.saltstack.com/{{ py_ver_repr }}/redhat/$releasever/$basearch/{{ salt_release }}'
   key_url: 'https://repo.saltstack.com/{{ py_ver_repr }}/redhat/$releasever/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
   pygit2: python-pygit2
   python_git: GitPython
   gitfs:
     gitpython:
-      install_from_source: False
+      install_from_source: false
     pygit2:
-      install_from_source: False
+      install_from_source: false
       git:
-        require_state: False
+        require_state: false
         install_from_package: git
   master:
     gitfs_provider: pygit2
 
 Suse:
+  pkgrepo_humanname: 'Salt releases for SLE-based SUSE products (openSUSE_Leap_{{ osrelease }})'
   pkgrepo: 'http://repo.saltstack.com/opensuse/openSUSE_Leap_{{ osrelease }}/'
   key_url: 'http://repo.saltstack.com/opensuse/openSUSE_Leap_{{ osrelease }}/repodata/repomd.xml.key'
   pygit2: python-pygit2
   pyinotify: python-pyinotify
   gitfs:
     pygit2:
-      install_from_source: False
+      install_from_source: false
       git:
-        require_state: False
+        require_state: false
         install_from_package: git
   master:
     gitfs_provider: pygit2
@@ -71,7 +79,7 @@ Gentoo:
   salt_syndic: app-admin/salt
   salt_api: app-admin/salt
   salt_cloud: app-admin/salt
-  pyinotify:  dev-python/pyinotify
+  pyinotify: dev-python/pyinotify
 
 Arch:
   salt_master: salt
