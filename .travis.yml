@@ -98,8 +98,9 @@ jobs:
                    @semantic-release/git@7
       deploy:
         provider: 'script'
-        # Using deprecated `skip_cleanup` until `cleanup: false` works reliably
-        # cleanup: false
-        skip_cleanup: true
+        # Opt-in to `dpl v2` to complete the Travis build config validation (beta)
+        # * https://docs.travis-ci.com/user/build-config-validation
+        # Deprecated `skip_cleanup` can now be avoided, `cleanup: false` is by default
+        edge: true
         # Run `semantic-release`
         script: 'npx semantic-release@15'
