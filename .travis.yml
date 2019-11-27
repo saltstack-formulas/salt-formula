@@ -37,7 +37,7 @@ jobs:
       script:
         # Install and run `salt-lint`
         - pip install --user salt-lint
-        - git ls-files -- *.sls *.jinja *.j2 *.tmpl *.tst
+        - git ls-files -- '*.sls' '*.jinja' '*.j2' '*.tmpl' '*.tst'
                         | xargs salt-lint
         # Install and run `yamllint`
         # Need at least `v1.17.0` for the `yaml-files` setting
@@ -48,7 +48,7 @@ jobs:
         - rubocop -d
         # Run `shellcheck` (already pre-installed in Travis)
         - shellcheck --version
-        - git ls-files -- *.sh *.bash *.ksh
+        - git ls-files -- '*.sh' '*.bash' '*.ksh'
                         | xargs shellcheck
         # Install and run `commitlint`
         - npm i -D @commitlint/config-conventional
