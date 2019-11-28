@@ -2,6 +2,32 @@
 Changelog
 =========
 
+`0.59.8 <https://github.com/saltstack-formulas/salt-formula/compare/v0.59.7...v0.59.8>`_ (2019-11-28)
+---------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **release.config.js:** use full commit hash in commit link [skip ci] (\ `67e1109 <https://github.com/saltstack-formulas/salt-formula/commit/67e110973b9ddde1ea07889e8e40de97e29c96db>`_\ )
+* **shellcheck:** fix shellcheck error (\ `cc31514 <https://github.com/saltstack-formulas/salt-formula/commit/cc3151436cecc921c992c6b520ad951bbd0f867f>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **travis:** apply changes from build config validation [skip ci] (\ `56c2eb5 <https://github.com/saltstack-formulas/salt-formula/commit/56c2eb536709ff4b07413656b08a502954e15f97>`_\ )
+* **travis:** opt-in to ``dpl v2`` to complete build config validation [skip ci] (\ `33f69cf <https://github.com/saltstack-formulas/salt-formula/commit/33f69cfb7bd462230547d2cbe91474aeccb91975>`_\ )
+* **travis:** quote pathspecs used with ``git ls-files`` [skip ci] (\ `1a27b0a <https://github.com/saltstack-formulas/salt-formula/commit/1a27b0ae84a7433120fd82a644d7bfd02da18a40>`_\ )
+* **travis:** run ``shellcheck`` during lint job [skip ci] (\ `f4e8ae6 <https://github.com/saltstack-formulas/salt-formula/commit/f4e8ae6871d9788f4b57fabd6e5962a44bf6982c>`_\ )
+* **travis:** use build config validation (beta) [skip ci] (\ `85593f5 <https://github.com/saltstack-formulas/salt-formula/commit/85593f555e95928cfd0bafdc01ca4445baddd194>`_\ )
+
+Performance Improvements
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **travis:** improve ``salt-lint`` invocation [skip ci] (\ `ef7e1c1 <https://github.com/saltstack-formulas/salt-formula/commit/ef7e1c1e7b8eb97fcb859a85d919d78f553f82ed>`_\ )
+
 `0.59.7 <https://github.com/saltstack-formulas/salt-formula/compare/v0.59.6...v0.59.7>`_ (2019-10-29)
 ---------------------------------------------------------------------------------------------------------
 
