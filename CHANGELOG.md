@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.59.9](https://github.com/saltstack-formulas/salt-formula/compare/v0.59.8...v0.59.9) (2019-12-03)
+
+
+### Tests
+
+* **pkgs_spec:** update for new `opensuse` package ([6da3d0d](https://github.com/saltstack-formulas/salt-formula/commit/6da3d0d9350bb6083f14073ee176fbd56fbad5ee)), closes [/travis-ci.com/saltstack-formulas/salt-formula/jobs/261961203#L1619-L1632](https://github.com//travis-ci.com/saltstack-formulas/salt-formula/jobs/261961203/issues/L1619-L1632)
+
 ## [0.59.8](https://github.com/saltstack-formulas/salt-formula/compare/v0.59.7...v0.59.8) (2019-11-28)
 
 
