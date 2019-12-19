@@ -1,5 +1,12 @@
 # Changelog
 
+# [1.1.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.0.0...v1.1.0) (2019-12-19)
+
+
+### Features
+
+* **formulas:** git.latest parallelization ([eda88bd](https://github.com/saltstack-formulas/salt-formula/commit/eda88bd1a684c8d462e12db31fb29cbccdf67a3d))
+
 # [1.0.0](https://github.com/saltstack-formulas/salt-formula/compare/v0.59.9...v1.0.0) (2019-12-16)
 
 
