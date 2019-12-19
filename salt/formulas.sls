@@ -34,6 +34,7 @@
 {%-       do processed_basedirs.append(basedir) %}
 {{ basedir }}:
   file.directory:
+    - parallel: {{ salt.pkg.version_cmp(grains['saltversion'], '2017.7.0') >= 0 }}
     {%-   for key, value in salt['pillar.get']('salt_formulas:basedir_opts',
                                                {'makedirs': True}).items() %}
     - {{ key }}: {{ value }}
@@ -53,12 +54,11 @@
 {{ gitdir_env }}:
   git.latest:
     - name: {{ baseurl }}/{{ f_name }}.git
+    - parallel: {{ salt.pkg.version_cmp(grains['saltversion'], '2017.7.0') >= 0 }}
     - target: {{ gitdir }}
     {%-   for key, value in options.items() %}
     - {{ key }}: {{ value }}
     {%-   endfor %}
-    - require:
-      - file: {{ basedir }}
     {%-   if not update %}
     - unless: test -e {{ gitdir }} >/dev/null 2>&1
     {%-   endif %}
