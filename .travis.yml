@@ -107,4 +107,4 @@ jobs:
         # Deprecated `skip_cleanup` can now be avoided, `cleanup: false` is by default
         edge: true
         # Run `semantic-release`
-        script: 'npx semantic-release@15'
+        script: 'npx semantic-release@15.14'
