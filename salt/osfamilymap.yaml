@@ -3,7 +3,7 @@
 
 {% import_yaml "salt/ospyvermap.yaml" as ospyvermap %}
 {% set ospyver = salt['grains.filter_by'](ospyvermap, grain='os_family') or {} %}
-{% set py_ver_repr = salt['pillar.filter_by'](ospyver, pillar='salt:py_ver', default='py2') %}
+{% set py_ver_repr = salt['pillar.filter_by'](ospyvermap, pillar='salt:py_ver', default='py2') %}
 
 {% set osrelease = salt['grains.get']('osrelease') %}
 {% set salt_release = salt['pillar.get']('salt:release', 'latest') %}
