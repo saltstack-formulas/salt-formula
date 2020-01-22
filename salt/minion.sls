@@ -2,33 +2,60 @@
 {%- from tplroot ~ "/map.jinja" import salt_settings with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
 
-{% if salt_settings.install_packages and grains.os == 'MacOS' %}
+    {%- if grains.os == 'MacOS' %}
+        {% if salt_settings.install_packages %}
 download-salt-minion:
-    {% if salt_settings.salt_minion_pkg_source %}
-        {# only download IF we know where to get the pkg from and what version to check the current install (if installed) against #}
-        {# e.g. don't download unless it appears as though we're about to try and upgrade the minion #}
+            {% if salt_settings.salt_minion_pkg_source %}
+                {# only IF we know source and version to check the current install (if installed) against #}
+                {# e.g. don't download unless a minion upgrade is happening #}
   file.managed:
     - name: '/tmp/salt.pkg'
     - source: {{ salt_settings.salt_minion_pkg_source }}
-    {%- if salt_settings.salt_minion_pkg_hash %}
+                    {%- if salt_settings.salt_minion_pkg_hash %}
     - source_hash: {{ salt_settings.salt_minion_pkg_hash }}
-    {% else %}
+                    {% else %}
     - skip_verify: True
-    {% endif %}
+                    {% endif %}
     - user: root
     - group: wheel
-    - mode: 0644
+    - mode: '0644'
     - unless:
       - test -n "{{ salt_settings.version }}" && '/opt/salt/bin/salt-minion --version=.*{{ salt_settings.version }}.*'
     - require_in:
       - macpackage: salt-minion
-   {%- elif "workaround https://github.com/saltstack/salt/issues/49348" %}
+    - retry:
+        attempts: 2
+        until: True
+        interval: 10
+        splay: 10
+            {%- elif "workaround https://github.com/saltstack/salt/issues/49348" %}
   cmd.run:
     - name: /usr/local/bin/brew install {{ salt_settings.salt_minion }}
     - onlyif: test -x /usr/local/bin/brew
     - runas: {{ salt_settings.rootuser }}
-   {%- endif %}
-{% endif %}
+            {%- endif %}
+
+salt-minion-macos:
+  file.managed:
+    - onlyif: {{ grains.os == 'MacOS' }}
+    - name: /Library/LaunchDaemons/com.saltstack.salt.minion.plist
+    - source: https://raw.githubusercontent.com/saltstack/salt/master/pkg/darwin/com.saltstack.salt.minion.plist
+    - source_hash: {{ salt_settings.salt_minion_macos_plist_hash }}
+    - retry:
+        attempts: 2
+        until: True
+        interval: 10
+        splay: 10
+  cmd.run:
+    - names:
+      - launchctl load -w /Library/LaunchDaemons/com.saltstack.salt.minion.plist
+      - launchctl unload /Library/LaunchDaemons/com.saltstack.salt.minion.plist
+    - require:
+      - file: salt-minion-macos
+    - require_in:
+      - service: salt-minion
+    {%- endif %}
+{%- endif %}
 
 salt-minion:
 {% if salt_settings.install_packages %}
@@ -36,7 +63,7 @@ salt-minion:
   macpackage.installed:
     - name: '/tmp/salt.pkg'
     - target: /
-    {# macpackage.installed behaves weirdly with version_check; version_check detects difference but fails to actually complete install. #}
+    {# macpackage.installed behaves weirdly with version_check, detects diff but fails to complete install. #}
     {# use force == True as workaround #}
     - force: True
     - unless:

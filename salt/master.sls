@@ -2,6 +2,27 @@
 {%- from tplroot ~ "/map.jinja" import salt_settings with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
 
+    {%- if grains.os == 'MacOS' %}
+salt-master-macos:
+  file.managed:
+    - name: /Library/LaunchDaemons/com.saltstack.salt.master.plist
+    - source: https://raw.githubusercontent.com/saltstack/salt/master/pkg/darwin/com.saltstack.salt.master.plist
+    - source_hash: {{ salt_settings.salt_master_macos_plist_hash }}
+    - retry:
+        attempts: 2
+        until: True
+        interval: 10
+        splay: 10
+  cmd.run:
+    - names:
+      - launchctl load -w /Library/LaunchDaemons/com.saltstack.salt.master.plist
+      - launchctl unload /Library/LaunchDaemons/com.saltstack.salt.master.plist
+    - require:
+      - file: salt-master-macos
+    - require_in:
+      - service: salt-master
+    {%- endif %}
+
 salt-master:
 {% if salt_settings.install_packages %}
   pkg.installed:

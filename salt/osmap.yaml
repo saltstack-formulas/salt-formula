@@ -57,3 +57,7 @@ SmartOS:
   config_path: /opt/local/etc/salt
   master:
     gitfs_provider: dulwich
+
+MacOS:
+  salt_master_macos_plist_hash: 9c55cb448269f4d7c433429448d1ec7dda260f180bbcf5197bc430f7645017de
+  salt_minion_macos_plist_hash: 6383d2d336b06802bfdf25a4c21ee25c85ee9fa57d3ef5776321d9c8cd096395
