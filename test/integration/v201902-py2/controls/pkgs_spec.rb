@@ -7,7 +7,7 @@ version =
   when 'suse'
     '2019.2.0-lp151.5.3.1'
   when 'debian'
-    '2019.2.1+ds-1'
+    '2019.2.3+ds-1'
   end
 
 control 'salt packages' do
