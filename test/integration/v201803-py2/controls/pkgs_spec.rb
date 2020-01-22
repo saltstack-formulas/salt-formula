@@ -1,7 +1,7 @@
 version =
   case platform[:family]
   when 'redhat'
-    '2018.3.4-1.el7'
+    '2018.3.5-1.el7'
   when 'debian'
     '2018.3.5+ds-1'
   end
