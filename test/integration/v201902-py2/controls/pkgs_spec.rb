@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 version =
   case platform[:family]
   when 'redhat'
@@ -18,10 +20,10 @@ version =
 control 'salt packages' do
   title 'should be installed'
 
-  %w(
+  %w[
     salt-master
     salt-minion
-  ).each do |p|
+  ].each do |p|
     describe package(p) do
       it { should be_installed }
       its('version') { should eq version }
