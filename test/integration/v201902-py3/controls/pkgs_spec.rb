@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 version =
   case platform[:family]
   when 'redhat'
     case platform[:name]
     when 'amazon'
-      '2019.2.0-1.el7'
+      '2019.2.2-1.el7'
     when 'centos'
       '2019.2.1-1.el7'
     when 'fedora'
@@ -18,10 +20,10 @@ version =
 control 'salt packages' do
   title 'should be installed'
 
-  %w(
+  %w[
     salt-master
     salt-minion
-  ).each do |p|
+  ].each do |p|
     describe package(p) do
       it { should be_installed }
       its('version') { should eq version }

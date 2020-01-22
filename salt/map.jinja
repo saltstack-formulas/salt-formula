@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # vim: ft=jinja
 
-{## Start imports ##}
+{#- Start imports #}
 {% import_yaml "salt/defaults.yaml" as defaults %}
 {% import_yaml "salt/osfamilymap.yaml" as osfamilymap %}
 {% import_yaml "salt/osmap.yaml" as osmap %}
@@ -18,8 +18,8 @@
 {% set lookup = salt['pillar.get']('salt:lookup', default={}, merge=True) %}
 {% do salt['defaults.merge'](defaults['salt'], lookup) %}
 
-{## Merge in salt pillar ##}
+{#- Merge in salt pillar #}
 {% set salt_settings = salt['pillar.get']('salt', default=defaults['salt'], merge=True) %}
 
-{## Merge in salt_formulas pillar ##}
+{#- Merge in salt_formulas pillar #}
 {% set formulas_settings = salt['pillar.get']('salt_formulas',default=defaults['salt_formulas'], merge=True) %}
