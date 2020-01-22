@@ -37,7 +37,7 @@ Contributing to this repo
 
 **Commit message formatting is significant!!**
 
-Please see :ref:`How to contribute <CONTRIBUTING>` for more details.
+Please see `How to contribute <https://github.com/saltstack-formulas/.github/blob/master/CONTRIBUTING.rst>`_ for more details.
 
 Available states
 ----------------
