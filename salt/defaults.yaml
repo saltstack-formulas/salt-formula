@@ -3,6 +3,7 @@
 ---
 salt:
   version: ''
+  py_ver: ''
   rootuser: root
   rootgroup: root
   install_packages: true
