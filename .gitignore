@@ -48,6 +48,7 @@ coverage.xml
 .kitchen
 .kitchen.local.yml
 kitchen.local.yml
+junit-*.xml
 
 # Translations
 *.mo
@@ -110,5 +111,16 @@ Gemfile.lock
 docs/*.md
 
 # Vim
-*.swp
-*.swo
+*.sw?
+
+## Collected when centralising formulas (check and sort)
+# `collectd-formula`
+.pytest_cache/
+/.idea/
+Dockerfile.*_*
+ignore/
+tmp/
+
+#Vagrant Specific files
+.vagrant
+top.sls

@@ -25,7 +25,8 @@
 
 {%- macro formulas_roots(env) -%}
 {%- set value = [] -%}
-{%- for dir in formulas.get(env, []) -%}
+{%- for formula in formulas.get(env, []) -%}
+{%- set dir = formula | first if formula is mapping else formula %}
 {%- set basedir = formulas_git_opt(env, 'basedir')|load_yaml -%}
 {%- do value.append('{0}/{1}'.format(basedir, dir)) -%}
 {%- endfor -%}

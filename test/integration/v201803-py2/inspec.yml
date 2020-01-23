@@ -1,0 +1,18 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+name: v201803-py2
+title: salt formula
+maintainer: SaltStack Formulas
+license: Apache-2.0
+summary: Verify that Salt `v201803-py2` is setup and configured
+supports:
+  - platform-name: debian
+  - platform-name: ubuntu
+  - platform-name: centos
+  - platform-name: fedora
+  - platform-name: opensuse
+  - platform-name: suse
+  - platform-name: freebsd
+  - platform-name: amazon
+  - platform-name: arch

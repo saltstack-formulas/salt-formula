@@ -1,24 +1,27 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
 salt:
   # Set this to true to clean any non-salt-formula managed files out of
   # /etc/salt/{master,minion}.d ... You really don't want to do this on 2015.2
   # and up as it'll wipe out important files that Salt relies on.
-  clean_config_d_dir: False
+  clean_config_d_dir: false
 
   # This state will remove "/etc/salt/minion" when you set this to true.
-  minion_remove_config: True
+  minion_remove_config: true
 
   # This state will remove "/etc/salt/master" when you set this to true.
-  master_remove_config: True
+  master_remove_config: true
 
   # Set this to 'py3' to install the Python 3 packages.
   # If this is not set, the Python 2 packages will be installed by default.
   py_ver: 'py3'
 
-  # Set this to False to not have the formula install packages (in the case you
+  # Set this to false to not have the formula install packages (in the case you
   # install Salt via git/pip/etc.)
-  install_packages: True
+  install_packages: true
 
-  # Optional: set salt version (if install_packages is set to True)
+  # Optional: set salt version (if install_packages is set to true)
   version: 2017.7.2-1.el7
 
   # to overwrite map.jinja salt packages
@@ -37,14 +40,18 @@ salt:
   release: '2018.3'
 
   # MacOS has no package management.
-  # Instead, we use file.managed to download an appropriate .pkg file and macpackage.installed to install it
-  # 'version', if set (see above), will be used to check the .pkg version to determine if it should be installed
+  # Instead, we use file.managed to download an appropriate .pkg file and
+  # macpackage.installed to install it 'version', if set (see above), will be
+  # used to check the .pkg version to determine if it should be installed
   #
-  # NOTE: if 'version' is not set version comparison will not occur and the .pkg WILL NOT be installed if a salt
-  # .pkg is already installed
-  # NOTE: salt_minion_pkg_hash, if set, will be passed into file.managed's source_hash, use URL or hash string
+  # NOTE: if 'version' is not set version comparison will not occur and the
+  # .pkg WILL NOT be installed if a salt .pkg is already installed
+  # NOTE: salt_minion_pkg_hash, if set, will be passed into file.managed's
+  # source_hash, use URL or hash string
+  # yamllint disable rule:line-length
   salt_minion_pkg_source: 'https://repo.saltstack.com/osx/salt-2017.7.4-py3-x86_64.pkg'
   salt_minion_pkg_hash: 'https://repo.saltstack.com/osx/salt-2017.7.4-py3-x86_64.pkg.md5'
+  # yamllint enable rule:line-length
 
   # tofs:
   #   The files_switch key serves as a selector for alternative
@@ -71,7 +78,7 @@ salt:
   #       - 'alt_minion.d'
 
   # salt master config
-  master_config_use_TOFS: True
+  master_config_use_TOFS: true
   master:
     fileserver_backend:
       - git
@@ -79,7 +86,7 @@ salt:
       - roots
     gitfs_remotes:
       - git://github.com/saltstack-formulas/salt-formula.git:
-        - base: develop
+          - base: develop
     s3.keyid: GKTADJGHEIQSXMKKRBJ08H
     s3.key: askdjghsdfjkghWupUjasdflkdfklgjsdfjajkghs
     s3.buckets:
@@ -98,8 +105,9 @@ salt:
       port: 8000
       ssl_crt: /etc/pki/api/certs/server.crt
       ssl_key: /etc/pki/api/certs/server.key
-      debug: False
-      disable_ssl: False
+      debug: false
+      disable_ssl: false
+      # yamllint disable-line rule:line-length
     # for profile configuration as https://docs.saltstack.com/en/latest/topics/tutorials/lxc.html#tutorial-lxc-profiles
     lxc.container_profile:
       debian:
@@ -118,10 +126,10 @@ salt:
           type: veth
           flags: up
     ## for external auth - LDAP
-      # filter to use for Active Directory LDAP
-    auth.ldap.filter: {% raw %}'sAMAccountName={{username}}'{% endraw %}
-      # filter to use for Most other LDAP servers
-    auth.ldap.filter: {% raw %}'uid={{ username }}'{% endraw %}
+    ## filter to use for Active Directory LDAP
+    # auth.ldap.filter: {% raw %}'sAMAccountName={{username}}'{% endraw %}
+    ## filter to use for Most other LDAP servers
+    # auth.ldap.filter: {% raw %}'uid={{ username }}'{% endraw %}
 
     # Define winrepo provider, by default support order is pygit2, gitpython
     # Set to gitpython for Debian & Ubuntu to get around saltstack/salt#35993
@@ -132,7 +140,7 @@ salt:
     engines:
       - slack:
           token: xoxp-XXXXX-XXXXXXX   # use Slack's legacy API token
-          control: True
+          control: true
           valid_users:
             - someuser
             - otheruser
@@ -149,26 +157,26 @@ salt:
     # 'salt:reactors' or the old 'salt:reactor' parameters
     reactors:
       - 'master/deploy':
-        - /srv/salt/reactors/deploy.sls
+          - /srv/salt/reactors/deploy.sls
 
   # salt minion config:
-  minion_config_use_TOFS: True
+  minion_config_use_TOFS: true
   minion:
 
     # single master setup
     master: salt
 
     # multi master setup
-    #master:
-      #- salt_master_1
-      #- salt_master_2
+    # master:
+    #   - salt_master_1
+    #   - salt_master_2
 
     fileserver_backend:
       - git
       - roots
     gitfs_remotes:
       - git://github.com/saltstack-formulas/salt-formula.git:
-        - base: develop
+          - base: develop
     file_roots:
       base:
         - /srv/salt
@@ -176,7 +184,7 @@ salt:
       base:
         - /srv/pillar
     module_config:
-      test: True
+      test: true
       test.foo: foo
       test.bar:
         - baz
@@ -197,9 +205,9 @@ salt:
     # Define a minion scheduler
     schedule:
       - highstate:
-        - function: state.apply
-        - minutes: 60
-        - returner: redis
+          - function: state.apply
+          - minutes: 60
+          - returner: redis
 
     # other 'non-default' config
     auth_keytab: /root/auth.keytab
@@ -209,7 +217,7 @@ salt:
     engines:
       - slack:
           token: xoxp-XXXXX-XXXXXXX   # use Slack's legacy API token
-          control: True
+          control: true
           valid_users:
             - someuser
             - otheruser
@@ -240,7 +248,7 @@ salt:
     # 'salt:reactors' or the old 'salt:reactor' parameters
     reactors:
       - 'minion/deploy':
-        - /srv/salt/reactors/deploy.sls
+          - /srv/salt/reactors/deploy.sls
 
     # Optional: Configure an elasticsearch returner
     return: elasticsearch
@@ -248,14 +256,14 @@ salt:
       hosts:
         - example.elasticsearch.host:9200
         - example.elasticsearch.host2:9200
-      index_date: True
+      index_date: true
       index: salt
       number_of_shards: 5
       number_of_replicas: 2
-      debug_returner_payload: True
-      states_count: True
-      states_order_output: True
-      states_single_index: True
+      debug_returner_payload: true
+      states_count: true
+      states_order_output: true
+      states_single_index: true
       functions_blacklist:
         - test.ping
         - saltutil.find_job
@@ -307,6 +315,7 @@ salt:
     aws_key: AWSKEYIJSHJAIJS6JSH
     aws_secret: AWSSECRETYkkDY1iQf9zRtl9+pW+Nm+aZY95
     gce_project: test
+    # yamllint disable-line rule:line-length
     gce_service_account_email_address: 867543072364-orl4h2tpp8jcn1tr9ipj@developer.gserviceaccount.com
     rsos_user: afeawofghob
     rsos_tenant: tenant_id_number
@@ -322,12 +331,13 @@ salt:
     prod1:
       host: host.example.com
       user: ubuntu
-      sudo: True
+      sudo: true
       priv: /etc/salt/ssh_keys/sshkey.pem
   gitfs:
     keys:
       global:
-        # key and pub end up being the extension used on the key file. values other than key and pub are possible
+        # key and pub end up being the extension used on the key file
+        # values other than key and pub are possible
         key: |
           -----BEGIN RSA PRIVATE KEY-----
           ...........
@@ -338,7 +348,7 @@ salt:
   # These reactors will be configured both in the minion and the master
   reactors:
     - 'deploy':
-      - /srv/salt/reactors/deploy.sls
+        - /srv/salt/reactors/deploy.sls
 
 salt_cloud_certs:
   aws:
@@ -364,8 +374,8 @@ salt_formulas:
       baseurl: https://github.com/saltstack-formulas
       # Directory where Git repositories are downloaded
       basedir: /srv/formulas
-      # Update the git repository to the latest version (False by default)
-      update: False
+      # Update the git repository to the latest version (false by default)
+      update: false
       # Options passed directly to the git.latest state
       options:
         rev: master
@@ -373,7 +383,7 @@ salt_formulas:
         identity: /path/to/.ssh/id_rsa_github_username
     dev:
       basedir: /srv/formulas/dev
-      update: True
+      update: true
       options:
         rev: develop
     # Alternatively, a single directory with multiple branches can be used
@@ -394,30 +404,38 @@ salt_formulas:
         rev: staging
     upstream:
       baseurl: git@github.com:saltstack-formulas
-      update: True
+      update: true
       options:
         branch: upstream
         remote: upstream
   # Options of the file.directory state that creates the directory where
   # the git repositories of the formulas are stored
   basedir_opts:
-    makedirs: True
+    makedirs: true
     user: root
     group: root
     mode: 755
   # Explicitly checkout the original branch for repos after the
-  # git.latest states have been processed (False by default)
+  # git.latest states have been processed (false by default)
   # Enable if using the alternative method (single directory, multiple branches)
-  checkout_orig_branch: True
+  checkout_orig_branch: true
   # List of formulas to enable in each environment
   list:
     base:
       - salt-formula
       - postfix-formula
+      - nginx-formula:  # We can also override some options per formula
+          rev: 'v1.1.0'  # Pin a version
+      - openssh-formula:
+          rev: '3e01ad8'  # or pin a commit id
     dev:
       - salt-formula
       - postfix-formula
       - openssh-formula
+      - nginx-formula:
+          # You can also pull from another location
+          name: 'https://github.com/another-fork-location/salt-formula.git'
+          rev: 'feat/feature'
     # Likewise for the alternative method (single directory, multiple branches)
     production:
       - salt-formula
@@ -430,4 +448,3 @@ salt_formulas:
       - salt-formula
       - postfix-formula
       - openssh-formula
-

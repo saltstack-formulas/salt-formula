@@ -1,0 +1,39 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+# Extend the `default` configuration provided by `yamllint`
+extends: default
+
+# Files to ignore completely
+# 1. All YAML files under directory `node_modules/`, introduced during the Travis run
+# 2. Any SLS files under directory `test/`, which are actually state files
+# 3. Any YAML files under directory `.kitchen/`, introduced during local testing
+# 4. All YAML files heavily reliant on Jinja; these can be tackled in a subsequent PR
+ignore: |
+  node_modules/
+  test/**/states/**/*.sls
+  .kitchen/
+  salt/osfamilymap.yaml
+  salt/osmap.yaml
+
+yaml-files:
+  # Default settings
+  - '*.yaml'
+  - '*.yml'
+  - .salt-lint
+  - .yamllint
+  # SaltStack Formulas additional settings
+  - '*.example'
+  - test/**/*.sls
+
+rules:
+  empty-values:
+    forbid-in-block-mappings: true
+    forbid-in-flow-mappings: true
+  line-length:
+    # Increase from default of `80`
+    # Based on https://github.com/PyCQA/flake8-bugbear#opinionated-warnings (`B950`)
+    max: 88
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true

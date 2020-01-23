@@ -39,7 +39,7 @@ Using SaltStack is a simple and effective way to implement configuration managem
 
 To avoid this situation we can use the `pillar mechanism <http://docs.saltstack.com/en/latest/topics/pillar/>`_, which is designed to provide controlled access to data from the minions based on some selection rules. As pillar data could be easily integrated in the `Jinja <http://docs.saltstack.com/en/latest/topics/tutorials/pillar.html>`_ templates, it is a good mechanism to store values to be used in the final rendering of state files and templates.
 
-There are a variety of approaches on the usage of pillar and templates as seen in the `saltstack-formulas <https://github.com/saltstack-formulas>`_' repositories. `Some <https://github.com/saltstack-formulas/nginx-formula/pull/18>`_ `developments <https://github.com/saltstack-formulas/php-formula/pull/14>`_ stress the initial purpose of pillar data into a storage for most of the possible variables for a determined system configuration. This, in my opinion, is shifting too much load from the original template files approach. Adding up some `non-trivial Jinja <https://github.com/spsoit/nginx-formula/blob/81de880fe0276dd9488ffa15bc78944c0fc2b919/nginx/ng/files/nginx.conf>`_ code as essential part of composing the state file definitely makes SaltStack state files (hence formulas) more difficult to read. The extreme of this approach is that we could end up with a new render mechanism, implemented in Jinja, storing everything needed in pillar data to compose configurations. Additionally, we are establishing a strong dependency with the Jinja renderer.
+There are a variety of approaches on the usage of pillar and templates as seen in the `saltstack-formulas <https://github.com/saltstack-formulas>`_' repositories. `Some <https://github.com/saltstack-formulas/nginx-formula/pull/18>`_ `developments <https://github.com/saltstack-formulas/php-formula/pull/14>`_ stress the initial purpose of pillar data into a storage for most of the possible variables for a determined system configuration. This, in my opinion, is shifting too much load from the original template files approach. Adding up some `non-trivial Jinja <https://github.com/saltstack-formulas/nginx-formula/blob/f74254c07e188bd448eaf1c5f9c802d78c4c005e/nginx/files/default/nginx.conf>`_ code as essential part of composing the state file definitely makes SaltStack state files (hence formulas) more difficult to read. The extreme of this approach is that we could end up with a new render mechanism, implemented in Jinja, storing everything needed in pillar data to compose configurations. Additionally, we are establishing a strong dependency with the Jinja renderer.
 
 In opposition to the *put the code in file_roots and the data in pillars* approach, there is the *pillar as a store for a set of key-values* approach. A full-blown configuration file abstracted in pillar and jinja is complicated to develop, understand and maintain. I think a better and simpler approach is to keep a configuration file templated using just a basic (non-extensive but extensible) set of pillar values.
 
@@ -325,6 +325,7 @@ We can simplify the ``conf.sls`` with the new ``files_switch`` macro to use in t
 
 
 * This uses ``config.get``, searching for ``ntp:tofs:source_files:Configure NTP`` to determine the list of template files to use.
+* If this returns a result, the default of ``['/etc/ntp.conf.jinja']`` will be appended to it.
 * If this does not yield any results, the default of ``['/etc/ntp.conf.jinja']`` will be used.
 
 In ``libtofs.jinja``, we define this new macro ``files_switch``.
@@ -426,7 +427,6 @@ The list of ``source_files`` can be given:
      tofs:
        source_files:
          Configure NTP:
-           - '/etc/ntp.conf.jinja'
            - '/etc/ntp.conf_alt.jinja'
 
 Resulting in:
@@ -434,10 +434,85 @@ Resulting in:
 .. code-block:: sls
 
          - source:
-           - salt://ntp/files/theminion/etc/ntp.conf.jinja
            - salt://ntp/files/theminion/etc/ntp.conf_alt.jinja
-           - salt://ntp/files/Debian/etc/ntp.conf.jinja
+           - salt://ntp/files/theminion/etc/ntp.conf.jinja
            - salt://ntp/files/Debian/etc/ntp.conf_alt.jinja
-           - salt://ntp/files/default/etc/ntp.conf.jinja
+           - salt://ntp/files/Debian/etc/ntp.conf.jinja
            - salt://ntp/files/default/etc/ntp.conf_alt.jinja
+           - salt://ntp/files/default/etc/ntp.conf.jinja
 
+Note: This does *not* override the default value.
+Rather, the value from the pillar/config is prepended to the default.
+
+Using sub-directories for ``components``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If your formula is composed of several components, you may prefer to provides files under sub-directories, like in the `systemd-formula <https://github.com/saltstack-formulas/systemd-formula>`_.
+
+.. code-block::
+
+   /srv/saltstack/systemd-formula/
+     systemd/
+       init.sls
+       libtofs.jinja
+       map.jinja
+       networkd/
+         init.sls
+         files/
+           default/
+             network/
+               99-default.link
+       resolved/
+         init.sls
+         files/
+           default/
+             resolved.conf
+       timesyncd/
+         init.sls
+         files/
+           Arch/
+             resolved.conf
+           Debian/
+             resolved.conf
+           default/
+             resolved.conf
+           Ubuntu/
+             resolved.conf
+
+For example, the following ``formula.component.config`` SLS:
+
+.. code-block:: sls
+
+   {%- from "formula/libtofs.jinja" import files_switch with context %}
+
+   formula configuration file:
+     file.managed:
+       - name: /etc/formula.conf
+       - user: root
+       - group: root
+       - mode: 644
+       - template: jinja
+       - source: {{ files_switch(['formula.conf'],
+                                 lookup='formula',
+                                 use_subpath=True
+                    )
+                 }}
+
+will be rendered on a ``Debian`` minion named ``salt-formula.ci.local`` as:
+
+.. code-block:: sls
+
+   formula configuration file:
+     file.managed:
+       - name: /etc/formula.conf
+       - user: root
+       - group: root
+       - mode: 644
+       - template: jinja
+       - source:
+         - salt://formula/component/files/salt-formula.ci.local/formula.conf
+         - salt://formula/component/files/Debian/formula.conf
+         - salt://formula/component/files/default/formula.conf
+         - salt://formula/files/salt-formula.ci.local/formula.conf
+         - salt://formula/files/Debian/formula.conf
+         - salt://formula/files/default/formula.conf
