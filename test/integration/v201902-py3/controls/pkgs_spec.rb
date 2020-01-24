@@ -7,7 +7,7 @@ version =
     when 'amazon'
       '2019.2.2-1.el7'
     when 'centos'
-      '2019.2.2-1.el8'
+      '2019.2.3-1.el8'
     end
   when 'fedora'
     '2019.2.1rc0-3.fc31'
