@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.1](https://github.com/saltstack-formulas/salt-formula/compare/v1.1.0...v1.1.1) (2020-01-24)
+
+
+### Continuous Integration
+
+* **travis:** use `major.minor` for `semantic-release` version [skip ci] ([9d30df2](https://github.com/saltstack-formulas/salt-formula/commit/9d30df2f5f7405b9e354203f22a524b79a44ac15))
+
+
+### Tests
+
+* **pkgs_spec:** update `centos-8` for `2019.2.3` release ([7121d1d](https://github.com/saltstack-formulas/salt-formula/commit/7121d1d8cd67230a9f9dabecd1a6e11a14cfa109))
+* **versions:** bump salt pkg versions ([c42125c](https://github.com/saltstack-formulas/salt-formula/commit/c42125c2ab1563b64e4768cf80955401a40a86ea))
+
 # [1.1.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.0.0...v1.1.0) (2019-12-19)
 
 
