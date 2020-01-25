@@ -3,16 +3,7 @@
 version =
   case platform[:family]
   when 'redhat'
-    case platform[:name]
-    when 'amazon'
-      '2019.2.3-1.el7'
-    when 'centos'
-      '2019.2.1-1.el7'
-    when 'fedora'
-      '2019.2.0-1.fc30'
-    end
-  when 'suse'
-    '2019.2.0-lp151.5.3.1'
+    '2019.2.3-1.el7'
   when 'debian'
     '2019.2.3+ds-1'
   end
