@@ -3,4 +3,3 @@
 ---
 salt:
   release: '2019.2'
-  py_ver: 'py2'
