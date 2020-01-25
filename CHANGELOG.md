@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/saltstack-formulas/salt-formula/compare/v1.1.1...v1.1.2) (2020-01-25)
+
+
+### Code Refactoring
+
+* **mapping:** simplify py version handling ([715e3b8](https://github.com/saltstack-formulas/salt-formula/commit/715e3b8fa495ed2c8e9f4a5fbbb6398021ac9ec7))
+
 ## [1.1.1](https://github.com/saltstack-formulas/salt-formula/compare/v1.1.0...v1.1.1) (2020-01-24)
 
 
