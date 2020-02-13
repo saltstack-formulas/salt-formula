@@ -75,7 +75,7 @@ jobs:
     # - env: INSTANCE=v201803-py2-arch-base-latest-2018-3-py2
     - env: INSTANCE=v201902-py2-ubuntu-1804-2019-2-py2
     # - env: INSTANCE=v201902-py2-centos-7-2019-2-py2
-    - env: INSTANCE=v201902-py2-amazonlinux-2-2019-2-py3
+    - env: INSTANCE=v201902-py3-amazonlinux-2-2019-2-py3
     # - env: INSTANCE=v201902-py2-arch-base-latest-2019-2-py2
     - env: INSTANCE=v201902-py3-debian-10-2019-2-py3
     # - env: INSTANCE=v201902-py3-debian-9-2019-2-py3
