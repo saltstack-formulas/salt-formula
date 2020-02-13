@@ -24,7 +24,7 @@ salt-master:
               }}
     {%- else %}
     - template: jinja
-    - source: salt://{{ slspath }}/files/master.d
+    - source: salt://{{ tplroot }}/files/master.d
     {%- endif %}
     - clean: {{ salt_settings.clean_config_d_dir }}
     - exclude_pat: _*
