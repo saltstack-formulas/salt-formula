@@ -66,7 +66,7 @@ salt-minion:
               }}
     {%- else %}
     - template: jinja
-    - source: salt://{{ slspath }}/files/minion.d
+    - source: salt://{{ tplroot }}/files/minion.d
     - context:
         standalone: False
         file_roots: {{ file_roots }}

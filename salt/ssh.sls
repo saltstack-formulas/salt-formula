@@ -1,6 +1,5 @@
-## from template-formula
 {%- set tplroot = tpldir.split('/')[0] %}
-{% from tplroot ~ "/map.jinja" import salt_settings with context %}
+{% from "salt/map.jinja" import salt_settings with context %}
 
 {% if salt_settings.install_packages %}
 ensure-salt-ssh-is-installed:
@@ -14,7 +13,7 @@ ensure-salt-ssh-is-installed:
 ensure-roster-config:
   file.managed:
     - name: {{ salt_settings.config_path }}/roster
-    - source: salt://{{ slspath }}/files/roster.jinja
+    - source: salt://{{ tplroot }}/files/roster.jinja
     - template: jinja
 {% if salt_settings.install_packages %}
     - require:

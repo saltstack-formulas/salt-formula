@@ -120,3 +120,7 @@ docs/*.md
 Dockerfile.*_*
 ignore/
 tmp/
+
+#Vagrant Specific files
+.vagrant
+top.sls

@@ -32,13 +32,13 @@ jobs:
     - language: 'node_js'
       node_js: 'lts/*'
       env: 'Lint'
-      name: 'Lint: salt-lint, yamllint, rubocop & commitlint'
+      name: 'Lint: salt-lint, yamllint, rubocop, shellcheck & commitlint'
       before_install: 'skip'
       script:
         # Install and run `salt-lint`
         - pip install --user salt-lint
-        - git ls-files | grep '\.sls$\|\.jinja$\|\.j2$\|\.tmpl$\|\.tst$'
-                       | xargs salt-lint
+        - git ls-files -- '*.sls' '*.jinja' '*.j2' '*.tmpl' '*.tst'
+                        | xargs salt-lint
         # Install and run `yamllint`
         # Need at least `v1.17.0` for the `yaml-files` setting
         - pip install --user yamllint>=1.17.0
@@ -46,6 +46,10 @@ jobs:
         # Install and run `rubocop`
         - gem install rubocop
         - rubocop -d
+        # Run `shellcheck` (already pre-installed in Travis)
+        - shellcheck --version
+        - git ls-files -- '*.sh' '*.bash' '*.ksh'
+                        | xargs shellcheck
         # Install and run `commitlint`
         - npm i -D @commitlint/config-conventional
                    @commitlint/travis-cli
@@ -62,16 +66,16 @@ jobs:
     # - env: INSTANCE=v201707-py2-debian-8-2017-7-py2
     - env: INSTANCE=v201707-py2-ubuntu-1604-2017-7-py2
     - env: INSTANCE=v201707-py2-centos-6-2017-7-py2
-    # - env: INSTANCE=v201707-py2-amazonlinux-2-2017-7-py2
+    # - env: INSTANCE=v201707-py2-amazonlinux-1-2017-7-py2
     # - env: INSTANCE=v201707-py2-arch-base-latest-2017-7-py2
     - env: INSTANCE=v201803-py2-debian-9-2018-3-py2
     # - env: INSTANCE=v201803-py2-ubuntu-1604-2018-3-py2
     - env: INSTANCE=v201803-py2-centos-7-2018-3-py2
-    # - env: INSTANCE=v201803-py2-amazonlinux-2-2018-3-py2
+    # - env: INSTANCE=v201803-py2-amazonlinux-1-2018-3-py2
     # - env: INSTANCE=v201803-py2-arch-base-latest-2018-3-py2
     - env: INSTANCE=v201902-py2-ubuntu-1804-2019-2-py2
     # - env: INSTANCE=v201902-py2-centos-7-2019-2-py2
-    - env: INSTANCE=v201902-py2-amazonlinux-2-2019-2-py2
+    - env: INSTANCE=v201902-py3-amazonlinux-2-2019-2-py3
     # - env: INSTANCE=v201902-py2-arch-base-latest-2019-2-py2
     - env: INSTANCE=v201902-py3-debian-10-2019-2-py3
     # - env: INSTANCE=v201902-py3-debian-9-2019-2-py3
@@ -98,8 +102,9 @@ jobs:
                    @semantic-release/git@7
       deploy:
         provider: 'script'
-        # Using deprecated `skip_cleanup` until `cleanup: false` works reliably
-        # cleanup: false
-        skip_cleanup: true
+        # Opt-in to `dpl v2` to complete the Travis build config validation (beta)
+        # * https://docs.travis-ci.com/user/build-config-validation
+        # Deprecated `skip_cleanup` can now be avoided, `cleanup: false` is by default
+        edge: true
         # Run `semantic-release`
-        script: 'npx semantic-release@15'
+        script: 'npx semantic-release@15.14'
