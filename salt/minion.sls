@@ -41,8 +41,10 @@ salt-minion:
     - force: True
     - unless:
       - test -n "{{ salt_settings.version }}" && '/opt/salt/bin/salt-minion --version=.*{{ salt_settings.version }}.*'
+{% if salt_settings.minion_service_details.state != 'ignore' %}
     - require_in:
       - service: salt-minion
+{% endif %}
     - onchanges_in:
       - cmd: remove-macpackage-salt
   {%- elif grains.os != 'MacOS' and "workaround https://github.com/saltstack/salt/issues/49348" %}
@@ -51,8 +53,10 @@ salt-minion:
   {%- if salt_settings.version %}
     - version: {{ salt_settings.version }}
   {%- endif %}
+{% if salt_settings.minion_service_details.state != 'ignore' %}
     - require_in:
       - service: salt-minion
+{% endif %}
   {%- endif %}
 {% endif %}
   file.recurse:
@@ -71,11 +75,13 @@ salt-minion:
     {%- endif %}
     - clean: {{ salt_settings.clean_config_d_dir }}
     - exclude_pat: _*
-  service.running:
-    - enable: True
+{% if salt_settings.minion_service_details.state != 'ignore' %}
+  service.{{ salt_settings.minion_service_details.state }}:
+    - enable: {{ salt_settings.minion_service_details.enabled }}
     - name: {{ salt_settings.minion_service }}
     - require:
       - file: salt-minion
+{% endif %}
 {%- if not salt_settings.restart_via_at %}
   cmd.run:
   {%- if grains['saltversioninfo'] >= [ 2016, 3 ] %}

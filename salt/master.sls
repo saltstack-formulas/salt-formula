@@ -9,10 +9,12 @@ salt-master:
   {%- if salt_settings.version is defined %}
     - version: {{ salt_settings.version }}
   {%- endif %}
+{% if salt_settings.master_service_details.state != 'ignore' %}
     - require_in:
       - service: salt-master
     - watch_in:
       - service: salt-master
+{% endif %}
 {% endif %}
   file.recurse:
     - name: {{ salt_settings.config_path }}/master.d
@@ -28,13 +30,14 @@ salt-master:
     {%- endif %}
     - clean: {{ salt_settings.clean_config_d_dir }}
     - exclude_pat: _*
-  service.running:
-    - enable: True
+{% if salt_settings.master_service_details.state != 'ignore' %}
+  service.{{ salt_settings.master_service_details.state }}:
+    - enable: {{ salt_settings.master_service_details.enabled }}
     - name: {{ salt_settings.master_service }}
     - watch:
       - file: salt-master
       - file: remove-old-master-conf-file
-
+{% endif %}
 {% if salt_settings.master_remove_config %}
 remove-default-master-conf-file:
   file.absent:
