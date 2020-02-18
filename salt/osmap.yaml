@@ -24,7 +24,7 @@ Amazon:
   key_url: 'https://repo.saltstack.com/{{ py_ver_dir or 'yum' }}/amazon/2/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
 
 Ubuntu:
-  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_dir or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
+  pkgrepo: 'deb [arch=amd64] http://repo.saltstack.com/{{ py_ver_dir or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
   key_url: 'https://repo.saltstack.com/{{ py_ver_dir or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
   pygit2: python-pygit2
   gitfs:

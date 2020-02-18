@@ -69,7 +69,6 @@ salt-minion:
     - source: salt://{{ tplroot }}/files/minion.d
     - context:
         standalone: False
-        file_roots: {{ file_roots }}
         formulas: {{ formulas|json }}
     {%- endif %}
     - clean: {{ salt_settings.clean_config_d_dir }}
