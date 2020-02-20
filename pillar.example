@@ -80,6 +80,7 @@ salt:
   # salt master config
   master_config_use_TOFS: true
   master:
+    standalone: false
     fileserver_backend:
       - git
       - s3fs
@@ -162,6 +163,9 @@ salt:
   # salt minion config:
   minion_config_use_TOFS: true
   minion:
+
+    # standalone setup
+    master_type: false   # see init.sls & standalone.sls
 
     # single master setup
     master: salt
@@ -267,6 +271,13 @@ salt:
       functions_blacklist:
         - test.ping
         - saltutil.find_job
+
+  # init.sls skips salt.api and salt.syndic states
+  # unless those dicts are populated with something
+  api:
+    somekey: somevalue
+  syndic:
+    somekey: somevalue
 
   # salt cloud config
   cloud:
