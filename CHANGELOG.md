@@ -1,5 +1,22 @@
 # Changelog
 
+# [1.2.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.1.3...v1.2.0) (2020-02-20)
+
+
+### Bug Fixes
+
+* **libtofs:** “files_switch” mess up the variable exported by “map.jinja” [skip ci] ([4955737](https://github.com/saltstack-formulas/salt-formula/commit/4955737f844678ca3ca208340fe73fcd47aab256))
+
+
+### Continuous Integration
+
+* **kitchen+travis+inspec:** fix `amazonlinux-2-py3` [skip ci] ([10e2ce0](https://github.com/saltstack-formulas/salt-formula/commit/10e2ce07a4293ad46d785bcbc16b822280f17142))
+
+
+### Features
+
+* **metastate:** add metastate per community convention ([fbaa456](https://github.com/saltstack-formulas/salt-formula/commit/fbaa456ca69fafa2a8a4ef910b5e09dafffe5ece))
+
 ## [1.1.3](https://github.com/saltstack-formulas/salt-formula/compare/v1.1.2...v1.1.3) (2020-02-13)
 
 
