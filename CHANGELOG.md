@@ -1,5 +1,12 @@
 # Changelog
 
+# [1.3.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.2.0...v1.3.0) (2020-03-11)
+
+
+### Features
+
+* **mapping:** better control of the service's state ([29ffd68](https://github.com/saltstack-formulas/salt-formula/commit/29ffd68d3419b61b938221130911844f48134817))
+
 # [1.2.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.1.3...v1.2.0) (2020-02-20)
 
 
