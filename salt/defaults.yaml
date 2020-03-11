@@ -19,8 +19,23 @@ salt:
   master_config_use_TOFS: false
 
   minion_service: salt-minion
+  minion_service_details:
+    # special name 'ignore' will not output anything about the service
+    state: running
+    enabled: true
+
   master_service: salt-master
+  master_service_details:
+    # special name 'ignore' will not output anything about the service
+    state: running
+    enabled: true
+
   api_service: salt-api
+  api_service_details:
+    # special name 'ignore' will not output anything about the service
+    state: running
+    enabled: true
+
   syndic_service: salt-syndic
 
   salt_master: salt-master
