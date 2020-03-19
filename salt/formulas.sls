@@ -34,7 +34,7 @@
 {%-       do processed_basedirs.append(basedir) %}
 {{ basedir }}:
   file.directory:
-    - parallel: {{ salt.pkg.version_cmp(grains['saltversion'], '2017.7.0') >= 0 }}
+    - parallel: {{ grains['saltversioninfo'] >= [2017, 7, 0] }}
     {%-   for key, value in salt['pillar.get']('salt_formulas:basedir_opts',
                                                {'makedirs': True}).items() %}
     - {{ key }}: {{ value }}
