@@ -12,7 +12,7 @@ version =
   when 'fedora'
     '2019.2.1rc0-3.fc31'
   when 'suse'
-    '2019.2.0-lp151.5.9.1'
+    '2019.2.0-lp151.5.12.1'
   when 'debian'
     '2019.2.3+ds-1'
   end
