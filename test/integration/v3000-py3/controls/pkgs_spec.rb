@@ -5,16 +5,16 @@ version =
   when 'redhat'
     case platform[:name]
     when 'amazon'
-      '2019.2.3-1.amzn2'
+      '3000-1.amzn2'
     when 'centos'
-      '2019.2.3-1.el8'
+      '3000-1.el8'
     end
   when 'fedora'
-    '2019.2.1rc0-3.fc31'
+    '3000-5.fc31'
   when 'suse'
-    '2019.2.0-lp151.28.1'
+    '3000-lp151.28.1'
   when 'debian'
-    '2019.2.3+ds-1'
+    '3000+ds-1'
   end
 
 control 'salt packages' do
