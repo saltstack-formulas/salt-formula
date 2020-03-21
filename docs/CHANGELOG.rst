@@ -2,6 +2,28 @@
 Changelog
 =========
 
+`1.3.2 <https://github.com/saltstack-formulas/salt-formula/compare/v1.3.1...v1.3.2>`_ (2020-03-21)
+------------------------------------------------------------------------------------------------------
+
+Code Refactoring
+^^^^^^^^^^^^^^^^
+
+
+* **osfamilymap:** remove workaround for OpenSUSE 15.1 (\ `0da366c <https://github.com/saltstack-formulas/salt-formula/commit/0da366c7b25778dcec12f2a4a80cd4072c3d4d29>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **kitchen+travis:** adjust matrix to add ``3000`` & remove ``2017.7`` (\ `4a5f805 <https://github.com/saltstack-formulas/salt-formula/commit/4a5f8053e938569814a2043405416c74b8c990fd>`_\ )
+
+Tests
+^^^^^
+
+
+* **neon:** add pillar and tests for ``3000`` (\ `f91f10c <https://github.com/saltstack-formulas/salt-formula/commit/f91f10c2800edfc1b59fd731a6b6f82a47f74fcc>`_\ )
+* **nitrogen:** remove pillar and tests for ``2017.7`` (\ `f246a5e <https://github.com/saltstack-formulas/salt-formula/commit/f246a5e0af84f527df2f87428d929440c716361b>`_\ )
+
 `1.3.1 <https://github.com/saltstack-formulas/salt-formula/compare/v1.3.0...v1.3.1>`_ (2020-03-19)
 ------------------------------------------------------------------------------------------------------
 
