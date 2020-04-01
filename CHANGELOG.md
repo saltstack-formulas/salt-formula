@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.3.3](https://github.com/saltstack-formulas/salt-formula/compare/v1.3.2...v1.3.3) (2020-04-01)
+
+
+### Continuous Integration
+
+* **kitchen+travis:** adjust matrix to update `3000` to `3000.1` ([a8fe65a](https://github.com/saltstack-formulas/salt-formula/commit/a8fe65a2c80a63cb167ea6f7f88b1198b6e07b97))
+
+
+### Tests
+
+* **pkgs_spec:** update `3000` to `3000.1` ([1e677cd](https://github.com/saltstack-formulas/salt-formula/commit/1e677cd761ab82ff6160d7b96ce7f6920b2e02e4))
+* **service_spec:** add `should be_installed` ([b5461a0](https://github.com/saltstack-formulas/salt-formula/commit/b5461a0ebab63fb77186ea5960e71bd1426609a1))
+
 ## [1.3.2](https://github.com/saltstack-formulas/salt-formula/compare/v1.3.1...v1.3.2) (2020-03-21)
 
 
