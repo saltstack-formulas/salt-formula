@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.4](https://github.com/saltstack-formulas/salt-formula/compare/v1.3.3...v1.3.4) (2020-04-03)
+
+
+### Bug Fixes
+
+* **api:** remove spurious colon in salt.api state ([02fbcd4](https://github.com/saltstack-formulas/salt-formula/commit/02fbcd43fc56e99fa62d7ab78658fa19e5d83372))
+
 ## [1.3.3](https://github.com/saltstack-formulas/salt-formula/compare/v1.3.2...v1.3.3) (2020-04-01)
 
 
