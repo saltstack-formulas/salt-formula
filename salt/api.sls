@@ -13,7 +13,7 @@ salt-api:
 {% endif %}
 {% if salt_settings.api_service_details.state != 'ignore' %}
   service.{{ salt_settings.api_service_details.state }}:
-    - enable: {{ salt_settings.api_service_details.enabled }}:
+    - enable: {{ salt_settings.api_service_details.enabled }}
     - name: {{ salt_settings.api_service }}
     - require:
       - service: {{ salt_settings.master_service }}
