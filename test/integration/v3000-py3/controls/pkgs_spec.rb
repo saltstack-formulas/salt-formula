@@ -10,7 +10,7 @@ version =
       '3000.1-1.el8'
     end
   when 'fedora'
-    '3000-5.fc31'
+    '3000.1-1.fc31'
   when 'suse'
     '3000-lp151.28.1'
   when 'debian'
