@@ -2,6 +2,21 @@
 Changelog
 =========
 
+`1.4.0 <https://github.com/saltstack-formulas/salt-formula/compare/v1.3.4...v1.4.0>`_ (2020-04-18)
+------------------------------------------------------------------------------------------------------
+
+Features
+^^^^^^^^
+
+
+* **package:** use apt-pinning to pin specific package version (\ `98ad87a <https://github.com/saltstack-formulas/salt-formula/commit/98ad87a0014114f79fde1854dfb3731fad772ac4>`_\ )
+
+Tests
+^^^^^
+
+
+* **pkgs_spec:** update ``fedora`` version [skip ci] (\ `e786eb6 <https://github.com/saltstack-formulas/salt-formula/commit/e786eb6b8e8e3892046f6d56e719e119b16591b7>`_\ )
+
 `1.3.4 <https://github.com/saltstack-formulas/salt-formula/compare/v1.3.3...v1.3.4>`_ (2020-04-03)
 ------------------------------------------------------------------------------------------------------
 
