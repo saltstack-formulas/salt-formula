@@ -3,6 +3,7 @@
 ---
 salt:
   version: ''
+  pin_version: false
   py_ver: ''   ## py2 is default
   rootuser: root
   rootgroup: root

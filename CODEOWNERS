@@ -1,0 +1,6 @@
+# https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+
+# FILE PATTERN                 OWNER(S)
+*                              @saltstack-formulas/wg
+salt/formulas.sls              @sticky-note @myii
+salt/pin.sls                   @hatifnatt

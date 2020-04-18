@@ -2,6 +2,11 @@
 {%- from tplroot ~ "/map.jinja" import salt_settings with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
 
+{% if salt_settings.pin_version and salt_settings.version and grains.os_family|lower == 'debian' %}
+include:
+  - .pin
+{% endif %}
+
 {% if salt_settings.install_packages and grains.os == 'MacOS' %}
 download-salt-minion:
     {% if salt_settings.salt_minion_pkg_source %}

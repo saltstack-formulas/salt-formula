@@ -24,6 +24,10 @@ salt:
   # Optional: set salt version (if install_packages is set to true)
   version: 2017.7.2-1.el7
 
+  # Pin version provided under 'version' key by using apt-pinning
+  # available only on Debian family OS-es
+  pin_version: false
+
   # to overwrite map.jinja salt packages
   lookup:
     salt_master: 'salt-master'
