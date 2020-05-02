@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.4.1](https://github.com/saltstack-formulas/salt-formula/compare/v1.4.0...v1.4.1) (2020-05-02)
+
+
+### Continuous Integration
+
+* **gemfile.lock:** add to repo with updated `Gemfile` [skip ci] ([f10a85f](https://github.com/saltstack-formulas/salt-formula/commit/f10a85fc706aeba06453234b02bb5d8b0f00ad34))
+* **kitchen+travis:** adjust matrix to add `3000.2` & remove `2018.3` ([433a2c1](https://github.com/saltstack-formulas/salt-formula/commit/433a2c1597fca67762cc41617d1a4056b6b6adc3))
+
+
+### Tests
+
+* add tests for `v3000-py2` ([c228029](https://github.com/saltstack-formulas/salt-formula/commit/c228029879f36ee5aaa5f3cd3d3684ede29808bb))
+* **pkgs_spec:** update for CVE releases `3000.2` & `2019.2.4` ([965588b](https://github.com/saltstack-formulas/salt-formula/commit/965588b10808dea7dcf13fa651c95f61f2e4f83b))
+* remove deprecated Salt/Python versions ([7f19796](https://github.com/saltstack-formulas/salt-formula/commit/7f19796517e920d0b1773b22724c68d5a8de681b))
+
 # [1.4.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.3.4...v1.4.0) (2020-04-18)
 
 
