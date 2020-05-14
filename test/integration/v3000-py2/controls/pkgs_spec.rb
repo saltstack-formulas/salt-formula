@@ -3,7 +3,7 @@
 version =
   case platform[:family]
   when 'debian'
-    '3000.2+ds-1'
+    '3000.3+ds-1'
   end
 
 control 'salt packages' do

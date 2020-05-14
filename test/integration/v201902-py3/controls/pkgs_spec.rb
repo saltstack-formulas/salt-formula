@@ -6,22 +6,22 @@ platform_finger = "#{platform[:name]}-#{platform[:release].split('.')[0]}"
 version =
   case platform[:family]
   when 'debian'
-    '2019.2.4+ds-1'
+    '2019.2.5+ds-1'
   when 'redhat'
     case platform_finger
     when 'centos-8'
-      '2019.2.4-1.el8'
+      '2019.2.5-1.el8'
     when 'centos-7'
-      '2019.2.4-1.el7'
+      '2019.2.5-1.el7'
     when 'amazon-2'
-      '2019.2.4-1.amzn2'
+      '2019.2.5-1.amzn2'
     end
   when 'fedora'
-    # Issue in the upstream repo, should be `3000.2`
-    '3000.1-1.fc31'
+    # Issue in the upstream repo, should be `3000.3`
+    '3000.2-1.fc31'
   when 'suse'
-    # Issue in the upstream repo, should be `2019.2.4`
-    '2019.2.0-lp151.28.1'
+    # Issue in the upstream repo, should be `2019.2.5`
+    '2019.2.0-lp151.37.1'
   end
 
 control 'salt packages' do
