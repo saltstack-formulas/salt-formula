@@ -58,16 +58,16 @@ jobs:
     ## Define the rest of the matrix based on Kitchen testing
     # Make sure the instances listed below match up with
     # the `platforms` defined in `kitchen.yml`
-    - env: INSTANCE=v3000-py3-debian-10-3000-2-py3
-    # - env: INSTANCE=v3000-py3-debian-9-3000-2-py3
-    # - env: INSTANCE=v3000-py3-ubuntu-1804-3000-2-py3
-    - env: INSTANCE=v3000-py3-centos-8-3000-2-py3
-    # - env: INSTANCE=v3000-py3-centos-7-3000-2-py3
-    - env: INSTANCE=v3000-py3-fedora-31-3000-2-py3
-    # - env: INSTANCE=v3000-py3-opensuse-leap-151-3000-2-py3
-    - env: INSTANCE=v3000-py3-amazonlinux-2-3000-2-py3
-    - env: INSTANCE=v3000-py2-ubuntu-1804-3000-2-py2
-    # - env: INSTANCE=v3000-py2-ubuntu-1604-3000-2-py2
+    - env: INSTANCE=v3000-py3-debian-10-3000-3-py3
+    # - env: INSTANCE=v3000-py3-debian-9-3000-3-py3
+    # - env: INSTANCE=v3000-py3-ubuntu-1804-3000-3-py3
+    - env: INSTANCE=v3000-py3-centos-8-3000-3-py3
+    # - env: INSTANCE=v3000-py3-centos-7-3000-3-py3
+    - env: INSTANCE=v3000-py3-fedora-31-3000-3-py3
+    # - env: INSTANCE=v3000-py3-opensuse-leap-151-3000-3-py3
+    - env: INSTANCE=v3000-py3-amazonlinux-2-3000-3-py3
+    - env: INSTANCE=v3000-py2-ubuntu-1804-3000-3-py2
+    # - env: INSTANCE=v3000-py2-ubuntu-1604-3000-3-py2
     # - env: INSTANCE=v201902-py3-debian-10-2019-2-py3
     - env: INSTANCE=v201902-py3-debian-9-2019-2-py3
     # - env: INSTANCE=v201902-py3-ubuntu-1804-2019-2-py3
