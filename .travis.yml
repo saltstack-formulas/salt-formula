@@ -105,3 +105,15 @@ jobs:
         edge: true
         # Run `semantic-release`
         script: 'npx semantic-release@15.14'
+
+# Notification options: `always`, `never` or `change`
+notifications:
+  webhooks:
+    if: 'repo = saltstack-formulas/salt-formula'
+    urls:
+      - https://saltstack-formulas.zulipchat.com/api/v1/external/travis?api_key=HsIq3o5QmLxdnVCKF9is0FUIpkpAY79P&stream=CI&topic=saltstack-formulas%2Fsalt-formula&ignore_pull_requests=true
+    on_success: always  # default: always
+    on_failure: always  # default: always
+    on_start: always    # default: never
+    on_cancel: always   # default: always
+    on_error: always    # default: always
