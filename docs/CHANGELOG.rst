@@ -2,6 +2,32 @@
 Changelog
 =========
 
+`1.4.2 <https://github.com/saltstack-formulas/salt-formula/compare/v1.4.1...v1.4.2>`_ (2020-05-26)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **opensuse:** use appropriate upstream repo (\ `5d9a92b <https://github.com/saltstack-formulas/salt-formula/commit/5d9a92bf1d567cf25916239c2b11828fe625fd17>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **kitchen+travis:** adjust matrix to add ``3000.3`` [skip ci] (\ `a333801 <https://github.com/saltstack-formulas/salt-formula/commit/a3338018fbf0f770c41a6523473eb42123daa435>`_\ )
+* **kitchen+travis:** adjust matrix to add ``opensuse-leap-15.2`` (\ `7fc32fb <https://github.com/saltstack-formulas/salt-formula/commit/7fc32fb0fb739a713c58d1642cd206106270322e>`_\ )
+* **kitchen+travis:** adjust matrix to add ``opensuse-leap-15.2`` (\ `1afa84e <https://github.com/saltstack-formulas/salt-formula/commit/1afa84e1af2132763b6dbdaff98892dd35bf9f1c>`_\ )
+* **travis:** add notifications => zulip [skip ci] (\ `7e2a9c0 <https://github.com/saltstack-formulas/salt-formula/commit/7e2a9c0acd8dff358cfb80a14eaa596e3abf3e60>`_\ )
+* **workflows/commitlint:** add to repo [skip ci] (\ `38ebe56 <https://github.com/saltstack-formulas/salt-formula/commit/38ebe5653b72fb5b9e11fdeef9c8f394600bd2ff>`_\ )
+
+Tests
+^^^^^
+
+
+* **pkgs_spec:** update for releases ``3000.3`` & ``2019.2.5`` (\ `5917569 <https://github.com/saltstack-formulas/salt-formula/commit/591756946403d17228a59b46ab48f6d1985743e2>`_\ )
+* **pkgs_spec:** update version installed on ``fedora`` (\ `301a988 <https://github.com/saltstack-formulas/salt-formula/commit/301a9884ac0159ead8324b6ab4eaa170943b92f8>`_\ )
+
 `1.4.1 <https://github.com/saltstack-formulas/salt-formula/compare/v1.4.0...v1.4.1>`_ (2020-05-02)
 ------------------------------------------------------------------------------------------------------
 
