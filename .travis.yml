@@ -65,6 +65,7 @@ jobs:
     # - env: INSTANCE=v3000-py3-centos-7-3000-3-py3
     - env: INSTANCE=v3000-py3-fedora-31-3000-3-py3
     - env: INSTANCE=v3000-py3-opensuse-leap-152-3000-3-py3
+    - env: INSTANCE=v3000-py3-opensuse-leap-151-3000-3-py3
     - env: INSTANCE=v3000-py3-amazonlinux-2-3000-3-py3
     - env: INSTANCE=v3000-py2-ubuntu-1804-3000-3-py2
     # - env: INSTANCE=v3000-py2-ubuntu-1604-3000-3-py2
@@ -74,8 +75,6 @@ jobs:
     - env: INSTANCE=v201902-py3-ubuntu-1604-2019-2-py3
     # - env: INSTANCE=v201902-py3-centos-8-2019-2-py3
     - env: INSTANCE=v201902-py3-centos-7-2019-2-py3
-    # - env: INSTANCE=v201902-py3-fedora-31-2019-2-py3
-    - env: INSTANCE=v201902-py3-opensuse-leap-151-2019-2-py3
     # - env: INSTANCE=v201902-py3-amazonlinux-2-2019-2-py3
     - env: INSTANCE=v201902-py2-centos-6-2019-2-py2
     # - env: INSTANCE=v201902-py2-amazonlinux-1-2019-2-py2
