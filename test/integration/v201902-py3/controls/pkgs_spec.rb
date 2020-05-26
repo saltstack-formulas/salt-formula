@@ -18,10 +18,7 @@ version =
     end
   when 'fedora'
     # Issue in the upstream repo, should be `3000.3`
-    '3000.2-1.fc31'
-  when 'suse'
-    # Issue in the upstream repo, should be `2019.2.5`
-    '2019.2.0-lp151.37.1'
+    '3000.3-1.fc31'
   end
 
 control 'salt packages' do
