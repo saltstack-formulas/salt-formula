@@ -30,11 +30,11 @@ platforms:
   - name: fedora-31-3000-3-py3
     driver:
       image: netmanagers/salt-3000.3-py3:fedora-31
-  - name: opensuse-leap-151-3000-3-py3
+  - name: opensuse-leap-152-3000-3-py3
     driver:
-      image: netmanagers/salt-3000.3-py3:opensuse-leap-15.1
+      image: netmanagers/salt-3000.3-py3:opensuse-leap-15.2
       run_command: /usr/lib/systemd/systemd
-    # Workaround to avoid intermittent failures on `opensuse-leap-15.1`:
+    # Workaround to avoid intermittent failures on `opensuse-leap-15.2`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
@@ -117,7 +117,7 @@ suites:
       - centos-8-3000-3-py3
       - centos-7-3000-3-py3
       - fedora-31-3000-3-py3
-      - opensuse-leap-151-3000-3-py3
+      - opensuse-leap-152-3000-3-py3
       - amazonlinux-2-3000-3-py3
     provisioner:
       state_top:
