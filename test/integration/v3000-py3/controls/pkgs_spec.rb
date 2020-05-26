@@ -17,11 +17,15 @@ version =
       '3000.3-1.amzn2'
     end
   when 'fedora'
-    # Issue in the upstream repo, should be `3000.3`
-    '3000.2-1.fc31'
+    '3000.3-1.fc31'
   when 'suse'
     # Issue in the upstream repo, should be `3000.3`
-    '2019.2.0-lp151.37.1'
+    case platform[:release]
+    when /^15.2/
+      '3000.2-lp152.7.1'
+    when /^15.1/
+      '3000.2-lp151.2.1'
+    end
   end
 
 control 'salt packages' do

@@ -16,12 +16,6 @@ version =
     when 'amazon-2'
       '2019.2.5-1.amzn2'
     end
-  when 'fedora'
-    # Issue in the upstream repo, should be `3000.3`
-    '3000.2-1.fc31'
-  when 'suse'
-    # Issue in the upstream repo, should be `2019.2.5`
-    '2019.2.0-lp151.37.1'
   end
 
 control 'salt packages' do
