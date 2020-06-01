@@ -5,7 +5,7 @@ version =
   when 'redhat'
     case platform[:name]
     when 'amazon'
-      '2019.2.2-1.el7'
+      '2019.2.3-1.amzn2'
     when 'centos'
       '2019.2.3-1.el8'
     end

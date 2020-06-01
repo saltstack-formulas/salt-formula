@@ -16,7 +16,7 @@
         '<tplroot>:tofs:files_switch' this is the ordered list of grains to
         use as selector switch of the directories under
         "<path_prefix>/files"
-      * indent_witdh: indentation of the result value to conform to YAML
+      * indent_width: indentation of the result value to conform to YAML
       * use_subpath: defaults to `False` but if set, lookup the source file
         recursively from the current state directory up to `tplroot`
 
@@ -82,7 +82,7 @@
     ) %}
     {#- Append an empty value to evaluate as `default` in the loop below #}
     {%- if '' not in fsl %}
-      {%- do fsl.append('') %}
+      {%- set fsl = fsl + [''] %}
     {%- endif %}
     {%- for fs in fsl %}
       {%- for src_file in src_files %}

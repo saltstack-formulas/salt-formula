@@ -2,6 +2,30 @@
 Changelog
 =========
 
+`1.1.3 <https://github.com/saltstack-formulas/salt-formula/compare/v1.1.2...v1.1.3>`_ (2020-02-13)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **tpl_path:** replace slspath to tplroot (\ `bbcc4cd <https://github.com/saltstack-formulas/salt-formula/commit/bbcc4cda7ada4470db07dc02a5938a5b650e2f1c>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **kitchen:** avoid using bootstrap for ``master`` instances [skip ci] (\ `d2d5186 <https://github.com/saltstack-formulas/salt-formula/commit/d2d51864a5e4e5584afa979378ded15b1c5b9366>`_\ )
+
+`1.1.2 <https://github.com/saltstack-formulas/salt-formula/compare/v1.1.1...v1.1.2>`_ (2020-01-25)
+------------------------------------------------------------------------------------------------------
+
+Code Refactoring
+^^^^^^^^^^^^^^^^
+
+
+* **mapping:** simplify py version handling (\ `715e3b8 <https://github.com/saltstack-formulas/salt-formula/commit/715e3b8fa495ed2c8e9f4a5fbbb6398021ac9ec7>`_\ )
+
 `1.1.1 <https://github.com/saltstack-formulas/salt-formula/compare/v1.1.0...v1.1.1>`_ (2020-01-24)
 ------------------------------------------------------------------------------------------------------
 

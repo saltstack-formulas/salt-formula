@@ -2,9 +2,7 @@
 # vim: ft=yaml
 ---
 
-{%- import_yaml "salt/ospyvermap.yaml" as ospyvermap %}
-{%- set ospyver = salt['grains.filter_by'](ospyvermap, grain='os_family') or {} %}
-{%- set py_ver_repr = salt['pillar.filter_by'](ospyver, pillar='salt:py_ver', default='py2') %}
+{%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
 
 {%- set osrelease = salt['grains.get']('osrelease') %}
 {#- Workaround for OpenSuse Leap 15.1 until the repo is available #}
@@ -26,8 +24,8 @@
 {%- endif %}
 
 Debian:
-  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_repr }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
-  key_url: 'https://repo.saltstack.com/{{ py_ver_repr }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_repr or 'apt' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
+  key_url: 'https://repo.saltstack.com/{{ py_ver_repr or 'apt' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
   libgit2: libgit2-22
   pyinotify: python-pyinotify
   gitfs:
@@ -43,8 +41,8 @@ Debian:
 RedHat:
   pkgrepo_name: saltstack
   pkgrepo_humanname: SaltStack repo for RHEL/CentOS $releasever
-  pkgrepo: 'https://repo.saltstack.com/{{ py_ver_repr }}/redhat/$releasever/$basearch/{{ salt_release }}'
-  key_url: 'https://repo.saltstack.com/{{ py_ver_repr }}/redhat/$releasever/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: 'https://repo.saltstack.com/{{ py_ver_repr or 'yum' }}/redhat/$releasever/$basearch/{{ salt_release }}'
+  key_url: 'https://repo.saltstack.com/{{ py_ver_repr or 'yum' }}/redhat/$releasever/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
   pygit2: python-pygit2
   python_git: GitPython
   gitfs:
@@ -105,14 +103,14 @@ Alpine:
 
 FreeBSD:
   rootgroup: wheel
-  salt_master: py27-salt
-  salt_minion: py27-salt
-  salt_syndic: py27-salt
-  salt_cloud: py27-salt
-  salt_api: py27-salt
-  salt_ssh: py27-salt
-  python_git: py27-GitPython
-  pygit2: py27-pygit2
+  salt_master: {{ py_ver_repr or 'py27' }}-salt
+  salt_minion: {{ py_ver_repr or 'py27' }}-salt
+  salt_syndic: {{ py_ver_repr or 'py27' }}-salt
+  salt_cloud: {{ py_ver_repr or 'py27' }}-salt
+  salt_api: {{ py_ver_repr or 'py27' }}-salt
+  salt_ssh: {{ py_ver_repr or 'py27' }}-salt
+  python_git: {{ py_ver_repr or 'py27' }}-GitPython
+  pygit2: {{ py_ver_repr or 'py27' }}-pygit2
   config_path: /usr/local/etc/salt
   minion_service: salt_minion
   master_service: salt_master
@@ -132,7 +130,7 @@ OpenBSD:
   python_git: py-GitPython
 
 Windows:
-  salt_minion: salt-minion{{ py_ver_repr }}
+  salt_minion: salt-minion{{ py_ver_repr or '-py3' }}
   config_path: 'C:\salt\conf'
   minion_service: salt-minion
 

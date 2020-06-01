@@ -3,6 +3,7 @@
 ---
 salt:
   version: ''
+  py_ver: ''   ## py2 is default
   rootuser: root
   rootgroup: root
   install_packages: true

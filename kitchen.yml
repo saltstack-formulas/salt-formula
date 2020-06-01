@@ -22,9 +22,10 @@ platforms:
     driver:
       image: netmanagers/salt-2017.7-py2:centos-6
       run_command: /sbin/init
-  - name: amazonlinux-2-2017-7-py2
+  - name: amazonlinux-1-2017-7-py2
     driver:
-      image: netmanagers/salt-2017.7-py2:amazonlinux-2
+      image: netmanagers/salt-2017.7-py2:amazonlinux-1
+      run_command: /sbin/init
   - name: arch-base-latest-2017-7-py2
     driver:
       image: netmanagers/salt-2017.7-py2:arch-base-latest
@@ -40,9 +41,10 @@ platforms:
   - name: centos-7-2018-3-py2
     driver:
       image: netmanagers/salt-2018.3-py2:centos-7
-  - name: amazonlinux-2-2018-3-py2
+  - name: amazonlinux-1-2018-3-py2
     driver:
-      image: netmanagers/salt-2018.3-py2:amazonlinux-2
+      image: netmanagers/salt-2018.3-py2:amazonlinux-1
+      run_command: /sbin/init
   - name: arch-base-latest-2018-3-py2
     driver:
       image: netmanagers/salt-2018.3-py2:arch-base-latest
@@ -55,9 +57,9 @@ platforms:
   - name: centos-7-2019-2-py2
     driver:
       image: netmanagers/salt-2019.2-py2:centos-7
-  - name: amazonlinux-2-2019-2-py2
+  - name: amazonlinux-2-2019-2-py3
     driver:
-      image: netmanagers/salt-2019.2-py2:amazonlinux-2
+      image: netmanagers/salt-2019.2-py3:amazonlinux-2
   - name: arch-base-latest-2019-2-py2
     driver:
       image: netmanagers/salt-2019.2-py2:arch-base-latest
@@ -112,6 +114,7 @@ suites:
       - ubuntu-1804-2019-2-py3
       - centos-8-2019-2-py3
       - opensuse-leap-151-2019-2-py3
+      - amazonlinux-2-2019-2-py3
     provisioner:
       state_top:
         base:
@@ -135,7 +138,6 @@ suites:
     includes:
       - ubuntu-1804-2019-2-py2
       - centos-7-2019-2-py2
-      - amazonlinux-2-2019-2-py2
       - arch-base-latest-2019-2-py2
     provisioner:
       state_top:
@@ -161,7 +163,7 @@ suites:
       - debian-9-2018-3-py2
       - ubuntu-1604-2018-3-py2
       - centos-7-2018-3-py2
-      - amazonlinux-2-2018-3-py2
+      - amazonlinux-1-2018-3-py2
       - arch-base-latest-2018-3-py2
     provisioner:
       state_top:
@@ -187,7 +189,7 @@ suites:
       - debian-8-2017-7-py2
       - ubuntu-1604-2017-7-py2
       - centos-6-2017-7-py2
-      - amazonlinux-2-2017-7-py2
+      - amazonlinux-1-2017-7-py2
       - arch-base-latest-2017-7-py2
     provisioner:
       state_top:
