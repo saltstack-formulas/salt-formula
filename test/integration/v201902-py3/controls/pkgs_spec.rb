@@ -1,25 +1,9 @@
 # frozen_string_literal: true
 
-# Prepare platform "finger"
-platform_finger = "#{platform[:name]}-#{platform[:release].split('.')[0]}"
-
-version =
-  case platform[:family]
-  when 'debian'
-    '2019.2.5+ds-1'
-  when 'redhat'
-    case platform_finger
-    when 'centos-8'
-      '2019.2.5-1.el8'
-    when 'centos-7'
-      '2019.2.5-1.el7'
-    when 'amazon-2'
-      '2019.2.5-1.amzn2'
-    end
-  end
-
 control 'salt packages' do
   title 'should be installed'
+
+  version = '2019.2.5'
 
   %w[
     salt-master
@@ -27,7 +11,7 @@ control 'salt packages' do
   ].each do |p|
     describe package(p) do
       it { should be_installed }
-      its('version') { should eq version }
+      its('version') { should match(/^#{version}/) }
     end
   end
 end
