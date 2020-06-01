@@ -6,5 +6,11 @@ Layout/LineLength:
   # Increase from default of `80`
   # Based on https://github.com/PyCQA/flake8-bugbear#opinionated-warnings (`B950`)
   Max: 88
+Metrics/BlockLength:
+  ExcludedMethods:
+    - control
+    - describe
+  # Increase from default of `25`
+  Max: 30
 
 # Any offenses that should be fixed, e.g. collected via. `rubocop --auto-gen-config`

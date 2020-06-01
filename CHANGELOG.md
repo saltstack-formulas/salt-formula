@@ -1,5 +1,124 @@
 # Changelog
 
+## [1.4.2](https://github.com/saltstack-formulas/salt-formula/compare/v1.4.1...v1.4.2) (2020-05-26)
+
+
+### Bug Fixes
+
+* **opensuse:** use appropriate upstream repo ([5d9a92b](https://github.com/saltstack-formulas/salt-formula/commit/5d9a92bf1d567cf25916239c2b11828fe625fd17))
+
+
+### Continuous Integration
+
+* **kitchen+travis:** adjust matrix to add `3000.3` [skip ci] ([a333801](https://github.com/saltstack-formulas/salt-formula/commit/a3338018fbf0f770c41a6523473eb42123daa435))
+* **kitchen+travis:** adjust matrix to add `opensuse-leap-15.2` ([7fc32fb](https://github.com/saltstack-formulas/salt-formula/commit/7fc32fb0fb739a713c58d1642cd206106270322e))
+* **kitchen+travis:** adjust matrix to add `opensuse-leap-15.2` ([1afa84e](https://github.com/saltstack-formulas/salt-formula/commit/1afa84e1af2132763b6dbdaff98892dd35bf9f1c))
+* **travis:** add notifications => zulip [skip ci] ([7e2a9c0](https://github.com/saltstack-formulas/salt-formula/commit/7e2a9c0acd8dff358cfb80a14eaa596e3abf3e60))
+* **workflows/commitlint:** add to repo [skip ci] ([38ebe56](https://github.com/saltstack-formulas/salt-formula/commit/38ebe5653b72fb5b9e11fdeef9c8f394600bd2ff))
+
+
+### Tests
+
+* **pkgs_spec:** update for releases `3000.3` & `2019.2.5` ([5917569](https://github.com/saltstack-formulas/salt-formula/commit/591756946403d17228a59b46ab48f6d1985743e2))
+* **pkgs_spec:** update version installed on `fedora` ([301a988](https://github.com/saltstack-formulas/salt-formula/commit/301a9884ac0159ead8324b6ab4eaa170943b92f8))
+
+## [1.4.1](https://github.com/saltstack-formulas/salt-formula/compare/v1.4.0...v1.4.1) (2020-05-02)
+
+
+### Continuous Integration
+
+* **gemfile.lock:** add to repo with updated `Gemfile` [skip ci] ([f10a85f](https://github.com/saltstack-formulas/salt-formula/commit/f10a85fc706aeba06453234b02bb5d8b0f00ad34))
+* **kitchen+travis:** adjust matrix to add `3000.2` & remove `2018.3` ([433a2c1](https://github.com/saltstack-formulas/salt-formula/commit/433a2c1597fca67762cc41617d1a4056b6b6adc3))
+
+
+### Tests
+
+* add tests for `v3000-py2` ([c228029](https://github.com/saltstack-formulas/salt-formula/commit/c228029879f36ee5aaa5f3cd3d3684ede29808bb))
+* **pkgs_spec:** update for CVE releases `3000.2` & `2019.2.4` ([965588b](https://github.com/saltstack-formulas/salt-formula/commit/965588b10808dea7dcf13fa651c95f61f2e4f83b))
+* remove deprecated Salt/Python versions ([7f19796](https://github.com/saltstack-formulas/salt-formula/commit/7f19796517e920d0b1773b22724c68d5a8de681b))
+
+# [1.4.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.3.4...v1.4.0) (2020-04-18)
+
+
+### Features
+
+* **package:** use apt-pinning to pin specific package version ([98ad87a](https://github.com/saltstack-formulas/salt-formula/commit/98ad87a0014114f79fde1854dfb3731fad772ac4))
+
+
+### Tests
+
+* **pkgs_spec:** update `fedora` version [skip ci] ([e786eb6](https://github.com/saltstack-formulas/salt-formula/commit/e786eb6b8e8e3892046f6d56e719e119b16591b7))
+
+## [1.3.4](https://github.com/saltstack-formulas/salt-formula/compare/v1.3.3...v1.3.4) (2020-04-03)
+
+
+### Bug Fixes
+
+* **api:** remove spurious colon in salt.api state ([02fbcd4](https://github.com/saltstack-formulas/salt-formula/commit/02fbcd43fc56e99fa62d7ab78658fa19e5d83372))
+
+## [1.3.3](https://github.com/saltstack-formulas/salt-formula/compare/v1.3.2...v1.3.3) (2020-04-01)
+
+
+### Continuous Integration
+
+* **kitchen+travis:** adjust matrix to update `3000` to `3000.1` ([a8fe65a](https://github.com/saltstack-formulas/salt-formula/commit/a8fe65a2c80a63cb167ea6f7f88b1198b6e07b97))
+
+
+### Tests
+
+* **pkgs_spec:** update `3000` to `3000.1` ([1e677cd](https://github.com/saltstack-formulas/salt-formula/commit/1e677cd761ab82ff6160d7b96ce7f6920b2e02e4))
+* **service_spec:** add `should be_installed` ([b5461a0](https://github.com/saltstack-formulas/salt-formula/commit/b5461a0ebab63fb77186ea5960e71bd1426609a1))
+
+## [1.3.2](https://github.com/saltstack-formulas/salt-formula/compare/v1.3.1...v1.3.2) (2020-03-21)
+
+
+### Code Refactoring
+
+* **osfamilymap:** remove workaround for OpenSUSE 15.1 ([0da366c](https://github.com/saltstack-formulas/salt-formula/commit/0da366c7b25778dcec12f2a4a80cd4072c3d4d29))
+
+
+### Continuous Integration
+
+* **kitchen+travis:** adjust matrix to add `3000` & remove `2017.7` ([4a5f805](https://github.com/saltstack-formulas/salt-formula/commit/4a5f8053e938569814a2043405416c74b8c990fd))
+
+
+### Tests
+
+* **neon:** add pillar and tests for `3000` ([f91f10c](https://github.com/saltstack-formulas/salt-formula/commit/f91f10c2800edfc1b59fd731a6b6f82a47f74fcc))
+* **nitrogen:** remove pillar and tests for `2017.7` ([f246a5e](https://github.com/saltstack-formulas/salt-formula/commit/f246a5e0af84f527df2f87428d929440c716361b))
+
+## [1.3.1](https://github.com/saltstack-formulas/salt-formula/compare/v1.3.0...v1.3.1) (2020-03-19)
+
+
+### Bug Fixes
+
+* **jinja:** replace version_cmp with grains lookup ([dd37869](https://github.com/saltstack-formulas/salt-formula/commit/dd37869d2842927a87273b940fd76945ff6a05ec))
+* **jinja:** replace version_cmp with grains lookup ([325f6c0](https://github.com/saltstack-formulas/salt-formula/commit/325f6c061beb2721cb55777e206922d728f62e69))
+
+# [1.3.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.2.0...v1.3.0) (2020-03-11)
+
+
+### Features
+
+* **mapping:** better control of the service's state ([29ffd68](https://github.com/saltstack-formulas/salt-formula/commit/29ffd68d3419b61b938221130911844f48134817))
+
+# [1.2.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.1.3...v1.2.0) (2020-02-20)
+
+
+### Bug Fixes
+
+* **libtofs:** “files_switch” mess up the variable exported by “map.jinja” [skip ci] ([4955737](https://github.com/saltstack-formulas/salt-formula/commit/4955737f844678ca3ca208340fe73fcd47aab256))
+
+
+### Continuous Integration
+
+* **kitchen+travis+inspec:** fix `amazonlinux-2-py3` [skip ci] ([10e2ce0](https://github.com/saltstack-formulas/salt-formula/commit/10e2ce07a4293ad46d785bcbc16b822280f17142))
+
+
+### Features
+
+* **metastate:** add metastate per community convention ([fbaa456](https://github.com/saltstack-formulas/salt-formula/commit/fbaa456ca69fafa2a8a4ef910b5e09dafffe5ece))
+
 ## [1.1.3](https://github.com/saltstack-formulas/salt-formula/compare/v1.1.2...v1.1.3) (2020-02-13)
 
 

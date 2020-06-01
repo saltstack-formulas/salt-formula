@@ -6,17 +6,25 @@ platform_finger = "#{platform[:name]}-#{platform[:release].split('.')[0]}"
 version =
   case platform[:family]
   when 'debian'
-    '2019.2.5+ds-1'
+    '3000.3+ds-1'
   when 'redhat'
     case platform_finger
+    when 'centos-8'
+      '3000.3-1.el8'
     when 'centos-7'
-      '2019.2.5-1.el7'
-    when 'centos-6'
-      '2019.2.5-1.el6'
+      '3000.3-1.el7'
     when 'amazon-2'
-      '2019.2.5-1.amzn2'
-    when 'amazon-2018'
-      '2019.2.5-1.amzn1'
+      '3000.3-1.amzn2'
+    end
+  when 'fedora'
+    '3000.3-1.fc31'
+  when 'suse'
+    # Issue in the upstream repo, should be `3000.3`
+    case platform[:release]
+    when /^15.2/
+      '3000.2-lp152.7.1'
+    when /^15.1/
+      '3000.2-lp151.2.1'
     end
   end
 
