@@ -2,6 +2,15 @@
 Changelog
 =========
 
+`1.4.3 <https://github.com/saltstack-formulas/salt-formula/compare/v1.4.2...v1.4.3>`_ (2020-06-01)
+------------------------------------------------------------------------------------------------------
+
+Tests
+^^^^^
+
+
+* **pkgs_spec:** simplify using ``match`` (trigger: update for ``suse``\ ) (\ `b2b1fee <https://github.com/saltstack-formulas/salt-formula/commit/b2b1fee370060c82101526157dc2630a4453dfb8>`_\ ), closes `/travis-ci.org/github/myii/salt-formula/jobs/692337807#L2366-L2381 <https://github.com//travis-ci.org/github/myii/salt-formula/jobs/692337807/issues/L2366-L2381>`_
+
 `1.4.2 <https://github.com/saltstack-formulas/salt-formula/compare/v1.4.1...v1.4.2>`_ (2020-05-26)
 ------------------------------------------------------------------------------------------------------
 
