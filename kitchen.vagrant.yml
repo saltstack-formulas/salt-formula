@@ -1,0 +1,38 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+driver:
+  name: vagrant
+
+platforms:
+  - name: windows-81
+    driver:
+      box: techneg/win81x64-pro-salt
+      gui: false
+      linked_clone: true
+    provisioner:
+      init_environment: >
+        salt-call --local state.single file.managed
+        C:\Users\vagrant\AppData\Local\Temp\kitchen\srv\salt\win\repo-ng\salt-minion-py3.sls
+        source=https://github.com/saltstack/salt-winrepo-ng/raw/master/salt-minion-py3.sls
+        skip_verify=True makedirs=True
+
+suites:
+  - name: v3000-py3
+    provisioner:
+      state_top:
+        base:
+          '*':
+            - salt.minion
+      pillars:
+        top.sls:
+          base:
+            '*':
+              - salt
+              - v3000-py3
+      pillars_from_files:
+        salt.sls: test/salt/pillar/salt.sls
+        v3000-py3.sls: test/salt/pillar/v3000-py3.sls
+    verifier:
+      inspec_tests:
+        - path: test/integration/v3000-py3
