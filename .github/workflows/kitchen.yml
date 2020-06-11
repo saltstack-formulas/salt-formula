@@ -1,0 +1,39 @@
+---
+name: CI
+
+'on': [push, pull_request]
+
+env:
+  machine_user: kitchen
+  machine_pass: Pass@word1
+  machine_port: 5985
+  KITCHEN_LOCAL_YAML: kitchen.github.yml
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - shell: powershell
+        run: |
+          $password = ConvertTo-SecureString $env:machine_pass -AsPlainText -Force
+          New-LocalUser $env:machine_user -Password $password
+          Add-LocalGroupMember -Group "Administrators" -Member $env:machine_user
+      - shell: powershell
+        run: >
+          Set-WSManQuickConfig -Force;
+          Set-WSManInstance -ResourceURI winrm/config/service
+          -ValueSet @{AllowUnencrypted="true"}
+      - run: gem install bundler --quiet --no-document
+      - name: Bundle install
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+      - run: bundle exec kitchen test
