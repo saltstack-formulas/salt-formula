@@ -127,7 +127,7 @@ OpenBSD:
   python_git: py-GitPython
 
 Windows:
-  salt_minion: salt-minion{{ py_ver_repr or '-py3' }}
+  salt_minion: salt-minion{{ '-' ~ py_ver_repr if py_ver_repr else '' }}
   config_path: 'C:\salt\conf'
   minion_service: salt-minion
 
