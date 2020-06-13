@@ -57,5 +57,5 @@ SmartOS:
     gitfs_provider: dulwich
 
 MacOS:
-  salt_master_macos_plist_hash: 9c55cb448269f4d7c433429448d1ec7dda260f180bbcf5197bc430f7645017de
-  salt_minion_macos_plist_hash: 6383d2d336b06802bfdf25a4c21ee25c85ee9fa57d3ef5776321d9c8cd096395
+  salt_master_macos_plist_hash: 8435331b2d48ca8f0759f216e5b15ec9171a4216b1441328c732c6906728b7c9
+  salt_minion_macos_plist_hash: 26b33da12e0d8960ee96b488c8352002c22a377c19bf3df3f986a1e49eca8b20
