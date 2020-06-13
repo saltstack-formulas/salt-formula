@@ -4,11 +4,7 @@
 
 {%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
 
-{%- set osrelease = salt['grains.get']('osrelease') %}
-{#- Workaround for OpenSuse Leap 15.1 until the repo is available #}
-{%- if [grains.os_family, osrelease] == ['Suse', '15.1'] %}
-{%-   set osrelease = '15.0' %}
-{%- endif %}
+{%- set osrelease = salt['grains.get']('osrelease', '') %}
 {%- set salt_release = salt['pillar.get']('salt:release', 'latest') %}
 {%- if salt_release.split('.')|length >= 3 %}
 {%-   set salt_release = 'archive/' ~ salt_release %}
@@ -16,6 +12,7 @@
 {%- set osfamily_lower =  salt['grains.get']('os_family')|lower %}
 {%- set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
 {%- set oscodename = salt['grains.get']('oscodename') %}
+{%- set suse_testing_repo = ':/products:/next:/testing' if [osfamily_lower, osrelease] == ['suse', '15.2'] else '' %}
 
 #from template-formula
 {%- if grains.os == 'MacOS' %}
@@ -58,8 +55,8 @@ RedHat:
 
 Suse:
   pkgrepo_humanname: 'Salt releases for SLE-based SUSE products (openSUSE_Leap_{{ osrelease }})'
-  pkgrepo: 'http://repo.saltstack.com/opensuse/openSUSE_Leap_{{ osrelease }}/'
-  key_url: 'http://repo.saltstack.com/opensuse/openSUSE_Leap_{{ osrelease }}/repodata/repomd.xml.key'
+  pkgrepo: 'https://download.opensuse.org/repositories/systemsmanagement:/saltstack{{ suse_testing_repo }}/openSUSE_Leap_{{ osrelease }}/'
+  key_url: 'https://download.opensuse.org/repositories/systemsmanagement:/saltstack{{ suse_testing_repo }}/openSUSE_Leap_{{ osrelease }}/repodata/repomd.xml.key'
   pygit2: python-pygit2
   pyinotify: python-pyinotify
   gitfs:
