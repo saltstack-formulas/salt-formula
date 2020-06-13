@@ -9,6 +9,7 @@ include:
 
     {%- if grains.os == 'MacOS' %}
         {% if salt_settings.install_packages %}
+
 download-salt-minion:
             {% if salt_settings.salt_minion_pkg_source %} {# minion upgrade? #}
   file.managed:
