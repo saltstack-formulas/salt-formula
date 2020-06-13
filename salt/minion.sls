@@ -50,12 +50,6 @@ salt-minion-macos:
         until: True
         interval: 10
         splay: 10
-  cmd.run:
-    - names:
-      - launchctl load -w /Library/LaunchDaemons/com.saltstack.salt.minion.plist
-      - launchctl unload /Library/LaunchDaemons/com.saltstack.salt.minion.plist
-    - require:
-      - file: salt-minion-macos
     - require_in:
       - service: salt-minion
         {%- endif %}
