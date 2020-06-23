@@ -1,5 +1,5 @@
 name: salt
-os: Debian, Redhat, Suse, Arch, Gentoo, FreeBSD, Windows
+os: Debian, Ubuntu, Raspbian, RedHat, Fedora, CentOS, Oracle, Amazon, Suse, openSUSE, Gentoo, Funtoo, Arch, Manjaro, FreeBSD, OpenBSD, Windows
 os_family: Debian, Redhat, Suse, Arch, Gentoo, FreeBSD, Windows
 version: 1.4.3
 release: 1
