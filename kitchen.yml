@@ -11,6 +11,49 @@ driver:
 # Make sure the platforms listed below match up with
 # the `env.matrix` instances defined in `.travis.yml`
 platforms:
+  ## SALT `3001`
+  - name: debian-10-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:debian-10
+  - name: debian-9-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:debian-9
+  - name: ubuntu-2004-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:ubuntu-20.04
+  - name: ubuntu-1804-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:ubuntu-18.04
+  - name: centos-8-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:centos-8
+  - name: centos-7-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:centos-7
+  - name: fedora-32-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:fedora-32
+  - name: fedora-31-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:fedora-31
+  - name: opensuse-leap-152-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:opensuse-leap-15.2
+      run_command: /usr/lib/systemd/systemd
+    # Workaround to avoid intermittent failures on `opensuse-leap-15.2`:
+    # => SCP did not finish successfully (255):  (Net::SCP::Error)
+    transport:
+      max_ssh_sessions: 1
+  - name: amazonlinux-2-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:amazonlinux-2
+  - name: oraclelinux-8-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:oraclelinux-8
+  - name: oraclelinux-7-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:oraclelinux-7
+
   ## SALT `3000.3`
   - name: debian-10-3000-3-py3
     driver:
@@ -38,17 +81,15 @@ platforms:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
-  - name: opensuse-leap-151-3000-3-py3
-    driver:
-      image: netmanagers/salt-3000.3-py3:opensuse-leap-15.1
-      run_command: /usr/lib/systemd/systemd
-    # Workaround to avoid intermittent failures on `opensuse-leap-15.1`:
-    # => SCP did not finish successfully (255):  (Net::SCP::Error)
-    transport:
-      max_ssh_sessions: 1
   - name: amazonlinux-2-3000-3-py3
     driver:
       image: saltimages/salt-3000.3-py3:amazonlinux-2
+  - name: oraclelinux-8-3000-3-py3
+    driver:
+      image: saltimages/salt-3000.3-py3:oraclelinux-8
+  - name: oraclelinux-7-3000-3-py3
+    driver:
+      image: saltimages/salt-3000.3-py3:oraclelinux-7
   - name: ubuntu-1804-3000-3-py2
     driver:
       image: saltimages/salt-3000.3-py2:ubuntu-18.04
@@ -75,6 +116,17 @@ platforms:
   - name: centos-7-2019-2-py3
     driver:
       image: saltimages/salt-2019.2-py3:centos-7
+  - name: fedora-31-2019-2-py3
+    driver:
+      image: saltimages/salt-2019.2-py3:fedora-31
+  - name: opensuse-leap-152-2019-2-py3
+    driver:
+      image: saltimages/salt-2019.2-py3:opensuse-leap-15.2
+      run_command: /usr/lib/systemd/systemd
+    # Workaround to avoid intermittent failures on `opensuse-leap-15.2`:
+    # => SCP did not finish successfully (255):  (Net::SCP::Error)
+    transport:
+      max_ssh_sessions: 1
   - name: amazonlinux-2-2019-2-py3
     driver:
       image: saltimages/salt-2019.2-py3:amazonlinux-2
@@ -106,6 +158,39 @@ verifier:
     - cli
 
 suites:
+  - name: v3001-py3
+    includes:
+      - debian-10-3001-py3
+      - debian-9-3001-py3
+      - ubuntu-2004-3001-py3
+      - ubuntu-1804-3001-py3
+      - centos-8-3001-py3
+      - centos-7-3001-py3
+      - fedora-32-3001-py3
+      - fedora-31-3001-py3
+      - opensuse-leap-152-3001-py3
+      - amazonlinux-2-3001-py3
+      - oraclelinux-8-3001-py3
+      - oraclelinux-7-3001-py3
+    provisioner:
+      state_top:
+        base:
+          '*':
+            - salt.pkgrepo
+            - salt.master
+            - salt.minion
+      pillars:
+        top.sls:
+          base:
+            '*':
+              - salt
+              - v3001-py3
+      pillars_from_files:
+        salt.sls: test/salt/pillar/salt.sls
+        v3001-py3.sls: test/salt/pillar/v3001-py3.sls
+    verifier:
+      inspec_tests:
+        - path: test/integration/v3001-py3
   - name: v3000-py3
     includes:
       - debian-10-3000-3-py3
@@ -115,8 +200,9 @@ suites:
       - centos-7-3000-3-py3
       - fedora-31-3000-3-py3
       - opensuse-leap-152-3000-3-py3
-      - opensuse-leap-151-3000-3-py3
       - amazonlinux-2-3000-3-py3
+      - oraclelinux-8-3000-3-py3
+      - oraclelinux-7-3000-3-py3
     provisioner:
       state_top:
         base:
@@ -167,6 +253,8 @@ suites:
       - ubuntu-1604-2019-2-py3
       - centos-8-2019-2-py3
       - centos-7-2019-2-py3
+      - fedora-31-2019-2-py3
+      - opensuse-leap-152-2019-2-py3
       - amazonlinux-2-2019-2-py3
     provisioner:
       state_top:
