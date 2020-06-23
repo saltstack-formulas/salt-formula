@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.4.4](https://github.com/saltstack-formulas/salt-formula/compare/v1.4.3...v1.4.4) (2020-06-23)
+
+
+### Continuous Integration
+
+* **kitchen:** use `saltimages` Docker Hub where available [skip ci] ([f66a09c](https://github.com/saltstack-formulas/salt-formula/commit/f66a09c2d69bf676113be9073cd365860e8548a3))
+* **kitchen+travis:** adjust matrix to add `3001` ([9060879](https://github.com/saltstack-formulas/salt-formula/commit/90608799249147f8c0d9e3189b865d8999dc4e5f))
+
+
+### Tests
+
+* **sodium:** add pillar and tests for `3001` ([42cacc2](https://github.com/saltstack-formulas/salt-formula/commit/42cacc253f9f0fbf1411ac19f9dc4169aef5d3f5))
+
 ## [1.4.3](https://github.com/saltstack-formulas/salt-formula/compare/v1.4.2...v1.4.3) (2020-06-01)
 
 
