@@ -2,6 +2,27 @@
 Changelog
 =========
 
+`1.4.5 <https://github.com/saltstack-formulas/salt-formula/compare/v1.4.4...v1.4.5>`_ (2020-06-28)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **windows:** ``py2`` should still be default like other platforms (\ `62f6d39 <https://github.com/saltstack-formulas/salt-formula/commit/62f6d39d63cc2e5c134571e20518f7da8c17e09e>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **github:** add Windows testing using Actions (\ `1eca9c7 <https://github.com/saltstack-formulas/salt-formula/commit/1eca9c75519d9ad97dc6526fa83a56477da16579>`_\ )
+
+Tests
+^^^^^
+
+
+* **windows:** add local testing of Windows using Vagrant/Virtualbox (\ `0465af7 <https://github.com/saltstack-formulas/salt-formula/commit/0465af72dac6d8609f918ce32796c91157422358>`_\ )
+
 `1.4.4 <https://github.com/saltstack-formulas/salt-formula/compare/v1.4.3...v1.4.4>`_ (2020-06-23)
 ------------------------------------------------------------------------------------------------------
 
