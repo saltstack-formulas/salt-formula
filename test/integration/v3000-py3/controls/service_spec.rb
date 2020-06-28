@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
+services =
+  case platform[:family]
+  when 'windows'
+    %w[salt-minion]
+  else
+    %w[salt-master salt-minion]
+  end
+
 control 'salt services' do
   title 'should be running'
 
-  %w[
-    salt-master
-    salt-minion
-  ].each do |p|
+  services.each do |p|
     describe service(p) do
       it { should be_installed }
       it { should be_enabled }
