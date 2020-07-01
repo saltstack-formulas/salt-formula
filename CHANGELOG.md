@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.6](https://github.com/saltstack-formulas/salt-formula/compare/v1.4.5...v1.4.6) (2020-07-01)
+
+
+### Bug Fixes
+
+* **freebsd:** command `at` is already present in base system ([b6ab1b1](https://github.com/saltstack-formulas/salt-formula/commit/b6ab1b1d543908ea050cdb928a255dd4e2a3384d))
+
 ## [1.4.5](https://github.com/saltstack-formulas/salt-formula/compare/v1.4.4...v1.4.5) (2020-06-28)
 
 
