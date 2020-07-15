@@ -55,8 +55,11 @@ salt-master:
     - enable: {{ salt_settings.master_service_details.enabled }}
     - name: {{ salt_settings.master_service }}
     - watch:
+           {%- if grains.kernel|lower == 'darwin' %}
       - file: salt-master-macos
+           {%- else %}
       - file: salt-master
+           {%- endif %}
       - file: remove-old-master-conf-file
     {% endif %}
     {% if salt_settings.master_remove_config %}

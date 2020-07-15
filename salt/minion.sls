@@ -52,6 +52,8 @@ salt-minion-macos:
         splay: 10
     - require_in:
       - service: salt-minion
+    - watch_in:
+      - service: salt-minion
         {%- endif %}
     {%- endif %}
 
@@ -104,8 +106,6 @@ salt-minion:
     - enable: {{ salt_settings.minion_service_details.enabled }}
     - name: {{ salt_settings.minion_service }}
     - watch:
-      - file: salt-master-macos
-      - file: salt-master
       - file: remove-old-minion-conf-file
     {% endif %}
     {%- if not salt_settings.restart_via_at %}
