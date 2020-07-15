@@ -41,6 +41,8 @@ salt:
 
   salt_master: salt-master
   salt_minion: salt-minion
+  salt_master_macos_plist_hash: ''
+  salt_minion_macos_plist_hash: ''
   salt_syndic: salt-syndic
   salt_cloud: salt-cloud
   salt_api: salt-api
