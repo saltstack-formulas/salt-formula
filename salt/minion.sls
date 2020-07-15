@@ -143,18 +143,17 @@ salt-minion:
       - file: remove-old-minion-conf-file
     {%- else %}
 
-        {% if grains.os != 'MacOS' %}
-           {# MacOS has 'at' command; but there's no package to install #}
+  {% if grains.os_family not in ['MacOS', 'FreeBSD'] %}
+  {# MacOS and FreeBSD have the 'at' command; but there's no package to install #}
 at:
-  pkg.installed: []
-        {% endif %}
+  pkg.installed:
+    - require_in: restart-salt-minion
+  {% endif %}
 
 restart-salt-minion:
   cmd.run:
     - name: echo salt-call --local service.restart {{ salt_settings.minion_service }} | at now + 1 minute
     - order: last
-    - require:
-        - pkg: at
     - onchanges:
         {%- if salt_settings.install_packages %}
             {%- if grains.os == 'MacOS' and salt_settings.salt_minion_pkg_source %}

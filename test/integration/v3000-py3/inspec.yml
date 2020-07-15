@@ -15,4 +15,6 @@ supports:
   - platform-name: suse
   - platform-name: freebsd
   - platform-name: amazon
+  - platform-name: oracle
   - platform-name: arch
+  - platform: windows

@@ -1,5 +1,42 @@
 # Changelog
 
+## [1.4.6](https://github.com/saltstack-formulas/salt-formula/compare/v1.4.5...v1.4.6) (2020-07-01)
+
+
+### Bug Fixes
+
+* **freebsd:** command `at` is already present in base system ([b6ab1b1](https://github.com/saltstack-formulas/salt-formula/commit/b6ab1b1d543908ea050cdb928a255dd4e2a3384d))
+
+## [1.4.5](https://github.com/saltstack-formulas/salt-formula/compare/v1.4.4...v1.4.5) (2020-06-28)
+
+
+### Bug Fixes
+
+* **windows:** `py2` should still be default like other platforms ([62f6d39](https://github.com/saltstack-formulas/salt-formula/commit/62f6d39d63cc2e5c134571e20518f7da8c17e09e))
+
+
+### Continuous Integration
+
+* **github:** add Windows testing using Actions ([1eca9c7](https://github.com/saltstack-formulas/salt-formula/commit/1eca9c75519d9ad97dc6526fa83a56477da16579))
+
+
+### Tests
+
+* **windows:** add local testing of Windows using Vagrant/Virtualbox ([0465af7](https://github.com/saltstack-formulas/salt-formula/commit/0465af72dac6d8609f918ce32796c91157422358))
+
+## [1.4.4](https://github.com/saltstack-formulas/salt-formula/compare/v1.4.3...v1.4.4) (2020-06-23)
+
+
+### Continuous Integration
+
+* **kitchen:** use `saltimages` Docker Hub where available [skip ci] ([f66a09c](https://github.com/saltstack-formulas/salt-formula/commit/f66a09c2d69bf676113be9073cd365860e8548a3))
+* **kitchen+travis:** adjust matrix to add `3001` ([9060879](https://github.com/saltstack-formulas/salt-formula/commit/90608799249147f8c0d9e3189b865d8999dc4e5f))
+
+
+### Tests
+
+* **sodium:** add pillar and tests for `3001` ([42cacc2](https://github.com/saltstack-formulas/salt-formula/commit/42cacc253f9f0fbf1411ac19f9dc4169aef5d3f5))
+
 ## [1.4.3](https://github.com/saltstack-formulas/salt-formula/compare/v1.4.2...v1.4.3) (2020-06-01)
 
 
