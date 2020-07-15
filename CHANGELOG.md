@@ -1,5 +1,23 @@
 # Changelog
 
+# [1.5.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.4.6...v1.5.0) (2020-07-15)
+
+
+### Bug Fixes
+
+* **macos:** use macos service names ([c72b183](https://github.com/saltstack-formulas/salt-formula/commit/c72b183f5ff885b30f0ac0fff8c9a847333a9304))
+* **minion:** fix requisites from recent prs ([a466456](https://github.com/saltstack-formulas/salt-formula/commit/a46645607b3e20cf2f69a51e976457c201830c4c))
+
+
+### Features
+
+* **macos:** basic launchctl service support ([94027f7](https://github.com/saltstack-formulas/salt-formula/commit/94027f7332093764553162d9e80074029647f7ef))
+
+
+### Tests
+
+* **versions:** bump pkg versions ([37eb3b3](https://github.com/saltstack-formulas/salt-formula/commit/37eb3b35141885fe16ddc59d0ba45b29dbd5babe))
+
 ## [1.4.6](https://github.com/saltstack-formulas/salt-formula/compare/v1.4.5...v1.4.6) (2020-07-01)
 
 
