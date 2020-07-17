@@ -66,6 +66,8 @@ salt-master:
 remove-default-master-conf-file:
   file.absent:
     - name: {{ salt_settings.config_path }}/master
+    - watch_in:
+      - service: salt-master
     {% endif %}
 
 # clean up old _defaults.conf file if they have it around
