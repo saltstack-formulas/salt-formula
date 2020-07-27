@@ -24,6 +24,10 @@ salt:
   # Optional: set salt version (if install_packages is set to true)
   version: 2017.7.2-1.el7
 
+  # Pin version provided under 'version' key by using apt-pinning
+  # available only on Debian family OS-es
+  pin_version: false
+
   # to overwrite map.jinja salt packages
   lookup:
     salt_master: 'salt-master'
@@ -80,6 +84,7 @@ salt:
   # salt master config
   master_config_use_TOFS: true
   master:
+    standalone: false
     fileserver_backend:
       - git
       - s3fs
@@ -162,6 +167,9 @@ salt:
   # salt minion config:
   minion_config_use_TOFS: true
   minion:
+
+    # standalone setup
+    master_type: false   # see init.sls & standalone.sls
 
     # single master setup
     master: salt
@@ -267,6 +275,13 @@ salt:
       functions_blacklist:
         - test.ping
         - saltutil.find_job
+
+  # init.sls skips salt.api and salt.syndic states
+  # unless those dicts are populated with something
+  api:
+    somekey: somevalue
+  syndic:
+    somekey: somevalue
 
   # salt cloud config
   cloud:

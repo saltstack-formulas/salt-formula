@@ -2,4 +2,5 @@
 # vim: ft=yaml
 ---
 salt:
-  release: '2018.3'
+  release: '3000'
+  py_ver: 'py3'

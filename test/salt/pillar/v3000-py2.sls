@@ -2,4 +2,4 @@
 # vim: ft=yaml
 ---
 salt:
-  release: '2017.7'
+  release: '3000'

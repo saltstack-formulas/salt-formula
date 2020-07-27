@@ -2,18 +2,40 @@
 {%- from tplroot ~ "/map.jinja" import salt_settings with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
 
+{% if salt_settings.pin_version and salt_settings.version and grains.os_family|lower == 'debian' %}
+include:
+  - .pin
+{% endif %}
+
+    {%- if grains.os == 'MacOS' %}
+salt-master-macos:
+  file.managed:
+    - name: /Library/LaunchDaemons/com.saltstack.salt.master.plist
+    - source: https://raw.githubusercontent.com/saltstack/salt/master/pkg/osx/scripts/com.saltstack.salt.master.plist
+    - source_hash: {{ salt_settings.salt_master_macos_plist_hash }}
+    - retry:
+        attempts: 2
+        until: True
+        interval: 10
+        splay: 10
+    - require_in:
+      - service: salt-master
+    {%- endif %}
+
 salt-master:
-{% if salt_settings.install_packages %}
+    {% if salt_settings.install_packages %}
   pkg.installed:
     - name: {{ salt_settings.salt_master }}
-  {%- if salt_settings.version is defined %}
+       {%- if salt_settings.version is defined %}
     - version: {{ salt_settings.version }}
-  {%- endif %}
+       {%- endif %}
+       {% if salt_settings.master_service_details.state != 'ignore' %}
     - require_in:
       - service: salt-master
     - watch_in:
       - service: salt-master
-{% endif %}
+       {% endif %}
+    {% endif %}
   file.recurse:
     - name: {{ salt_settings.config_path }}/master.d
     {%- if salt_settings.master_config_use_TOFS %}
@@ -28,18 +50,25 @@ salt-master:
     {%- endif %}
     - clean: {{ salt_settings.clean_config_d_dir }}
     - exclude_pat: _*
-  service.running:
-    - enable: True
+    {% if salt_settings.master_service_details.state != 'ignore' %}
+  service.{{ salt_settings.master_service_details.state }}:
+    - enable: {{ salt_settings.master_service_details.enabled }}
     - name: {{ salt_settings.master_service }}
     - watch:
+           {%- if grains.kernel|lower == 'darwin' %}
+      - file: salt-master-macos
+           {%- else %}
       - file: salt-master
+           {%- endif %}
       - file: remove-old-master-conf-file
-
-{% if salt_settings.master_remove_config %}
+    {% endif %}
+    {% if salt_settings.master_remove_config %}
 remove-default-master-conf-file:
   file.absent:
     - name: {{ salt_settings.config_path }}/master
-{% endif %}
+    - watch_in:
+      - service: salt-master
+    {% endif %}
 
 # clean up old _defaults.conf file if they have it around
 remove-old-master-conf-file:

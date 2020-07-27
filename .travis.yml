@@ -58,30 +58,41 @@ jobs:
     ## Define the rest of the matrix based on Kitchen testing
     # Make sure the instances listed below match up with
     # the `platforms` defined in `kitchen.yml`
-    # The ordering used below has been selected based on the time required in Travis
-    # The slower ones are kept as high up as possible, to run concurrently rather than
-    # slow down the entire run at the end (i.e. `centos-6` and `opensuse`)
-    # However, the groupings needed to be maintained in some semblance of order
-    # so this is a best-effort matrix, in the circumstances
-    # - env: INSTANCE=v201707-py2-debian-8-2017-7-py2
-    - env: INSTANCE=v201707-py2-ubuntu-1604-2017-7-py2
-    - env: INSTANCE=v201707-py2-centos-6-2017-7-py2
-    # - env: INSTANCE=v201707-py2-amazonlinux-1-2017-7-py2
-    # - env: INSTANCE=v201707-py2-arch-base-latest-2017-7-py2
-    - env: INSTANCE=v201803-py2-debian-9-2018-3-py2
-    # - env: INSTANCE=v201803-py2-ubuntu-1604-2018-3-py2
-    - env: INSTANCE=v201803-py2-centos-7-2018-3-py2
-    # - env: INSTANCE=v201803-py2-amazonlinux-1-2018-3-py2
-    # - env: INSTANCE=v201803-py2-arch-base-latest-2018-3-py2
-    - env: INSTANCE=v201902-py2-ubuntu-1804-2019-2-py2
-    # - env: INSTANCE=v201902-py2-centos-7-2019-2-py2
-    - env: INSTANCE=v201902-py3-amazonlinux-2-2019-2-py3
-    # - env: INSTANCE=v201902-py2-arch-base-latest-2019-2-py2
-    - env: INSTANCE=v201902-py3-debian-10-2019-2-py3
-    # - env: INSTANCE=v201902-py3-debian-9-2019-2-py3
+    - env: INSTANCE=v3001-py3-debian-10-3001-py3
+    # - env: INSTANCE=v3001-py3-debian-9-3001-py3
+    - env: INSTANCE=v3001-py3-ubuntu-2004-3001-py3
+    # - env: INSTANCE=v3001-py3-ubuntu-1804-3001-py3
+    - env: INSTANCE=v3001-py3-centos-8-3001-py3
+    # - env: INSTANCE=v3001-py3-centos-7-3001-py3
+    - env: INSTANCE=v3001-py3-fedora-32-3001-py3
+    # - env: INSTANCE=v3001-py3-fedora-31-3001-py3
+    # - env: INSTANCE=v3001-py3-opensuse-leap-152-3001-py3
+    # - env: INSTANCE=v3001-py3-amazonlinux-2-3001-py3
+    - env: INSTANCE=v3001-py3-oraclelinux-8-3001-py3
+    # - env: INSTANCE=v3001-py3-oraclelinux-7-3001-py3
+    # - env: INSTANCE=v3000-py3-debian-10-3000-3-py3
+    # - env: INSTANCE=v3000-py3-debian-9-3000-3-py3
+    # - env: INSTANCE=v3000-py3-ubuntu-1804-3000-3-py3
+    # - env: INSTANCE=v3000-py3-centos-8-3000-3-py3
+    # - env: INSTANCE=v3000-py3-centos-7-3000-3-py3
+    - env: INSTANCE=v3000-py3-fedora-31-3000-3-py3
+    - env: INSTANCE=v3000-py3-opensuse-leap-152-3000-3-py3
+    - env: INSTANCE=v3000-py3-amazonlinux-2-3000-3-py3
+    # - env: INSTANCE=v3000-py3-oraclelinux-8-3000-3-py3
+    - env: INSTANCE=v3000-py3-oraclelinux-7-3000-3-py3
+    - env: INSTANCE=v3000-py2-ubuntu-1804-3000-3-py2
+    # - env: INSTANCE=v3000-py2-ubuntu-1604-3000-3-py2
+    # - env: INSTANCE=v201902-py3-debian-10-2019-2-py3
+    - env: INSTANCE=v201902-py3-debian-9-2019-2-py3
     # - env: INSTANCE=v201902-py3-ubuntu-1804-2019-2-py3
+    - env: INSTANCE=v201902-py3-ubuntu-1604-2019-2-py3
     # - env: INSTANCE=v201902-py3-centos-8-2019-2-py3
-    - env: INSTANCE=v201902-py3-opensuse-leap-151-2019-2-py3
+    - env: INSTANCE=v201902-py3-centos-7-2019-2-py3
+    # - env: INSTANCE=v201902-py3-fedora-31-2019-2-py3
+    # - env: INSTANCE=v201902-py3-opensuse-leap-152-2019-2-py3
+    # - env: INSTANCE=v201902-py3-amazonlinux-2-2019-2-py3
+    - env: INSTANCE=v201902-py2-centos-6-2019-2-py2
+    # - env: INSTANCE=v201902-py2-amazonlinux-1-2019-2-py2
 
     ## Define the release stage that runs `semantic-release`
     - stage: 'release'
@@ -108,3 +119,15 @@ jobs:
         edge: true
         # Run `semantic-release`
         script: 'npx semantic-release@15.14'
+
+# Notification options: `always`, `never` or `change`
+notifications:
+  webhooks:
+    if: 'repo = saltstack-formulas/salt-formula'
+    urls:
+      - https://saltstack-formulas.zulipchat.com/api/v1/external/travis?api_key=HsIq3o5QmLxdnVCKF9is0FUIpkpAY79P&stream=CI&topic=saltstack-formulas%2Fsalt-formula&ignore_pull_requests=true
+    on_success: always  # default: always
+    on_failure: always  # default: always
+    on_start: always    # default: never
+    on_cancel: always   # default: always
+    on_error: always    # default: always
