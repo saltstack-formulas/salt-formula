@@ -61,6 +61,7 @@ salt-master:
       - file: salt-master
            {%- endif %}
       - file: remove-old-master-conf-file
+    - order: last
     {% endif %}
     {% if salt_settings.master_remove_config %}
 remove-default-master-conf-file:

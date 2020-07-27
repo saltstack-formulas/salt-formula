@@ -109,6 +109,7 @@ salt-minion:
     - name: {{ salt_settings.minion_service }}
     - watch:
       - file: remove-old-minion-conf-file
+    - order: last
     {% endif %}
     {%- if not salt_settings.restart_via_at %}
   cmd.run:
