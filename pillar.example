@@ -157,6 +157,12 @@ salt:
               type: runner
               cmd: jobs.list_jobs
 
+    # Define a master scheduler
+    schedule:
+      - update_winrepo:
+        - function: winrepo.update_git_repos
+        - hours: 6
+
     # optional: these reactors will be configured on the master
     # They override reactors configured in
     # 'salt:reactors' or the old 'salt:reactor' parameters
