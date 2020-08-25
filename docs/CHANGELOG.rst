@@ -2,6 +2,22 @@
 Changelog
 =========
 
+`1.5.1 <https://github.com/saltstack-formulas/salt-formula/compare/v1.5.0...v1.5.1>`_ (2020-08-25)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **service:** service salt-master and salt-minion to restart last (\ `d71cf0c <https://github.com/saltstack-formulas/salt-formula/commit/d71cf0c4f9ba716b93b784993f0409337e60fa18>`_\ )
+* **service:** svc ``salt-master`` watch ``remove-default-master-conf-file`` (\ `e1774e3 <https://github.com/saltstack-formulas/salt-formula/commit/e1774e3b40c54b554552ecf34508c1bcbf5ffbd1>`_\ )
+
+Styles
+^^^^^^
+
+
+* **libtofs.jinja:** use Black-inspired Jinja formatting [skip ci] (\ `76e820c <https://github.com/saltstack-formulas/salt-formula/commit/76e820c36f6f0ea712001285dd79cbd5b54489e8>`_\ )
+
 `1.5.0 <https://github.com/saltstack-formulas/salt-formula/compare/v1.4.6...v1.5.0>`_ (2020-07-15)
 ------------------------------------------------------------------------------------------------------
 
