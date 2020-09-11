@@ -39,7 +39,9 @@
                                                {'makedirs': True}).items() %}
     - {{ key }}: {{ value }}
     - user: {{ salt_settings.rootuser }}
+        {%- if grains.kernel != 'Windows' %}
     - group: {{ salt_settings.rootgroup }}
+        {%- endif %}
     {%-   endfor %}
 {%-     endif %}
 
