@@ -6,7 +6,7 @@ include:
       {%- if salt.config.get('salt_formulas:list') %}
   - salt.formulas
       {%- endif %}
-      {%- if salt.config.get('salt:master')|length > 1 %}
+      {%- if salt.config.get('salt:master')|length > 1 and grains.kernel != 'Windows' %}
   - salt.master
       {%- endif %}
       {%- if salt.config.get('salt:cloud')|length > 1 %}
