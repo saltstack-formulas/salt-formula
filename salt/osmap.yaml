@@ -63,4 +63,5 @@ MacOS:
   salt_minion_macos_plist_hash: 26b33da12e0d8960ee96b488c8352002c22a377c19bf3df3f986a1e49eca8b20
 
 Windows:
+  rootgroup: Users
   parallel: false   # not supported on windows/cygwin
