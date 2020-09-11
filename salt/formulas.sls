@@ -38,11 +38,11 @@
     {%-   for key, value in salt['pillar.get']('salt_formulas:basedir_opts',
                                                {'makedirs': True}).items() %}
     - {{ key }}: {{ value }}
+    {%-   endfor %}
     - user: {{ salt_settings.rootuser }}
         {%- if grains.kernel != 'Windows' %}
     - group: {{ salt_settings.rootgroup }}
         {%- endif %}
-    {%-   endfor %}
 {%-     endif %}
 
 # Setup the formula Git repository
