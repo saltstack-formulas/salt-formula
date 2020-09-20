@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.5.2](https://github.com/saltstack-formulas/salt-formula/compare/v1.5.1...v1.5.2) (2020-09-20)
+
+
+### Bug Fixes
+
+* **jinja:** stop repeating user/group args ([e313401](https://github.com/saltstack-formulas/salt-formula/commit/e313401cd657a77a3624ed372c8e22e905c2d172))
+* **windows:** dont run master state ([a36f2eb](https://github.com/saltstack-formulas/salt-formula/commit/a36f2eb2d2ab4e3d57885177f3438037b15318e3))
+* **windows:** git.latest(parallel:true) does not work ([0c591bb](https://github.com/saltstack-formulas/salt-formula/commit/0c591bba95cebd341e73cdd0fc986428ee34ce7e))
+* **windows:** group arg not supported on windows ([d61e671](https://github.com/saltstack-formulas/salt-formula/commit/d61e671fa0de58fe60c5c0cdc23d55c49b93dd01))
+* **windows:** group name is users not root ([887d155](https://github.com/saltstack-formulas/salt-formula/commit/887d1559b5496dd07e730390f4309568d0428c2f))
+
 ## [1.5.1](https://github.com/saltstack-formulas/salt-formula/compare/v1.5.0...v1.5.1) (2020-08-25)
 
 
