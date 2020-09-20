@@ -1,5 +1,12 @@
 # Changelog
 
+# [1.6.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.5.2...v1.6.0) (2020-09-20)
+
+
+### Features
+
+* enable the metadata grains server by default ([b1d296d](https://github.com/saltstack-formulas/salt-formula/commit/b1d296d270d3cc06332f569f81ee95fc78d95596))
+
 ## [1.5.2](https://github.com/saltstack-formulas/salt-formula/compare/v1.5.1...v1.5.2) (2020-09-20)
 
 
