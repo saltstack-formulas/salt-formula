@@ -7,6 +7,8 @@ include:
   - .pin
 {% endif %}
 
+{%- if grains.kernel != 'Windows' %}
+
     {%- if grains.os == 'MacOS' %}
 salt-master-macos:
   file.managed:
@@ -75,3 +77,12 @@ remove-default-master-conf-file:
 remove-old-master-conf-file:
   file.absent:
     - name: {{ salt_settings.config_path }}/master.d/_defaults.conf
+
+{%- else %}
+
+salt-master-install-skip:
+  test.show_notification:
+    - text: |
+        No salt-master state for Windows
+
+{%- endif %}

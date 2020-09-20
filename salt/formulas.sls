@@ -34,13 +34,15 @@
 {%-       do processed_basedirs.append(basedir) %}
 {{ basedir }}:
   file.directory:
-    - parallel: {{ grains['saltversioninfo'] >= [2017, 7, 0] }}
+    - parallel: {{ salt_settings.parallel }}
     {%-   for key, value in salt['pillar.get']('salt_formulas:basedir_opts',
                                                {'makedirs': True}).items() %}
     - {{ key }}: {{ value }}
-    - user: {{ salt_settings.rootuser }}
-    - group: {{ salt_settings.rootgroup }}
     {%-   endfor %}
+    - user: {{ salt_settings.rootuser }}
+        {%- if grains.kernel != 'Windows' %}
+    - group: {{ salt_settings.rootgroup }}
+        {%- endif %}
 {%-     endif %}
 
 # Setup the formula Git repository
@@ -54,7 +56,7 @@
 {{ gitdir_env }}:
   git.latest:
     - name: {{ baseurl }}/{{ f_name }}.git
-    - parallel: {{ grains['saltversioninfo'] >= [2017, 7, 0] }}
+    - parallel: {{ salt_settings.parallel }}
     - target: {{ gitdir }}
     {%-   for key, value in options.items() %}
     - {{ key }}: {{ value }}

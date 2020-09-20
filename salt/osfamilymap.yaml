@@ -15,10 +15,13 @@
 {%- set suse_testing_repo = ':/products:/next:/testing' if [osfamily_lower, osrelease] == ['suse', '15.2'] else '' %}
 
 #from template-formula
-{%- if grains.os == 'MacOS' %}
-{%-   set macos_rootuser = salt['cmd.run']("stat -f '%Su' /dev/console") %}
-{%-   set macos_rootgroup = salt['cmd.run']("stat -f '%Sg' /dev/console") %}
+{%- if grains.os_family == 'MacOS' %}
+{%-   set rootuser = salt['cmd.run']("stat -f '%Su' /dev/console") %}
+{%-   set rootgroup = salt['cmd.run']("stat -f '%Sg' /dev/console") %}
+{%- elif grains.os_family == 'Windows' %}
+{%-   set rootuser = salt['cmd.run']("id -un") %}
 {%- endif %}
+
 
 Debian:
   pkgrepo: 'deb http://repo.saltstack.com/{{ py_ver_repr or 'apt' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
@@ -130,6 +133,7 @@ Windows:
   salt_minion: salt-minion{{ '-' ~ py_ver_repr if py_ver_repr else '' }}
   config_path: 'C:\salt\conf'
   minion_service: salt-minion
+  rootuser: {{ rootuser | d('') }}
 
 MacOS:
   salt_minion: salt
@@ -138,5 +142,5 @@ MacOS:
   config_path: /private/etc/salt
   minion_service: com.saltstack.salt.minion
   ## from template-formula
-  rootuser: {{ macos_rootuser | d('') }}
-  rootgroup: {{ macos_rootgroup | d('') }}
+  rootuser: {{ rootuser | d('') }}
+  rootgroup: {{ rootgroup | d('') }}
