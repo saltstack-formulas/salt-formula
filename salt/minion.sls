@@ -191,3 +191,79 @@ remove-macpackage-salt:
     - name: /tmp/salt.pkg
     - force: True
     {% endif %}
+
+permissions-minion-config:
+  file.managed:
+    - name: {{ salt_settings.config_path | path_join('minion') }}
+    - user: {{ salt_settings.rootuser }}
+    - group:
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        wheel
+        {%- else %}
+        root
+        {%- endif %}
+    {%- if grains['kernel'] != 'Windows' %}
+    - mode: 640
+    {% endif %}
+    - replace: False
+
+salt-minion-pki-dir:
+  file.directory:
+{% if 'pki_dir' in salt_settings.minion %}
+    - name: {{ salt_settings.minion.pki_dir }}
+{% else %}
+    - name: {{ salt_settings.config_path | path_join('pki', 'minion') }}
+{% endif %}
+    - user: {{ salt_settings.rootuser }}
+    - group:
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        wheel
+        {%- else %}
+        root
+        {%- endif %}
+    {%- if grains['kernel'] != 'Windows' %}
+    - mode: 700
+    {% endif %}
+    - makedirs: True
+
+permissions-minion.pem:
+  file.managed:
+{% if 'pki_dir' in salt_settings.minion %}
+    - name: {{ salt_settings.minion.pki_dir | path_join('minion.pem') }}
+{% else %}
+    - name: {{ salt_settings.config_path | path_join('pki', 'minion', 'minion.pem') }}
+{% endif %}
+    - user: {{ salt_settings.rootuser }}
+    - group:
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        wheel
+        {%- else %}
+        root
+        {%- endif %}
+    {%- if grains['kernel'] != 'Windows' %}
+    - mode: 400
+    {% endif %}
+    - replace: False
+    - require:
+      - file: salt-minion-pki-dir
+
+permissions-minion.pub:
+  file.managed:
+{% if 'pki_dir' in salt_settings.minion %}
+    - name: {{ salt_settings.minion.pki_dir | path_join('minion.pub') }}
+{% else %}
+    - name: {{ salt_settings.config_path | path_join('pki', 'minion', 'minion.pub') }}
+{% endif %}
+    - user: {{ salt_settings.rootuser }}
+    - group:
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        wheel
+        {%- else %}
+        root
+        {%- endif %}
+    {%- if grains['kernel'] != 'Windows' %}
+    - mode: 644
+    {% endif %}
+    - replace: False
+    - require:
+      - file: salt-minion-pki-dir
