@@ -55,6 +55,20 @@ jobs:
                    @commitlint/travis-cli
         - commitlint-travis
 
+    # Run `pre-commit` linters in a single job
+    - language: 'python'
+      env: 'Lint_pre-commit'
+      name: 'Lint: pre-commit'
+      before_install: 'skip'
+      cache:
+        directories:
+          - $HOME/.cache/pre-commit
+      script:
+        # Install and run `pre-commit`
+        - pip install pre-commit==2.7.1
+        - pre-commit run --all-files --color always --verbose
+        - pre-commit run --color always --hook-stage manual --verbose commitlint-travis
+
     ## Define the rest of the matrix based on Kitchen testing
     # Make sure the instances listed below match up with
     # the `platforms` defined in `kitchen.yml`
