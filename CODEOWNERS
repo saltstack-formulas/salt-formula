@@ -11,6 +11,7 @@
 # SECTION: Owner(s) for files/directories related to `semantic-release`
 # FILE PATTERN                              OWNER(S)
 /.github/workflows/                         @saltstack-formulas/ssf
+/bin/install-hooks                          @saltstack-formulas/ssf
 /bin/kitchen                                @saltstack-formulas/ssf
 /docs/AUTHORS.rst                           @saltstack-formulas/ssf
 /docs/CHANGELOG.rst                         @saltstack-formulas/ssf
@@ -21,6 +22,8 @@
 /test/integration/**/README.md              @saltstack-formulas/ssf
 /.gitignore                                 @saltstack-formulas/ssf
 /.cirrus.yml                                @saltstack-formulas/ssf
+/.pre-commit-config.yaml                    @saltstack-formulas/ssf
+/.rstcheck.cfg                              @saltstack-formulas/ssf
 /.rubocop.yml                               @saltstack-formulas/ssf
 /.salt-lint                                 @saltstack-formulas/ssf
 /.travis.yml                                @saltstack-formulas/ssf
