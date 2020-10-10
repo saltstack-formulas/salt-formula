@@ -52,4 +52,5 @@ repos:
     hooks:
       - id: rstcheck
         name: Check reST files using rstcheck
+        exclude: 'docs/CHANGELOG.rst'
         args: [--report=warning]

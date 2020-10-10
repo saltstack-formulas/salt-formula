@@ -64,7 +64,7 @@ Example: NTP before applying TOFS
 
 Let's work with the NTP example. A basic formula that follows the `design guidelines <http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html>`_ has the following files and directories tree:
 
-.. code-block::
+.. code-block:: console
 
    /srv/saltstack/salt-formulas/ntp-saltstack-formula/
      ntp/
@@ -226,7 +226,7 @@ We can make different templates coexist for different minions, classified by any
 
 If we decide that we want ``os_family`` as switch, then we could provide the formula template variants for both the ``RedHat`` and ``Debian`` families.
 
-.. code-block::
+.. code-block:: console
 
    /srv/saltstack/salt-formulas/ntp-saltstack-formula/ntp/files/
      default/
@@ -449,7 +449,7 @@ Using sub-directories for ``components``
 
 If your formula is composed of several components, you may prefer to provides files under sub-directories, like in the `systemd-formula <https://github.com/saltstack-formulas/systemd-formula>`_.
 
-.. code-block::
+.. code-block:: console
 
    /srv/saltstack/systemd-formula/
      systemd/
