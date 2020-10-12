@@ -2,6 +2,23 @@
 Changelog
 =========
 
+`1.7.0 <https://github.com/saltstack-formulas/salt-formula/compare/v1.6.0...v1.7.0>`_ (2020-10-12)
+------------------------------------------------------------------------------------------------------
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **pre-commit:** add to formula [skip ci] (\ `7ff962e <https://github.com/saltstack-formulas/salt-formula/commit/7ff962e2addd97e84dd99c87351b1412f64134af>`_\ )
+* **pre-commit:** enable/disable ``rstcheck`` as relevant [skip ci] (\ `426b29c <https://github.com/saltstack-formulas/salt-formula/commit/426b29c21149f5cef9064177177891a091c6bb82>`_\ )
+* **pre-commit:** finalise ``rstcheck`` configuration [skip ci] (\ `22fa616 <https://github.com/saltstack-formulas/salt-formula/commit/22fa616f59864a77e3f7ea5b17e8a7f0bcf415be>`_\ )
+
+Features
+^^^^^^^^
+
+
+* add Gentoo support (\ `127c5d7 <https://github.com/saltstack-formulas/salt-formula/commit/127c5d779b1e2b9beb7322a2d03a027c50e5c6d7>`_\ )
+
 `1.6.0 <https://github.com/saltstack-formulas/salt-formula/compare/v1.5.2...v1.6.0>`_ (2020-09-20)
 ------------------------------------------------------------------------------------------------------
 
