@@ -21,3 +21,7 @@ salt:
     pillar_roots:
       base:
         - /srv/pillar
+
+# Gentoo-specific, improves performance for subsequent test runs within the same day
+portage:
+  sync_wait_one_day: true

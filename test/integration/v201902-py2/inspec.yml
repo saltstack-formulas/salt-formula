@@ -17,3 +17,4 @@ supports:
   - platform-name: amazon
   - platform-name: oracle
   - platform-name: arch
+  - platform-name: gentoo
