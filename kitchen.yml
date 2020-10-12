@@ -53,6 +53,13 @@ platforms:
   - name: oraclelinux-7-3001-py3
     driver:
       image: saltimages/salt-3001-py3:oraclelinux-7
+  - name: gentoo-stage3-latest-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:gentoo-stage3-latest
+      run_command: /sbin/init
+  - name: gentoo-stage3-systemd-3001-py3
+    driver:
+      image: saltimages/salt-3001-py3:gentoo-stage3-systemd
 
   ## SALT `3000.3`
   - name: debian-10-3000-3-py3
@@ -96,6 +103,13 @@ platforms:
   - name: ubuntu-1604-3000-3-py2
     driver:
       image: saltimages/salt-3000.3-py2:ubuntu-16.04
+  - name: gentoo-stage3-latest-3000-3-py3
+    driver:
+      image: saltimages/salt-3000.3-py3:gentoo-stage3-latest
+      run_command: /sbin/init
+  - name: gentoo-stage3-systemd-3000-3-py3
+    driver:
+      image: saltimages/salt-3000.3-py3:gentoo-stage3-systemd
 
   ## SALT `2019.2`
   - name: debian-10-2019-2-py3
@@ -172,6 +186,8 @@ suites:
       - amazonlinux-2-3001-py3
       - oraclelinux-8-3001-py3
       - oraclelinux-7-3001-py3
+      - gentoo-stage3-latest-3001-py3
+      - gentoo-stage3-systemd-3001-py3
     provisioner:
       state_top:
         base:
@@ -203,6 +219,8 @@ suites:
       - amazonlinux-2-3000-3-py3
       - oraclelinux-8-3000-3-py3
       - oraclelinux-7-3000-3-py3
+      - gentoo-stage3-latest-3000-3-py3
+      - gentoo-stage3-systemd-3000-3-py3
     provisioner:
       state_top:
         base:
