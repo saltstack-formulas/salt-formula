@@ -11,7 +11,7 @@ pkgs =
 control 'salt packages' do
   title 'should be installed'
 
-  version = '3000.3'
+  version = '3000'
 
   pkgs.each do |p|
     describe package(p) do
