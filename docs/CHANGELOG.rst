@@ -2,6 +2,22 @@
 Changelog
 =========
 
+`1.7.1 <https://github.com/saltstack-formulas/salt-formula/compare/v1.7.0...v1.7.1>`_ (2020-12-16)
+------------------------------------------------------------------------------------------------------
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **gitlab-ci:** use GitLab CI as Travis CI replacement (\ `c9b2cb4 <https://github.com/saltstack-formulas/salt-formula/commit/c9b2cb4a4a3562b80c84450284fdfa818d3620bc>`_\ )
+
+Tests
+^^^^^
+
+
+* **fluorine:** remove pillar and tests for ``2019.2`` (\ `75ccf59 <https://github.com/saltstack-formulas/salt-formula/commit/75ccf591eb20567464a306616e13c5d473af0b4e>`_\ )
+* **pkgs_spec:** test for major version only (i.e. ``3000``\ ) (\ `618f95a <https://github.com/saltstack-formulas/salt-formula/commit/618f95a6653adab4c7121cddd13ea2d128b337a4>`_\ )
+
 `1.7.0 <https://github.com/saltstack-formulas/salt-formula/compare/v1.6.0...v1.7.0>`_ (2020-10-12)
 ------------------------------------------------------------------------------------------------------
 
