@@ -11,7 +11,7 @@ sed -i -e "s_^\(version:\).*_\1 ${1}_" FORMULA
 ###############################################################################
 
 # Install `m2r`
-sudo -H pip install m2r
+pip3 install m2r
 
 # Copy and then convert the `.md` docs
 cp ./*.md docs/

@@ -16,12 +16,13 @@
 /docs/AUTHORS.rst                           @saltstack-formulas/ssf
 /docs/CHANGELOG.rst                         @saltstack-formulas/ssf
 /docs/TOFS_pattern.rst                      @saltstack-formulas/ssf
-/salt/libsaltcli.jinja                      @saltstack-formulas/ssf
-/salt/libtofs.jinja                         @saltstack-formulas/ssf
+/*/libsaltcli.jinja                         @saltstack-formulas/ssf
+/*/libtofs.jinja                            @saltstack-formulas/ssf
 /test/integration/**/inspec.yml             @saltstack-formulas/ssf
 /test/integration/**/README.md              @saltstack-formulas/ssf
 /.gitignore                                 @saltstack-formulas/ssf
 /.cirrus.yml                                @saltstack-formulas/ssf
+/.gitlab-ci.yml                             @saltstack-formulas/ssf
 /.pre-commit-config.yaml                    @saltstack-formulas/ssf
 /.rstcheck.cfg                              @saltstack-formulas/ssf
 /.rubocop.yml                               @saltstack-formulas/ssf

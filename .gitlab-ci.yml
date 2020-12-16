@@ -1,0 +1,152 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+###############################################################################
+# Define all YAML node anchors
+###############################################################################
+.node_anchors:
+  # `only` (also used for `except` where applicable)
+  only_branch_master_parent_repo: &only_branch_master_parent_repo
+    - 'master@saltstack-formulas/salt-formula'
+  # `stage`
+  stage_lint: &stage_lint 'lint'
+  stage_release: &stage_release 'release'
+  stage_test: &stage_test 'test'
+  # `image`
+  image_commitlint: &image_commitlint 'myii/ssf-commitlint:11'
+  image_dindruby: &image_dindruby 'myii/ssf-dind-ruby:2.7.1-r3'
+  image_precommit: &image_precommit
+    name: 'myii/ssf-pre-commit:2.9.2'
+    entrypoint: ['/bin/bash', '-c']
+  image_semantic-release: &image_semanticrelease 'myii/ssf-semantic-release:15.14'
+  # `services`
+  services_docker_dind: &services_docker_dind
+    - 'docker:dind'
+  # `variables`
+  # https://forum.gitlab.com/t/gitlab-com-ci-caching-rubygems/5627/3
+  # https://bundler.io/v1.16/bundle_config.html
+  variables_bundler: &variables_bundler
+    BUNDLE_CACHE_PATH: '${CI_PROJECT_DIR}/.cache/bundler'
+    BUNDLE_WITHOUT: 'production'
+  # `cache`
+  cache_bundler: &cache_bundler
+    key: '${CI_JOB_STAGE}'
+    paths:
+      - '${BUNDLE_CACHE_PATH}'
+
+###############################################################################
+# Define stages and global variables
+###############################################################################
+stages:
+  - *stage_lint
+  - *stage_test
+  - *stage_release
+variables:
+  DOCKER_DRIVER: 'overlay2'
+
+###############################################################################
+# `lint` stage: `commitlint` & `pre-commit`
+###############################################################################
+commitlint:
+  stage: *stage_lint
+  image: *image_commitlint
+  script:
+    # Add `upstream` remote to get access to `upstream/master`
+    - 'git remote add upstream ${CI_PROJECT_URL}.git'
+    - 'git fetch --all'
+    # Set default commit hashes for `--from` and `--to`
+    - 'export COMMITLINT_FROM="$(git merge-base upstream/master HEAD)"'
+    - 'export COMMITLINT_TO="${CI_COMMIT_SHA}"'
+    # `coqbot` adds a merge commit to test PRs on top of the latest commit in
+    # the repo; amend this merge commit message to avoid failure
+    - |
+      if [ "${GITLAB_USER_LOGIN}" = "coqbot" ] \
+      && [ "${CI_COMMIT_BRANCH}" != "master" ]; then
+        git commit --amend -m \
+          'chore: reword coqbot merge commit message for commitlint'
+        export COMMITLINT_TO=HEAD
+      fi
+    # Run `commitlint`
+    - 'commitlint --from "${COMMITLINT_FROM}"
+                  --to   "${COMMITLINT_TO}"
+                  --verbose'
+
+pre-commit:
+  stage: *stage_lint
+  image: *image_precommit
+  # https://pre-commit.com/#gitlab-ci-example
+  variables:
+    PRE_COMMIT_HOME: '${CI_PROJECT_DIR}/.cache/pre-commit'
+  cache:
+    key: '${CI_JOB_NAME}'
+    paths:
+      - '${PRE_COMMIT_HOME}'
+  script:
+    - 'pre-commit run --all-files --color always --verbose'
+
+###############################################################################
+# Define `test` template
+###############################################################################
+.test_instance:
+  stage: *stage_test
+  image: *image_dindruby
+  services: *services_docker_dind
+  variables: *variables_bundler
+  cache: *cache_bundler
+  before_script:
+    # TODO: This should work from the env vars above automatically
+    - 'bundle config set path "${BUNDLE_CACHE_PATH}"'
+    - 'bundle config set without "${BUNDLE_WITHOUT}"'
+    - 'bundle install'
+  script:
+    # Alternative value to consider: `${CI_JOB_NAME}`
+    - 'bin/kitchen verify "${DOCKER_ENV_CI_JOB_NAME}"'
+
+###############################################################################
+# `test` stage: each instance below uses the `test` template above
+###############################################################################
+## Define the rest of the matrix based on Kitchen testing
+# Make sure the instances listed below match up with
+# the `platforms` defined in `kitchen.yml`
+v3001-py3-debian-10-3001-py3: {extends: '.test_instance'}
+# v3001-py3-debian-9-3001-py3: {extends: '.test_instance'}
+v3001-py3-ubuntu-2004-3001-py3: {extends: '.test_instance'}
+# v3001-py3-ubuntu-1804-3001-py3: {extends: '.test_instance'}
+v3001-py3-centos-8-3001-py3: {extends: '.test_instance'}
+# v3001-py3-centos-7-3001-py3: {extends: '.test_instance'}
+v3001-py3-fedora-32-3001-py3: {extends: '.test_instance'}
+# v3001-py3-fedora-31-3001-py3: {extends: '.test_instance'}
+# v3001-py3-opensuse-leap-152-3001-py3: {extends: '.test_instance'}
+# v3001-py3-amazonlinux-2-3001-py3: {extends: '.test_instance'}
+v3001-py3-oraclelinux-8-3001-py3: {extends: '.test_instance'}
+# v3001-py3-oraclelinux-7-3001-py3: {extends: '.test_instance'}
+v3001-py3-gentoo-stage3-latest-3001-py3: {extends: '.test_instance'}
+v3001-py3-gentoo-stage3-systemd-3001-py3: {extends: '.test_instance'}
+# v3000-py3-debian-10-3000-3-py3: {extends: '.test_instance'}
+# v3000-py3-debian-9-3000-3-py3: {extends: '.test_instance'}
+# v3000-py3-ubuntu-1804-3000-3-py3: {extends: '.test_instance'}
+# v3000-py3-centos-8-3000-3-py3: {extends: '.test_instance'}
+# v3000-py3-centos-7-3000-3-py3: {extends: '.test_instance'}
+v3000-py3-opensuse-leap-152-3000-3-py3: {extends: '.test_instance'}
+v3000-py3-amazonlinux-2-3000-3-py3: {extends: '.test_instance'}
+# v3000-py3-oraclelinux-8-3000-3-py3: {extends: '.test_instance'}
+v3000-py3-oraclelinux-7-3000-3-py3: {extends: '.test_instance'}
+v3000-py2-ubuntu-1804-3000-3-py2: {extends: '.test_instance'}
+# v3000-py2-ubuntu-1604-3000-3-py2: {extends: '.test_instance'}
+# v3000-py3-gentoo-stage3-latest-3000-3-py3: {extends: '.test_instance'}
+# v3000-py3-gentoo-stage3-systemd-3000-3-py3: {extends: '.test_instance'}
+
+###############################################################################
+# `release` stage: `semantic-release`
+###############################################################################
+semantic-release:
+  only: *only_branch_master_parent_repo
+  stage: *stage_release
+  image: *image_semanticrelease
+  variables:
+    MAINTAINER_TOKEN: '${GH_TOKEN}'
+  script:
+    # Update `AUTHORS.md`
+    - '${HOME}/go/bin/maintainer contributor'
+    # Run `semantic-release`
+    - 'semantic-release'

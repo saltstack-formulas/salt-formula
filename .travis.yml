@@ -1,6 +1,15 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 ---
+################################################################################
+# NOTE: This file is UNMAINTAINED; it is provided for references purposes only.
+#       No guarantees are tendered that this structure will work after 2020.
+################################################################################
+# * https://en.wikipedia.org/wiki/Travis_CI:
+#   - "... free open-source plans were removed in [sic] the end of 2020"
+#   - https://blog.travis-ci.com/2020-11-02-travis-ci-new-billing
+#   - https://ropensci.org/technotes/2020/11/19/moving-away-travis/
+################################################################################
 ## Machine config
 os: 'linux'
 arch: 'amd64'
@@ -22,8 +31,10 @@ script:
 ## Stages and jobs matrix
 stages:
   - test
-  - name: 'release'
-    if: 'branch = master AND type != pull_request'
+  # # As part of the switch away from Travis CI, ensure that the `release` stage
+  # # is not run inadvertently
+  # - name: 'release'
+  #   if: 'branch = master AND type != pull_request'
 jobs:
   include:
     ## Define the test stage that runs the linters (and testing matrix, if applicable)
@@ -91,7 +102,6 @@ jobs:
     # - env: INSTANCE=v3000-py3-ubuntu-1804-3000-3-py3
     # - env: INSTANCE=v3000-py3-centos-8-3000-3-py3
     # - env: INSTANCE=v3000-py3-centos-7-3000-3-py3
-    - env: INSTANCE=v3000-py3-fedora-31-3000-3-py3
     - env: INSTANCE=v3000-py3-opensuse-leap-152-3000-3-py3
     - env: INSTANCE=v3000-py3-amazonlinux-2-3000-3-py3
     # - env: INSTANCE=v3000-py3-oraclelinux-8-3000-3-py3
@@ -100,17 +110,6 @@ jobs:
     # - env: INSTANCE=v3000-py2-ubuntu-1604-3000-3-py2
     # - env: INSTANCE=v3000-py3-gentoo-stage3-latest-3000-3-py3
     # - env: INSTANCE=v3000-py3-gentoo-stage3-systemd-3000-3-py3
-    # - env: INSTANCE=v201902-py3-debian-10-2019-2-py3
-    - env: INSTANCE=v201902-py3-debian-9-2019-2-py3
-    # - env: INSTANCE=v201902-py3-ubuntu-1804-2019-2-py3
-    - env: INSTANCE=v201902-py3-ubuntu-1604-2019-2-py3
-    # - env: INSTANCE=v201902-py3-centos-8-2019-2-py3
-    - env: INSTANCE=v201902-py3-centos-7-2019-2-py3
-    # - env: INSTANCE=v201902-py3-fedora-31-2019-2-py3
-    # - env: INSTANCE=v201902-py3-opensuse-leap-152-2019-2-py3
-    # - env: INSTANCE=v201902-py3-amazonlinux-2-2019-2-py3
-    - env: INSTANCE=v201902-py2-centos-6-2019-2-py2
-    # - env: INSTANCE=v201902-py2-amazonlinux-1-2019-2-py2
 
     ## Define the release stage that runs `semantic-release`
     - stage: 'release'

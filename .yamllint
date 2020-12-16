@@ -10,6 +10,7 @@ extends: default
 # 3. Any YAML files under directory `.kitchen/`, introduced during local testing
 # 4. All YAML files heavily reliant on Jinja; these can be tackled in a subsequent PR
 ignore: |
+  .cache/
   node_modules/
   test/**/states/**/*.sls
   .kitchen/
