@@ -18,6 +18,7 @@
   image_precommit: &image_precommit
     name: 'myii/ssf-pre-commit:2.9.2'
     entrypoint: ['/bin/bash', '-c']
+  image_rubocop: &image_rubocop 'pipelinecomponents/rubocop:latest'
   image_semantic-release: &image_semanticrelease 'myii/ssf-semantic-release:15.14'
   # `services`
   services_docker_dind: &services_docker_dind
@@ -83,6 +84,19 @@ pre-commit:
       - '${PRE_COMMIT_HOME}'
   script:
     - 'pre-commit run --all-files --color always --verbose'
+
+# Use a separate job for `rubocop` other than the one potentially run by `pre-commit`
+# - The `pre-commit` check will only be available for formulas that pass the default
+#   `rubocop` check -- and must continue to do so
+# - This job is allowed to fail, so can be used for all formulas
+# - Furthermore, this job uses all of the latest `rubocop` features & cops,
+#   which will help when upgrading the `rubocop` linter used in `pre-commit`
+rubocop:
+  allow_failure: true
+  stage: *stage_lint
+  image: *image_rubocop
+  script:
+    - 'rubocop -d -P -S --enable-pending-cops'
 
 ###############################################################################
 # Define `test` template
