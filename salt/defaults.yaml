@@ -58,7 +58,7 @@ salt:
   master:
     gitfs_provider: gitpython
   minion:
-    master_type: true  # see init.sls & standalone.sls
+    master_type: str  # see init.sls & standalone.sls
 
   gitfs:
     dulwich:
