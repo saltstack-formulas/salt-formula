@@ -2,6 +2,23 @@
 Changelog
 =========
 
+`1.7.2 <https://github.com/saltstack-formulas/salt-formula/compare/v1.7.1...v1.7.2>`_ (2020-12-20)
+------------------------------------------------------------------------------------------------------
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **commitlint:** ensure ``upstream/master`` uses main repo URL [skip ci] (\ `2a5b679 <https://github.com/saltstack-formulas/salt-formula/commit/2a5b6798d4a0c31f74d849f3f9df13a9cf29b9da>`_\ )
+* **gitlab-ci:** add ``rubocop`` linter (with ``allow_failure``\ ) [skip ci] (\ `8417653 <https://github.com/saltstack-formulas/salt-formula/commit/8417653525c62e30493b2788e0c9ab6224ffe4af>`_\ )
+* **kitchen+gitlab:** adjust matrix to add ``3002`` (\ `7df2445 <https://github.com/saltstack-formulas/salt-formula/commit/7df24454812c6bbd48a9c07c877efba4df194852>`_\ )
+
+Tests
+^^^^^
+
+
+* **magnesium:** add pillar and tests for ``3002`` (\ `c066060 <https://github.com/saltstack-formulas/salt-formula/commit/c0660608d7780483f0c1ebdd57b0873c3d62cb56>`_\ )
+
 `1.7.1 <https://github.com/saltstack-formulas/salt-formula/compare/v1.7.0...v1.7.1>`_ (2020-12-16)
 ------------------------------------------------------------------------------------------------------
 
