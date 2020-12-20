@@ -53,7 +53,8 @@ commitlint:
   image: *image_commitlint
   script:
     # Add `upstream` remote to get access to `upstream/master`
-    - 'git remote add upstream ${CI_PROJECT_URL}.git'
+    - 'git remote add upstream
+       https://gitlab.com/saltstack-formulas/salt-formula.git'
     - 'git fetch --all'
     # Set default commit hashes for `--from` and `--to`
     - 'export COMMITLINT_FROM="$(git merge-base upstream/master HEAD)"'
