@@ -301,6 +301,7 @@ suites:
       state_top:
         base:
           '*':
+            - salt._mapdata
             - salt.pkgrepo
             - salt.master
             - salt.minion
@@ -337,6 +338,7 @@ suites:
       state_top:
         base:
           '*':
+            - salt._mapdata
             - salt.pkgrepo
             - salt.master
             - salt.minion
@@ -370,6 +372,7 @@ suites:
       state_top:
         base:
           '*':
+            - salt._mapdata
             - salt.pkgrepo
             - salt.master
             - salt.minion
@@ -393,6 +396,7 @@ suites:
       state_top:
         base:
           '*':
+            - salt._mapdata
             - salt.pkgrepo
             - salt.master
             - salt.minion

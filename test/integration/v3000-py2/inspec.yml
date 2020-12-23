@@ -6,6 +6,9 @@ title: salt formula
 maintainer: SaltStack Formulas
 license: Apache-2.0
 summary: Verify that Salt `v3000-py2` is setup and configured
+depends:
+  - name: share
+    path: test/integration/share
 supports:
   - platform-name: debian
   - platform-name: ubuntu

@@ -1,0 +1,13 @@
+# yamllint disable rule:indentation rule:line-length
+# {{ grains.get("osfinger", grains.os) }}
+---
+{#- use salt.slsutil.serialize to avoid encoding errors on some platforms #}
+{{ salt["slsutil.serialize"](
+     "yaml",
+     map,
+     default_flow_style=False,
+     allow_unicode=True,
+   )
+   | regex_replace("^\s+'$", "'", multiline=True)
+   | trim
+}}
