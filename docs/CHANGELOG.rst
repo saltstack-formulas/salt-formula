@@ -2,6 +2,16 @@
 Changelog
 =========
 
+`1.7.3 <https://github.com/saltstack-formulas/salt-formula/compare/v1.7.2...v1.7.3>`_ (2020-12-23)
+------------------------------------------------------------------------------------------------------
+
+Tests
+^^^^^
+
+
+* **_mapdata:** generate verification files (\ `da6d150 <https://github.com/saltstack-formulas/salt-formula/commit/da6d1509fd12029edaf907f887071e3604aa0a0a>`_\ )
+* **map:** verify ``map.jinja`` dump using ``_mapdata`` state (\ `d2404d5 <https://github.com/saltstack-formulas/salt-formula/commit/d2404d5175bdc01f532032c82a4891e2f5d070cc>`_\ )
+
 `1.7.2 <https://github.com/saltstack-formulas/salt-formula/compare/v1.7.1...v1.7.2>`_ (2020-12-20)
 ------------------------------------------------------------------------------------------------------
 
