@@ -16,8 +16,11 @@
 /docs/AUTHORS.rst                           @saltstack-formulas/ssf
 /docs/CHANGELOG.rst                         @saltstack-formulas/ssf
 /docs/TOFS_pattern.rst                      @saltstack-formulas/ssf
+/*/_mapdata/                                @saltstack-formulas/ssf
 /*/libsaltcli.jinja                         @saltstack-formulas/ssf
 /*/libtofs.jinja                            @saltstack-formulas/ssf
+/test/integration/**/_mapdata_spec.rb       @saltstack-formulas/ssf
+/test/integration/**/libraries/system.rb    @saltstack-formulas/ssf
 /test/integration/**/inspec.yml             @saltstack-formulas/ssf
 /test/integration/**/README.md              @saltstack-formulas/ssf
 /.gitignore                                 @saltstack-formulas/ssf

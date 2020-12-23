@@ -23,6 +23,7 @@ suites:
       state_top:
         base:
           '*':
+            - salt._mapdata
             - salt.minion
       pillars:
         top.sls:
