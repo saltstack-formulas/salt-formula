@@ -45,7 +45,7 @@ class SystemResource < Inspec.resource(1)
     end
   end
 
-  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Metrics/MethodLength,Metrics/AbcSize,Metrics/CyclomaticComplexity
   def build_platform_release
     case inspec.platform[:name]
     when 'amazon'
@@ -55,6 +55,10 @@ class SystemResource < Inspec.resource(1)
       'base-latest'
     when 'gentoo'
       "#{inspec.platform[:release].split('.')[0]}-#{derive_gentoo_init_system}"
+    when 'opensuse'
+      # rubocop:disable Style/NumericLiterals,Layout/LineLength
+      inspec.platform[:release].to_i > 20210101 ? 'tumbleweed' : inspec.platform[:release]
+      # rubocop:enable Style/NumericLiterals,Layout/LineLength
     when 'windows_8.1_pro'
       '8.1'
     when 'windows_server_2019_datacenter'
@@ -63,15 +67,10 @@ class SystemResource < Inspec.resource(1)
       inspec.platform[:release]
     end
   end
-  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/MethodLength,Metrics/AbcSize,Metrics/CyclomaticComplexity
 
   def derive_gentoo_init_system
-    case inspec.command('systemctl').exist?
-    when true
-      'sysd'
-    else
-      'sysv'
-    end
+    inspec.command('systemctl').exist? ? 'sysd' : 'sysv'
   end
 
   def build_platform_finger
