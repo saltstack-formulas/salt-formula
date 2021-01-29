@@ -2,6 +2,28 @@
 Changelog
 =========
 
+`1.7.4 <https://github.com/saltstack-formulas/salt-formula/compare/v1.7.3...v1.7.4>`_ (2021-01-29)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **osfamilymap:** update openSUSE ``pkgrepo`` URLs (\ `48f8da0 <https://github.com/saltstack-formulas/salt-formula/commit/48f8da03574d85b27ef9692eb631b893ee047525>`_\ )
+* **pkgrepo/suse/install:** avoid managing repo if it already exists (\ `d5320a3 <https://github.com/saltstack-formulas/salt-formula/commit/d5320a35edfbaa44c769bf73036b1bee7581cab5>`_\ ), closes `/github.com/saltstack/salt/blob/45cc49daed1618dbe89e1f012128c8dcab00b356/salt/modules/zypperpkg.py#L1262-L1265 <https://github.com//github.com/saltstack/salt/blob/45cc49daed1618dbe89e1f012128c8dcab00b356/salt/modules/zypperpkg.py/issues/L1262-L1265>`_
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **kitchen+gitlab:** update for new pre-salted images (\ `a9413e8 <https://github.com/saltstack-formulas/salt-formula/commit/a9413e8c29ba456cd1cbb58b5b028c77d707cf30>`_\ )
+
+Tests
+^^^^^
+
+
+* **tumbleweed:** add map verification files (\ `6aeaa5a <https://github.com/saltstack-formulas/salt-formula/commit/6aeaa5ac941e0845c5af1f247100e52e354d545c>`_\ )
+
 `1.7.3 <https://github.com/saltstack-formulas/salt-formula/compare/v1.7.2...v1.7.3>`_ (2020-12-23)
 ------------------------------------------------------------------------------------------------------
 
