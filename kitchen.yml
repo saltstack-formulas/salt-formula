@@ -79,6 +79,14 @@ platforms:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
+  - name: opensuse-tmbl-latest-master-py3
+    driver:
+      image: saltimages/salt-master-py3:opensuse-tumbleweed-latest
+      run_command: /usr/lib/systemd/systemd
+    # Workaround to avoid intermittent failures on `opensuse-tumbleweed`:
+    # => SCP did not finish successfully (255):  (Net::SCP::Error)
+    transport:
+      max_ssh_sessions: 1
   - name: amazonlinux-2-master-py3
     driver:
       image: saltimages/salt-master-py3:amazonlinux-2
@@ -126,6 +134,14 @@ platforms:
       image: saltimages/salt-3002.2-py3:opensuse-leap-15.2
       run_command: /usr/lib/systemd/systemd
     # Workaround to avoid intermittent failures on `opensuse-leap-15.2`:
+    # => SCP did not finish successfully (255):  (Net::SCP::Error)
+    transport:
+      max_ssh_sessions: 1
+  - name: opensuse-tmbl-latest-3002-2-py3
+    driver:
+      image: saltimages/salt-3002.2-py3:opensuse-tumbleweed-latest
+      run_command: /usr/lib/systemd/systemd
+    # Workaround to avoid intermittent failures on `opensuse-tumbleweed`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
@@ -183,6 +199,14 @@ platforms:
       image: saltimages/salt-3001.4-py3:opensuse-leap-15.2
       run_command: /usr/lib/systemd/systemd
     # Workaround to avoid intermittent failures on `opensuse-leap-15.2`:
+    # => SCP did not finish successfully (255):  (Net::SCP::Error)
+    transport:
+      max_ssh_sessions: 1
+  - name: opensuse-tmbl-latest-3001-4-py3
+    driver:
+      image: saltimages/salt-3001.4-py3:opensuse-tumbleweed-latest
+      run_command: /usr/lib/systemd/systemd
+    # Workaround to avoid intermittent failures on `opensuse-tumbleweed`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
@@ -292,6 +316,7 @@ suites:
       - fedora-33-3002-2-py3
       - fedora-32-3002-2-py3
       - opensuse-leap-152-3002-2-py3
+      - opensuse-tmbl-latest-3002-2-py3
       - amazonlinux-2-3002-2-py3
       - oraclelinux-8-3002-2-py3
       - oraclelinux-7-3002-2-py3
@@ -329,6 +354,7 @@ suites:
       - fedora-33-3001-4-py3
       - fedora-32-3001-4-py3
       - opensuse-leap-152-3001-4-py3
+      - opensuse-tmbl-latest-3001-4-py3
       - amazonlinux-2-3001-4-py3
       - oraclelinux-8-3001-4-py3
       - oraclelinux-7-3001-4-py3

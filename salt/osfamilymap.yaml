@@ -12,7 +12,7 @@
 {%- set osfamily_lower =  salt['grains.get']('os_family')|lower %}
 {%- set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
 {%- set oscodename = salt['grains.get']('oscodename') %}
-{%- set suse_testing_repo = ':/products:/next:/testing' if [osfamily_lower, osrelease] == ['suse', '15.2'] else '' %}
+{%- set opensuse_repo_suffix = 'Leap_' ~ osrelease if salt['grains.get']('osfinger', '') == 'Leap-15' else 'Tumbleweed' %}
 
 #from template-formula
 {%- if grains.os_family == 'MacOS' %}
@@ -57,9 +57,9 @@ RedHat:
     gitfs_provider: pygit2
 
 Suse:
-  pkgrepo_humanname: 'Salt releases for SLE-based SUSE products (openSUSE_Leap_{{ osrelease }})'
-  pkgrepo: 'https://download.opensuse.org/repositories/systemsmanagement:/saltstack{{ suse_testing_repo }}/openSUSE_Leap_{{ osrelease }}/'
-  key_url: 'https://download.opensuse.org/repositories/systemsmanagement:/saltstack{{ suse_testing_repo }}/openSUSE_Leap_{{ osrelease }}/repodata/repomd.xml.key'
+  pkgrepo_humanname: 'Salt releases for SLE-based SUSE products (openSUSE_{{ opensuse_repo_suffix }})'
+  pkgrepo: 'https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_{{ opensuse_repo_suffix }}/'
+  key_url: 'https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_{{ opensuse_repo_suffix }}/repodata/repomd.xml.key'
   pygit2: python-pygit2
   pyinotify: python-pyinotify
   gitfs:
