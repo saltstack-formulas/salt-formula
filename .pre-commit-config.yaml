@@ -17,8 +17,8 @@ repos:
         stages: [manual]
         additional_dependencies: ['@commitlint/config-conventional@8.3.4']
         always_run: true
-  - repo: https://github.com/adithyabsk/mirrors-rubocop
-    rev: v0.91.0
+  - repo: https://github.com/rubocop-hq/rubocop
+    rev: v1.9.1
     hooks:
       - id: rubocop
         name: Check Ruby files with rubocop
@@ -33,7 +33,7 @@ repos:
         files: ^.*\.(sh|bash|ksh)$
         types: []
         args: []
-  - repo: https://github.com/adrienverge/yamllint.git
+  - repo: https://github.com/adrienverge/yamllint
     rev: v1.23.0
     hooks:
       - id: yamllint
