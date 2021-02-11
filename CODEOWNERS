@@ -19,7 +19,7 @@
 /*/_mapdata/                                @saltstack-formulas/ssf
 /*/libsaltcli.jinja                         @saltstack-formulas/ssf
 /*/libtofs.jinja                            @saltstack-formulas/ssf
-/test/integration/**/_mapdata_spec.rb       @saltstack-formulas/ssf
+/test/integration/**/_mapdata.rb            @saltstack-formulas/ssf
 /test/integration/**/libraries/system.rb    @saltstack-formulas/ssf
 /test/integration/**/inspec.yml             @saltstack-formulas/ssf
 /test/integration/**/README.md              @saltstack-formulas/ssf

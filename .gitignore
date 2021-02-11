@@ -91,6 +91,9 @@ celerybeat-schedule
 venv/
 ENV/
 
+# visual studio
+.vs/
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -121,6 +124,10 @@ Dockerfile.*_*
 ignore/
 tmp/
 
-#Vagrant Specific files
+# `salt-formula` -- Vagrant Specific files
 .vagrant
 top.sls
+
+# `suricata-formula` -- Platform binaries
+*.rpm
+*.deb

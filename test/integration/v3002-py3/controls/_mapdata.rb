@@ -2,8 +2,8 @@
 
 require 'yaml'
 
-control '`map.jinja` YAML dump' do
-  title 'should match the comparison file'
+control 'salt._mapdata' do
+  title '`map.jinja` should match the reference file'
 
   ### Method
   # The steps below for each file appear convoluted but they are both required
