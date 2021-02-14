@@ -97,6 +97,7 @@ jobs:
     - env: INSTANCE=v3002-py3-amazonlinux-2-3002-2-py3
     - env: INSTANCE=v3002-py3-oraclelinux-8-3002-2-py3
     - env: INSTANCE=v3002-py3-oraclelinux-7-3002-2-py3
+    # - env: INSTANCE=v3002-py3-arch-base-latest-3002-2-py3
     - env: INSTANCE=v3002-py3-gentoo-stage3-latest-3002-2-py3
     - env: INSTANCE=v3002-py3-gentoo-stage3-systemd-3002-2-py3
     - env: INSTANCE=v3001-py3-debian-10-3001-4-py3
@@ -113,6 +114,7 @@ jobs:
     # - env: INSTANCE=v3001-py3-amazonlinux-2-3001-4-py3
     - env: INSTANCE=v3001-py3-oraclelinux-8-3001-4-py3
     # - env: INSTANCE=v3001-py3-oraclelinux-7-3001-4-py3
+    # - env: INSTANCE=v3001-py3-arch-base-latest-3001-4-py3
     # - env: INSTANCE=v3001-py3-gentoo-stage3-latest-3001-4-py3
     # - env: INSTANCE=v3001-py3-gentoo-stage3-systemd-3001-4-py3
     # - env: INSTANCE=v3000-py3-debian-10-3000-6-py3
@@ -129,6 +131,7 @@ jobs:
     # - env: INSTANCE=v3000-py3-gentoo-stage3-systemd-3000-6-py3
     # - env: INSTANCE=v3000-py2-ubuntu-1804-3000-6-py2
     - env: INSTANCE=v3000-py2-ubuntu-1604-3000-6-py2
+    # - env: INSTANCE=v3000-py2-arch-base-latest-3000-6-py2
 
     ## Define the release stage that runs `semantic-release`
     - stage: 'release'
