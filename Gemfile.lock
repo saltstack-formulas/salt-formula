@@ -1,7 +1,7 @@
 GIT
-  remote: https://github.com/test-kitchen/kitchen-docker.git
-  revision: 41e80fed3a7cc86323e19c16a5a340cebf7e5848
-  ref: 41e80fe
+  remote: https://gitlab.com/saltstack-formulas/infrastructure/kitchen-docker
+  revision: 042e6921940a28d2502258b6a5ff3be17dd2fd37
+  branch: ssf
   specs:
     kitchen-docker (2.10.0)
       test-kitchen (>= 1.0.0)
