@@ -23,7 +23,7 @@ control 'salt._mapdata' do
   mapdata_file_path = "_mapdata/#{platform_finger}.yaml"
   # Load the mapdata from profile, into a YAML structure
   # https://docs.chef.io/inspec/profiles/#profile-files
-  mapdata_file_yaml = YAML.safe_load(inspec.profile.file(mapdata_file_path))
+  mapdata_file_yaml = YAML.load(inspec.profile.file(mapdata_file_path))
   # Dump the YAML back into a string for comparison
   mapdata_file_dump = YAML.dump(mapdata_file_yaml)
 
