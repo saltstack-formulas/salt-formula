@@ -45,6 +45,13 @@ values:
     key_url: https://repo.saltstack.com/py3/debian/10/amd64/3001/SALTSTACK-GPG-KEY.pub
     libgit2: libgit2-22
     master:
+      ext_pillar:
+      - cmd_yaml: cat /etc/salt/yaml
+      - stack:
+          - /path/to/stack1.cfg
+          - /path/to/stack2.cfg
+      - reclass:
+          inventory_base_uri: /etc/reclass
       file_roots:
         base:
         - /srv/salt
