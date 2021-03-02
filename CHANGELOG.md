@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.7.5](https://github.com/saltstack-formulas/salt-formula/compare/v1.7.4...v1.7.5) (2021-03-02)
+
+
+### Bug Fixes
+
+* revert to using `is mapping` in Jinja2 ([a89fb3f](https://github.com/saltstack-formulas/salt-formula/commit/a89fb3f4aa819ae4767a7818018d292e2b6633df))
+
+
+### Continuous Integration
+
+* **gemfile+lock:** use `ssf` customised `kitchen-docker` repo [skip ci] ([25fea89](https://github.com/saltstack-formulas/salt-formula/commit/25fea89238d0fc453af9679cb364bcdcc2c7f1e0))
+* **kitchen+gitlab-ci:** use latest pre-salted images [skip ci] ([fb9901e](https://github.com/saltstack-formulas/salt-formula/commit/fb9901e3acd334fc91f21abab4089a53977f6061))
+* **pre-commit:** update hook for `rubocop` [skip ci] ([a874a76](https://github.com/saltstack-formulas/salt-formula/commit/a874a76967b30426ec8ff9ccae8cb3801682cbcb))
+
 ## [1.7.4](https://github.com/saltstack-formulas/salt-formula/compare/v1.7.3...v1.7.4) (2021-01-29)
 
 
