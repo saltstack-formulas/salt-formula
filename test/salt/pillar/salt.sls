@@ -11,6 +11,13 @@ salt:
     pillar_roots:
       base:
         - /srv/pillar
+    ext_pillar:
+      - cmd_yaml: cat /etc/salt/yaml
+      - stack:
+          - /path/to/stack1.cfg
+          - /path/to/stack2.cfg
+      - reclass:
+          inventory_base_uri: /etc/reclass
   minion:
     master: localhost
     fileserver_backend:

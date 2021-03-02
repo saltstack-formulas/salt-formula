@@ -44,6 +44,13 @@ values:
     install_packages: true
     key_url: https://repo.saltstack.com/py3/redhat/$releasever/$basearch/3002/SALTSTACK-GPG-KEY.pub
     master:
+      ext_pillar:
+      - cmd_yaml: cat /etc/salt/yaml
+      - stack:
+          - /path/to/stack1.cfg
+          - /path/to/stack2.cfg
+      - reclass:
+          inventory_base_uri: /etc/reclass
       file_roots:
         base:
         - /srv/salt
