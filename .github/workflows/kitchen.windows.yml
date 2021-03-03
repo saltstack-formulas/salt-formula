@@ -1,5 +1,5 @@
 ---
-name: CI
+name: 'Kitchen (Windows)'
 
 'on': [push, pull_request]
 
@@ -7,7 +7,7 @@ env:
   machine_user: kitchen
   machine_pass: Pass@word1
   machine_port: 5985
-  KITCHEN_LOCAL_YAML: kitchen.github.yml
+  KITCHEN_LOCAL_YAML: kitchen.windows.yml
 
 jobs:
   build:
