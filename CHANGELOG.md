@@ -1,5 +1,17 @@
 # Changelog
 
+# [1.8.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.7.5...v1.8.0) (2021-03-03)
+
+
+### Features
+
+* allow selecting alternate salt package repositories ([8742ab3](https://github.com/saltstack-formulas/salt-formula/commit/8742ab30bb951cb28b3b527693aab9f6439b76f6))
+
+
+### Tests
+
+* **debian+ubuntu:** update `pkgrepo` to use `https` instead of `http` ([e94a8c9](https://github.com/saltstack-formulas/salt-formula/commit/e94a8c9dcec9c1643d655859de58eebb5d1eab81))
+
 ## [1.7.5](https://github.com/saltstack-formulas/salt-formula/compare/v1.7.4...v1.7.5) (2021-03-02)
 
 
