@@ -86,7 +86,7 @@ values:
       state: running
     parallel: true
     pin_version: false
-    pkgrepo: deb http://repo.saltstack.com/py3/ubuntu/18.04/amd64/3001 bionic main
+    pkgrepo: deb https://repo.saltstack.com/py3/ubuntu/18.04/amd64/3001 bionic main
     py_ver: py3
     pygit2: python-pygit2
     pyinotify: python-pyinotify
