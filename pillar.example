@@ -37,6 +37,10 @@ salt:
     salt_ssh: 'salt-ssh'
     pyinotify: 'python-pyinotify'  # the package to be installed for pyinotify
 
+  # Set which salt repository to use, default to https://repo.saltstack.com
+  # For older releases use https://archive.repo.saltproject.io
+  repo: 'https://archive.repo.saltproject.io'
+
   # Set which release of SaltStack to use, default to 'latest'
   # To get the available releases:
   # * http://repo.saltstack.com/yum/redhat/7/x86_64/
