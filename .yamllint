@@ -2,15 +2,18 @@
 # vim: ft=yaml
 ---
 # Extend the `default` configuration provided by `yamllint`
-extends: default
+extends: 'default'
 
 # Files to ignore completely
-# 1. All YAML files under directory `node_modules/`, introduced during the Travis run
-# 2. Any SLS files under directory `test/`, which are actually state files
-# 3. Any YAML files under directory `.kitchen/`, introduced during local testing
-# 4. All YAML files heavily reliant on Jinja; these can be tackled in a subsequent PR
+# 1. All YAML files under directory `.cache/`, introduced during the GitLab CI run
+# 2. All YAML files under directory `.git/`
+# 3. All YAML files under directory `node_modules/`, introduced during the Travis run
+# 4. Any SLS files under directory `test/`, which are actually state files
+# 5. Any YAML files under directory `.kitchen/`, introduced during local testing
+# 6. All YAML files heavily reliant on Jinja; these can be tackled in a subsequent PR
 ignore: |
   .cache/
+  .git/
   node_modules/
   test/**/states/**/*.sls
   .kitchen/
