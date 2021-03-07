@@ -102,34 +102,56 @@ platforms:
     driver:
       image: saltimages/salt-master-py3:gentoo-stage3-systemd
 
+  ## SALT `3002.5`
+  - name: debian-10-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:debian-10
+  - name: debian-9-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:debian-9
+  - name: ubuntu-2004-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:ubuntu-20.04
+  - name: ubuntu-1804-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:ubuntu-18.04
+  - name: ubuntu-1604-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:ubuntu-16.04
+  - name: centos-8-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:centos-8
+  - name: centos-7-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:centos-7
+  - name: fedora-33-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:fedora-33
+  - name: fedora-32-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:fedora-32
+  - name: amazonlinux-2-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:amazonlinux-2
+  - name: oraclelinux-8-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:oraclelinux-8
+  - name: oraclelinux-7-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:oraclelinux-7
+  - name: arch-base-latest-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:arch-base-latest
+      run_command: /usr/lib/systemd/systemd
+  - name: gentoo-stage3-latest-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:gentoo-stage3-latest
+      run_command: /sbin/init
+  - name: gentoo-stage3-systemd-3002-5-py3
+    driver:
+      image: saltimages/salt-3002.5-py3:gentoo-stage3-systemd
+
   ## SALT `3002.2`
-  - name: debian-10-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:debian-10
-  - name: debian-9-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:debian-9
-  - name: ubuntu-2004-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:ubuntu-20.04
-  - name: ubuntu-1804-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:ubuntu-18.04
-  - name: ubuntu-1604-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:ubuntu-16.04
-  - name: centos-8-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:centos-8
-  - name: centos-7-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:centos-7
-  - name: fedora-33-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:fedora-33
-  - name: fedora-32-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:fedora-32
   - name: opensuse-leap-152-3002-2-py3
     driver:
       image: saltimages/salt-3002.2-py3:opensuse-leap-15.2
@@ -146,144 +168,124 @@ platforms:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
-  - name: amazonlinux-2-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:amazonlinux-2
-  - name: oraclelinux-8-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:oraclelinux-8
-  - name: oraclelinux-7-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:oraclelinux-7
-  - name: arch-base-latest-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:arch-base-latest
-      run_command: /usr/lib/systemd/systemd
-  - name: gentoo-stage3-latest-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:gentoo-stage3-latest
-      run_command: /sbin/init
-  - name: gentoo-stage3-systemd-3002-2-py3
-    driver:
-      image: saltimages/salt-3002.2-py3:gentoo-stage3-systemd
 
-  ## SALT `3001.4`
-  - name: debian-10-3001-4-py3
+  ## SALT `3001.6`
+  - name: debian-10-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:debian-10
-  - name: debian-9-3001-4-py3
+      image: saltimages/salt-3001.6-py3:debian-10
+  - name: debian-9-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:debian-9
-  - name: ubuntu-2004-3001-4-py3
+      image: saltimages/salt-3001.6-py3:debian-9
+  - name: ubuntu-2004-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:ubuntu-20.04
-  - name: ubuntu-1804-3001-4-py3
+      image: saltimages/salt-3001.6-py3:ubuntu-20.04
+  - name: ubuntu-1804-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:ubuntu-18.04
-  - name: ubuntu-1604-3001-4-py3
+      image: saltimages/salt-3001.6-py3:ubuntu-18.04
+  - name: ubuntu-1604-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:ubuntu-16.04
-  - name: centos-8-3001-4-py3
+      image: saltimages/salt-3001.6-py3:ubuntu-16.04
+  - name: centos-8-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:centos-8
-  - name: centos-7-3001-4-py3
+      image: saltimages/salt-3001.6-py3:centos-8
+  - name: centos-7-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:centos-7
-  - name: fedora-33-3001-4-py3
+      image: saltimages/salt-3001.6-py3:centos-7
+  - name: fedora-33-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:fedora-33
-  - name: fedora-32-3001-4-py3
+      image: saltimages/salt-3001.6-py3:fedora-33
+  - name: fedora-32-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:fedora-32
-  - name: opensuse-leap-152-3001-4-py3
+      image: saltimages/salt-3001.6-py3:fedora-32
+  - name: opensuse-leap-152-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:opensuse-leap-15.2
+      image: saltimages/salt-3001.6-py3:opensuse-leap-15.2
       run_command: /usr/lib/systemd/systemd
     # Workaround to avoid intermittent failures on `opensuse-leap-15.2`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
-  - name: opensuse-tmbl-latest-3001-4-py3
+  - name: opensuse-tmbl-latest-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:opensuse-tumbleweed-latest
+      image: saltimages/salt-3001.6-py3:opensuse-tumbleweed-latest
       run_command: /usr/lib/systemd/systemd
     # Workaround to avoid intermittent failures on `opensuse-tumbleweed`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
-  - name: amazonlinux-2-3001-4-py3
+  - name: amazonlinux-2-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:amazonlinux-2
-  - name: oraclelinux-8-3001-4-py3
+      image: saltimages/salt-3001.6-py3:amazonlinux-2
+  - name: oraclelinux-8-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:oraclelinux-8
-  - name: oraclelinux-7-3001-4-py3
+      image: saltimages/salt-3001.6-py3:oraclelinux-8
+  - name: oraclelinux-7-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:oraclelinux-7
-  - name: arch-base-latest-3001-4-py3
+      image: saltimages/salt-3001.6-py3:oraclelinux-7
+  - name: arch-base-latest-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:arch-base-latest
+      image: saltimages/salt-3001.6-py3:arch-base-latest
       run_command: /usr/lib/systemd/systemd
-  - name: gentoo-stage3-latest-3001-4-py3
+  - name: gentoo-stage3-latest-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:gentoo-stage3-latest
+      image: saltimages/salt-3001.6-py3:gentoo-stage3-latest
       run_command: /sbin/init
-  - name: gentoo-stage3-systemd-3001-4-py3
+  - name: gentoo-stage3-systemd-3001-6-py3
     driver:
-      image: saltimages/salt-3001.4-py3:gentoo-stage3-systemd
+      image: saltimages/salt-3001.6-py3:gentoo-stage3-systemd
 
-  ## SALT `3000.6`
-  - name: debian-10-3000-6-py3
+  ## SALT `3000.8`
+  - name: debian-10-3000-8-py3
     driver:
-      image: saltimages/salt-3000.6-py3:debian-10
-  - name: debian-9-3000-6-py3
+      image: saltimages/salt-3000.8-py3:debian-10
+  - name: debian-9-3000-8-py3
     driver:
-      image: saltimages/salt-3000.6-py3:debian-9
-  - name: ubuntu-1804-3000-6-py3
+      image: saltimages/salt-3000.8-py3:debian-9
+  - name: ubuntu-1804-3000-8-py3
     driver:
-      image: saltimages/salt-3000.6-py3:ubuntu-18.04
-  - name: ubuntu-1604-3000-6-py3
+      image: saltimages/salt-3000.8-py3:ubuntu-18.04
+  - name: ubuntu-1604-3000-8-py3
     driver:
-      image: saltimages/salt-3000.6-py3:ubuntu-16.04
-  - name: centos-8-3000-6-py3
+      image: saltimages/salt-3000.8-py3:ubuntu-16.04
+  - name: centos-8-3000-8-py3
     driver:
-      image: saltimages/salt-3000.6-py3:centos-8
-  - name: centos-7-3000-6-py3
+      image: saltimages/salt-3000.8-py3:centos-8
+  - name: centos-7-3000-8-py3
     driver:
-      image: saltimages/salt-3000.6-py3:centos-7
-  - name: opensuse-leap-152-3000-6-py3
+      image: saltimages/salt-3000.8-py3:centos-7
+  - name: opensuse-leap-152-3000-8-py3
     driver:
-      image: saltimages/salt-3000.6-py3:opensuse-leap-15.2
+      image: saltimages/salt-3000.8-py3:opensuse-leap-15.2
       run_command: /usr/lib/systemd/systemd
     # Workaround to avoid intermittent failures on `opensuse-leap-15.2`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
-  - name: amazonlinux-2-3000-6-py3
+  - name: amazonlinux-2-3000-8-py3
     driver:
-      image: saltimages/salt-3000.6-py3:amazonlinux-2
-  - name: oraclelinux-8-3000-6-py3
+      image: saltimages/salt-3000.8-py3:amazonlinux-2
+  - name: oraclelinux-8-3000-8-py3
     driver:
-      image: saltimages/salt-3000.6-py3:oraclelinux-8
-  - name: oraclelinux-7-3000-6-py3
+      image: saltimages/salt-3000.8-py3:oraclelinux-8
+  - name: oraclelinux-7-3000-8-py3
     driver:
-      image: saltimages/salt-3000.6-py3:oraclelinux-7
-  - name: gentoo-stage3-latest-3000-6-py3
+      image: saltimages/salt-3000.8-py3:oraclelinux-7
+  - name: gentoo-stage3-latest-3000-8-py3
     driver:
-      image: saltimages/salt-3000.6-py3:gentoo-stage3-latest
+      image: saltimages/salt-3000.8-py3:gentoo-stage3-latest
       run_command: /sbin/init
-  - name: gentoo-stage3-systemd-3000-6-py3
+  - name: gentoo-stage3-systemd-3000-8-py3
     driver:
-      image: saltimages/salt-3000.6-py3:gentoo-stage3-systemd
-  - name: ubuntu-1804-3000-6-py2
+      image: saltimages/salt-3000.8-py3:gentoo-stage3-systemd
+  - name: ubuntu-1804-3000-8-py2
     driver:
-      image: saltimages/salt-3000.6-py2:ubuntu-18.04
-  - name: ubuntu-1604-3000-6-py2
+      image: saltimages/salt-3000.8-py2:ubuntu-18.04
+  - name: ubuntu-1604-3000-8-py2
     driver:
-      image: saltimages/salt-3000.6-py2:ubuntu-16.04
-  - name: arch-base-latest-3000-6-py2
+      image: saltimages/salt-3000.8-py2:ubuntu-16.04
+  - name: arch-base-latest-3000-8-py2
     driver:
-      image: saltimages/salt-3000.6-py2:arch-base-latest
+      image: saltimages/salt-3000.8-py2:arch-base-latest
       run_command: /usr/lib/systemd/systemd
 
 provisioner:
@@ -307,23 +309,21 @@ verifier:
 suites:
   - name: v3002-py3
     includes:
-      - debian-10-3002-2-py3
-      - debian-9-3002-2-py3
-      - ubuntu-2004-3002-2-py3
-      - ubuntu-1804-3002-2-py3
-      - ubuntu-1604-3002-2-py3
-      - centos-8-3002-2-py3
-      - centos-7-3002-2-py3
-      - fedora-33-3002-2-py3
-      - fedora-32-3002-2-py3
-      - opensuse-leap-152-3002-2-py3
-      - opensuse-tmbl-latest-3002-2-py3
-      - amazonlinux-2-3002-2-py3
-      - oraclelinux-8-3002-2-py3
-      - oraclelinux-7-3002-2-py3
-      - arch-base-latest-3002-2-py3
-      - gentoo-stage3-latest-3002-2-py3
-      - gentoo-stage3-systemd-3002-2-py3
+      - debian-10-3002-5-py3
+      - debian-9-3002-5-py3
+      - ubuntu-2004-3002-5-py3
+      - ubuntu-1804-3002-5-py3
+      - ubuntu-1604-3002-5-py3
+      - centos-8-3002-5-py3
+      - centos-7-3002-5-py3
+      - fedora-33-3002-5-py3
+      - fedora-32-3002-5-py3
+      - amazonlinux-2-3002-5-py3
+      - oraclelinux-8-3002-5-py3
+      - oraclelinux-7-3002-5-py3
+      - arch-base-latest-3002-5-py3
+      - gentoo-stage3-latest-3002-5-py3
+      - gentoo-stage3-systemd-3002-5-py3
     provisioner:
       state_top:
         base:
@@ -346,23 +346,23 @@ suites:
         - path: test/integration/v3002-py3
   - name: v3001-py3
     includes:
-      - debian-10-3001-4-py3
-      - debian-9-3001-4-py3
-      - ubuntu-2004-3001-4-py3
-      - ubuntu-1804-3001-4-py3
-      - ubuntu-1604-3001-4-py3
-      - centos-8-3001-4-py3
-      - centos-7-3001-4-py3
-      - fedora-33-3001-4-py3
-      - fedora-32-3001-4-py3
-      - opensuse-leap-152-3001-4-py3
-      - opensuse-tmbl-latest-3001-4-py3
-      - amazonlinux-2-3001-4-py3
-      - oraclelinux-8-3001-4-py3
-      - oraclelinux-7-3001-4-py3
-      - arch-base-latest-3001-4-py3
-      - gentoo-stage3-latest-3001-4-py3
-      - gentoo-stage3-systemd-3001-4-py3
+      - debian-10-3001-6-py3
+      - debian-9-3001-6-py3
+      - ubuntu-2004-3001-6-py3
+      - ubuntu-1804-3001-6-py3
+      - ubuntu-1604-3001-6-py3
+      - centos-8-3001-6-py3
+      - centos-7-3001-6-py3
+      - fedora-33-3001-6-py3
+      - fedora-32-3001-6-py3
+      - opensuse-leap-152-3001-6-py3
+      - opensuse-tmbl-latest-3001-6-py3
+      - amazonlinux-2-3001-6-py3
+      - oraclelinux-8-3001-6-py3
+      - oraclelinux-7-3001-6-py3
+      - arch-base-latest-3001-6-py3
+      - gentoo-stage3-latest-3001-6-py3
+      - gentoo-stage3-systemd-3001-6-py3
     provisioner:
       state_top:
         base:
@@ -385,18 +385,18 @@ suites:
         - path: test/integration/v3001-py3
   - name: v3000-py3
     includes:
-      - debian-10-3000-6-py3
-      - debian-9-3000-6-py3
-      - ubuntu-1804-3000-6-py3
-      - ubuntu-1604-3000-6-py3
-      - centos-8-3000-6-py3
-      - centos-7-3000-6-py3
-      - opensuse-leap-152-3000-6-py3
-      - amazonlinux-2-3000-6-py3
-      - oraclelinux-8-3000-6-py3
-      - oraclelinux-7-3000-6-py3
-      - gentoo-stage3-latest-3000-6-py3
-      - gentoo-stage3-systemd-3000-6-py3
+      - debian-10-3000-8-py3
+      - debian-9-3000-8-py3
+      - ubuntu-1804-3000-8-py3
+      - ubuntu-1604-3000-8-py3
+      - centos-8-3000-8-py3
+      - centos-7-3000-8-py3
+      - opensuse-leap-152-3000-8-py3
+      - amazonlinux-2-3000-8-py3
+      - oraclelinux-8-3000-8-py3
+      - oraclelinux-7-3000-8-py3
+      - gentoo-stage3-latest-3000-8-py3
+      - gentoo-stage3-systemd-3000-8-py3
     provisioner:
       state_top:
         base:
@@ -419,9 +419,9 @@ suites:
         - path: test/integration/v3000-py3
   - name: v3000-py2
     includes:
-      - ubuntu-1804-3000-6-py2
-      - ubuntu-1604-3000-6-py2
-      - arch-base-latest-3000-6-py2
+      - ubuntu-1804-3000-8-py2
+      - ubuntu-1604-3000-8-py2
+      - arch-base-latest-3000-8-py2
     provisioner:
       state_top:
         base:
