@@ -88,10 +88,10 @@ values:
     py_ver: py3
     python_dulwich: python-dulwich
     python_git: python-git
-    release: '3000'
+    release: '3002'
     restart_via_at: false
     rootgroup: root
-    rootuser: kitchen
+    rootuser: vagrant
     salt_api: salt-api
     salt_cloud: salt-cloud
     salt_master: salt-master
