@@ -38,8 +38,8 @@ class SystemResource < Inspec.resource(1)
     case inspec.platform[:name]
     when 'amazon', 'oracle'
       "#{inspec.platform[:name]}linux"
-    when 'windows_8.1_pro', 'windows_server_2019_datacenter'
-      'windows'
+    when /^windows_/
+      inspec.platform[:family]
     else
       inspec.platform[:name]
     end
@@ -63,6 +63,8 @@ class SystemResource < Inspec.resource(1)
       '8.1'
     when 'windows_server_2019_datacenter'
       '2019-server'
+    when 'windows_server_2016_datacenter'
+      '2016-server'
     else
       inspec.platform[:release]
     end

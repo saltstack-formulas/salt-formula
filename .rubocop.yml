@@ -7,7 +7,7 @@ Layout/LineLength:
   # Based on https://github.com/PyCQA/flake8-bugbear#opinionated-warnings (`B950`)
   Max: 88
 Metrics/BlockLength:
-  ExcludedMethods:
+  IgnoredMethods:
     - control
     - describe
   # Increase from default of `25`
