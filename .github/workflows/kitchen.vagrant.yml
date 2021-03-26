@@ -1,0 +1,36 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+name: 'Kitchen Vagrant (FreeBSD, OpenBSD & Windows)'
+'on': ['push', 'pull_request']
+
+env:
+  KITCHEN_LOCAL_YAML: 'kitchen.vagrant.yml'
+
+jobs:
+  test:
+    runs-on: 'macos-10.15'
+    strategy:
+      fail-fast: false
+      matrix:
+        instance:
+          - v3002-py3-freebsd-122-latest-py3
+          - v3002-py3-freebsd-114-latest-py3
+          - v3001-py3-openbsd-68-latest-py3
+          - v3002-py3-windows-81-latest-py3
+    steps:
+      - name: 'Check out code'
+        uses: 'actions/checkout@v2'
+      - name: 'Set up Bundler cache'
+        uses: 'actions/cache@v1'
+        with:
+          path: 'vendor/bundle'
+          key: "${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}"
+          restore-keys: "${{ runner.os }}-gems-"
+      - name: 'Run Bundler'
+        run: |
+          ruby --version
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+      - name: 'Run Test Kitchen'
+        run: 'bundle exec kitchen verify ${{ matrix.instance }}'

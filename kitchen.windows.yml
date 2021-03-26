@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
 ---
 driver:
   name: proxy
@@ -8,34 +10,16 @@ driver:
   password: Pass@word1
 
 platforms:
-  - name: windows
+  - name: windows-2019-latest-py3
+  - name: windows-2016-latest-py3
 
 provisioner:
   salt_install: bootstrap
-  salt_bootstrap_options: -pythonVersion 3 -version 3000.3
-  init_environment: >
-    C:\salt\salt-call --local state.single file.managed
-    C:\Users\kitchen\AppData\Local\Temp\kitchen\srv\salt\win\repo-ng\salt-minion-py3.sls
-    source=https://github.com/saltstack/salt-winrepo-ng/raw/master/salt-minion-py3.sls
-    skip_verify=True makedirs=True
-
-suites:
-  - name: v3000-py3
-    provisioner:
-      state_top:
-        base:
-          '*':
-            - salt._mapdata
-            - salt.minion
-      pillars:
-        top.sls:
-          base:
-            '*':
-              - salt
-              - v3000-py3
-      pillars_from_files:
-        salt.sls: test/salt/pillar/salt.sls
-        v3000-py3.sls: test/salt/pillar/v3000-py3.sls
-    verifier:
-      inspec_tests:
-        - path: test/integration/v3000-py3
+  salt_bootstrap_options: -pythonVersion 3 -version 3002.5
+  # yamllint disable rule:line-length
+  init_environment: |
+    C:\salt\salt-call --local state.single file.managed `
+      C:\Users\kitchen\AppData\Local\Temp\kitchen\srv\salt\win\repo-ng\salt-minion-py3.sls `
+      source=https://github.com/saltstack/salt-winrepo-ng/raw/master/salt-minion-py3.sls `
+      skip_verify=True makedirs=True
+  # yamllint enable rule:line-length
