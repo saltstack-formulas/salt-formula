@@ -15,11 +15,7 @@ salt-master-macos:
     - name: /Library/LaunchDaemons/com.saltstack.salt.master.plist
     - source: https://raw.githubusercontent.com/saltstack/salt/master/pkg/osx/scripts/com.saltstack.salt.master.plist
     - source_hash: {{ salt_settings.salt_master_macos_plist_hash }}
-    - retry:
-        attempts: 2
-        until: True
-        interval: 10
-        splay: 10
+    - retry: {{ salt_settings.retry_options | json }}
     - require_in:
       - service: salt-master
     {%- endif %}

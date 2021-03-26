@@ -27,11 +27,7 @@ download-salt-minion:
       - test -n "{{ salt_settings.version }}" && '/opt/salt/bin/salt-minion --version=.*{{ salt_settings.version }}.*'
     - require_in:
       - macpackage: salt-minion
-    - retry:
-        attempts: 2
-        until: True
-        interval: 10
-        splay: 10
+    - retry: {{ salt_settings.retry_options | json }}
             {%- elif "workaround https://github.com/saltstack/salt/issues/49348" %}
   cmd.run:
     - name: /usr/local/bin/brew install {{ salt_settings.salt_minion }}
@@ -45,11 +41,7 @@ salt-minion-macos:
     - name: /Library/LaunchDaemons/com.saltstack.salt.minion.plist
     - source: https://raw.githubusercontent.com/saltstack/salt/master/pkg/osx/scripts/com.saltstack.salt.master.plist
     - source_hash: {{ salt_settings.salt_minion_macos_plist_hash }}
-    - retry:
-        attempts: 2
-        until: True
-        interval: 10
-        splay: 10
+    - retry: {{ salt_settings.retry_options | json }}
     - require_in:
       - service: salt-minion
     - watch_in:
