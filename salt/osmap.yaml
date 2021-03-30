@@ -74,5 +74,11 @@ FreeBSD:
   pygit2: py37-pygit2-1.3.0
   python_dulwich: py37-dulwich-0.19.16
 
+# If `osfingermap.yaml` is introduced in the future, perhaps better to move to there,
+# since this is probably specific to `OpenBSD-6`
+OpenBSD:
+  python_git: py3-GitPython
+  python_dulwich: py3-dulwich
+
 Windows:
   parallel: false   # not supported on windows/cygwin
