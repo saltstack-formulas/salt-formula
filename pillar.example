@@ -369,6 +369,13 @@ salt:
     - 'deploy':
         - /srv/salt/reactors/deploy.sls
 
+  # https://docs.saltstack.com/en/latest/ref/states/requisites.html#retrying-states
+  retry_options:
+    attempts: 2
+    until: true
+    interval: 10
+    splay: 10
+
 salt_cloud_certs:
   aws:
     pem: |

@@ -1,12 +1,12 @@
 # yamllint disable rule:indentation rule:line-length
-# Oracle Linux Server-8
+# Windows-8.1
 ---
 values:
   formulas_settings:
     checkout_orig_branch: false
     git_opts:
       default:
-        basedir: /srv/formulas
+        basedir: "/srv/formulas"
         baseurl: https://github.com/saltstack-formulas
         options:
           output_loglevel: quiet
@@ -24,7 +24,7 @@ values:
         maps: salt://salt/files/cloud.maps.d
         profiles: salt://salt/files/cloud.profiles.d
         providers: salt://salt/files/cloud.providers.d
-    config_path: /etc/salt
+    config_path: C:\salt\conf
     gitfs:
       dulwich:
         install_from_source: true
@@ -34,15 +34,14 @@ values:
         git:
           install_from_package: git
           require_state: false
-        install_from_source: false
+        install_from_source: true
         libgit2:
-          build_parent_dir: /usr/src/
+          build_parent_dir: "/usr/src/"
           download_hash: 683d1164e361e2a0a8d52652840e2340
           install_from_source: true
           version: 0.23.0
         version: 0.23.0
     install_packages: true
-    key_url: https://repo.saltstack.com/py3/redhat/$releasever/$basearch/3002/SALTSTACK-GPG-KEY.pub
     master:
       ext_pillar:
       - cmd_yaml: cat /etc/salt/yaml
@@ -53,13 +52,13 @@ values:
           inventory_base_uri: /etc/reclass
       file_roots:
         base:
-        - /srv/salt
+        - "/srv/salt"
       fileserver_backend:
       - rootfs
-      gitfs_provider: pygit2
+      gitfs_provider: gitpython
       pillar_roots:
         base:
-        - /srv/pillar
+        - "/srv/pillar"
     master_config_use_TOFS: false
     master_remove_config: false
     master_service: salt-master
@@ -69,29 +68,26 @@ values:
     minion:
       file_roots:
         base:
-        - /srv/salt
+        - "/srv/salt"
       fileserver_backend:
       - rootfs
       master: localhost
       master_type: true
       pillar_roots:
         base:
-        - /srv/pillar
+        - "/srv/pillar"
     minion_config_use_TOFS: false
     minion_remove_config: false
     minion_service: salt-minion
     minion_service_details:
       enabled: true
       state: running
-    parallel: true
+    parallel: false
     pin_version: false
-    pkgrepo: https://repo.saltstack.com/py3/redhat/$releasever/$basearch/3002
-    pkgrepo_humanname: SaltStack repo for RHEL/CentOS $releasever
-    pkgrepo_name: saltstack
+    pkgrepo: ''
     py_ver: py3
-    pygit2: python-pygit2
     python_dulwich: python-dulwich
-    python_git: GitPython
+    python_git: python-git
     release: '3002'
     restart_via_at: false
     retry_options:
@@ -100,12 +96,12 @@ values:
       splay: 10
       until: true
     rootgroup: root
-    rootuser: root
+    rootuser: vagrant
     salt_api: salt-api
     salt_cloud: salt-cloud
     salt_master: salt-master
     salt_master_macos_plist_hash: ''
-    salt_minion: salt-minion
+    salt_minion: salt-minion-py3
     salt_minion_macos_plist_hash: ''
     salt_ssh: salt-ssh
     salt_syndic: salt-syndic

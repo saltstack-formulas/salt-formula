@@ -85,6 +85,13 @@ salt:
       profiles: salt://salt/files/cloud.profiles.d
       maps: salt://salt/files/cloud.maps.d
 
+  # https://docs.saltstack.com/en/latest/ref/states/requisites.html#retrying-states
+  retry_options:
+    attempts: 2
+    until: true
+    interval: 10
+    splay: 10
+
 salt_formulas:
   list: {}     # via pillar data
   checkout_orig_branch: false

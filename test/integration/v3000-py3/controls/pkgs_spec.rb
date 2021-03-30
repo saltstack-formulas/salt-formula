@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 pkgs =
-  case platform[:family]
+  case system.platform[:name]
+  when 'arch'
+    %w[salt]
+  when /bsd$/
+    %w[py37-salt-3002.6]
   when 'windows'
     %w[Salt\ Minion]
   else

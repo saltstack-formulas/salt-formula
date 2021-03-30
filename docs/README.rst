@@ -255,7 +255,7 @@ Gives you SSH access to the instance for manual testing.
 Testing with Vagrant
 --------------------
 
-Windows testing is done with ``kitchen-salt``.
+Windows/FreeBSD/OpenBSD testing is done with ``kitchen-salt``.
 
 Requirements
 ^^^^^^^^^^^^
@@ -273,8 +273,8 @@ Setup
    $ bundle install --with=vagrant
    $ bin/kitchen test [platform]
 
-Where ``[platform]`` is the platform name defined in ``kitchen.yml``,
-e.g. ``windows``.
+Where ``[platform]`` is the platform name defined in ``kitchen.vagrant.yml``,
+e.g. ``windows-81-latest-py3``.
 
 Note
 ^^^^
@@ -292,7 +292,7 @@ Then run the following commands as needed.
 ``bin/kitchen converge``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Creates the Vagrant instance and runs the ``salt.minion`` main state, ready for testing.
+Creates the Vagrant instance and runs the ``salt`` main states, ready for testing.
 
 ``bin/kitchen verify``
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -312,4 +312,4 @@ Runs all of the stages above in one go: i.e. ``destroy`` + ``converge`` + ``veri
 ``bin/kitchen login``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Gives you RDP access to the instance for manual testing.
+Gives you RDP/SSH access to the instance for manual testing.

@@ -93,6 +93,11 @@ values:
     python_git: python-git
     release: '3002'
     restart_via_at: false
+    retry_options:
+      attempts: 5
+      interval: 10
+      splay: 10
+      until: true
     rootgroup: root
     rootuser: root
     salt_api: salt-api
