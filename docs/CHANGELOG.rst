@@ -2,6 +2,46 @@
 Changelog
 =========
 
+`1.8.1 <https://github.com/saltstack-formulas/salt-formula/compare/v1.8.0...v1.8.1>`_ (2021-03-30)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **freebsd:** update to provide support for most recent versions (\ `24ebbb4 <https://github.com/saltstack-formulas/salt-formula/commit/24ebbb4e0c44a34fa3b20379306be67b5c03fbbe>`_\ )
+* **openbsd:** update to provide support for most recent versions (\ `61201de <https://github.com/saltstack-formulas/salt-formula/commit/61201de8c65663498b6cb1b6f0f154a9af0e691f>`_\ )
+* **osfamilymap:** use ``whoami`` for Windows ``rootuser`` (\ `69d5981 <https://github.com/saltstack-formulas/salt-formula/commit/69d598138e18134a9dcf8ed84daf04e3d4e2158e>`_\ ), closes `#495 <https://github.com/saltstack-formulas/salt-formula/issues/495>`_
+
+Code Refactoring
+^^^^^^^^^^^^^^^^
+
+
+* **retry_options:** provide options from defaults/pillar (\ `bbd7286 <https://github.com/saltstack-formulas/salt-formula/commit/bbd7286240c2f604e9c1a6bb027e696fc973f74f>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* enable Vagrant-based testing using GitHub Actions (\ `163c77f <https://github.com/saltstack-formulas/salt-formula/commit/163c77fceea0f4a098bc74039cb24e77f0f9852a>`_\ )
+* **kitchen+ci:** use latest pre-salted images (after CVE) [skip ci] (\ `cfefcc8 <https://github.com/saltstack-formulas/salt-formula/commit/cfefcc83c032ae76178d2c24169462b18a0434c7>`_\ )
+* **windows:** use ``kitchen.windows.yml`` (\ `c6043fb <https://github.com/saltstack-formulas/salt-formula/commit/c6043fbc9dde691bb019088a0dfd37d048a16773>`_\ )
+
+Documentation
+^^^^^^^^^^^^^
+
+
+* **readme:** add ``Testing with Vagrant`` section (\ `ef1bc02 <https://github.com/saltstack-formulas/salt-formula/commit/ef1bc02a8680a9b92b9d8d74013986070cc01f5e>`_\ )
+
+Tests
+^^^^^
+
+
+* update for new platforms (inc. using ``system`` library) (\ `e6bcdc1 <https://github.com/saltstack-formulas/salt-formula/commit/e6bcdc1b4d8d15f00af17d1c33ed57f496d951b2>`_\ )
+* **_mapdata:** add Arch Linux verification file (\ `e31a56e <https://github.com/saltstack-formulas/salt-formula/commit/e31a56e7a328117f5d5b951119eb853a91eade60>`_\ )
+* add Windows map verification files (\ `e0afe89 <https://github.com/saltstack-formulas/salt-formula/commit/e0afe89f2492f1b530d6205b871e435ea7ab0c97>`_\ )
+* standardise use of ``share`` suite & ``_mapdata`` state [skip ci] (\ `9816f47 <https://github.com/saltstack-formulas/salt-formula/commit/9816f473c5aae19ddf25a5c9b126221694c61c6c>`_\ )
+
 `1.8.0 <https://github.com/saltstack-formulas/salt-formula/compare/v1.7.5...v1.8.0>`_ (2021-03-03)
 ------------------------------------------------------------------------------------------------------
 
