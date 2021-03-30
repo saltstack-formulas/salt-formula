@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 services =
-  case platform[:family]
+  case system.platform[:family]
+  when 'bsd'
+    %w[salt_master salt_minion]
   when 'windows'
     %w[salt-minion]
   else
