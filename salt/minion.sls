@@ -71,6 +71,9 @@ salt-minion:
             {%- if salt_settings.version %}
     - version: {{ salt_settings.version }}
             {%- endif %}
+    {%- if grains.os_family == 'FreeBSD' %}
+    - unless: pkg info | grep {{ salt_settings.salt_master }}
+    {%- endif %}
             {% if salt_settings.minion_service_details.state != 'ignore' %}
     - require_in:
       - service: salt-minion
@@ -97,6 +100,9 @@ salt-minion:
   service.{{ salt_settings.minion_service_details.state }}:
     - enable: {{ salt_settings.minion_service_details.enabled }}
     - name: {{ salt_settings.minion_service }}
+    {%- if grains.os_family == 'FreeBSD' %}
+    - retry: {{ salt_settings.retry_options | json }}
+    {%- endif %}
     - watch:
       - file: remove-old-minion-conf-file
     - order: last

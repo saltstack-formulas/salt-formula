@@ -63,5 +63,16 @@ MacOS:
   salt_master_macos_plist_hash: 8435331b2d48ca8f0759f216e5b15ec9171a4216b1441328c732c6906728b7c9
   salt_minion_macos_plist_hash: 26b33da12e0d8960ee96b488c8352002c22a377c19bf3df3f986a1e49eca8b20
 
+FreeBSD:
+  salt_master: py37-salt-3002.6
+  salt_minion: py37-salt-3002.6
+  salt_syndic: py37-salt-3002.6
+  salt_cloud: py37-salt-3002.6
+  salt_api: py37-salt-3002.6
+  salt_ssh: py37-salt-3002.6
+  python_git: py37-GitPython-3.1.11
+  pygit2: py37-pygit2-1.3.0
+  python_dulwich: py37-dulwich-0.19.16
+
 Windows:
   parallel: false   # not supported on windows/cygwin
