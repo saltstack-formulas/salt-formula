@@ -1,5 +1,5 @@
 # yamllint disable rule:indentation rule:line-length
-# FreeBSD-12
+# FreeBSD-11
 ---
 values:
   formulas_settings:
