@@ -27,9 +27,6 @@ salt-master:
        {%- if salt_settings.version is defined %}
     - version: {{ salt_settings.version }}
        {%- endif %}
-    {%- if grains.os_family == 'FreeBSD' %}
-    - unless: pkg info | grep {{ salt_settings.salt_master }}
-    {%- endif %}
        {% if salt_settings.master_service_details.state != 'ignore' %}
     - require_in:
       - service: salt-master
