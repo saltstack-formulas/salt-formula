@@ -10,13 +10,15 @@ extends: 'default'
 # 3. All YAML files under directory `node_modules/`, introduced during the Travis run
 # 4. Any SLS files under directory `test/`, which are actually state files
 # 5. Any YAML files under directory `.kitchen/`, introduced during local testing
-# 6. All YAML files heavily reliant on Jinja; these can be tackled in a subsequent PR
+# 6. `kitchen.vagrant.yml`, which contains Embedded Ruby (ERB) template syntax
+# 7. All YAML files heavily reliant on Jinja; these can be tackled in a subsequent PR
 ignore: |
   .cache/
   .git/
   node_modules/
   test/**/states/**/*.sls
   .kitchen/
+  kitchen.vagrant.yml
   salt/osfamilymap.yaml
   salt/osmap.yaml
 

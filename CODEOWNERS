@@ -40,6 +40,8 @@
 /Gemfile                                    @saltstack-formulas/ssf
 /Gemfile.lock                               @saltstack-formulas/ssf
 /kitchen.yml                                @saltstack-formulas/ssf
+/kitchen.vagrant.yml                        @saltstack-formulas/ssf
+/kitchen.windows.yml                        @saltstack-formulas/ssf
 /pre-commit_semantic-release.sh             @saltstack-formulas/ssf
 /release-rules.js                           @saltstack-formulas/ssf
 /release.config.js                          @saltstack-formulas/ssf
