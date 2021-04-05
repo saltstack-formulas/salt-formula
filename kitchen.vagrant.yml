@@ -7,22 +7,35 @@ driver:
   customize:
     usbxhci: 'off'
   gui: false
-  linked_clone: true
   ssh:
     shell: /bin/sh
+  <% unless ENV['CI'] %>
+  linked_clone: true
+  synced_folders:
+    - - '.kitchen/kitchen-vagrant/%{instance_name}/vagrant'
+      - '/vagrant'
+      - 'create: true, disabled: false'
+  <% end %>
 
 platforms:
-  - name: freebsd-122-latest-py3
+  - name: freebsd-122-master-py3
     driver:
-      box: bento/freebsd-12.2
-  - name: freebsd-114-latest-py3
+      box: myii/freebsd-12.2-master-py3
+  - name: freebsd-114-master-py3
     driver:
-      box: bento/freebsd-11.4
-  - name: openbsd-68-latest-py3
+      box: myii/freebsd-11.4-master-py3
+  - name: freebsd-122-3002-6-py3
     driver:
-      box: generic/openbsd6
+      box: myii/freebsd-12.2-3002.6-py3
+  - name: freebsd-114-3002-6-py3
+    driver:
+      box: myii/freebsd-11.4-3002.6-py3
+  - name: openbsd-68-3001-1-py3
+    driver:
+      box: myii/openbsd-6.8-3001.1-py3
       ssh:
         shell: /bin/ksh
+      synced_folders: []
   - name: windows-81-latest-py3
     driver:
       box: techneg/win81x64-pro-salt
@@ -30,7 +43,6 @@ platforms:
       customize: {}
       ssh: {}
     provisioner:
-      salt_install: none
       # yamllint disable rule:line-length
       init_environment: |
         # Workaround to allow `kitchen converge` to be used multiple times
@@ -45,6 +57,3 @@ platforms:
           skip_verify=True makedirs=True
         exit 0
       # yamllint enable rule:line-length
-
-provisioner:
-  salt_install: bootstrap

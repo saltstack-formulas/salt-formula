@@ -324,8 +324,8 @@ suites:
       - arch-base-latest-3002-5-py3
       - gentoo-stage3-latest-3002-5-py3
       - gentoo-stage3-systemd-3002-5-py3
-      - freebsd-122-latest-py3
-      - freebsd-114-latest-py3
+      - freebsd-122-3002-6-py3
+      - freebsd-114-3002-6-py3
       - windows-81-latest-py3
       - windows-2019-latest-py3
       - windows-2016-latest-py3
@@ -368,7 +368,7 @@ suites:
       - arch-base-latest-3001-6-py3
       - gentoo-stage3-latest-3001-6-py3
       - gentoo-stage3-systemd-3001-6-py3
-      - openbsd-68-latest-py3
+      - openbsd-68-3001-1-py3
     provisioner:
       state_top:
         base:
