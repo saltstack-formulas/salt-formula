@@ -2,6 +2,27 @@
 Changelog
 =========
 
+`1.8.2 <https://github.com/saltstack-formulas/salt-formula/compare/v1.8.1...v1.8.2>`_ (2021-04-09)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **freebsd:** fix package names [skip ci] (\ `a30f124 <https://github.com/saltstack-formulas/salt-formula/commit/a30f124485550e487d8bd41db0549b03bbeb2d48>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **vagrant:** use pre-salted boxes & conditional local settings [skip ci] (\ `5941618 <https://github.com/saltstack-formulas/salt-formula/commit/5941618c6e322961009ce2e0aa6412337a71e79d>`_\ )
+
+Tests
+^^^^^
+
+
+* **freebsd-11:** fix ``osfinger`` in comment [skip ci] (\ `26f2cc1 <https://github.com/saltstack-formulas/salt-formula/commit/26f2cc1ef0a9c8d21b5767db877119eef7cf1515>`_\ )
+
 `1.8.1 <https://github.com/saltstack-formulas/salt-formula/compare/v1.8.0...v1.8.1>`_ (2021-03-30)
 ------------------------------------------------------------------------------------------------------
 
