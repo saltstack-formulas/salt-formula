@@ -36,6 +36,27 @@ platforms:
       ssh:
         shell: /bin/ksh
       synced_folders: []
+  - name: windows-10-latest-py3
+    driver:
+      box: techneg/win10x64-pro-salt
+      cache_directory: "/omnibus/cache"
+      customize: {}
+      ssh: {}
+    provisioner:
+      # yamllint disable rule:line-length
+      init_environment: |
+        # Workaround to allow `kitchen converge` to be used multiple times
+        # without having to `kitchen destroy` first: remove state files cached by
+        # Salt during the previous `converge` (if present)
+        rm -recurse `
+          C:\Users\vagrant\AppData\Local\Temp\kitchen\var\cache\salt\minion\files\base `
+          -ErrorAction SilentlyContinue
+        salt-call --local state.single file.managed `
+          C:\Users\vagrant\AppData\Local\Temp\kitchen\srv\salt\win\repo-ng\salt-minion-py3.sls `
+          source=https://github.com/saltstack/salt-winrepo-ng/raw/master/salt-minion-py3.sls `
+          skip_verify=True makedirs=True
+        exit 0
+      # yamllint enable rule:line-length
   - name: windows-81-latest-py3
     driver:
       box: techneg/win81x64-pro-salt

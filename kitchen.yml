@@ -326,6 +326,7 @@ suites:
       - gentoo-stage3-systemd-3002-5-py3
       - freebsd-122-3002-6-py3
       - freebsd-114-3002-6-py3
+      - windows-10-latest-py3
       - windows-81-latest-py3
       - windows-2019-latest-py3
       - windows-2016-latest-py3
