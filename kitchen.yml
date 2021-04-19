@@ -324,6 +324,7 @@ suites:
       - arch-base-latest-3002-5-py3
       - gentoo-stage3-latest-3002-5-py3
       - gentoo-stage3-systemd-3002-5-py3
+      - freebsd-130-3002-6-py3
       - freebsd-122-3002-6-py3
       - freebsd-114-3002-6-py3
       - windows-10-latest-py3

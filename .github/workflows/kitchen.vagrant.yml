@@ -14,6 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         instance:
+          - v3002-py3-freebsd-130-3002-6-py3
           - v3002-py3-freebsd-122-3002-6-py3
           - v3002-py3-freebsd-114-3002-6-py3
           - v3001-py3-openbsd-68-3001-1-py3
