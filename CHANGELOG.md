@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.8.3](https://github.com/saltstack-formulas/salt-formula/compare/v1.8.2...v1.8.3) (2021-04-22)
+
+
+### Continuous Integration
+
+* **kitchen+gitlab:** adjust matrix to add `3003` ([480b7ed](https://github.com/saltstack-formulas/salt-formula/commit/480b7edbfbe58532df89eebc59f8b2b48922327c))
+* **vagrant:** add FreeBSD 13.0 [skip ci] ([6316991](https://github.com/saltstack-formulas/salt-formula/commit/631699133424a456f1dfe829a717ea339f345af7))
+* **vagrant:** add Windows 10 pre-salted box [skip ci] ([fd285d8](https://github.com/saltstack-formulas/salt-formula/commit/fd285d8c5bb0b266116f47b274ebe57ca849d662))
+
+
+### Tests
+
+* **aluminium:** add pillar, tests and verification files for `3003` ([752a1de](https://github.com/saltstack-formulas/salt-formula/commit/752a1dea22dfd722b5732882d108ea5ecbcd332f))
+* **freebsd:** add `map.jinja` verification file (for 13.0) ([10ae613](https://github.com/saltstack-formulas/salt-formula/commit/10ae613cae58943c8af38a9199a0effcc5b7fba8))
+
 ## [1.8.2](https://github.com/saltstack-formulas/salt-formula/compare/v1.8.1...v1.8.2) (2021-04-09)
 
 
