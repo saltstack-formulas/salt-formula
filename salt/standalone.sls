@@ -25,6 +25,9 @@ salt-minion-standalone:
     - enable: False
   {%- endif %}
     - name: {{ salt_settings.minion_service }}
+    {%- if grains.os_family == 'FreeBSD' %}
+    - retry: {{ salt_settings.retry_options | json }}
+    {%- endif %}
     - require:
   {% if salt_settings.install_packages %}
       - pkg: salt-minion-standalone
