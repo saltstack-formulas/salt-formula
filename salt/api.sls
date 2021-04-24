@@ -15,6 +15,9 @@ salt-api:
   service.{{ salt_settings.api_service_details.state }}:
     - enable: {{ salt_settings.api_service_details.enabled }}
     - name: {{ salt_settings.api_service }}
+    {%- if grains.os_family == 'FreeBSD' %}
+    - retry: {{ salt_settings.retry_options | json }}
+    {%- endif %}
     - require:
       - service: {{ salt_settings.master_service }}
     - watch:

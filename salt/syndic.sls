@@ -18,6 +18,9 @@ salt-syndic:
   service.running:
     - enable: True
     - name: {{ salt_settings.syndic_service }}
+    {%- if grains.os_family == 'FreeBSD' %}
+    - retry: {{ salt_settings.retry_options | json }}
+    {%- endif %}
     - require:
       - service: salt-master
     - watch:
