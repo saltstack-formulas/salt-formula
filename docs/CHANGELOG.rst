@@ -2,6 +2,15 @@
 Changelog
 =========
 
+`1.8.4 <https://github.com/saltstack-formulas/salt-formula/compare/v1.8.3...v1.8.4>`_ (2021-04-24)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **freebsd:** use ``retry_options`` to avoid spurious service failures (\ `698b7ea <https://github.com/saltstack-formulas/salt-formula/commit/698b7eae59e1585483fa26366f38bed12a835843>`_\ )
+
 `1.8.3 <https://github.com/saltstack-formulas/salt-formula/compare/v1.8.2...v1.8.3>`_ (2021-04-22)
 ------------------------------------------------------------------------------------------------------
 
