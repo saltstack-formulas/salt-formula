@@ -129,8 +129,8 @@ v3003-py3-ubuntu-2004-3003-0-py3: {extends: '.test_instance'}
 # v3003-py3-ubuntu-1804-3003-0-py3: {extends: '.test_instance'}
 v3003-py3-centos-8-3003-0-py3: {extends: '.test_instance'}
 # v3003-py3-centos-7-3003-0-py3: {extends: '.test_instance'}
-# v3003-py3-fedora-34-3003-0-py3: {extends: '.test_instance'}
-# v3003-py3-fedora-33-3003-0-py3: {extends: '.test_instance'}
+v3003-py3-fedora-34-3003-0-py3: {extends: '.test_instance'}
+v3003-py3-fedora-33-3003-0-py3: {extends: '.test_instance'}
 # v3003-py3-fedora-32-3003-0-py3: {extends: '.test_instance'}
 v3003-py3-amazonlinux-2-3003-0-py3: {extends: '.test_instance'}
 v3003-py3-oraclelinux-8-3003-0-py3: {extends: '.test_instance'}
@@ -145,8 +145,8 @@ v3002-py3-ubuntu-1804-3002-6-py3: {extends: '.test_instance'}
 # v3002-py3-ubuntu-1604-3002-6-py3: {extends: '.test_instance'}
 # v3002-py3-centos-8-3002-6-py3: {extends: '.test_instance'}
 v3002-py3-centos-7-3002-6-py3: {extends: '.test_instance'}
-v3002-py3-fedora-34-3002-6-py3: {extends: '.test_instance'}
-v3002-py3-fedora-33-3002-6-py3: {extends: '.test_instance'}
+# v3002-py3-fedora-34-3002-6-py3: {extends: '.test_instance'}
+# v3002-py3-fedora-33-3002-6-py3: {extends: '.test_instance'}
 # v3002-py3-fedora-32-3002-6-py3: {extends: '.test_instance'}
 v3002-py3-amazonlinux-2-3002-6-py3: {extends: '.test_instance'}
 # v3002-py3-oraclelinux-8-3002-6-py3: {extends: '.test_instance'}
