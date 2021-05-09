@@ -97,6 +97,10 @@ platforms:
   - name: oraclelinux-7-master-py3
     driver:
       image: saltimages/salt-master-py3:oraclelinux-7
+  - name: arch-base-latest-master-py3
+    driver:
+      image: saltimages/salt-master-py3:arch-base-latest
+      run_command: /usr/lib/systemd/systemd
   - name: gentoo-stage3-latest-master-py3
     driver:
       image: saltimages/salt-master-py3:gentoo-stage3-latest
