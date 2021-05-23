@@ -439,6 +439,7 @@ suites:
       - freebsd-130-3002-6-py3
       - freebsd-122-3002-6-py3
       - freebsd-114-3002-6-py3
+      - openbsd-69-3002-6-py3
     provisioner:
       state_top:
         base:
