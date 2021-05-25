@@ -42,7 +42,7 @@ values:
           version: 0.23.0
         version: 0.23.0
     install_packages: true
-    key_url: https://repo.saltstack.com/py3/amazon/2/$basearch/3000/SALTSTACK-GPG-KEY.pub
+    key_url: https://repo.saltproject.io/py3/amazon/2/$basearch/3000/SALTSTACK-GPG-KEY.pub
     master:
       ext_pillar:
       - cmd_yaml: cat /etc/salt/yaml
@@ -85,7 +85,7 @@ values:
       state: running
     parallel: true
     pin_version: false
-    pkgrepo: https://repo.saltstack.com/py3/amazon/2/$basearch/3000
+    pkgrepo: https://repo.saltproject.io/py3/amazon/2/$basearch/3000
     pkgrepo_humanname: SaltStack repo for Amazon Linux 2
     pkgrepo_name: saltstack-amzn-repo
     py_ver: py3

@@ -13,7 +13,7 @@
 {%- set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
 {%- set oscodename = salt['grains.get']('oscodename') %}
 {%- set opensuse_repo_suffix = 'Leap_' ~ osrelease if salt['grains.get']('osfinger', '') == 'Leap-15' else 'Tumbleweed' %}
-{%- set salt_repo = salt['pillar.get']('salt:repo', 'https://repo.saltstack.com') %}
+{%- set salt_repo = salt['pillar.get']('salt:repo', 'https://repo.saltproject.io') %}
 
 #from template-formula
 {%- if grains.os_family == 'MacOS' %}

@@ -37,14 +37,14 @@ salt:
     salt_ssh: 'salt-ssh'
     pyinotify: 'python-pyinotify'  # the package to be installed for pyinotify
 
-  # Set which salt repository to use, default to https://repo.saltstack.com
+  # Set which salt repository to use, default to https://repo.saltproject.io
   # For older releases use https://archive.repo.saltproject.io
   repo: 'https://archive.repo.saltproject.io'
 
   # Set which release of SaltStack to use, default to 'latest'
   # To get the available releases:
-  # * http://repo.saltstack.com/yum/redhat/7/x86_64/
-  # * http://repo.saltstack.com/apt/debian/8/amd64/
+  # * http://repo.saltproject.io/yum/redhat/7/x86_64/
+  # * http://repo.saltproject.io/apt/debian/8/amd64/
   release: '2018.3'
 
   # MacOS has no package management.
@@ -57,8 +57,8 @@ salt:
   # NOTE: salt_minion_pkg_hash, if set, will be passed into file.managed's
   # source_hash, use URL or hash string
   # yamllint disable rule:line-length
-  salt_minion_pkg_source: 'https://repo.saltstack.com/osx/salt-2017.7.4-py3-x86_64.pkg'
-  salt_minion_pkg_hash: 'https://repo.saltstack.com/osx/salt-2017.7.4-py3-x86_64.pkg.md5'
+  salt_minion_pkg_source: 'https://repo.saltproject.io/osx/salt-2017.7.4-py3-x86_64.pkg'
+  salt_minion_pkg_hash: 'https://repo.saltproject.io/osx/salt-2017.7.4-py3-x86_64.pkg.md5'
   # yamllint enable rule:line-length
 
   # tofs:

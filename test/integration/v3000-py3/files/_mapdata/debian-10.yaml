@@ -42,7 +42,7 @@ values:
           version: 0.23.0
         version: 0.22.1
     install_packages: true
-    key_url: https://repo.saltstack.com/py3/debian/10/amd64/3000/SALTSTACK-GPG-KEY.pub
+    key_url: https://repo.saltproject.io/py3/debian/10/amd64/3000/SALTSTACK-GPG-KEY.pub
     libgit2: libgit2-22
     master:
       ext_pillar:
@@ -86,7 +86,7 @@ values:
       state: running
     parallel: true
     pin_version: false
-    pkgrepo: deb https://repo.saltstack.com/py3/debian/10/amd64/3000 buster main
+    pkgrepo: deb https://repo.saltproject.io/py3/debian/10/amd64/3000 buster main
     py_ver: py3
     pyinotify: python-pyinotify
     python_dulwich: python-dulwich
