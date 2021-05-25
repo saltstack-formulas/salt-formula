@@ -5,14 +5,19 @@
 {% import_yaml "salt/defaults.yaml" as defaults %}
 {% import_yaml "salt/osfamilymap.yaml" as osfamilymap %}
 {% import_yaml "salt/osmap.yaml" as osmap %}
+{% import_yaml "salt/osfingermap.yaml" as osfingermap %}
 
 {# merge the osfamilymap #}
-{% set osfamily = salt['grains.filter_by'](osfamilymap, grain='os_family') or{} %}
-{% do salt['defaults.merge'](defaults['salt'], osfamily) %}
+{% set osfamily_map = salt['grains.filter_by'](osfamilymap, grain='os_family') or {} %}
+{% do salt['defaults.merge'](defaults['salt'], osfamily_map) %}
 
 {# merge the osmap #}
-{% set osmap = salt['grains.filter_by'](osmap, grain='os') or{} %}
-{% do salt['defaults.merge'](defaults['salt'], osmap) %}
+{% set os_map = salt['grains.filter_by'](osmap, grain='os') or {} %}
+{% do salt['defaults.merge'](defaults['salt'], os_map) %}
+
+{# merge the osfingermap #}
+{% set osfinger_map = salt['grains.filter_by'](osfingermap, grain='osfinger') or {} %}
+{% do salt['defaults.merge'](defaults['salt'], osfinger_map) %}
 
 {# merge the lookup #}
 {% set lookup = salt['pillar.get']('salt:lookup', default={}, merge=True) %}

@@ -21,6 +21,7 @@ ignore: |
   kitchen.vagrant.yml
   salt/osfamilymap.yaml
   salt/osmap.yaml
+  salt/osfingermap.yaml
 
 yaml-files:
   # Default settings

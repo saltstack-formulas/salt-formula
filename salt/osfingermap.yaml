@@ -1,0 +1,18 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+
+{%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
+
+{%- set osrelease = salt['grains.get']('osrelease', '') %}
+{%- set salt_release = salt['pillar.get']('salt:release', 'latest') %}
+{%- if salt_release.split('.')|length >= 3 %}
+{%-   set salt_release = 'archive/' ~ salt_release %}
+{%- endif %}
+{%- set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
+{%- set salt_repo = salt['pillar.get']('salt:repo', 'https://repo.saltproject.io') %}
+
+Oracle Linux Server-7:
+  pkgrepo_humanname: SaltStack repo for RHEL/CentOS {{ osmajorrelease }}
+  pkgrepo: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/redhat/{{ osmajorrelease }}/$basearch/{{ salt_release }}'
+  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/redhat/{{ osmajorrelease }}/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
