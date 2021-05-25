@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.8.5](https://github.com/saltstack-formulas/salt-formula/compare/v1.8.4...v1.8.5) (2021-05-25)
+
+
+### Bug Fixes
+
+* **oracle-7:** use `osmajorrelease` instead of `$releasever` ([5146c44](https://github.com/saltstack-formulas/salt-formula/commit/5146c449d5d2d00ba4da67567d74966c21f394a8))
+* **repo:** update repo urls to `repo.saltproject.io` ([80542ba](https://github.com/saltstack-formulas/salt-formula/commit/80542bad6ea88c89da474703453226e4ed6c7072))
+
+
+### Continuous Integration
+
+* **vagrant:** add OpenBSD 6.9 [skip ci] ([374527b](https://github.com/saltstack-formulas/salt-formula/commit/374527b235993f5a3a8214e5a4bebcbd101d71a0))
+* add `arch-master` to matrix and update `.travis.yml` [skip ci] ([b867733](https://github.com/saltstack-formulas/salt-formula/commit/b8677339cc5cdf0d2f9c840dae52336230980127))
+* **gitlab-ci:** update Fedora testing after release [skip ci] ([33d6a03](https://github.com/saltstack-formulas/salt-formula/commit/33d6a033d38a3197c4dd8b719548d85a2fb7f734))
+
 ## [1.8.4](https://github.com/saltstack-formulas/salt-formula/compare/v1.8.3...v1.8.4) (2021-04-24)
 
 
