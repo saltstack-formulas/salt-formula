@@ -13,7 +13,7 @@
 {% set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
 {% set oscodename = salt['grains.get']('oscodename') %}
 {% set os_family_lower =  salt['grains.get']('os_family')|lower %}
-{% set salt_repo = salt['pillar.get']('salt:repo', 'https://repo.saltstack.com') %}
+{% set salt_repo = salt['pillar.get']('salt:repo', 'https://repo.saltproject.io') %}
 
 Fedora:
   pygit2: python2-pygit2

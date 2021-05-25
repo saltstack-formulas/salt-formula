@@ -199,7 +199,7 @@ salt-minion packages on MacOS will not be upgraded by default. To enable package
 
     install_packages: True
     version: 2017.7.4
-    salt_minion_pkg_source: https://repo.saltstack.com/osx/salt-2017.7.4-py3-x86_64.pkg
+    salt_minion_pkg_source: https://repo.saltproject.io/osx/salt-2017.7.4-py3-x86_64.pkg
 
 install_packages must indicate that the installation of a package is desired. If so, version will be used to compare the version of the installed .pkg against the downloaded one. If version is not set and a salt.pkg is already installed the .pkg will not be installed again.
 
