@@ -126,7 +126,7 @@ Undo the effects of ``salt.pkgrepo`` on Debian, RedHat, and SuSE.
 
 Clone selected `Salt formulas
 <http://docs.saltstack.com/en/latest/topics/development/conventions/formulas.html>`_
-Git repositories under ``/srv/formulas`` and makes them available in the relevant ``file_roots`` settings. Please note that in order for `file_roots` to be updated, `salt.master` must be called after `salt.formulas`. For example:
+Git repositories under ``/srv/formulas`` and makes them available in the relevant ``file_roots`` settings. Please note that in order for ``file_roots`` to be updated, ``salt.master`` must be called after ``salt.formulas``. For example:
 
 ::
 
