@@ -22,9 +22,6 @@ platforms:
   - name: ubuntu-1804-tiamat-py3
     driver:
       image: saltimages/salt-tiamat-py3:ubuntu-18.04
-  - name: ubuntu-1604-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:ubuntu-16.04
   - name: centos-8-tiamat-py3
     driver:
       image: saltimages/salt-tiamat-py3:centos-8
@@ -54,9 +51,6 @@ platforms:
   - name: ubuntu-1804-master-py3
     driver:
       image: saltimages/salt-master-py3:ubuntu-18.04
-  - name: ubuntu-1604-master-py3
-    driver:
-      image: saltimages/salt-master-py3:ubuntu-16.04
   - name: centos-8-master-py3
     driver:
       image: saltimages/salt-master-py3:centos-8
@@ -69,9 +63,6 @@ platforms:
   - name: fedora-33-master-py3
     driver:
       image: saltimages/salt-master-py3:fedora-33
-  - name: fedora-32-master-py3
-    driver:
-      image: saltimages/salt-master-py3:fedora-32
   - name: opensuse-leap-152-master-py3
     driver:
       image: saltimages/salt-master-py3:opensuse-leap-15.2
@@ -134,9 +125,6 @@ platforms:
   - name: fedora-33-3003-0-py3
     driver:
       image: saltimages/salt-3003.0-py3:fedora-33
-  - name: fedora-32-3003-0-py3
-    driver:
-      image: saltimages/salt-3003.0-py3:fedora-32
   - name: amazonlinux-2-3003-0-py3
     driver:
       image: saltimages/salt-3003.0-py3:amazonlinux-2
@@ -171,9 +159,6 @@ platforms:
   - name: ubuntu-1804-3002-6-py3
     driver:
       image: saltimages/salt-3002.6-py3:ubuntu-18.04
-  - name: ubuntu-1604-3002-6-py3
-    driver:
-      image: saltimages/salt-3002.6-py3:ubuntu-16.04
   - name: centos-8-3002-6-py3
     driver:
       image: saltimages/salt-3002.6-py3:centos-8
@@ -186,9 +171,6 @@ platforms:
   - name: fedora-33-3002-6-py3
     driver:
       image: saltimages/salt-3002.6-py3:fedora-33
-  - name: fedora-32-3002-6-py3
-    driver:
-      image: saltimages/salt-3002.6-py3:fedora-32
   - name: amazonlinux-2-3002-6-py3
     driver:
       image: saltimages/salt-3002.6-py3:amazonlinux-2
@@ -243,9 +225,6 @@ platforms:
   - name: ubuntu-1804-3001-7-py3
     driver:
       image: saltimages/salt-3001.7-py3:ubuntu-18.04
-  - name: ubuntu-1604-3001-7-py3
-    driver:
-      image: saltimages/salt-3001.7-py3:ubuntu-16.04
   - name: centos-8-3001-7-py3
     driver:
       image: saltimages/salt-3001.7-py3:centos-8
@@ -258,9 +237,6 @@ platforms:
   - name: fedora-33-3001-7-py3
     driver:
       image: saltimages/salt-3001.7-py3:fedora-33
-  - name: fedora-32-3001-7-py3
-    driver:
-      image: saltimages/salt-3001.7-py3:fedora-32
   - name: opensuse-leap-152-3001-7-py3
     driver:
       image: saltimages/salt-3001.7-py3:opensuse-leap-15.2
@@ -310,9 +286,6 @@ platforms:
   - name: ubuntu-1804-3000-9-py3
     driver:
       image: saltimages/salt-3000.9-py3:ubuntu-18.04
-  - name: ubuntu-1604-3000-9-py3
-    driver:
-      image: saltimages/salt-3000.9-py3:ubuntu-16.04
   - name: centos-8-3000-9-py3
     driver:
       image: saltimages/salt-3000.9-py3:centos-8
@@ -339,9 +312,6 @@ platforms:
   - name: ubuntu-1804-3000-9-py2
     driver:
       image: saltimages/salt-3000.9-py2:ubuntu-18.04
-  - name: ubuntu-1604-3000-9-py2
-    driver:
-      image: saltimages/salt-3000.9-py2:ubuntu-16.04
   - name: arch-base-latest-3000-9-py2
     driver:
       image: saltimages/salt-3000.9-py2:arch-base-latest
@@ -385,7 +355,6 @@ suites:
       - centos-7-3003-0-py3
       - fedora-34-3003-0-py3
       - fedora-33-3003-0-py3
-      - fedora-32-3003-0-py3
       - amazonlinux-2-3003-0-py3
       - oraclelinux-8-3003-0-py3
       - oraclelinux-7-3003-0-py3
@@ -422,12 +391,10 @@ suites:
       - debian-9-3002-6-py3
       - ubuntu-2004-3002-6-py3
       - ubuntu-1804-3002-6-py3
-      - ubuntu-1604-3002-6-py3
       - centos-8-3002-6-py3
       - centos-7-3002-6-py3
       - fedora-34-3002-6-py3
       - fedora-33-3002-6-py3
-      - fedora-32-3002-6-py3
       - amazonlinux-2-3002-6-py3
       - oraclelinux-8-3002-6-py3
       - oraclelinux-7-3002-6-py3
@@ -466,12 +433,10 @@ suites:
       - debian-9-3001-7-py3
       - ubuntu-2004-3001-7-py3
       - ubuntu-1804-3001-7-py3
-      - ubuntu-1604-3001-7-py3
       - centos-8-3001-7-py3
       - centos-7-3001-7-py3
       - fedora-34-3001-7-py3
       - fedora-33-3001-7-py3
-      - fedora-32-3001-7-py3
       - opensuse-leap-152-3001-7-py3
       - opensuse-tmbl-latest-3001-7-py3
       - amazonlinux-2-3001-7-py3
@@ -504,7 +469,6 @@ suites:
       - debian-10-3000-9-py3
       - debian-9-3000-9-py3
       - ubuntu-1804-3000-9-py3
-      - ubuntu-1604-3000-9-py3
       - centos-8-3000-9-py3
       - centos-7-3000-9-py3
       - opensuse-leap-152-3000-9-py3
@@ -534,7 +498,6 @@ suites:
   - name: v3000-py2
     includes:
       - ubuntu-1804-3000-9-py2
-      - ubuntu-1604-3000-9-py2
       - arch-base-latest-3000-9-py2
     provisioner:
       state_top:

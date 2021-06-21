@@ -91,7 +91,6 @@ jobs:
     # - env: INSTANCE=v3003-py3-centos-7-3003-0-py3
     - env: INSTANCE=v3003-py3-fedora-34-3003-0-py3
     - env: INSTANCE=v3003-py3-fedora-33-3003-0-py3
-    # - env: INSTANCE=v3003-py3-fedora-32-3003-0-py3
     - env: INSTANCE=v3003-py3-amazonlinux-2-3003-0-py3
     - env: INSTANCE=v3003-py3-oraclelinux-8-3003-0-py3
     # - env: INSTANCE=v3003-py3-oraclelinux-7-3003-0-py3
@@ -100,14 +99,12 @@ jobs:
     - env: INSTANCE=v3003-py3-gentoo-stage3-systemd-3003-0-py3
     # - env: INSTANCE=v3002-py3-debian-10-3002-6-py3
     - env: INSTANCE=v3002-py3-debian-9-3002-6-py3
-    # - env: INSTANCE=v3002-py3-ubuntu-2004-3002-6-py3
-    - env: INSTANCE=v3002-py3-ubuntu-1804-3002-6-py3
-    # - env: INSTANCE=v3002-py3-ubuntu-1604-3002-6-py3
+    - env: INSTANCE=v3002-py3-ubuntu-2004-3002-6-py3
+    # - env: INSTANCE=v3002-py3-ubuntu-1804-3002-6-py3
     # - env: INSTANCE=v3002-py3-centos-8-3002-6-py3
     - env: INSTANCE=v3002-py3-centos-7-3002-6-py3
     # - env: INSTANCE=v3002-py3-fedora-34-3002-6-py3
     # - env: INSTANCE=v3002-py3-fedora-33-3002-6-py3
-    # - env: INSTANCE=v3002-py3-fedora-32-3002-6-py3
     - env: INSTANCE=v3002-py3-amazonlinux-2-3002-6-py3
     # - env: INSTANCE=v3002-py3-oraclelinux-8-3002-6-py3
     - env: INSTANCE=v3002-py3-oraclelinux-7-3002-6-py3
@@ -120,12 +117,10 @@ jobs:
     # - env: INSTANCE=v3001-py3-debian-9-3001-7-py3
     - env: INSTANCE=v3001-py3-ubuntu-2004-3001-7-py3
     # - env: INSTANCE=v3001-py3-ubuntu-1804-3001-7-py3
-    # - env: INSTANCE=v3001-py3-ubuntu-1604-3001-7-py3
     - env: INSTANCE=v3001-py3-centos-8-3001-7-py3
     # - env: INSTANCE=v3001-py3-centos-7-3001-7-py3
     # - env: INSTANCE=v3001-py3-fedora-34-3001-7-py3
     # - env: INSTANCE=v3001-py3-fedora-33-3001-7-py3
-    - env: INSTANCE=v3001-py3-fedora-32-3001-7-py3
     # - env: INSTANCE=v3001-py3-opensuse-leap-152-3001-7-py3
     # - env: INSTANCE=v3001-py3-opensuse-tmbl-latest-3001-7-py3
     # - env: INSTANCE=v3001-py3-amazonlinux-2-3001-7-py3
@@ -135,15 +130,13 @@ jobs:
     # - env: INSTANCE=v3000-py3-debian-10-3000-9-py3
     - env: INSTANCE=v3000-py3-debian-9-3000-9-py3
     - env: INSTANCE=v3000-py3-ubuntu-1804-3000-9-py3
-    # - env: INSTANCE=v3000-py3-ubuntu-1604-3000-9-py3
     # - env: INSTANCE=v3000-py3-centos-8-3000-9-py3
     - env: INSTANCE=v3000-py3-centos-7-3000-9-py3
     # - env: INSTANCE=v3000-py3-opensuse-leap-152-3000-9-py3
     # - env: INSTANCE=v3000-py3-amazonlinux-2-3000-9-py3
     # - env: INSTANCE=v3000-py3-oraclelinux-8-3000-9-py3
     - env: INSTANCE=v3000-py3-oraclelinux-7-3000-9-py3
-    # - env: INSTANCE=v3000-py2-ubuntu-1804-3000-9-py2
-    - env: INSTANCE=v3000-py2-ubuntu-1604-3000-9-py2
+    - env: INSTANCE=v3000-py2-ubuntu-1804-3000-9-py2
     # - env: INSTANCE=v3000-py2-arch-base-latest-3000-9-py2
 
     ## Define the release stage that runs `semantic-release`
