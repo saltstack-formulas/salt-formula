@@ -52,3 +52,14 @@ repos:
       - id: rstcheck
         name: Check reST files using rstcheck
         exclude: 'docs/CHANGELOG.rst'
+  - repo: https://github.com/saltstack-formulas/mirrors-rst-lint
+    rev: v1.3.2
+    hooks:
+      - id: rst-lint
+        name: Check reST files using rst-lint
+        exclude: |
+            (?x)^(
+                docs/CHANGELOG.rst|
+                docs/TOFS_pattern.rst|
+            )$
+        additional_dependencies: [pygments==2.9.0]

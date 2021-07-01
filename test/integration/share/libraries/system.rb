@@ -36,7 +36,7 @@ class SystemResource < Inspec.resource(1)
 
   def build_platform_name
     case inspec.platform[:name]
-    when 'amazon', 'oracle'
+    when 'amazon', 'oracle', 'rocky'
       "#{inspec.platform[:name]}linux"
     when /^windows_/
       inspec.platform[:family]

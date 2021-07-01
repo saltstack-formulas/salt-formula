@@ -1,6 +1,6 @@
 GIT
   remote: https://gitlab.com/saltstack-formulas/infrastructure/kitchen-docker
-  revision: 042e6921940a28d2502258b6a5ff3be17dd2fd37
+  revision: 1f543f654da5c1774cb8737f6f07a01745520bb5
   branch: ssf
   specs:
     kitchen-docker (2.10.0)

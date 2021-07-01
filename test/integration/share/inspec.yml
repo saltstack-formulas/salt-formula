@@ -19,4 +19,6 @@ supports:
   - platform-name: oracle
   - platform-name: arch
   - platform-name: gentoo
+  - platform-name: almalinux
+  - platform-name: rocky
   - platform: windows
