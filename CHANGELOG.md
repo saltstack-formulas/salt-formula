@@ -1,5 +1,24 @@
 # Changelog
 
+# [1.9.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.8.5...v1.9.0) (2021-07-14)
+
+
+### Continuous Integration
+
+* **3003.1:** update inc. AlmaLinux, Rocky & `rst-lint` [skip ci] ([0e62858](https://github.com/saltstack-formulas/salt-formula/commit/0e628589866e9881407972c263494896bcacae45))
+* **kitchen.vagrant.yml:** disable FreeBSD until pre-salted boxes updated ([fa820c7](https://github.com/saltstack-formulas/salt-formula/commit/fa820c78392e68f34c9dbb30021fb2ef3ba0f9c0))
+* **kitchen+gitlab:** remove Ubuntu 16.04 & Fedora 32 (EOL) [skip ci] ([226a187](https://github.com/saltstack-formulas/salt-formula/commit/226a187258bb32eea66b77fac9cccf43f65e6ad5))
+
+
+### Documentation
+
+* **readme:** add documentation regarding salt.formula usage [skip ci] ([209575f](https://github.com/saltstack-formulas/salt-formula/commit/209575f385ea352a36c00b60d3bf67b100f16f9d))
+
+
+### Features
+
+* **freebsd:** update packages from `py37-*` => `py38-*` ([0ab42d7](https://github.com/saltstack-formulas/salt-formula/commit/0ab42d7ce864ca39e628a962a589cb894606ad36))
+
 ## [1.8.5](https://github.com/saltstack-formulas/salt-formula/compare/v1.8.4...v1.8.5) (2021-05-25)
 
 
