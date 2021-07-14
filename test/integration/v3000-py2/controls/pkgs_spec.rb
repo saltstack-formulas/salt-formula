@@ -5,7 +5,7 @@ pkgs =
   when 'arch'
     %w[salt]
   when /bsd$/
-    %w[py37-salt-3002.6]
+    %w[py38-salt-3002.6]
   when 'windows'
     %w[Salt\ Minion]
   else
