@@ -402,8 +402,8 @@ verifier:
   # https://www.inspec.io/
   name: inspec
   sudo: true
-  # cli, documentation, html, progress, json, json-min, json-rspec, junit
   reporter:
+    # cli, documentation, html, progress, json, json-min, json-rspec, junit
     - cli
 
 suites:

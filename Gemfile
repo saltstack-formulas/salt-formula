@@ -10,7 +10,7 @@ gem 'inspec',      '~> 4.22.22'
 # rubocop:disable Layout/LineLength
 gem 'kitchen-docker', git: 'https://gitlab.com/saltstack-formulas/infrastructure/kitchen-docker', branch: 'ssf'
 # rubocop:enable Layout/LineLength
-gem 'kitchen-inspec', '>= 2.2.1'
+gem 'kitchen-inspec', '>= 2.5.0'
 gem 'kitchen-salt', '>= 0.6.3'
 
 group :vagrant do
