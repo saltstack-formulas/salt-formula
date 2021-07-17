@@ -9,10 +9,6 @@ driver:
   username: kitchen
   password: Pass@word1
 
-platforms:
-  - name: windows-2019-latest-py3
-  - name: windows-2016-latest-py3
-
 provisioner:
   salt_install: bootstrap
   salt_bootstrap_options: -pythonVersion 3 -version 3003.1
@@ -23,3 +19,7 @@ provisioner:
       source=https://github.com/saltstack/salt-winrepo-ng/raw/master/salt-minion-py3.sls `
       skip_verify=True makedirs=True
   # yamllint enable rule:line-length
+
+platforms:
+  - name: windows-2019-latest-py3
+  - name: windows-2016-latest-py3
