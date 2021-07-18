@@ -83,7 +83,8 @@ jobs:
     ## Define the rest of the matrix based on Kitchen testing
     # Make sure the instances listed below match up with
     # the `platforms` defined in `kitchen.yml`
-    - env: INSTANCE=v3003-py3-debian-10-3003-1-py3
+    - env: INSTANCE=v3003-py3-debian-11-3003-1-py3
+    # - env: INSTANCE=v3003-py3-debian-10-3003-1-py3
     # - env: INSTANCE=v3003-py3-debian-9-3003-1-py3
     - env: INSTANCE=v3003-py3-ubuntu-2004-3003-1-py3
     # - env: INSTANCE=v3003-py3-ubuntu-1804-3003-1-py3
@@ -100,8 +101,9 @@ jobs:
     - env: INSTANCE=v3003-py3-arch-base-latest-3003-1-py3
     - env: INSTANCE=v3003-py3-gentoo-stage3-latest-3003-1-py3
     - env: INSTANCE=v3003-py3-gentoo-stage3-systemd-3003-1-py3
-    # - env: INSTANCE=v3002-py3-debian-10-3002-6-py3
-    - env: INSTANCE=v3002-py3-debian-9-3002-6-py3
+    # - env: INSTANCE=v3002-py3-debian-11-3002-6-py3
+    - env: INSTANCE=v3002-py3-debian-10-3002-6-py3
+    # - env: INSTANCE=v3002-py3-debian-9-3002-6-py3
     - env: INSTANCE=v3002-py3-ubuntu-2004-3002-6-py3
     # - env: INSTANCE=v3002-py3-ubuntu-1804-3002-6-py3
     # - env: INSTANCE=v3002-py3-centos-8-3002-6-py3

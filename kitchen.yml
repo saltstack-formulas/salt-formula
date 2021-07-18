@@ -20,6 +20,10 @@ provisioner:
 
 platforms:
   ## SALT `tiamat`
+  - name: debian-11-tiamat-py3
+    driver:
+      image: saltimages/salt-tiamat-py3:debian-11
+      run_command: /lib/systemd/systemd
   - name: debian-10-tiamat-py3
     driver:
       image: saltimages/salt-tiamat-py3:debian-10
@@ -59,6 +63,10 @@ platforms:
       image: saltimages/salt-tiamat-py3:rockylinux-8
 
   ## SALT `master`
+  - name: debian-11-master-py3
+    driver:
+      image: saltimages/salt-master-py3:debian-11
+      run_command: /lib/systemd/systemd
   - name: debian-10-master-py3
     driver:
       image: saltimages/salt-master-py3:debian-10
@@ -135,6 +143,10 @@ platforms:
       image: saltimages/salt-master-py3:rockylinux-8
 
   ## SALT `3003.1`
+  - name: debian-11-3003-1-py3
+    driver:
+      image: saltimages/salt-3003.1-py3:debian-11
+      run_command: /lib/systemd/systemd
   - name: debian-10-3003-1-py3
     driver:
       image: saltimages/salt-3003.1-py3:debian-10
@@ -205,6 +217,10 @@ platforms:
       image: saltimages/salt-3003.1-py3:gentoo-stage3-systemd
 
   ## SALT `3002.6`
+  - name: debian-11-3002-6-py3
+    driver:
+      image: saltimages/salt-3002.6-py3:debian-11
+      run_command: /lib/systemd/systemd
   - name: debian-10-3002-6-py3
     driver:
       image: saltimages/salt-3002.6-py3:debian-10
@@ -414,6 +430,7 @@ verifier:
 suites:
   - name: v3003-py3
     includes:
+      - debian-11-3003-1-py3
       - debian-10-3003-1-py3
       - debian-9-3003-1-py3
       - ubuntu-2004-3003-1-py3
@@ -457,6 +474,7 @@ suites:
         - path: test/integration/v3003-py3
   - name: v3002-py3
     includes:
+      - debian-11-3002-6-py3
       - debian-10-3002-6-py3
       - debian-9-3002-6-py3
       - ubuntu-2004-3002-6-py3
