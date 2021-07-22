@@ -448,6 +448,9 @@ suites:
       - arch-base-latest-3003-1-py3
       - gentoo-stage3-latest-3003-1-py3
       - gentoo-stage3-systemd-3003-1-py3
+      - freebsd-130-3003-1-py3
+      - freebsd-122-3003-1-py3
+      - freebsd-114-3003-1-py3
       - windows-10-latest-py3
       - windows-81-latest-py3
       - windows-2019-latest-py3
@@ -492,9 +495,6 @@ suites:
       - opensuse-leap-153-3002-2-py3
       - opensuse-leap-152-3002-2-py3
       - opensuse-tmbl-latest-3002-2-py3
-      - freebsd-130-3002-6-py3
-      - freebsd-122-3002-6-py3
-      - freebsd-114-3002-6-py3
       - openbsd-69-3002-6-py3
     provisioner:
       state_top:
