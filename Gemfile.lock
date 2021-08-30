@@ -1,17 +1,17 @@
 GIT
   remote: https://gitlab.com/saltstack-formulas/infrastructure/inspec
-  revision: 603468f3449c8581d05ea6b7328834115490dfb8
+  revision: 4fa6455347ea3c7123743dfd9796728cb0b77bb9
   branch: ssf
   specs:
-    inspec (4.41.7)
+    inspec (4.41.11)
       faraday_middleware (>= 0.12.2, < 1.1)
-      inspec-core (= 4.41.7)
+      inspec-core (= 4.41.11)
       mongo (= 2.13.2)
       train (~> 3.0)
       train-aws (~> 0.1)
       train-habitat (~> 0.1)
       train-winrm (~> 0.2)
-    inspec-core (4.41.7)
+    inspec-core (4.41.11)
       addressable (~> 2.4)
       chef-telemetry (~> 1.0, >= 1.0.8)
       faraday (>= 0.9.0, < 1.5)
@@ -55,8 +55,8 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     aws-eventstream (1.1.1)
-    aws-partitions (1.489.0)
-    aws-sdk-apigateway (1.65.0)
+    aws-partitions (1.492.0)
+    aws-sdk-apigateway (1.66.0)
       aws-sdk-core (~> 3, >= 3.119.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-apigatewayv2 (1.35.0)
@@ -133,7 +133,7 @@ GEM
     aws-sdk-dynamodb (1.62.0)
       aws-sdk-core (~> 3, >= 3.119.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-ec2 (1.257.0)
+    aws-sdk-ec2 (1.260.0)
       aws-sdk-core (~> 3, >= 3.119.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-ecr (1.44.0)
@@ -214,7 +214,7 @@ GEM
     aws-sdk-route53resolver (1.29.0)
       aws-sdk-core (~> 3, >= 3.119.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.99.0)
+    aws-sdk-s3 (1.100.0)
       aws-sdk-core (~> 3, >= 3.119.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.1)
@@ -242,7 +242,7 @@ GEM
     aws-sdk-sqs (1.42.0)
       aws-sdk-core (~> 3, >= 3.119.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-ssm (1.115.0)
+    aws-sdk-ssm (1.116.0)
       aws-sdk-core (~> 3, >= 3.119.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-states (1.39.0)
@@ -266,9 +266,9 @@ GEM
     bcrypt_pbkdf (1.1.0)
     bson (4.12.1)
     builder (3.2.4)
-    chef-config (17.3.48)
+    chef-config (17.4.38)
       addressable
-      chef-utils (= 17.3.48)
+      chef-utils (= 17.4.38)
       fuzzyurl
       mixlib-config (>= 2.2.12, < 4.0)
       mixlib-shellout (>= 2.0, < 4.0)
@@ -276,7 +276,7 @@ GEM
     chef-telemetry (1.1.1)
       chef-config
       concurrent-ruby (~> 1.0)
-    chef-utils (17.3.48)
+    chef-utils (17.4.38)
       concurrent-ruby
     coderay (1.1.3)
     concurrent-ruby (1.1.9)
@@ -347,7 +347,7 @@ GEM
     kitchen-salt (0.6.3)
       hashie (>= 3.5)
       test-kitchen (>= 1.4)
-    kitchen-vagrant (1.9.0)
+    kitchen-vagrant (1.10.0)
       test-kitchen (>= 1.4, < 4)
     license-acceptance (2.1.13)
       pastel (~> 0.7)
