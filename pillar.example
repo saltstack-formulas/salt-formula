@@ -173,7 +173,7 @@ salt:
   minion:
 
     # standalone setup
-    master_type: false   # see init.sls & standalone.sls
+    master_type: str   # see init.sls & standalone.sls
 
     # single master setup
     master: salt
