@@ -73,7 +73,7 @@ values:
       fileserver_backend:
       - rootfs
       master: localhost
-      master_type: true
+      master_type: str
       pillar_roots:
         base:
         - /srv/pillar
