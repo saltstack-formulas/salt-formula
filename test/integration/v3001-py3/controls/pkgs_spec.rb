@@ -7,7 +7,7 @@ pkgs =
   when /bsd$/
     %w[py38-salt-3002.6]
   when 'windows'
-    %w[Salt\ Minion]
+    ['Salt Minion']
   else
     %w[salt-master salt-minion]
   end
