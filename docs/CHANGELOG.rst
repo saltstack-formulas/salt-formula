@@ -2,6 +2,34 @@
 Changelog
 =========
 
+`1.9.1 <https://github.com/saltstack-formulas/salt-formula/compare/v1.9.0...v1.9.1>`_ (2021-09-04)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **default:** set salt:minion:master_type to str (\ `ca1df1b <https://github.com/saltstack-formulas/salt-formula/commit/ca1df1b69e9b9c2caef8a1e2a18a6a68a6cdf524>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **freebsd:** update with latest pre-salted Vagrant boxes [skip ci] (\ `0231e63 <https://github.com/saltstack-formulas/salt-formula/commit/0231e6368e38e8c2d3a8ddf3c8a45728f19184ac>`_\ )
+* **gemfile+lock:** use ``ssf`` customised ``inspec`` repo [skip ci] (\ `a86e19e <https://github.com/saltstack-formulas/salt-formula/commit/a86e19e794d7bb9f634818c3fe36352b3207187a>`_\ )
+* **kitchen:** move ``provisioner`` block & update ``run_command`` [skip ci] (\ `5cc8759 <https://github.com/saltstack-formulas/salt-formula/commit/5cc8759efd586b98dda3fc0cdf627d57bee7416b>`_\ )
+* **kitchen+ci:** update with latest ``3003.2`` pre-salted images [skip ci] (\ `86b0fa1 <https://github.com/saltstack-formulas/salt-formula/commit/86b0fa1d406a2bcbef42f60e74b0941f16ed00d4>`_\ )
+* **pillar:** update master_type in pillar.example (\ `8fa064b <https://github.com/saltstack-formulas/salt-formula/commit/8fa064baa911d7c5f5527be770a49264cf9c213c>`_\ )
+* add Debian 11 Bullseye & update ``yamllint`` configuration [skip ci] (\ `ac1d3b9 <https://github.com/saltstack-formulas/salt-formula/commit/ac1d3b9a2de95d9e08577e308b08482875c61cd3>`_\ )
+
+Tests
+^^^^^
+
+
+* **_mapdata:** add AlmaLinux verification file [skip ci] (\ `42d6487 <https://github.com/saltstack-formulas/salt-formula/commit/42d64870e33b68b1cc6bf920c876ac2edc7ef4f5>`_\ )
+* **_mapdata:** update verification files for ``master_type: str`` (\ `c16e7a3 <https://github.com/saltstack-formulas/salt-formula/commit/c16e7a3b755e849fc91bea1aefd0d549a47882e5>`_\ )
+* **pkgs_spec:** fix latest rubocop violations [skip ci] (\ `f64197a <https://github.com/saltstack-formulas/salt-formula/commit/f64197ada462dc7a1a9d6b436ccec4ff5f3aa42f>`_\ )
+
 `1.9.0 <https://github.com/saltstack-formulas/salt-formula/compare/v1.8.5...v1.9.0>`_ (2021-07-14)
 ------------------------------------------------------------------------------------------------------
 
