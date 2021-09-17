@@ -2,6 +2,21 @@
 Changelog
 =========
 
+`1.9.2 <https://github.com/saltstack-formulas/salt-formula/compare/v1.9.1...v1.9.2>`_ (2021-09-17)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **debian,ubuntu:** rename repo file to match documentation (\ `47ab261 <https://github.com/saltstack-formulas/salt-formula/commit/47ab261b397da51febffaefef848dfeff9b57c27>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **mapdata:** remove Ubuntu 16.04 [skip ci] (\ `cd2a0bf <https://github.com/saltstack-formulas/salt-formula/commit/cd2a0bfdf00aa196d11b2a06f5ecd2023a1cb469>`_\ )
+
 `1.9.1 <https://github.com/saltstack-formulas/salt-formula/compare/v1.9.0...v1.9.1>`_ (2021-09-04)
 ------------------------------------------------------------------------------------------------------
 
