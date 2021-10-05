@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.9.3](https://github.com/saltstack-formulas/salt-formula/compare/v1.9.2...v1.9.3) (2021-10-05)
+
+
+### Continuous Integration
+
+* **kitchen+ci:** update with latest CVE pre-salted images ([1a8512d](https://github.com/saltstack-formulas/salt-formula/commit/1a8512d77f8212cd51aa7ba09625f647adc5e171))
+
+
+### Tests
+
+* **_mapdata:** reset indentation [skip ci] ([678548f](https://github.com/saltstack-formulas/salt-formula/commit/678548fc8ba4bb8fe2c791665b8dda3abca327ee))
+* **_mapdata:** use `15.3` for `opensuse-15.yaml` ([f4a91c4](https://github.com/saltstack-formulas/salt-formula/commit/f4a91c458cca5b609ec1fc32cd100c147e1894b2))
+* **neon:** remove pillar and tests for `v3000` ([d00b04a](https://github.com/saltstack-formulas/salt-formula/commit/d00b04a5df4a24ba49a4f8fa7028f5e02503aac8))
+
 ## [1.9.2](https://github.com/saltstack-formulas/salt-formula/compare/v1.9.1...v1.9.2) (2021-09-17)
 
 
