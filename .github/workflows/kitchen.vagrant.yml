@@ -16,7 +16,6 @@ jobs:
         instance:
           - v3003-py3-freebsd-130-3003-1-py3
           - v3003-py3-freebsd-122-3003-1-py3
-          - v3003-py3-freebsd-114-3003-1-py3
           - v3002-py3-openbsd-69-3002-6-py3
           - v3001-py3-openbsd-68-3001-1-py3
           - v3003-py3-windows-10-latest-py3
