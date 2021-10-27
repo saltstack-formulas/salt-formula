@@ -47,7 +47,9 @@ salt-master:
     - source: salt://{{ tplroot }}/files/master.d
     {%- endif %}
     - clean: {{ salt_settings.clean_config_d_dir }}
-    - exclude_pat: _*
+    - exclude_pat:
+      - _*
+      - raas.conf
     {% if salt_settings.master_service_details.state != 'ignore' %}
   service.{{ salt_settings.master_service_details.state }}:
     - enable: {{ salt_settings.master_service_details.enabled }}
