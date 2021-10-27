@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.4](https://github.com/saltstack-formulas/salt-formula/compare/v1.9.3...v1.9.4) (2021-10-27)
+
+
+### Bug Fixes
+
+* **master:** don't manage config for saltstack enterprise master plugin ([184f338](https://github.com/saltstack-formulas/salt-formula/commit/184f338741c42457e5823c5a9eccecf24cbc1b34))
+
 ## [1.9.3](https://github.com/saltstack-formulas/salt-formula/compare/v1.9.2...v1.9.3) (2021-10-05)
 
 
