@@ -22,6 +22,8 @@ salt:
           - /path/to/stack2.cfg
       - reclass:
           inventory_base_uri: /etc/reclass
+      - saltclass:
+          - path: /srv/saltclass
   minion:
     master: localhost
     fileserver_backend:
