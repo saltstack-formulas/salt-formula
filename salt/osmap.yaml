@@ -38,8 +38,8 @@ Ubuntu:
         install_from_package: Null
 
 Raspbian:
-  pkgrepo: 'deb {{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }} {{ oscodename }} main'
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=armhf] {{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }} {{ oscodename }} main'
+  pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }}/salt-archive-keyring.gpg'
 
 SmartOS:
   salt_master: salt
