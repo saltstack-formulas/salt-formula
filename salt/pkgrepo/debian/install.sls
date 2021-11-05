@@ -21,7 +21,9 @@ salt-pkgrepo-install-saltstack-debian:
     - humanname: SaltStack Debian Repo
     - name: {{ salt_settings.pkgrepo }}
     - file: /etc/apt/sources.list.d/salt.list
+    {% if salt_settings.get('key_url') is not none %}
     - key_url: {{ salt_settings.key_url }}
+    {% endif %}
     - clean_file: True
     # Order: 3 because we can't put a require_in on "pkg: salt-{master,minion}"
     # because we don't know if they are used.

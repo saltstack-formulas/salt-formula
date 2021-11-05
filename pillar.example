@@ -14,7 +14,7 @@ salt:
   master_remove_config: true
 
   # Set this to 'py3' to install the Python 3 packages.
-  # If this is not set, the Python 2 packages will be installed by default.
+  # The default varies between OS versions.
   py_ver: 'py3'
 
   # Set this to false to not have the formula install packages (in the case you
