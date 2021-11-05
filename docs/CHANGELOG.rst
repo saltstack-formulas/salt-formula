@@ -2,6 +2,16 @@
 Changelog
 =========
 
+`1.9.5 <https://github.com/saltstack-formulas/salt-formula/compare/v1.9.4...v1.9.5>`_ (2021-11-05)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* make it possible to not have key_url set (\ `97e1d1f <https://github.com/saltstack-formulas/salt-formula/commit/97e1d1f07a2acc8e9b048412911d61695d7187b3>`_\ ), closes `#520 <https://github.com/saltstack-formulas/salt-formula/issues/520>`_
+* update to modern defaults for Debian family (\ `a932a8c <https://github.com/saltstack-formulas/salt-formula/commit/a932a8cc84d6a97d958aa0d6e6b1026bbbf5a745>`_\ )
+
 `1.9.4 <https://github.com/saltstack-formulas/salt-formula/compare/v1.9.3...v1.9.4>`_ (2021-10-27)
 ------------------------------------------------------------------------------------------------------
 
