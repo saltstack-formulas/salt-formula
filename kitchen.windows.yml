@@ -22,4 +22,10 @@ provisioner:
 
 platforms:
   - name: windows-2019-latest-py3
+    verifier:
+      inputs:
+        saltmajorversion: 3003
   - name: windows-2016-latest-py3
+    verifier:
+      inputs:
+        saltmajorversion: 3003
