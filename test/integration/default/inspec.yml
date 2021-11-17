@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # vim: ft=yaml
 ---
-name: v3002-py3
+name: default
 title: salt formula
 maintainer: SaltStack Formulas
 license: Apache-2.0
-summary: Verify that Salt `v3002-py3` is setup and configured
+summary: Verify that Salt is setup and configured
 depends:
   - name: share
     path: test/integration/share

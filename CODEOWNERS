@@ -23,6 +23,7 @@
 /test/integration/**/libraries/system.rb    @saltstack-formulas/ssf
 /test/integration/**/inspec.yml             @saltstack-formulas/ssf
 /test/integration/**/README.md              @saltstack-formulas/ssf
+/test/salt/pillar/top.sls                   @saltstack-formulas/ssf
 /.gitignore                                 @saltstack-formulas/ssf
 /.cirrus.yml                                @saltstack-formulas/ssf
 /.gitlab-ci.yml                             @saltstack-formulas/ssf

@@ -22,28 +22,46 @@ platforms:
     driver:
       box: myii/freebsd-13.0-master-py3
       synced_folders: []  # https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=255208
+    verifier:
+      inputs:
+        saltmajorversion: 3004
   - name: freebsd-122-master-py3
     driver:
       box: myii/freebsd-12.2-master-py3
+    verifier:
+      inputs:
+        saltmajorversion: 3004
   - name: freebsd-130-3003-1-py3
     driver:
       box: myii/freebsd-13.0-3003.1-py3
       synced_folders: []  # https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=255208
+    verifier:
+      inputs:
+        saltmajorversion: 3003
   - name: freebsd-122-3003-1-py3
     driver:
       box: myii/freebsd-12.2-3003.1-py3
+    verifier:
+      inputs:
+        saltmajorversion: 3003
   - name: openbsd-69-3002-6-py3
     driver:
       box: myii/openbsd-6.9-3002.6-py3
       ssh:
         shell: /bin/ksh
       synced_folders: []
+    verifier:
+      inputs:
+        saltmajorversion: 3002
   - name: openbsd-68-3001-1-py3
     driver:
       box: myii/openbsd-6.8-3001.1-py3
       ssh:
         shell: /bin/ksh
       synced_folders: []
+    verifier:
+      inputs:
+        saltmajorversion: 3001
   - name: windows-10-latest-py3
     driver:
       box: techneg/win10x64-pro-salt
@@ -65,6 +83,9 @@ platforms:
           skip_verify=True makedirs=True
         exit 0
       # yamllint enable rule:line-length
+    verifier:
+      inputs:
+        saltmajorversion: 3003
   - name: windows-81-latest-py3
     driver:
       box: techneg/win81x64-pro-salt
@@ -86,3 +107,6 @@ platforms:
           skip_verify=True makedirs=True
         exit 0
       # yamllint enable rule:line-length
+    verifier:
+      inputs:
+        saltmajorversion: 3003

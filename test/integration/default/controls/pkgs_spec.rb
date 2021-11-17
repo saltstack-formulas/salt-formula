@@ -15,12 +15,10 @@ pkgs =
 control 'salt packages' do
   title 'should be installed'
 
-  version = '3002'
-
   pkgs.each do |p|
     describe package(p) do
       it { should be_installed }
-      its('version') { should match(/^#{version}/) }
+      its('version') { should match(/^#{input('saltmajorversion')}/) }
     end
   end
 end
