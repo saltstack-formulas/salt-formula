@@ -2,6 +2,22 @@
 Changelog
 =========
 
+`1.9.6 <https://github.com/saltstack-formulas/salt-formula/compare/v1.9.5...v1.9.6>`_ (2021-11-17)
+------------------------------------------------------------------------------------------------------
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* use ``pillars_from_directories`` & ``test/salt/pillar/top.sls`` (\ `98c9dbf <https://github.com/saltstack-formulas/salt-formula/commit/98c9dbfcfbb45f514a7d35165f1ac572c0bfe6af>`_\ )
+
+Tests
+^^^^^
+
+
+* **pillar:** centralise and clean-up entries (\ `db5b69c <https://github.com/saltstack-formulas/salt-formula/commit/db5b69c9cda824194a891c515f19baabe46748b6>`_\ )
+* centralise all suites into ``default`` suite (\ `b475e24 <https://github.com/saltstack-formulas/salt-formula/commit/b475e24638edc7e6cbd5b131b3d1316727bf8246>`_\ )
+
 `1.9.5 <https://github.com/saltstack-formulas/salt-formula/compare/v1.9.4...v1.9.5>`_ (2021-11-05)
 ------------------------------------------------------------------------------------------------------
 
