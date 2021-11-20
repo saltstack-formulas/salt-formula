@@ -1,5 +1,5 @@
 # yamllint disable rule:indentation rule:line-length
-# Debian-9
+# Rocky Linux-8
 ---
 values:
   formulas_settings:
@@ -34,15 +34,15 @@ values:
         git:
           install_from_package: git
           require_state: false
-        install_from_source: true
+        install_from_source: false
         libgit2:
           build_parent_dir: /usr/src/
           download_hash: 683d1164e361e2a0a8d52652840e2340
-          install_from_source: false
+          install_from_source: true
           version: 0.23.0
-        version: 0.22.1
+        version: 0.23.0
     install_packages: true
-    libgit2: libgit2-22
+    key_url: https://repo.saltproject.io/py3/redhat/$releasever/$basearch/3004/SALTSTACK-GPG-KEY.pub
     master:
       ext_pillar:
       - cmd_yaml: cat /etc/salt/yaml
@@ -56,7 +56,7 @@ values:
         - /srv/salt
       fileserver_backend:
       - rootfs
-      gitfs_provider: gitpython
+      gitfs_provider: pygit2
       pillar_roots:
         base:
         - /srv/pillar
@@ -85,15 +85,14 @@ values:
       state: running
     parallel: true
     pin_version: false
-    pkgrepo: deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64]
-      https://repo.saltproject.io/py3/debian/9/amd64/3002 stretch main
-    pkgrepo_keyring: https://repo.saltproject.io/py3/debian/9/amd64/3002/salt-archive-keyring.gpg
-    pkgrepo_keyring_hash: sha256=ea38e0cdbd8dc53e1af154a8d711a2a321a69f81188062dc5cde9d54df2b8c47
+    pkgrepo: https://repo.saltproject.io/py3/redhat/$releasever/$basearch/3004
+    pkgrepo_humanname: SaltStack repo for RHEL/CentOS $releasever
+    pkgrepo_name: saltstack
     py_ver: py3
-    pyinotify: python-pyinotify
+    pygit2: python-pygit2
     python_dulwich: python-dulwich
-    python_git: python-git
-    release: '3002'
+    python_git: GitPython
+    release: '3004'
     restart_via_at: false
     retry_options:
       attempts: 5

@@ -91,7 +91,7 @@ values:
     pyinotify: python2-pyinotify
     python_dulwich: python-dulwich
     python_git: python2-gitpython
-    release: '3003'
+    release: '3004'
     restart_via_at: false
     retry_options:
       attempts: 5
