@@ -53,15 +53,6 @@ platforms:
     verifier:
       inputs:
         saltmajorversion: 3002
-  - name: openbsd-68-3001-1-py3
-    driver:
-      box: myii/openbsd-6.8-3001.1-py3
-      ssh:
-        shell: /bin/ksh
-      synced_folders: []
-    verifier:
-      inputs:
-        saltmajorversion: 3001
   - name: windows-10-latest-py3
     driver:
       box: techneg/win10x64-pro-salt
