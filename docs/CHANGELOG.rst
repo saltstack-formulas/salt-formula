@@ -2,6 +2,21 @@
 Changelog
 =========
 
+`1.9.7 <https://github.com/saltstack-formulas/salt-formula/compare/v1.9.6...v1.9.7>`_ (2021-11-22)
+------------------------------------------------------------------------------------------------------
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **kitchen+gitlab:** adjust matrix to add ``3004`` (\ `93289f6 <https://github.com/saltstack-formulas/salt-formula/commit/93289f6df12a675eafcf719ced7363e350b9651b>`_\ )
+
+Tests
+^^^^^
+
+
+* **silicon:** add pillar and verification files for ``3004`` (\ `f9ff8ea <https://github.com/saltstack-formulas/salt-formula/commit/f9ff8eab10fe22d6930107cefef4a589b85e81d0>`_\ )
+
 `1.9.6 <https://github.com/saltstack-formulas/salt-formula/compare/v1.9.5...v1.9.6>`_ (2021-11-17)
 ------------------------------------------------------------------------------------------------------
 
