@@ -31,16 +31,25 @@ platforms:
     verifier:
       inputs:
         saltmajorversion: 3004
-  - name: freebsd-130-3003-1-py3
+  - name: freebsd-130-3004-0-py3
     driver:
-      box: myii/freebsd-13.0-3003.1-py3
+      box: myii/freebsd-13.0-3004.0-py3
       synced_folders: []  # https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=255208
     verifier:
       inputs:
-        saltmajorversion: 3003
-  - name: freebsd-122-3003-1-py3
+        saltmajorversion: 3004
+  - name: freebsd-122-3004-0-py3
     driver:
-      box: myii/freebsd-12.2-3003.1-py3
+      box: myii/freebsd-12.2-3004.0-py3
+    verifier:
+      inputs:
+        saltmajorversion: 3004
+  - name: openbsd-70-3003-3-py3
+    driver:
+      box: myii/openbsd-7.0-3003.3-py3
+      ssh:
+        shell: /bin/ksh
+      synced_folders: []
     verifier:
       inputs:
         saltmajorversion: 3003
