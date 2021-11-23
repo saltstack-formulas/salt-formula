@@ -89,7 +89,7 @@ values:
     pygit2: py38-pygit2
     python_dulwich: py38-dulwich
     python_git: py38-gitpython
-    release: '3003'
+    release: '3004'
     restart_via_at: false
     retry_options:
       attempts: 5
