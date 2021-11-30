@@ -50,6 +50,8 @@ values:
         - /path/to/stack2.cfg
       - reclass:
           inventory_base_uri: /etc/reclass
+      - saltclass:
+        - path: /srv/saltclass
       file_roots:
         base:
         - /srv/salt
