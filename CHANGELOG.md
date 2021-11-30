@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.9.8](https://github.com/saltstack-formulas/salt-formula/compare/v1.9.7...v1.9.8) (2021-11-30)
+
+
+### Bug Fixes
+
+* **master:** master.d template to support saltclass ext_pillar ([5b7d7ea](https://github.com/saltstack-formulas/salt-formula/commit/5b7d7ea70e19a9c27b5de96eb0752db4534bc62d))
+
+
+### Continuous Integration
+
+* **kitchen+ci:** update with `3004` pre-salted images/boxes [skip ci] ([47d6c23](https://github.com/saltstack-formulas/salt-formula/commit/47d6c23df345c037e650b0b92db028b010708dc8))
+
+
+### Tests
+
+* **_mapdata:** add verification file for OpenBSD 7.0 [skip ci] ([f1ead04](https://github.com/saltstack-formulas/salt-formula/commit/f1ead04517a7fd369ac9fb90cb6b8f88dda31899))
+* **_mapdata:** update verification files for FreeBSD [skip ci] ([4b356b1](https://github.com/saltstack-formulas/salt-formula/commit/4b356b12134dbdf2ee6828c34edddaefbac50cd9))
+
 ## [1.9.7](https://github.com/saltstack-formulas/salt-formula/compare/v1.9.6...v1.9.7) (2021-11-22)
 
 
