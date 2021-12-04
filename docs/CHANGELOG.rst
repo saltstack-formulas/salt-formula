@@ -2,6 +2,15 @@
 Changelog
 =========
 
+`1.9.9 <https://github.com/saltstack-formulas/salt-formula/compare/v1.9.8...v1.9.9>`_ (2021-12-04)
+------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* sort extra options in configuration (\ `89cdcec <https://github.com/saltstack-formulas/salt-formula/commit/89cdcec5953550e1fe5a8a1e0974c9b31e736d1f>`_\ )
+
 `1.9.8 <https://github.com/saltstack-formulas/salt-formula/compare/v1.9.7...v1.9.8>`_ (2021-11-30)
 ------------------------------------------------------------------------------------------------------
 
