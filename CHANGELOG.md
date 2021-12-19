@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.10](https://github.com/saltstack-formulas/salt-formula/compare/v1.9.9...v1.9.10) (2021-12-19)
+
+
+### Bug Fixes
+
+* **minion:** update config parameter saltenv ([7540dc9](https://github.com/saltstack-formulas/salt-formula/commit/7540dc90aa32976640a298db16c0219173994e4a))
+
 ## [1.9.9](https://github.com/saltstack-formulas/salt-formula/compare/v1.9.8...v1.9.9) (2021-12-04)
 
 
