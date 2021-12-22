@@ -11,13 +11,13 @@ env:
   KITCHEN_LOCAL_YAML: 'kitchen.windows.yml'
 
 jobs:
-  test-2019:
-    runs-on: 'windows-2019'
+  test-2022:
+    runs-on: 'windows-2022'
     strategy:
       fail-fast: false
       matrix:
         instance:
-          - default-windows-2019-latest-py3
+          - default-windows-2022-latest-py3
     steps:
       - name: 'Check out code'
         uses: 'actions/checkout@v2'
@@ -53,13 +53,13 @@ jobs:
           bundle install --jobs 4 --retry 3
       - name: 'Run Test Kitchen'
         run: 'bundle exec kitchen verify ${{ matrix.instance }}'
-  test-2016:
-    runs-on: 'windows-2016'
+  test-2019:
+    runs-on: 'windows-2019'
     strategy:
       fail-fast: false
       matrix:
         instance:
-          - default-windows-2016-latest-py3
+          - default-windows-2019-latest-py3
     steps:
       - name: 'Check out code'
         uses: 'actions/checkout@v2'

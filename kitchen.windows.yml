@@ -14,18 +14,18 @@ provisioner:
   salt_bootstrap_options: -pythonVersion 3 -version 3003.3
   # yamllint disable rule:line-length
   init_environment: |
-    C:\salt\salt-call --local state.single file.managed `
+    salt-call --local state.single file.managed `
       C:\Users\kitchen\AppData\Local\Temp\kitchen\srv\salt\win\repo-ng\salt-minion-py3.sls `
       source=https://github.com/saltstack/salt-winrepo-ng/raw/master/salt-minion-py3.sls `
       skip_verify=True makedirs=True
   # yamllint enable rule:line-length
 
 platforms:
-  - name: windows-2019-latest-py3
+  - name: windows-2022-latest-py3
     verifier:
       inputs:
         saltmajorversion: 3003
-  - name: windows-2016-latest-py3
+  - name: windows-2019-latest-py3
     verifier:
       inputs:
         saltmajorversion: 3003

@@ -61,6 +61,8 @@ class SystemResource < Inspec.resource(1)
       # rubocop:enable Style/NumericLiterals,Layout/LineLength
     when 'windows_8.1_pro'
       '8.1'
+    when 'windows_server_2022_datacenter'
+      '2022-server'
     when 'windows_server_2019_datacenter'
       '2019-server'
     when 'windows_server_2016_datacenter'
