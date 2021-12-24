@@ -21,26 +21,24 @@ platforms:
   - name: freebsd-130-master-py3
     driver:
       box: myii/freebsd-13.0-master-py3
-      synced_folders: []  # https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=255208
     verifier:
       inputs:
         saltmajorversion: 3004
-  - name: freebsd-122-master-py3
+  - name: freebsd-123-master-py3
     driver:
-      box: myii/freebsd-12.2-master-py3
+      box: myii/freebsd-12.3-master-py3
     verifier:
       inputs:
         saltmajorversion: 3004
   - name: freebsd-130-3004-0-py3
     driver:
       box: myii/freebsd-13.0-3004.0-py3
-      synced_folders: []  # https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=255208
     verifier:
       inputs:
         saltmajorversion: 3004
-  - name: freebsd-122-3004-0-py3
+  - name: freebsd-123-3004-0-py3
     driver:
-      box: myii/freebsd-12.2-3004.0-py3
+      box: myii/freebsd-12.3-3004.0-py3
     verifier:
       inputs:
         saltmajorversion: 3004
