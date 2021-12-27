@@ -1,5 +1,25 @@
 # Changelog
 
+# [1.10.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.9.10...v1.10.0) (2021-12-27)
+
+
+### Bug Fixes
+
+* **log_fmt_console:** double option in config ([b705e44](https://github.com/saltstack-formulas/salt-formula/commit/b705e44378dc8905e4394362c55cd757afb88be7))
+* **minion:** fix windows path construction ([c9c6e12](https://github.com/saltstack-formulas/salt-formula/commit/c9c6e1222396ef3105c19bb7d4e9e8f1670fd700))
+
+
+### Continuous Integration
+
+* **proxy:** replace deprecated Windows `2016` with `2022` [skip ci] ([21b8d36](https://github.com/saltstack-formulas/salt-formula/commit/21b8d3626e4f356b43cac8098f5f9be334840818))
+* **proxy+windows:** fix setting up WinRM [skip ci] ([39cbc1b](https://github.com/saltstack-formulas/salt-formula/commit/39cbc1b91bfe5c46664ca2a74233b62f99ac3850))
+* **vagrant:** replace FreeBSD 12.2 with 12.3 [skip ci] ([1654e67](https://github.com/saltstack-formulas/salt-formula/commit/1654e6746b4e0c18d2a88fa2afe678f6f5bb5238))
+
+
+### Features
+
+* **minion:** ensure correct permissions for salt-cloud generated files ([dfa7f7d](https://github.com/saltstack-formulas/salt-formula/commit/dfa7f7d1d8fd02c928a71415b49c408446e09423))
+
 ## [1.9.10](https://github.com/saltstack-formulas/salt-formula/compare/v1.9.9...v1.9.10) (2021-12-19)
 
 
