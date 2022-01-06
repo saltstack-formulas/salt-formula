@@ -1,19 +1,19 @@
 GIT
   remote: https://gitlab.com/saltstack-formulas/infrastructure/inspec
-  revision: 488720b9bdb0f3cf2d5dc23131d3c66783d1d01d
+  revision: 50b07563d32b20b968307f86dd7c1cae0328f657
   branch: ssf
   specs:
-    inspec (4.52.9)
+    inspec (4.52.10)
       cookstyle
       faraday_middleware (>= 0.12.2, < 1.1)
-      inspec-core (= 4.52.9)
+      inspec-core (= 4.52.10)
       mongo (= 2.13.2)
       rake
       train (~> 3.0)
       train-aws (~> 0.2)
       train-habitat (~> 0.1)
       train-winrm (~> 0.2)
-    inspec-core (4.52.9)
+    inspec-core (4.52.10)
       addressable (~> 2.4)
       chef-telemetry (~> 1.0, >= 1.0.8)
       faraday (>= 0.9.0, < 1.5)
@@ -57,7 +57,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     ast (2.4.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.543.0)
+    aws-partitions (1.544.0)
     aws-sdk-alexaforbusiness (1.54.0)
       aws-sdk-core (~> 3, >= 3.125.0)
       aws-sigv4 (~> 1.1)
@@ -219,7 +219,7 @@ GEM
     aws-sdk-ram (1.26.0)
       aws-sdk-core (~> 3, >= 3.112.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-rds (1.134.0)
+    aws-sdk-rds (1.135.0)
       aws-sdk-core (~> 3, >= 3.125.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-redshift (1.76.0)
@@ -431,7 +431,7 @@ GEM
     nori (2.6.0)
     os (1.1.4)
     parallel (1.21.0)
-    parser (3.0.3.2)
+    parser (3.1.0.0)
       ast (~> 2.4.1)
     parslet (1.8.2)
     pastel (0.8.0)
