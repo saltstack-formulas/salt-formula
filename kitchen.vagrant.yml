@@ -83,7 +83,7 @@ platforms:
       # yamllint enable rule:line-length
     verifier:
       inputs:
-        saltmajorversion: 3003
+        saltmajorversion: 3004
   - name: windows-81-latest-py3
     driver:
       box: techneg/win81x64-pro-salt
@@ -107,4 +107,4 @@ platforms:
       # yamllint enable rule:line-length
     verifier:
       inputs:
-        saltmajorversion: 3003
+        saltmajorversion: 3004
