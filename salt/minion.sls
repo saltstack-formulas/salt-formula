@@ -192,6 +192,7 @@ remove-macpackage-salt:
     - force: True
     {% endif %}
 
+    {% if not salt_settings.minion_remove_config %}
 permissions-minion-config:
   file.managed:
     - name: {{ salt_settings.config_path | path_join('minion') }}
@@ -206,6 +207,7 @@ permissions-minion-config:
     - mode: 640
     {% endif %}
     - replace: False
+    {% endif %}
 
 salt-minion-pki-dir:
   file.directory:
