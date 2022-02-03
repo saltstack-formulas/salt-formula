@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.10.1](https://github.com/saltstack-formulas/salt-formula/compare/v1.10.0...v1.10.1) (2022-02-03)
+
+
+### Bug Fixes
+
+* **minion:** respect `minion_remove_config: true` ([02c31df](https://github.com/saltstack-formulas/salt-formula/commit/02c31df0c5cca2863a46fd3c517a6610bb331548)), closes [#527](https://github.com/saltstack-formulas/salt-formula/issues/527)
+
+
+### Continuous Integration
+
+* **gemfile:** allow rubygems proxy to be provided as an env var [skip ci] ([46fc639](https://github.com/saltstack-formulas/salt-formula/commit/46fc639d46bedfe0489ed66719534384fcc84757))
+* **kitchen+gitlab:** update for new pre-salted images [skip ci] ([d95dac2](https://github.com/saltstack-formulas/salt-formula/commit/d95dac24aadd343bf92a976a59e0a72be6ade2d8))
+* **windows:** update Salt version installed to `3004-3` [skip ci] ([fdccb9b](https://github.com/saltstack-formulas/salt-formula/commit/fdccb9b6125acbc90d1a596553eced7525af4a47))
+* **windows:** use Salt version `3004` [skip ci] ([a1e9823](https://github.com/saltstack-formulas/salt-formula/commit/a1e9823b42205f1442d3bea2037936b64760a8b6))
+
+
+### Tests
+
+* update for new pre-salted images [skip ci] ([8015fe0](https://github.com/saltstack-formulas/salt-formula/commit/8015fe0c9252d80c8c63aa08a1a0152e0eba279b))
+
 # [1.10.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.9.10...v1.10.0) (2021-12-27)
 
 
