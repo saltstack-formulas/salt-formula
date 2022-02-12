@@ -16,4 +16,8 @@ Security/YAMLLoad:
   Exclude:
     - test/integration/**/_mapdata.rb
 
+# General settings across all cops in this formula
+AllCops:
+  NewCops: enable
+
 # Any offenses that should be fixed, e.g. collected via. `rubocop --auto-gen-config`

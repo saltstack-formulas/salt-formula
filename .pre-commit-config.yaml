@@ -18,7 +18,7 @@ repos:
         additional_dependencies: ['@commitlint/config-conventional@8.3.4']
         always_run: true
   - repo: https://github.com/rubocop-hq/rubocop
-    rev: v1.9.1
+    rev: v1.25.1
     hooks:
       - id: rubocop
         name: Check Ruby files with rubocop
@@ -26,14 +26,14 @@ repos:
         always_run: true
         pass_filenames: false
   - repo: https://github.com/shellcheck-py/shellcheck-py
-    rev: v0.7.1.1
+    rev: v0.8.0.4
     hooks:
       - id: shellcheck
         name: Check shell scripts with shellcheck
         files: ^.*\.(sh|bash|ksh)$
         types: []
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.23.0
+    rev: v1.26.3
     hooks:
       - id: yamllint
         name: Check YAML syntax with yamllint
@@ -41,7 +41,7 @@ repos:
         always_run: true
         pass_filenames: false
   - repo: https://github.com/warpnet/salt-lint
-    rev: v0.3.0
+    rev: v0.8.0
     hooks:
       - id: salt-lint
         name: Check Salt files using salt-lint
