@@ -4,6 +4,7 @@
 # Author: Daniel Dehennin <daniel.dehennin@ac-dijon.fr>
 # Copyright (C) 2020 Daniel Dehennin <daniel.dehennin@ac-dijon.fr>
 
+# rubocop:disable Metrics/ClassLength
 class SystemResource < Inspec.resource(1)
   name 'system'
 
@@ -21,7 +22,8 @@ class SystemResource < Inspec.resource(1)
       family: build_platform_family,
       name: build_platform_name,
       release: build_platform_release,
-      finger: build_platform_finger
+      finger: build_platform_finger,
+      codename: build_platform_codename
     }
   end
 
@@ -89,4 +91,44 @@ class SystemResource < Inspec.resource(1)
       build_platform_release.split('.')[0]
     end
   end
+
+  # rubocop:disable Metrics/MethodLength,Metrics/CyclomaticComplexity
+  def build_platform_codename
+    case build_platform_finger
+    when 'ubuntu-20.04'
+      'focal'
+    when 'ubuntu-18.04'
+      'bionic'
+    when 'debian-11'
+      'bullseye'
+    when 'debian-10'
+      'buster'
+    when 'debian-9'
+      'stretch'
+    when 'almalinux-8'
+      "AlmaLinux #{build_platform_release} (Arctic Sphynx)"
+    when 'amazonlinux-2'
+      'Amazon Linux 2'
+    when 'arch-base-latest'
+      'Arch Linux'
+    when 'centos-7'
+      'CentOS Linux 7 (Core)'
+    when 'centos-8'
+      'CentOS Stream 8'
+    when 'opensuse-tumbleweed'
+      'openSUSE Tumbleweed'
+    when 'opensuse-15'
+      "openSUSE Leap #{build_platform_release}"
+    when 'oraclelinux-8', 'oraclelinux-7'
+      "Oracle Linux Server #{build_platform_release}"
+    when 'gentoo-2-sysd', 'gentoo-2-sysv'
+      'Gentoo/Linux'
+    when 'rockylinux-8'
+      "Rocky Linux #{build_platform_release} (Green Obsidian)"
+    else
+      ''
+    end
+  end
+  # rubocop:enable Metrics/MethodLength,Metrics/CyclomaticComplexity
 end
+# rubocop:enable Metrics/ClassLength
