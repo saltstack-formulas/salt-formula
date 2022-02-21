@@ -130,6 +130,7 @@ rubocop:
 ## Define the rest of the matrix based on Kitchen testing
 # Make sure the instances listed below match up with
 # the `platforms` defined in `kitchen.yml`
+# yamllint disable rule:line-length
 # default-debian-11-tiamat-py3: {extends: '.test_instance'}
 # default-debian-10-tiamat-py3: {extends: '.test_instance'}
 # default-debian-9-tiamat-py3: {extends: '.test_instance'}
@@ -208,6 +209,7 @@ default-debian-9-3002-7-py3: {extends: '.test_instance'}
 # default-oraclelinux-7-3002-7-py3: {extends: '.test_instance'}
 # default-gentoo-stage3-latest-3002-7-py3: {extends: '.test_instance'}
 # default-gentoo-stage3-systemd-3002-7-py3: {extends: '.test_instance'}
+# yamllint enable rule:line-length
 
 ###############################################################################
 # `release` stage: `semantic-release`
