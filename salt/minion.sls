@@ -24,7 +24,7 @@ download-salt-minion:
     - group: wheel
     - mode: '0644'
     - unless:
-      - test -n "{{ salt_settings.version }}" && '/opt/salt/bin/salt-minion --version=.*{{ salt_settings.version }}.*'
+      - test -n "{{ salt_settings.version }}" && /opt/salt/bin/salt-minion --version | grep -E '{{ salt_settings.version }}$'
     - require_in:
       - macpackage: salt-minion
     - retry: {{ salt_settings.retry_options | json }}
@@ -58,7 +58,7 @@ salt-minion:
            {# macpackage.installed is weird with version_check, detects diff but incomplete install #}
     - force: True    {# workaround #}
     - unless:
-      - test -n "{{ salt_settings.version }}" && '/opt/salt/bin/salt-minion --version=.*{{ salt_settings.version }}.*'
+      - test -n "{{ salt_settings.version }}" && /opt/salt/bin/salt-minion --version | grep -E '{{ salt_settings.version }}$'
            {% if salt_settings.minion_service_details.state != 'ignore' %}
     - require_in:
       - service: salt-minion
