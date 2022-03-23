@@ -64,7 +64,7 @@ salt-minion:
       - service: salt-minion
            {% endif %}
     - onchanges_in:
-      - cmd: remove-macpackage-salt
+      - file: remove-macpackage-salt
         {%- elif grains.os != 'MacOS' and "workaround https://github.com/saltstack/salt/issues/49348" %}
   pkg.installed:
     - name: {{ salt_settings.salt_minion }}
