@@ -198,7 +198,7 @@ permissions-minion-config:
     - name: {{ salt_settings.config_path | path_join('minion') }}
     - user: {{ salt_settings.rootuser }}
     - group:
-        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD', 'Darwin'] %}
         wheel
         {%- else %}
         root
@@ -218,7 +218,7 @@ salt-minion-pki-dir:
 {% endif %}
     - user: {{ salt_settings.rootuser }}
     - group:
-        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD', 'Darwin'] %}
         wheel
         {%- else %}
         root
@@ -237,7 +237,7 @@ permissions-minion.pem:
 {% endif %}
     - user: {{ salt_settings.rootuser }}
     - group:
-        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD', 'Darwin'] %}
         wheel
         {%- else %}
         root
@@ -258,7 +258,7 @@ permissions-minion.pub:
 {% endif %}
     - user: {{ salt_settings.rootuser }}
     - group:
-        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD', 'Darwin'] %}
         wheel
         {%- else %}
         root
