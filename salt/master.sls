@@ -2,9 +2,9 @@
 {%- from tplroot ~ "/map.jinja" import salt_settings with context %}
 {%- from tplroot ~ "/libtofs.jinja" import files_switch with context %}
 
-{% if salt_settings.pin_version and salt_settings.version and grains.os_family|lower == 'debian' %}
+{% if salt_settings.hold_version is defined and salt_settings.install_packages %}
 include:
-  - .pin
+  - .hold
 {% endif %}
 
 {%- if grains.kernel != 'Windows' %}
@@ -26,6 +26,12 @@ salt-master:
     - name: {{ salt_settings.salt_master }}
        {%- if salt_settings.version is defined %}
     - version: {{ salt_settings.version }}
+       {%- endif %}
+       {%- if salt_settings.hold_version is defined %}
+    - hold: {{ salt_settings.hold_version }}
+       {%- endif %}
+       {%- if salt_settings.update_holds is defined %}
+    - update_holds: {{ salt_settings.update_holds }}
        {%- endif %}
        {% if salt_settings.master_service_details.state != 'ignore' %}
     - require_in:
