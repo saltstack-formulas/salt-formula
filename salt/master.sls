@@ -54,7 +54,7 @@ salt-master:
   service.{{ salt_settings.master_service_details.state }}:
     - enable: {{ salt_settings.master_service_details.enabled }}
     - name: {{ salt_settings.master_service }}
-    {%- if grains.os_family == 'FreeBSD' %}
+    {%- if grains.os_family in ['FreeBSD', 'Gentoo'] %}
     - retry: {{ salt_settings.retry_options | json }}
     {%- endif %}
     - watch:

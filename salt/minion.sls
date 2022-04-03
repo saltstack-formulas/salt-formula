@@ -97,7 +97,7 @@ salt-minion:
   service.{{ salt_settings.minion_service_details.state }}:
     - enable: {{ salt_settings.minion_service_details.enabled }}
     - name: {{ salt_settings.minion_service }}
-    {%- if grains.os_family == 'FreeBSD' %}
+    {%- if grains.os_family in ['FreeBSD', 'Gentoo'] %}
     - retry: {{ salt_settings.retry_options | json }}
     {%- endif %}
     - watch:

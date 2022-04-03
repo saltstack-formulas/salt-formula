@@ -25,7 +25,7 @@ salt-minion-standalone:
     - enable: False
   {%- endif %}
     - name: {{ salt_settings.minion_service }}
-    {%- if grains.os_family == 'FreeBSD' %}
+    {%- if grains.os_family in ['FreeBSD', 'Gentoo'] %}
     - retry: {{ salt_settings.retry_options | json }}
     {%- endif %}
     - require:

@@ -18,7 +18,7 @@ salt-syndic:
   service.running:
     - enable: True
     - name: {{ salt_settings.syndic_service }}
-    {%- if grains.os_family == 'FreeBSD' %}
+    {%- if grains.os_family in ['FreeBSD', 'Gentoo'] %}
     - retry: {{ salt_settings.retry_options | json }}
     {%- endif %}
     - require:

@@ -15,7 +15,7 @@ salt-api:
   service.{{ salt_settings.api_service_details.state }}:
     - enable: {{ salt_settings.api_service_details.enabled }}
     - name: {{ salt_settings.api_service }}
-    {%- if grains.os_family == 'FreeBSD' %}
+    {%- if grains.os_family in ['FreeBSD', 'Gentoo'] %}
     - retry: {{ salt_settings.retry_options | json }}
     {%- endif %}
     - require:
