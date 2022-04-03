@@ -1,5 +1,5 @@
 # yamllint disable rule:indentation rule:line-length
-# Gentoo-2
+# Fedora-35
 ---
 values:
   formulas_settings:
@@ -34,7 +34,7 @@ values:
         git:
           install_from_package: git
           require_state: false
-        install_from_source: true
+        install_from_source: false
         libgit2:
           build_parent_dir: /usr/src/
           download_hash: 683d1164e361e2a0a8d52652840e2340
@@ -42,6 +42,7 @@ values:
           version: 0.23.0
         version: 0.23.0
     install_packages: true
+    key_url: https://repo.saltproject.io/py3/redhat/$releasever/$basearch/3004/SALTSTACK-GPG-KEY.pub
     master:
       ext_pillar:
       - cmd_yaml: cat /etc/salt/yaml
@@ -57,7 +58,7 @@ values:
         - /srv/salt
       fileserver_backend:
       - rootfs
-      gitfs_provider: gitpython
+      gitfs_provider: pygit2
       pillar_roots:
         base:
         - /srv/pillar
@@ -86,11 +87,13 @@ values:
       state: running
     parallel: true
     pin_version: false
-    pkgrepo: ''
+    pkgrepo: https://repo.saltproject.io/py3/redhat/$releasever/$basearch/3004
+    pkgrepo_humanname: SaltStack repo for RHEL/CentOS $releasever
+    pkgrepo_name: saltstack
     py_ver: py3
-    pyinotify: dev-python/pyinotify
+    pygit2: python2-pygit2
     python_dulwich: python-dulwich
-    python_git: python-git
+    python_git: GitPython
     release: '3004'
     restart_via_at: false
     retry_options:
@@ -100,14 +103,14 @@ values:
       until: true
     rootgroup: root
     rootuser: root
-    salt_api: app-admin/salt
-    salt_cloud: app-admin/salt
-    salt_master: app-admin/salt
+    salt_api: salt-api
+    salt_cloud: salt-cloud
+    salt_master: salt-master
     salt_master_macos_plist_hash: ''
-    salt_minion: app-admin/salt
+    salt_minion: salt-minion
     salt_minion_macos_plist_hash: ''
     salt_ssh: salt-ssh
-    salt_syndic: app-admin/salt
+    salt_syndic: salt-syndic
     ssh_roster: {}
     syndic_service: salt-syndic
     use_pip: false

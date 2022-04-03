@@ -42,7 +42,7 @@ values:
           version: 0.23.0
         version: 0.23.0
     install_packages: true
-    key_url: https://repo.saltproject.io/py3/redhat/$releasever/$basearch/3003/SALTSTACK-GPG-KEY.pub
+    key_url: https://repo.saltproject.io/py3/redhat/$releasever/$basearch/3004/SALTSTACK-GPG-KEY.pub
     master:
       ext_pillar:
       - cmd_yaml: cat /etc/salt/yaml
@@ -87,14 +87,14 @@ values:
       state: running
     parallel: true
     pin_version: false
-    pkgrepo: https://repo.saltproject.io/py3/redhat/$releasever/$basearch/3003
+    pkgrepo: https://repo.saltproject.io/py3/redhat/$releasever/$basearch/3004
     pkgrepo_humanname: SaltStack repo for RHEL/CentOS $releasever
     pkgrepo_name: saltstack
     py_ver: py3
     pygit2: python2-pygit2
     python_dulwich: python-dulwich
     python_git: GitPython
-    release: '3003'
+    release: '3004'
     restart_via_at: false
     retry_options:
       attempts: 5
