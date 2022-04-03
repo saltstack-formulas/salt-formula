@@ -2,6 +2,29 @@
 Changelog
 =========
 
+`1.10.2 <https://github.com/saltstack-formulas/salt-formula/compare/v1.10.1...v1.10.2>`_ (2022-04-03)
+---------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **gentoo:** use ``retry_options`` to avoid spurious service failures (\ `d00c069 <https://github.com/saltstack-formulas/salt-formula/commit/d00c069e25463e6e675b0cea9f625a6e78985744>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **kitchen+gitlab:** update for new pre-salted images [skip ci] (\ `92a82a9 <https://github.com/saltstack-formulas/salt-formula/commit/92a82a98c72e5297caf08e1e135b72d09c2e4149>`_\ )
+* update linters to latest versions [skip ci] (\ `47efbc0 <https://github.com/saltstack-formulas/salt-formula/commit/47efbc04920a3f20ef9a69350b1ee46bbee11b37>`_\ )
+
+Tests
+^^^^^
+
+
+* **_mapdata:** add/update verification files for Fedora & Gentoo (\ `e9cb3d2 <https://github.com/saltstack-formulas/salt-formula/commit/e9cb3d27284d81115bac16c3af225c4b25eebaf9>`_\ )
+* **system:** add ``build_platform_codename`` [skip ci] (\ `6b5598a <https://github.com/saltstack-formulas/salt-formula/commit/6b5598a8d8d91ccc367283f80d5c736c7eb0168c>`_\ )
+
 `1.10.1 <https://github.com/saltstack-formulas/salt-formula/compare/v1.10.0...v1.10.1>`_ (2022-02-03)
 ---------------------------------------------------------------------------------------------------------
 
