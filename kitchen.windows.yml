@@ -11,7 +11,7 @@ driver:
 
 provisioner:
   salt_install: bootstrap
-  salt_bootstrap_options: -pythonVersion 3 -version 3004-3
+  salt_bootstrap_options: -pythonVersion 3 -version 3004.1-1
   # yamllint disable rule:line-length
   init_environment: |
     salt-call --local state.single file.managed `
