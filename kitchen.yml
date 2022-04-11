@@ -148,6 +148,12 @@ platforms:
     verifier:
       inputs:
         saltmajorversion: 3004
+  - name: fedora-36-master-py3
+    driver:
+      image: saltimages/salt-master-py3:fedora-36
+    verifier:
+      inputs:
+        saltmajorversion: 3004
   - name: fedora-35-master-py3
     driver:
       image: saltimages/salt-master-py3:fedora-35
@@ -275,6 +281,12 @@ platforms:
   - name: centos-7-3004-1-py3
     driver:
       image: saltimages/salt-3004.1-py3:centos-7
+    verifier:
+      inputs:
+        saltmajorversion: 3004
+  - name: fedora-36-3004-1-py3
+    driver:
+      image: saltimages/salt-3004.1-py3:fedora-36
     verifier:
       inputs:
         saltmajorversion: 3004

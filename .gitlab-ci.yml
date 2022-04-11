@@ -150,6 +150,7 @@ rubocop:
 # default-ubuntu-1804-master-py3: {extends: '.test_instance'}
 # default-centos-stream8-master-py3: {extends: '.test_instance_failure_permitted'}
 # default-centos-7-master-py3: {extends: '.test_instance'}
+# default-fedora-36-master-py3: {extends: '.test_instance_failure_permitted'}
 # default-fedora-35-master-py3: {extends: '.test_instance'}
 # default-fedora-34-master-py3: {extends: '.test_instance'}
 # default-opensuse-leap-153-master-py3: {extends: '.test_instance'}
@@ -169,6 +170,7 @@ default-ubuntu-2004-3004-1-py3: {extends: '.test_instance'}
 # default-ubuntu-1804-3004-1-py3: {extends: '.test_instance'}
 default-centos-stream8-3004-1-py3: {extends: '.test_instance_failure_permitted'}
 # default-centos-7-3004-1-py3: {extends: '.test_instance'}
+default-fedora-36-3004-1-py3: {extends: '.test_instance_failure_permitted'}
 default-fedora-35-3004-1-py3: {extends: '.test_instance'}
 default-fedora-34-3004-1-py3: {extends: '.test_instance'}
 default-amazonlinux-2-3004-1-py3: {extends: '.test_instance'}
