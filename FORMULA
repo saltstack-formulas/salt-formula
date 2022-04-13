@@ -1,7 +1,7 @@
 name: salt
 os: Debian, Ubuntu, Raspbian, RedHat, Fedora, CentOS, Oracle, Amazon, Suse, openSUSE, Gentoo, Funtoo, Arch, Manjaro, FreeBSD, OpenBSD, Windows
 os_family: Debian, Redhat, Suse, Arch, Gentoo, FreeBSD, Windows
-version: 1.10.2
+version: 1.10.3
 release: 1
 minimum_version: 2015.8
 summary: Formula for install Saltstack

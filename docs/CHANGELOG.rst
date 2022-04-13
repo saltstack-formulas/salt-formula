@@ -2,6 +2,27 @@
 Changelog
 =========
 
+`1.10.3 <https://github.com/saltstack-formulas/salt-formula/compare/v1.10.2...v1.10.3>`_ (2022-04-13)
+---------------------------------------------------------------------------------------------------------
+
+Bug Fixes
+^^^^^^^^^
+
+
+* **pkgrepo:** pkgrepo use cmd.shell (\ `0e4b3bd <https://github.com/saltstack-formulas/salt-formula/commit/0e4b3bdf945d89cc8a4cc614fbe2073426363dff>`_\ )
+
+Continuous Integration
+^^^^^^^^^^^^^^^^^^^^^^
+
+
+* **kitchen.windows:** fix version number for Salt installation [skip ci] (\ `37dd068 <https://github.com/saltstack-formulas/salt-formula/commit/37dd068d199b4ee049c31807ecf34dfadec0179b>`_\ )
+
+Tests
+^^^^^
+
+
+* **_mapdata:** add verification file for ``fedora-36`` [skip ci] (\ `c20deb9 <https://github.com/saltstack-formulas/salt-formula/commit/c20deb92d48e26a83732eefa196f2f08d6548bff>`_\ )
+
 `1.10.2 <https://github.com/saltstack-formulas/salt-formula/compare/v1.10.1...v1.10.2>`_ (2022-04-03)
 ---------------------------------------------------------------------------------------------------------
 
