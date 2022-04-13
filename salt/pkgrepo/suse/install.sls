@@ -4,7 +4,7 @@
 
 {#- Resorting to this ugly hack since the state doesn't handle if the `baseurl` is
     already configured under another name, such as used by the `salt-bootstrap` #}
-{%- if not salt["cmd.run"]("zypper lr --uri | grep " ~ salt_settings.pkgrepo) %}
+{%- if not salt["cmd.shell"]("zypper lr --uri | grep " ~ salt_settings.pkgrepo) %}
 salt-pkgrepo-install-saltstack-suse:
   pkgrepo.managed:
     - name: systemsmanagement_saltstack_products
