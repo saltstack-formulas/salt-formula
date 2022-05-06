@@ -43,6 +43,13 @@ platforms:
     verifier:
       inputs:
         saltmajorversion: 3004
+  - name: ubuntu-2204-tiamat-py3
+    driver:
+      image: saltimages/salt-tiamat-py3:ubuntu-22.04
+      run_command: /lib/systemd/systemd
+    verifier:
+      inputs:
+        saltmajorversion: 3004
   - name: ubuntu-2004-tiamat-py3
     driver:
       image: saltimages/salt-tiamat-py3:ubuntu-20.04
@@ -118,6 +125,13 @@ platforms:
   - name: debian-9-master-py3
     driver:
       image: saltimages/salt-master-py3:debian-9
+      run_command: /lib/systemd/systemd
+    verifier:
+      inputs:
+        saltmajorversion: 3004
+  - name: ubuntu-2204-master-py3
+    driver:
+      image: saltimages/salt-master-py3:ubuntu-22.04
       run_command: /lib/systemd/systemd
     verifier:
       inputs:
@@ -254,6 +268,13 @@ platforms:
   - name: debian-9-3004-1-py3
     driver:
       image: saltimages/salt-3004.1-py3:debian-9
+      run_command: /lib/systemd/systemd
+    verifier:
+      inputs:
+        saltmajorversion: 3004
+  - name: ubuntu-2204-3004-1-py3
+    driver:
+      image: saltimages/salt-3004.1-py3:ubuntu-22.04
       run_command: /lib/systemd/systemd
     verifier:
       inputs:

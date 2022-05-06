@@ -134,6 +134,7 @@ rubocop:
 # default-debian-11-tiamat-py3: {extends: '.test_instance'}
 # default-debian-10-tiamat-py3: {extends: '.test_instance'}
 # default-debian-9-tiamat-py3: {extends: '.test_instance'}
+# default-ubuntu-2204-tiamat-py3: {extends: '.test_instance_failure_permitted'}
 # default-ubuntu-2004-tiamat-py3: {extends: '.test_instance'}
 # default-ubuntu-1804-tiamat-py3: {extends: '.test_instance'}
 # default-centos-stream8-tiamat-py3: {extends: '.test_instance_failure_permitted'}
@@ -146,6 +147,7 @@ rubocop:
 # default-debian-11-master-py3: {extends: '.test_instance'}
 # default-debian-10-master-py3: {extends: '.test_instance'}
 # default-debian-9-master-py3: {extends: '.test_instance'}
+# default-ubuntu-2204-master-py3: {extends: '.test_instance_failure_permitted'}
 # default-ubuntu-2004-master-py3: {extends: '.test_instance'}
 # default-ubuntu-1804-master-py3: {extends: '.test_instance'}
 # default-centos-stream8-master-py3: {extends: '.test_instance_failure_permitted'}
@@ -166,6 +168,7 @@ rubocop:
 default-debian-11-3004-1-py3: {extends: '.test_instance'}
 # default-debian-10-3004-1-py3: {extends: '.test_instance'}
 # default-debian-9-3004-1-py3: {extends: '.test_instance'}
+default-ubuntu-2204-3004-1-py3: {extends: '.test_instance_failure_permitted'}
 default-ubuntu-2004-3004-1-py3: {extends: '.test_instance'}
 # default-ubuntu-1804-3004-1-py3: {extends: '.test_instance'}
 default-centos-stream8-3004-1-py3: {extends: '.test_instance_failure_permitted'}
