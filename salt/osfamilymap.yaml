@@ -138,6 +138,7 @@ Windows:
   rootuser: {{ rootuser | d('') }}
 
 MacOS:
+  salt_master: saltstack
   salt_minion: salt
   salt_minion_pkg_source: ''
   salt_minion_pkg_hash: ''
