@@ -20,8 +20,8 @@ download-salt-minion:
                     {% else %}
     - skip_verify: True
                     {% endif %}
-    - user: root
-    - group: wheel
+    - user: {{ salt_settings.rootuser }}
+    - group: {{ salt_settings.rootgroup }}
     - mode: '0644'
     - unless:
       - test -n "{{ salt_settings.version }}" && '/opt/salt/bin/salt-minion --version=.*{{ salt_settings.version }}.*'
@@ -204,7 +204,7 @@ permissions-minion-config:
         {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
         wheel
         {%- else %}
-        root
+        {{ salt_settings.rootgroup }}
         {%- endif %}
     {%- if grains['kernel'] != 'Windows' %}
     - mode: 640
@@ -224,7 +224,7 @@ salt-minion-pki-dir:
         {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
         wheel
         {%- else %}
-        root
+        {{ salt_settings.rootgroup }}
         {%- endif %}
     {%- if grains['kernel'] != 'Windows' %}
     - mode: 700
@@ -243,7 +243,7 @@ permissions-minion.pem:
         {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
         wheel
         {%- else %}
-        root
+        {{ salt_settings.rootgroup }}
         {%- endif %}
     {%- if grains['kernel'] != 'Windows' %}
     - mode: 400
@@ -264,7 +264,7 @@ permissions-minion.pub:
         {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
         wheel
         {%- else %}
-        root
+        {{ salt_settings.rootgroup }}
         {%- endif %}
     {%- if grains['kernel'] != 'Windows' %}
     - mode: 644
