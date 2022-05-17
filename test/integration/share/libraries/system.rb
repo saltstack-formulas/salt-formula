@@ -57,6 +57,8 @@ class SystemResource < Inspec.resource(1)
       'base-latest'
     when 'gentoo'
       "#{inspec.platform[:release].split('.')[0]}-#{derive_gentoo_init_system}"
+    when 'mac_os_x'
+      inspec.command('sw_vers -productVersion').stdout.to_s
     when 'opensuse'
       # rubocop:disable Style/NumericLiterals,Layout/LineLength
       inspec.platform[:release].to_i > 20210101 ? 'tumbleweed' : inspec.platform[:release]

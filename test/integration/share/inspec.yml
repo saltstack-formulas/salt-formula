@@ -21,4 +21,5 @@ supports:
   - platform-name: gentoo
   - platform-name: almalinux
   - platform-name: rocky
+  - platform-name: mac_os_x
   - platform: windows
