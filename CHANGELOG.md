@@ -1,5 +1,35 @@
 # Changelog
 
+# [1.11.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.10.3...v1.11.0) (2022-05-17)
+
+
+### Bug Fixes
+
+* **minion:** replace literals with `rootuser` & `rootgroup` from map ([b2316ed](https://github.com/saltstack-formulas/salt-formula/commit/b2316ed17b7c60e5a4ee394f18fcad70572dc53d))
+
+
+### Code Refactoring
+
+* **minion:** use `pkg.installed` state for macOS ([3eff2d2](https://github.com/saltstack-formulas/salt-formula/commit/3eff2d2acf43eb87015007fdfc5dd92bb8edaaf7))
+
+
+### Continuous Integration
+
+* **macos:** enable testing using GitHub Actions ([8ab60b9](https://github.com/saltstack-formulas/salt-formula/commit/8ab60b9689158035a4d60a165729135b086e499d))
+* **vagrant:** use `linked_clone` at all times (inc. CI) [skip ci] ([18a6230](https://github.com/saltstack-formulas/salt-formula/commit/18a62308564faefa53cfc2b535a7fb9763c0c130))
+
+
+### Features
+
+* **macos:** use `saltstack` as package to install ([c05fddf](https://github.com/saltstack-formulas/salt-formula/commit/c05fddf139e2a7ba9032ed1d1710929b9679b59c))
+
+
+### Tests
+
+* **macos:** add `map.jinja` verification files ([c1c635f](https://github.com/saltstack-formulas/salt-formula/commit/c1c635fda48384c13284fbb424c88a1bfd3f0486))
+* **macos:** update for this platform ([dc9cff9](https://github.com/saltstack-formulas/salt-formula/commit/dc9cff99c5bcc487a68f488bbe419758ac72987c))
+* **system.rb:** add support for `mac_os_x` [skip ci] ([e8a1237](https://github.com/saltstack-formulas/salt-formula/commit/e8a12376324a1ae6a62485da6b84ccb3df8ac484))
+
 ## [1.10.3](https://github.com/saltstack-formulas/salt-formula/compare/v1.10.2...v1.10.3) (2022-04-13)
 
 
