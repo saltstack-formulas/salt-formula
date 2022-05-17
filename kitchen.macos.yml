@@ -1,0 +1,25 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+driver:
+  name: exec
+
+provisioner:
+  sudo: true
+  salt_install: bootstrap
+  salt_bootstrap_options: -P stable latest
+  salt_call_command: /opt/salt/bin/salt-call
+
+platforms:
+  - name: macos-12-latest-py3
+    verifier:
+      inputs:
+        saltmajorversion: 3004
+  - name: macos-11-latest-py3
+    verifier:
+      inputs:
+        saltmajorversion: 3004
+  - name: macos-1015-latest-py3
+    verifier:
+      inputs:
+        saltmajorversion: 3004

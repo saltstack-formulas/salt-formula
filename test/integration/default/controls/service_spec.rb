@@ -6,6 +6,14 @@ services =
     %w[salt_master salt_minion]
   when 'windows'
     %w[salt-minion]
+  when 'darwin'
+    # The following is expected but isn't yet working in the GitHub Actions
+    # macOS runners
+    # %w[com.saltstack.salt.api
+    #    com.saltstack.salt.master
+    #    com.saltstack.salt.minion
+    #    com.saltstack.salt.syndic]
+    []
   else
     %w[salt-master salt-minion]
   end

@@ -20,8 +20,8 @@ download-salt-minion:
                     {% else %}
     - skip_verify: True
                     {% endif %}
-    - user: root
-    - group: wheel
+    - user: {{ salt_settings.rootuser }}
+    - group: {{ salt_settings.rootgroup }}
     - mode: '0644'
     - unless:
       - test -n "{{ salt_settings.version }}" && '/opt/salt/bin/salt-minion --version=.*{{ salt_settings.version }}.*'
@@ -29,10 +29,13 @@ download-salt-minion:
       - macpackage: salt-minion
     - retry: {{ salt_settings.retry_options | json }}
             {%- elif "workaround https://github.com/saltstack/salt/issues/49348" %}
-  cmd.run:
-    - name: /usr/local/bin/brew install {{ salt_settings.salt_minion }}
-    - onlyif: test -x /usr/local/bin/brew
-    - runas: {{ salt_settings.rootuser }}
+  {% if salt_settings.install_packages %}
+  pkg.installed:
+    - name: {{ salt_settings.salt_minion }}
+    {%- if salt_settings.version is defined %}
+    - version: {{ salt_settings.version }}
+    {%- endif %}
+  {% endif %}
             {%- endif %}
 
 salt-minion-macos:
@@ -130,7 +133,7 @@ salt-minion:
             {%- if grains.os == 'MacOS' and salt_settings.salt_minion_pkg_source %}
       - macpackage: salt-minion
             {%- elif grains.os == 'MacOS' %}
-      - cmd: download-salt-minion
+      - pkg: download-salt-minion
             {%- else %}
       - pkg: salt-minion
             {%- endif %}
@@ -155,7 +158,7 @@ restart-salt-minion:
             {%- if grains.os == 'MacOS' and salt_settings.salt_minion_pkg_source %}
       - macpackage: salt-minion
             {%- elif grains.os == 'MacOS' %}
-      - cmd: download-salt-minion
+      - pkg: download-salt-minion
             {%- else %}
       - pkg: salt-minion
             {%- endif %}
@@ -201,7 +204,7 @@ permissions-minion-config:
         {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
         wheel
         {%- else %}
-        root
+        {{ salt_settings.rootgroup }}
         {%- endif %}
     {%- if grains['kernel'] != 'Windows' %}
     - mode: 640
@@ -221,7 +224,7 @@ salt-minion-pki-dir:
         {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
         wheel
         {%- else %}
-        root
+        {{ salt_settings.rootgroup }}
         {%- endif %}
     {%- if grains['kernel'] != 'Windows' %}
     - mode: 700
@@ -240,7 +243,7 @@ permissions-minion.pem:
         {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
         wheel
         {%- else %}
-        root
+        {{ salt_settings.rootgroup }}
         {%- endif %}
     {%- if grains['kernel'] != 'Windows' %}
     - mode: 400
@@ -261,7 +264,7 @@ permissions-minion.pub:
         {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
         wheel
         {%- else %}
-        root
+        {{ salt_settings.rootgroup }}
         {%- endif %}
     {%- if grains['kernel'] != 'Windows' %}
     - mode: 644

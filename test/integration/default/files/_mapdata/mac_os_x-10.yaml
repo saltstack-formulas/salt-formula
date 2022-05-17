@@ -1,0 +1,115 @@
+# yamllint disable rule:indentation rule:line-length
+# Mac OS X
+---
+values:
+  formulas_settings:
+    checkout_orig_branch: false
+    git_opts:
+      default:
+        basedir: /srv/formulas
+        baseurl: https://github.com/saltstack-formulas
+        options:
+          output_loglevel: quiet
+          rev: master
+        update: false
+    list: {}
+  salt_settings:
+    api_service: salt-api
+    api_service_details:
+      enabled: true
+      state: running
+    clean_config_d_dir: true
+    cloud:
+      template_sources:
+        maps: salt://salt/files/cloud.maps.d
+        profiles: salt://salt/files/cloud.profiles.d
+        providers: salt://salt/files/cloud.providers.d
+    config_path: /private/etc/salt
+    gitfs:
+      dulwich:
+        install_from_source: true
+      gitpython:
+        install_from_source: false
+      pygit2:
+        git:
+          install_from_package: git
+          require_state: false
+        install_from_source: true
+        libgit2:
+          build_parent_dir: /usr/src/
+          download_hash: 683d1164e361e2a0a8d52652840e2340
+          install_from_source: true
+          version: 0.23.0
+        version: 0.23.0
+    install_packages: true
+    master:
+      ext_pillar:
+      - cmd_yaml: cat /etc/salt/yaml
+      - stack:
+        - /path/to/stack1.cfg
+        - /path/to/stack2.cfg
+      - reclass:
+          inventory_base_uri: /etc/reclass
+      - saltclass:
+        - path: /srv/saltclass
+      file_roots:
+        base:
+        - /srv/salt
+      fileserver_backend:
+      - rootfs
+      gitfs_provider: gitpython
+      pillar_roots:
+        base:
+        - /srv/pillar
+    master_config_use_TOFS: false
+    master_remove_config: false
+    master_service: com.saltstack.salt.master
+    master_service_details:
+      enabled: true
+      state: running
+    minion:
+      file_roots:
+        base:
+        - /srv/salt
+      fileserver_backend:
+      - rootfs
+      master: localhost
+      master_type: str
+      pillar_roots:
+        base:
+        - /srv/pillar
+    minion_config_use_TOFS: false
+    minion_remove_config: false
+    minion_service: com.saltstack.salt.minion
+    minion_service_details:
+      enabled: true
+      state: running
+    parallel: true
+    pin_version: false
+    pkgrepo: ''
+    py_ver: py3
+    python_dulwich: python-dulwich
+    python_git: python-git
+    release: '3004'
+    restart_via_at: false
+    retry_options:
+      attempts: 5
+      interval: 10
+      splay: 10
+      until: true
+    rootgroup: staff
+    rootuser: runner
+    salt_api: salt-api
+    salt_cloud: salt-cloud
+    salt_master: saltstack
+    salt_master_macos_plist_hash: 8435331b2d48ca8f0759f216e5b15ec9171a4216b1441328c732c6906728b7c9
+    salt_minion: salt
+    salt_minion_macos_plist_hash: 26b33da12e0d8960ee96b488c8352002c22a377c19bf3df3f986a1e49eca8b20
+    salt_minion_pkg_hash: ''
+    salt_minion_pkg_source: ''
+    salt_ssh: salt-ssh
+    salt_syndic: salt-syndic
+    ssh_roster: {}
+    syndic_service: salt-syndic
+    use_pip: false
+    version: ''

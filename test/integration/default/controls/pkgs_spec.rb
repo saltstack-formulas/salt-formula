@@ -8,6 +8,8 @@ pkgs =
     %w[py38-salt]
   when 'windows'
     ['Salt Minion']
+  when 'mac_os_x'
+    %w[salt saltstack]
   else
     %w[salt-master salt-minion]
   end
