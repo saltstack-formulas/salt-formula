@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-source ENV['PROXY_RUBYGEMSORG'] || 'https://rubygems.org'
+source ENV.fetch('PROXY_RUBYGEMSORG', 'https://rubygems.org')
 
 # Install the `inspec` gem using `git` because versions after `4.22.22`
 # suppress diff output; this version fixes this for our uses.
