@@ -88,14 +88,14 @@ values:
     parallel: true
     pin_version: false
     pkgrepo: deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64]
-      https://repo.saltproject.io/py3/debian/9/amd64/3002 stretch main
-    pkgrepo_keyring: https://repo.saltproject.io/py3/debian/9/amd64/3002/salt-archive-keyring.gpg
+      https://repo.saltproject.io/py3/debian/9/amd64/3003 stretch main
+    pkgrepo_keyring: https://repo.saltproject.io/py3/debian/9/amd64/3003/salt-archive-keyring.gpg
     pkgrepo_keyring_hash: sha256=ea38e0cdbd8dc53e1af154a8d711a2a321a69f81188062dc5cde9d54df2b8c47
     py_ver: py3
     pyinotify: python-pyinotify
     python_dulwich: python-dulwich
     python_git: python-git
-    release: '3002'
+    release: '3003'
     restart_via_at: false
     retry_options:
       attempts: 5

@@ -174,12 +174,6 @@ platforms:
     verifier:
       inputs:
         saltmajorversion: 3004
-  - name: fedora-34-master-py3
-    driver:
-      image: saltimages/salt-master-py3:fedora-34
-    verifier:
-      inputs:
-        saltmajorversion: 3004
   - name: opensuse-leap-153-master-py3
     driver:
       image: saltimages/salt-master-py3:opensuse-leap-15.3
@@ -314,12 +308,6 @@ platforms:
   - name: fedora-35-3004-1-py3
     driver:
       image: saltimages/salt-3004.1-py3:fedora-35
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: fedora-34-3004-1-py3
-    driver:
-      image: saltimages/salt-3004.1-py3:fedora-34
     verifier:
       inputs:
         saltmajorversion: 3004
@@ -460,60 +448,6 @@ platforms:
     verifier:
       inputs:
         saltmajorversion: 3003
-
-  ## SALT `3002.8`
-  - name: debian-10-3002-8-py3
-    driver:
-      image: saltimages/salt-3002.8-py3:debian-10
-      run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3002
-  - name: debian-9-3002-8-py3
-    driver:
-      image: saltimages/salt-3002.8-py3:debian-9
-      run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3002
-  - name: ubuntu-2004-3002-8-py3
-    driver:
-      image: saltimages/salt-3002.8-py3:ubuntu-20.04
-      run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3002
-  - name: ubuntu-1804-3002-8-py3
-    driver:
-      image: saltimages/salt-3002.8-py3:ubuntu-18.04
-      run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3002
-  - name: centos-7-3002-8-py3
-    driver:
-      image: saltimages/salt-3002.8-py3:centos-7
-    verifier:
-      inputs:
-        saltmajorversion: 3002
-  - name: amazonlinux-2-3002-8-py3
-    driver:
-      image: saltimages/salt-3002.8-py3:amazonlinux-2
-    verifier:
-      inputs:
-        saltmajorversion: 3002
-  - name: oraclelinux-8-3002-8-py3
-    driver:
-      image: saltimages/salt-3002.8-py3:oraclelinux-8
-    verifier:
-      inputs:
-        saltmajorversion: 3002
-  - name: oraclelinux-7-3002-8-py3
-    driver:
-      image: saltimages/salt-3002.8-py3:oraclelinux-7
-    verifier:
-      inputs:
-        saltmajorversion: 3002
 
 verifier:
   # https://www.inspec.io/

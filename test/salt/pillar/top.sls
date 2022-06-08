@@ -8,6 +8,4 @@ base:
     - v3004-py3
   'G@saltversioninfo:0:3003 and G@pythonversion:0:3':
     - v3003-py3
-  'G@saltversioninfo:0:3002 and G@pythonversion:0:3':
-    - v3002-py3
 ...

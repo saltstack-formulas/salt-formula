@@ -19,7 +19,6 @@ jobs:
           - default-freebsd-130-3004-0-py3
           - default-freebsd-123-3004-0-py3
           - default-openbsd-70-3003-3-py3
-          - default-openbsd-69-3002-6-py3
           - default-windows-10-latest-py3
           - default-windows-81-latest-py3
     steps:

@@ -106,7 +106,6 @@ jobs:
     # - env: INSTANCE=default-centos-7-master-py3
     # - env: INSTANCE=default-fedora-36-master-py3
     # - env: INSTANCE=default-fedora-35-master-py3
-    # - env: INSTANCE=default-fedora-34-master-py3
     # - env: INSTANCE=default-opensuse-leap-153-master-py3
     # - env: INSTANCE=default-opensuse-tmbl-latest-master-py3
     # - env: INSTANCE=default-amazonlinux-2-master-py3
@@ -127,7 +126,6 @@ jobs:
     # - env: INSTANCE=default-centos-7-3004-1-py3
     - env: INSTANCE=default-fedora-36-3004-1-py3
     - env: INSTANCE=default-fedora-35-3004-1-py3
-    - env: INSTANCE=default-fedora-34-3004-1-py3
     - env: INSTANCE=default-amazonlinux-2-3004-1-py3
     - env: INSTANCE=default-oraclelinux-8-3004-1-py3
     # - env: INSTANCE=default-oraclelinux-7-3004-1-py3
@@ -139,7 +137,7 @@ jobs:
     - env: INSTANCE=default-opensuse-leap-153-3004-0-py3
     - env: INSTANCE=default-opensuse-tmbl-latest-3004-0-py3
     - env: INSTANCE=default-debian-10-3003-4-py3
-    # - env: INSTANCE=default-debian-9-3003-4-py3
+    - env: INSTANCE=default-debian-9-3003-4-py3
     # - env: INSTANCE=default-ubuntu-2004-3003-4-py3
     - env: INSTANCE=default-ubuntu-1804-3003-4-py3
     # - env: INSTANCE=default-centos-stream8-3003-4-py3
@@ -148,14 +146,6 @@ jobs:
     # - env: INSTANCE=default-oraclelinux-8-3003-4-py3
     - env: INSTANCE=default-oraclelinux-7-3003-4-py3
     # - env: INSTANCE=default-almalinux-8-3003-4-py3
-    # - env: INSTANCE=default-debian-10-3002-8-py3
-    - env: INSTANCE=default-debian-9-3002-8-py3
-    # - env: INSTANCE=default-ubuntu-2004-3002-8-py3
-    # - env: INSTANCE=default-ubuntu-1804-3002-8-py3
-    # - env: INSTANCE=default-centos-7-3002-8-py3
-    # - env: INSTANCE=default-amazonlinux-2-3002-8-py3
-    # - env: INSTANCE=default-oraclelinux-8-3002-8-py3
-    # - env: INSTANCE=default-oraclelinux-7-3002-8-py3
 
     ## Define the release stage that runs `semantic-release`
     - stage: 'release'
