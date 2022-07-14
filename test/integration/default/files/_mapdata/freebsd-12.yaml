@@ -88,9 +88,9 @@ values:
     pin_version: false
     pkgrepo: ''
     py_ver: py3
-    pygit2: py38-pygit2
-    python_dulwich: py38-dulwich
-    python_git: py38-gitpython
+    pygit2: py39-pygit2
+    python_dulwich: py39-dulwich
+    python_git: py39-gitpython
     release: '3004'
     restart_via_at: false
     retry_options:
@@ -100,14 +100,14 @@ values:
       until: true
     rootgroup: wheel
     rootuser: root
-    salt_api: py38-salt
-    salt_cloud: py38-salt
-    salt_master: py38-salt
+    salt_api: py39-salt
+    salt_cloud: py39-salt
+    salt_master: py39-salt
     salt_master_macos_plist_hash: ''
-    salt_minion: py38-salt
+    salt_minion: py39-salt
     salt_minion_macos_plist_hash: ''
-    salt_ssh: py38-salt
-    salt_syndic: py38-salt
+    salt_ssh: py39-salt
+    salt_syndic: py39-salt
     ssh_roster: {}
     syndic_service: salt_syndic
     use_pip: false
