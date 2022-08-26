@@ -66,15 +66,15 @@ MacOS:
   salt_minion_macos_plist_hash: 26b33da12e0d8960ee96b488c8352002c22a377c19bf3df3f986a1e49eca8b20
 
 FreeBSD:
-  salt_master: py38-salt
-  salt_minion: py38-salt
-  salt_syndic: py38-salt
-  salt_cloud: py38-salt
-  salt_api: py38-salt
-  salt_ssh: py38-salt
-  python_git: py38-gitpython
-  pygit2: py38-pygit2
-  python_dulwich: py38-dulwich
+  salt_master: py39-salt
+  salt_minion: py39-salt
+  salt_syndic: py39-salt
+  salt_cloud: py39-salt
+  salt_api: py39-salt
+  salt_ssh: py39-salt
+  python_git: py39-gitpython
+  pygit2: py39-pygit2
+  python_dulwich: py39-dulwich
 
 # If `osfingermap.yaml` is introduced in the future, perhaps better to move to there,
 # since this is probably specific to `OpenBSD-6`
