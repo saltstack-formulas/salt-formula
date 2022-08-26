@@ -1,5 +1,17 @@
 # Changelog
 
+# [1.12.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.11.0...v1.12.0) (2022-08-26)
+
+
+### Continuous Integration
+
+* update `pre-commit` configuration inc. for pre-commit.ci [skip ci] ([c8f9dd4](https://github.com/saltstack-formulas/salt-formula/commit/c8f9dd44e610b250dc85a1e1f9c5475866902b5c))
+
+
+### Features
+
+* **freebsd:** update package names for Python 3.9 ([2881fdd](https://github.com/saltstack-formulas/salt-formula/commit/2881fdd81136b1d57ae493dcb58b2b79947f6d0a))
+
 # [1.11.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.10.3...v1.11.0) (2022-05-17)
 
 
