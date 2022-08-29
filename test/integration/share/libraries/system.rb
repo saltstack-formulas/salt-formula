@@ -97,6 +97,8 @@ class SystemResource < Inspec.resource(1)
   # rubocop:disable Metrics/MethodLength,Metrics/CyclomaticComplexity
   def build_platform_codename
     case build_platform_finger
+    when 'ubuntu-22.04'
+      'jammy'
     when 'ubuntu-20.04'
       'focal'
     when 'ubuntu-18.04'
