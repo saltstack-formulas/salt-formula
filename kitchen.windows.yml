@@ -15,8 +15,8 @@ provisioner:
   # yamllint disable rule:line-length
   init_environment: |
     salt-call --local state.single file.managed `
-      C:\Users\kitchen\AppData\Local\Temp\kitchen\srv\salt\win\repo-ng\salt-minion-py3.sls `
-      source=https://github.com/saltstack/salt-winrepo-ng/raw/master/salt-minion-py3.sls `
+      C:\Users\kitchen\AppData\Local\Temp\kitchen\srv\salt\win\repo-ng\salt-minion.sls `
+      source=https://github.com/saltstack/salt-winrepo-ng/raw/master/salt-minion.sls `
       skip_verify=True makedirs=True
   # yamllint enable rule:line-length
 
