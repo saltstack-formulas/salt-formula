@@ -4,6 +4,7 @@
 
 {%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
 
+{%- set repoarch = 'amd64' if salt['grains.get']('osarch', '') == 'x86_64' else 'arm64' %}
 {%- set osrelease = salt['grains.get']('osrelease', '') %}
 {%- set salt_release = salt['pillar.get']('salt:release', 'latest') %}
 {%- if salt_release.split('.')|length >= 3 %}
@@ -13,7 +14,7 @@
 {%- set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
 {%- set oscodename = salt['grains.get']('oscodename') %}
 {%- set opensuse_repo_suffix = 'Leap_' ~ osrelease if salt['grains.get']('osfinger', '') == 'Leap-15' else 'Tumbleweed' %}
-{%- set salt_repo = salt['pillar.get']('salt:repo', 'https://repo.saltproject.io') %}
+{%- set salt_repo = salt['pillar.get']('salt:repo', 'https://repo.saltproject.io/salt') %}
 
 #from template-formula
 {%- if grains.os_family == 'MacOS' %}
@@ -25,7 +26,7 @@
 
 
 Debian:
-  pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64] {{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
+  pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch={{ repoarch }}] {{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/{{ repoarch }}/{{ salt_release }} {{ oscodename }} main'
   pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }}/salt-archive-keyring.gpg'
   pkgrepo_keyring_hash: sha256=ea38e0cdbd8dc53e1af154a8d711a2a321a69f81188062dc5cde9d54df2b8c47
   libgit2: libgit2-22
@@ -43,8 +44,8 @@ Debian:
 RedHat:
   pkgrepo_name: saltstack
   pkgrepo_humanname: SaltStack repo for RHEL/CentOS $releasever
-  pkgrepo: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/redhat/$releasever/$basearch/{{ salt_release }}'
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/redhat/$releasever/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/redhat/$releasever/$basearch/{{ salt_release }}'
+  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/redhat/$releasever/$basearch/{{ salt_release }}/SALT-PROJECT-GPG-PUBKEY-{{ "today" | strftime("%Y") }}.pub'
   pygit2: python-pygit2
   python_git: GitPython
   gitfs:

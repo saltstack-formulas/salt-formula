@@ -4,7 +4,7 @@
 salt:
   version: ''
   pin_version: false
-  py_ver: ''   ## py2 is default
+  py_ver: 'py3'   ## py3 is default
   rootuser: root
   rootgroup: root
   install_packages: true
