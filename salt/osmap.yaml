@@ -4,6 +4,7 @@
 
 {%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
 
+{%- set repoarch = 'amd64' if salt['grains.get']('osarch', '') == 'x86_64' else 'arm64' %}
 {%- set osrelease = salt['grains.get']('osrelease', '') %}
 {%- set salt_release = salt['pillar.get']('salt:release', 'latest') %}
 {%- if salt_release.split('.')|length >= 3 %}
@@ -22,13 +23,13 @@ Amazon:
   pkgrepo_name: saltstack-amzn-repo
   pkgrepo_humanname: SaltStack repo for Amazon Linux 2
   pkgrepo: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/amazon/2/$basearch/{{ salt_release }}'
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/amazon/2/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/amazon/2/$basearch/{{ salt_release }}/SALT-PROJECT-GPG-PUBKEY-{{ "today" | strftime("%Y") }}.pub'
 
 Ubuntu:
-  pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64] {{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
-  pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/salt-archive-keyring.gpg'
+  pkgrepo: 'deb [signed-by=/usr/share/keyrings/SALT-PROJECT-GPG-PUBKEY-{{ "today" | strftime("%Y") }}.gpg arch={{ repoarch }}] {{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/{{ repoarch }}/{{ salt_release }} {{ oscodename }} main'
+  pkgrepo_keyring: '{{ salt_repo }}/{% if oscodename == "jammy" %}salt/{% endif %}{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/SALT-PROJECT-GPG-PUBKEY-{{ "today" | strftime("%Y") }}.gpg'
   pkgrepo_keyring_hash: sha256=ea38e0cdbd8dc53e1af154a8d711a2a321a69f81188062dc5cde9d54df2b8c47
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/SALT-PROJECT-GPG-PUBKEY-{{ "today" | strftime("%Y") }}.gpg'
   pygit2: python-pygit2
   gitfs:
     pygit2:
@@ -39,7 +40,7 @@ Ubuntu:
 
 Raspbian:
   pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=armhf] {{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }} {{ oscodename }} main'
-  pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }}/salt-archive-keyring.gpg'
+  pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }}/SALT-PROJECT-GPG-PUBKEY-{{ "today" | strftime("%Y") }}.gpg'
 
 SmartOS:
   salt_master: salt
