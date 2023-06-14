@@ -11,15 +11,15 @@ provisioner:
   salt_call_command: /opt/salt/bin/salt-call
 
 platforms:
+  - name: macos-13-latest-py3
+    verifier:
+      inputs:
+        saltmajorversion: 3006
   - name: macos-12-latest-py3
     verifier:
       inputs:
-        saltmajorversion: 3004
+        saltmajorversion: 3006
   - name: macos-11-latest-py3
     verifier:
       inputs:
-        saltmajorversion: 3004
-  - name: macos-1015-latest-py3
-    verifier:
-      inputs:
-        saltmajorversion: 3004
+        saltmajorversion: 3006
