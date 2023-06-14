@@ -45,7 +45,7 @@ RedHat:
   pkgrepo_name: saltstack
   pkgrepo_humanname: SaltStack repo for RHEL/CentOS $releasever
   pkgrepo: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/redhat/$releasever/$basearch/{{ salt_release }}'
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/redhat/$releasever/$basearch/{{ salt_release }}/SALT-PROJECT-GPG-PUBKEY-{{ "today" | strftime("%Y") }}.pub'
+  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/redhat/$releasever/$basearch/{{ salt_release }}/SALT-PROJECT-GPG-PUBKEY-2023.pub'
   pygit2: python-pygit2
   python_git: GitPython
   gitfs:

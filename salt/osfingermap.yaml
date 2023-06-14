@@ -15,4 +15,4 @@
 Oracle Linux Server-7:
   pkgrepo_humanname: SaltStack repo for RHEL/CentOS {{ osmajorrelease }}
   pkgrepo: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/redhat/{{ osmajorrelease }}/$basearch/{{ salt_release }}'
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/redhat/{{ osmajorrelease }}/$basearch/{{ salt_release }}/SALT-PROJECT-GPG-PUBKEY-{{ "today" | strftime("%Y") }}.pub'
+  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/redhat/{{ osmajorrelease }}/$basearch/{{ salt_release }}/SALT-PROJECT-GPG-PUBKEY-2023.pub'
