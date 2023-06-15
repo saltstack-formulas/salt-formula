@@ -7,7 +7,7 @@ driver:
 provisioner:
   sudo: true
   salt_install: bootstrap
-  salt_bootstrap_options: -P stable 3006.1
+  salt_bootstrap_options: -P onedir 3006.1
   salt_call_command: /opt/salt/bin/salt-call
 
 platforms:
