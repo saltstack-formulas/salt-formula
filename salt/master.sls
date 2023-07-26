@@ -13,7 +13,7 @@ include:
 salt-master-macos:
   file.managed:
     - name: /Library/LaunchDaemons/com.saltstack.salt.master.plist
-    - source: https://raw.githubusercontent.com/saltstack/salt/master/pkg/osx/scripts/com.saltstack.salt.master.plist
+    - source: {{ salt_settings.salt_master_macos_plist_source }}
     - source_hash: {{ salt_settings.salt_master_macos_plist_hash }}
     - retry: {{ salt_settings.retry_options | json }}
     - require_in:
