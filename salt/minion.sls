@@ -20,8 +20,10 @@ download-salt-minion:
                     {% else %}
     - skip_verify: True
                     {% endif %}
+    {%- if grains['kernel'] != 'Windows' %}
     - user: {{ salt_settings.rootuser }}
     - group: {{ salt_settings.rootgroup }}
+    {% endif %}
     - mode: '0644'
     - unless:
       - test -n "{{ salt_settings.version }}" && '/opt/salt/bin/salt-minion --version=.*{{ salt_settings.version }}.*'
@@ -199,6 +201,7 @@ remove-macpackage-salt:
 permissions-minion-config:
   file.managed:
     - name: {{ salt_settings.config_path | path_join('minion') }}
+    {%- if grains['kernel'] != 'Windows' %}
     - user: {{ salt_settings.rootuser }}
     - group:
         {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
@@ -206,6 +209,7 @@ permissions-minion-config:
         {%- else %}
         {{ salt_settings.rootgroup }}
         {%- endif %}
+    {% endif %}
     {%- if grains['kernel'] != 'Windows' %}
     - mode: 640
     {% endif %}
@@ -218,7 +222,8 @@ salt-minion-pki-dir:
     - name: {{ salt_settings.minion.pki_dir }}
 {% else %}
     - name: {{ salt_settings.config_path | path_join('pki', 'minion') }}
-{% endif %}
+{% endif %}    
+    {%- if grains['kernel'] != 'Windows' %}
     - user: {{ salt_settings.rootuser }}
     - group:
         {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
@@ -226,6 +231,7 @@ salt-minion-pki-dir:
         {%- else %}
         {{ salt_settings.rootgroup }}
         {%- endif %}
+    {% endif %}
     {%- if grains['kernel'] != 'Windows' %}
     - mode: 700
     {% endif %}
@@ -237,7 +243,8 @@ permissions-minion.pem:
     - name: {{ salt_settings.minion.pki_dir | path_join('minion.pem') }}
 {% else %}
     - name: {{ salt_settings.config_path | path_join('pki', 'minion', 'minion.pem') }}
-{% endif %}
+{% endif %}    
+    {%- if grains['kernel'] != 'Windows' %}
     - user: {{ salt_settings.rootuser }}
     - group:
         {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
@@ -245,6 +252,7 @@ permissions-minion.pem:
         {%- else %}
         {{ salt_settings.rootgroup }}
         {%- endif %}
+    {% endif %}
     {%- if grains['kernel'] != 'Windows' %}
     - mode: 400
     {% endif %}
