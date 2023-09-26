@@ -90,7 +90,7 @@ values:
     pkgrepo: https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_Tumbleweed/
     pkgrepo_humanname: Salt releases for SLE-based SUSE products (openSUSE_Tumbleweed)
     py_ver: py3
-    pygit2: python-pygit2
+    pygit2: python3-pygit2
     pyinotify: python-pyinotify
     python_dulwich: python-dulwich
     python_git: python-git
