@@ -244,6 +244,22 @@ platforms:
       inputs:
         saltmajorversion: 3004
 
+  ## SALT `3006.4`
+  - name: debian-11-3006-4-py3
+    driver:
+      image: saltimages/salt-3006.4-py3:debian-11
+      run_command: /lib/systemd/systemd
+    verifier:
+      inputs:
+        saltmajorversion: 3006
+  - name: debian-10-3006-4-py3
+    driver:
+      image: saltimages/salt-3006.4-py3:debian-10
+      run_command: /lib/systemd/systemd
+    verifier:
+      inputs:
+        saltmajorversion: 3006
+
   ## SALT `3004.1`
   - name: debian-11-3004-1-py3
     driver:
