@@ -107,7 +107,7 @@ salt-minion:
       - file: remove-old-minion-conf-file
     - order: last
     {% endif %}
-    {%- if not salt_settings.restart_via_at %}
+    {%- if not salt_settings.restart_via_at and not salt_settings.restart_via_systemd %}
   cmd.run:
         {%- if grains['saltversioninfo'] >= [ 2016, 3 ] %}
             {%- if grains['kernel'] == 'Windows' %}
@@ -142,7 +142,7 @@ salt-minion:
       - file: remove-old-minion-conf-file
     {%- else %}
 
-  {% if grains.os_family not in ['MacOS', 'FreeBSD'] %}
+  {%- if grains.os_family not in ['MacOS', 'FreeBSD'] and not salt_settings.restart_via_systemd %}
   {# MacOS and FreeBSD have the 'at' command; but there's no package to install #}
 at:
   pkg.installed:
@@ -151,7 +151,11 @@ at:
 
 restart-salt-minion:
   cmd.run:
+    {%- if salt_settings.restart_via_systemd %}
+    - name: systemd-run --on-active=1m systemctl restart salt-minion
+    {%- else %}
     - name: echo salt-call --local service.restart {{ salt_settings.minion_service }} | at now + 1 minute
+    {%- endif %}
     - order: last
     - onchanges:
         {%- if salt_settings.install_packages %}

@@ -173,6 +173,8 @@ salt:
 
   # salt minion config:
   minion_config_use_TOFS: true
+  # schedule delayed minion restart on configuration changes
+  restart_via_systemd: false
   minion:
 
     # standalone setup
