@@ -95,7 +95,7 @@ values:
     python_dulwich: python-dulwich
     python_git: python-git
     restart_via_at: false
-    restart_via_systemd: false
+    restart_via_systemd: true
     retry_options:
       attempts: 5
       interval: 10
