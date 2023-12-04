@@ -14,8 +14,8 @@
   stage_test: &stage_test 'test'
   # `image`
   image_commitlint: &image_commitlint 'myii/ssf-commitlint:11'
-  image_dindruby: &image_dindruby 'dafyddj/ci-dind-python-ruby:2.0.0'
-  image_precommit: &image_precommit 'dafyddj/ci-pre-commit:2.0.2'
+  image_dindruby: &image_dindruby 'dafyddj/ci-dind-python-ruby:2.0.2'
+  image_precommit: &image_precommit 'dafyddj/ci-pre-commit:2.1.0'
   image_rubocop: &image_rubocop 'pipelinecomponents/rubocop:latest'
   image_semantic-release: &image_semanticrelease 'myii/ssf-semantic-release:15.14'
   # `services`
