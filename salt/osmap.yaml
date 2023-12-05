@@ -4,10 +4,17 @@
 
 {%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
 
+{%- set repoarch = salt['grains.get']('osarch') %}
 {%- set osrelease = salt['grains.get']('osrelease', '') %}
 {%- set salt_release = salt['pillar.get']('salt:release', 'latest') %}
 {%- if salt_release.split('.')|length >= 3 %}
 {%-   set salt_release = 'archive/' ~ salt_release %}
+{%- endif %}
+{%- set salt_release_major = salt_release.split('.') | map('int') | list | first %}
+{%- if salt_release != "latest" %}
+{%-   set onedir = salt['pillar.get']('salt:onedir', True) if (salt_release_major >= 3005) and (salt_release != "archive/") else False %}
+{%- else %}
+{%-   set onedir = True %}
 {%- endif %}
 {%- set os_lower =  salt['grains.get']('os')|lower %}
 {%- set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
@@ -21,14 +28,14 @@ Fedora:
 Amazon:
   pkgrepo_name: saltstack-amzn-repo
   pkgrepo_humanname: SaltStack repo for Amazon Linux 2
-  pkgrepo: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/amazon/2/$basearch/{{ salt_release }}'
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/amazon/2/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: '{{ salt_repo }}/{% if onedir == True %}salt/{% endif %}{{ py_ver_repr or 'py3' }}/amazon/2/$basearch/{{ salt_release }}'
+  key_url: '{{ salt_repo }}/{% if onedir == True %}salt/{% endif %}{{ py_ver_repr or 'py3' }}/amazon/2/$basearch/{{ salt_release }}/{% if (salt_release == "latest") or (salt_release_major >= 3006) %}SALT-PROJECT-GPG-PUBKEY-2023.pub{% else %}SALTSTACK-GPG-KEY.pub{% endif %}'
 
 Ubuntu:
-  pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64] {{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
-  pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/salt-archive-keyring.gpg'
-  pkgrepo_keyring_hash: sha256=ea38e0cdbd8dc53e1af154a8d711a2a321a69f81188062dc5cde9d54df2b8c47
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch={{ repoarch }}] {{ salt_repo }}/{% if (oscodename == "jammy") or (onedir == True) %}salt/{% endif %}{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/{{ repoarch }}/{{ salt_release }} {{ oscodename }} main'
+  pkgrepo_keyring: '{{ salt_repo }}/{% if (oscodename == "jammy") or (onedir == True) %}salt/{% endif %}{{ py_ver_repr or 'py3' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/{% if (salt_release == "latest") or (salt_release_major >= 3006) %}SALT-PROJECT-GPG-PUBKEY-2023.gpg{% else %}salt-archive-keyring.gpg{% endif %}'
+  pkgrepo_keyring_hash: sha256={% if (salt_release == "latest") or (salt_release_major >= 3006) %}c6f6cbcd96fdb130b1dde8dcfc05d46a3a3f322ff0514f98e2e6473896243472{% else %}ea38e0cdbd8dc53e1af154a8d711a2a321a69f81188062dc5cde9d54df2b8c47{% endif %}
+  key_url: '{{ salt_repo }}/{% if (oscodename == "jammy") or (onedir == True) %}salt/{% endif %}{{ py_ver_repr or 'py3' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/{% if (oscodename == "jammy") and (salt_release_major == 3005) %}salt-archive-keyring.gpg{% elif (salt_release == "latest") or (salt_release_major >= 3006) %}SALT-PROJECT-GPG-PUBKEY-2023.pub{% else %}SALTSTACK-GPG-KEY.pub{% endif %}'
   pygit2: python-pygit2
   gitfs:
     pygit2:
@@ -38,8 +45,8 @@ Ubuntu:
         install_from_package: Null
 
 Raspbian:
-  pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=armhf] {{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }} {{ oscodename }} main'
-  pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }}/salt-archive-keyring.gpg'
+  pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=armhf] {{ salt_repo }}/{% if onedir == True %}salt/{% endif %}{{ py_ver_repr or 'py3' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }} {{ oscodename }} main'
+  pkgrepo_keyring: '{{ salt_repo }}/{% if onedir == True %}salt/{% endif %}{{ py_ver_repr or 'py3' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }}/{% if (salt_release == "latest") or (salt_release_major >= 3006) %}SALT-PROJECT-GPG-PUBKEY-2023.gpg{% else %}salt-archive-keyring.gpg{% endif %}'
 
 SmartOS:
   salt_master: salt
@@ -62,8 +69,10 @@ SmartOS:
 MacOS:
   minion_service: com.saltstack.salt.minion
   master_service: com.saltstack.salt.master
-  salt_master_macos_plist_hash: 8435331b2d48ca8f0759f216e5b15ec9171a4216b1441328c732c6906728b7c9
-  salt_minion_macos_plist_hash: 26b33da12e0d8960ee96b488c8352002c22a377c19bf3df3f986a1e49eca8b20
+  salt_master_macos_plist_source: https://github.com/saltstack/salt/raw/master/pkg/macos/scripts/com.saltstack.salt.master.plist
+  salt_minion_macos_plist_source: https://github.com/saltstack/salt/raw/master/pkg/macos/scripts/com.saltstack.salt.minion.plist
+  salt_master_macos_plist_hash: 97666226c14ec2fd755edb5d909688540a36408dfe9fb34a1c15676020376ace
+  salt_minion_macos_plist_hash: 17d9556b5742a785eaddaec117132be99af138cab7157dbacbda2058538b6e69
 
 FreeBSD:
   salt_master: py39-salt

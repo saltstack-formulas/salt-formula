@@ -42,7 +42,7 @@ salt-minion-macos:
   file.managed:
     - onlyif: {{ grains.os == 'MacOS' }}
     - name: /Library/LaunchDaemons/com.saltstack.salt.minion.plist
-    - source: https://raw.githubusercontent.com/saltstack/salt/master/pkg/osx/scripts/com.saltstack.salt.master.plist
+    - source: {{ salt_settings.salt_minion_macos_plist_source }}
     - source_hash: {{ salt_settings.salt_minion_macos_plist_hash }}
     - retry: {{ salt_settings.retry_options | json }}
     - require_in:

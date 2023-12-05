@@ -4,10 +4,17 @@
 
 {%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
 
+{%- set repoarch = salt['grains.get']('osarch') %}
 {%- set osrelease = salt['grains.get']('osrelease', '') %}
 {%- set salt_release = salt['pillar.get']('salt:release', 'latest') %}
 {%- if salt_release.split('.')|length >= 3 %}
 {%-   set salt_release = 'archive/' ~ salt_release %}
+{%- endif %}
+{%- set salt_release_major = salt_release.split('.') | map('int') | list | first %}
+{%- if salt_release != "latest" %}
+{%-   set onedir = salt['pillar.get']('salt:onedir', True) if (salt_release_major >= 3005) and (salt_release != "archive/") else False %}
+{%- else %}
+{%-   set onedir = True %}
 {%- endif %}
 {%- set osfamily_lower =  salt['grains.get']('os_family')|lower %}
 {%- set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
@@ -25,9 +32,9 @@
 
 
 Debian:
-  pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64] {{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
-  pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }}/salt-archive-keyring.gpg'
-  pkgrepo_keyring_hash: sha256=ea38e0cdbd8dc53e1af154a8d711a2a321a69f81188062dc5cde9d54df2b8c47
+  pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch={{ repoarch }}] {{ salt_repo }}/{% if onedir == True %}salt/{% endif %}{{ py_ver_repr or 'py3' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/{{ repoarch }}/{{ salt_release }} {{ oscodename }} main'
+  pkgrepo_keyring: '{{ salt_repo }}/{% if onedir == True %}salt/{% endif %}{{ py_ver_repr or 'py3' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }}/{% if (salt_release == "latest") or (salt_release_major >= 3006) %}SALT-PROJECT-GPG-PUBKEY-2023.gpg{% else %}salt-archive-keyring.gpg{% endif %}'
+  pkgrepo_keyring_hash: sha256={% if salt_release_major >= 3006 %}c6f6cbcd96fdb130b1dde8dcfc05d46a3a3f322ff0514f98e2e6473896243472{% else %}ea38e0cdbd8dc53e1af154a8d711a2a321a69f81188062dc5cde9d54df2b8c47{% endif %}
   libgit2: libgit2-22
   pyinotify: python-pyinotify
   gitfs:
@@ -43,8 +50,8 @@ Debian:
 RedHat:
   pkgrepo_name: saltstack
   pkgrepo_humanname: SaltStack repo for RHEL/CentOS $releasever
-  pkgrepo: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/redhat/$releasever/$basearch/{{ salt_release }}'
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/redhat/$releasever/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: '{{ salt_repo }}/{% if (osmajorrelease == "9") or (onedir == True) %}salt/{% endif %}{{ py_ver_repr or 'py3' }}/redhat/$releasever/$basearch/{{ salt_release }}'
+  key_url: '{{ salt_repo }}/{% if (osmajorrelease == "9") or (onedir == True) %}salt/{% endif %}{{ py_ver_repr or 'py3' }}/redhat/$releasever/$basearch/{{ salt_release }}/{% if (osmajorrelease == "9") and (salt_release_major == 3005) %}SALTSTACK-GPG-KEY2.pub{% elif (salt_release == "latest") or (salt_release_major >= 3006) %}SALT-PROJECT-GPG-PUBKEY-2023.pub{% else %}SALTSTACK-GPG-KEY.pub{% endif %}'
   pygit2: python-pygit2
   python_git: GitPython
   gitfs:

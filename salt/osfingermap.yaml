@@ -9,10 +9,16 @@
 {%- if salt_release.split('.')|length >= 3 %}
 {%-   set salt_release = 'archive/' ~ salt_release %}
 {%- endif %}
+{%- set salt_release_major = salt_release.split('.') | map('int') | list | first %}
+{%- if salt_release != "latest" %}
+{%-   set onedir = salt['pillar.get']('salt:onedir', True) if (salt_release_major >= 3005) and (salt_release != "archive/") else False %}
+{%- else %}
+{%-   set onedir = True %}
+{%- endif %}
 {%- set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
 {%- set salt_repo = salt['pillar.get']('salt:repo', 'https://repo.saltproject.io') %}
 
 Oracle Linux Server-7:
   pkgrepo_humanname: SaltStack repo for RHEL/CentOS {{ osmajorrelease }}
-  pkgrepo: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/redhat/{{ osmajorrelease }}/$basearch/{{ salt_release }}'
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/redhat/{{ osmajorrelease }}/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo: '{{ salt_repo }}/{% if onedir == True %}salt/{% endif %}{{ py_ver_repr or 'py3' }}/redhat/{{ osmajorrelease }}/$basearch/{{ salt_release }}'
+  key_url: '{{ salt_repo }}/{% if onedir == True %}salt/{% endif %}{{ py_ver_repr or 'py3' }}/redhat/{{ osmajorrelease }}/$basearch/{{ salt_release }}/{% if (salt_release == "latest") or (salt_release_major >= 3006) %}SALT-PROJECT-GPG-PUBKEY-2023.pub{% else %}SALTSTACK-GPG-KEY.pub{% endif %}'
