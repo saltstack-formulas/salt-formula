@@ -24,7 +24,7 @@ download-salt-minion:
     - group: {{ salt_settings.rootgroup }}
     - mode: '0644'
     - unless:
-      - test -n "{{ salt_settings.version }}" && '/opt/salt/bin/salt-minion --version=.*{{ salt_settings.version }}.*'
+      - test -n "{{ salt_settings.version }}" && /opt/salt/bin/salt-minion --version | grep -E '{{ salt_settings.version }}$'
     - require_in:
       - macpackage: salt-minion
     - retry: {{ salt_settings.retry_options | json }}
@@ -61,13 +61,13 @@ salt-minion:
            {# macpackage.installed is weird with version_check, detects diff but incomplete install #}
     - force: True    {# workaround #}
     - unless:
-      - test -n "{{ salt_settings.version }}" && '/opt/salt/bin/salt-minion --version=.*{{ salt_settings.version }}.*'
+      - test -n "{{ salt_settings.version }}" && /opt/salt/bin/salt-minion --version | grep -E '{{ salt_settings.version }}$'
            {% if salt_settings.minion_service_details.state != 'ignore' %}
     - require_in:
       - service: salt-minion
            {% endif %}
     - onchanges_in:
-      - cmd: remove-macpackage-salt
+      - file: remove-macpackage-salt
         {%- elif grains.os != 'MacOS' and "workaround https://github.com/saltstack/salt/issues/49348" %}
   pkg.installed:
     - name: {{ salt_settings.salt_minion }}
@@ -201,7 +201,7 @@ permissions-minion-config:
     - name: {{ salt_settings.config_path | path_join('minion') }}
     - user: {{ salt_settings.rootuser }}
     - group:
-        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD', 'Darwin'] %}
         wheel
         {%- else %}
         {{ salt_settings.rootgroup }}
@@ -221,7 +221,7 @@ salt-minion-pki-dir:
 {% endif %}
     - user: {{ salt_settings.rootuser }}
     - group:
-        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD', 'Darwin'] %}
         wheel
         {%- else %}
         {{ salt_settings.rootgroup }}
@@ -240,7 +240,7 @@ permissions-minion.pem:
 {% endif %}
     - user: {{ salt_settings.rootuser }}
     - group:
-        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD', 'Darwin'] %}
         wheel
         {%- else %}
         {{ salt_settings.rootgroup }}
@@ -261,7 +261,7 @@ permissions-minion.pub:
 {% endif %}
     - user: {{ salt_settings.rootuser }}
     - group:
-        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
+        {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD', 'Darwin'] %}
         wheel
         {%- else %}
         {{ salt_settings.rootgroup }}
