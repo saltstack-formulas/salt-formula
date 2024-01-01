@@ -26,7 +26,7 @@ repos:
         stages: [commit-msg]
         additional_dependencies: ['@commitlint/config-conventional@17.1.0']
   - repo: https://github.com/rubocop-hq/rubocop
-    rev: v1.57.0
+    rev: v1.59.0
     hooks:
       - id: rubocop
         name: Check Ruby files with rubocop
@@ -41,7 +41,7 @@ repos:
         files: ^.*\.(sh|bash|ksh)$
         types: []
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.32.0
+    rev: v1.33.0
     hooks:
       - id: yamllint
         name: Check YAML syntax with yamllint
@@ -78,7 +78,7 @@ repos:
       - id: salt-lint
         name: Check Salt files using salt-lint
         files: ^.*\.(sls|jinja|j2|tmpl|tst)$
-  - repo: https://github.com/myint/rstcheck
+  - repo: https://github.com/rstcheck/rstcheck
     rev: v6.2.0
     hooks:
       - id: rstcheck
@@ -86,7 +86,7 @@ repos:
         exclude: 'docs/CHANGELOG.rst'
         additional_dependencies: [sphinx==7.2.6]
   - repo: https://github.com/saltstack-formulas/mirrors-rst-lint
-    rev: v1.3.2
+    rev: v1.4.0
     hooks:
       - id: rst-lint
         name: Check reST files using rst-lint
