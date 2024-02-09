@@ -90,7 +90,7 @@ values:
     py_ver: py3
     python_dulwich: py3-dulwich
     python_git: py3-GitPython
-    release: '3003'
+    release: '3006'
     restart_via_at: false
     retry_options:
       attempts: 5

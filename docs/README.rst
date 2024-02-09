@@ -16,6 +16,12 @@ salt-formula
 
 Yes, Salt can Salt itself!
 
+## Note: As for salt `3006` and new `onedir` distribution method,
+upstream repositories of saltstack have changed naming conventions
+to get latest binaries and keys.
+If you depends on versions of salt from older repositories,
+please stick with version 1.x.x of this formula.
+
 .. contents:: **Table of Contents**
 
 General notes
@@ -134,7 +140,7 @@ Git repositories under ``/srv/formulas`` and makes them available in the relevan
       'saltmain':
         - salt.formulas
         - salt.master
-    
+
 
 Pillar data can be used to customize all paths, URLs, etc. Here's a minimal pillar sample installing two formulas in the base environment:
 
