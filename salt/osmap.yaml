@@ -5,7 +5,7 @@
 {%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
 
 {%- set osrelease = salt['grains.get']('osrelease', '') %}
-{%- set salt_release = salt['pillar.get']('salt:release', 'latest') %}
+{%- set salt_release = salt['pillar.get']('salt:release', 'latest') | string %}
 {%- if salt_release.split('.')|length >= 3 %}
 {%-   set salt_release = 'archive/' ~ salt_release %}
 {%- endif %}
@@ -15,6 +15,25 @@
 {%- set os_family_lower =  salt['grains.get']('os_family')|lower %}
 {%- set salt_repo = salt['pillar.get']('salt:repo', 'https://repo.saltproject.io') %}
 
+# Different salt versions have different repo's, keyrings, pubkeys and hashes.
+# 'latest' cannot be coerced into an integer and it's result will be int(0).
+{%- if salt_release.split('.')[0] | int >= 3005 or salt_release.split('.')[0] | int == 0 %}
+{%-   set default_repo                  = 'https://repo.saltproject.io/salt' %}
+{%-   set default_repo_keyring_filename = 'SALT-PROJECT-GPG-PUBKEY-2023.gpg' %}
+{%-   set default_repo_pubkey_filename  = 'SALT-PROJECT-GPG-PUBKEY-2023.pub' %}
+{%-   set default_repo_keyring_hash     = 'sha256=c6f6cbcd96fdb130b1dde8dcfc05d46a3a3f322ff0514f98e2e6473896243472' %}
+{%- else %}
+{%-   set default_repo                  = 'https://repo.saltproject.io' %}
+{%-   set default_repo_keyring_filename = 'salt-archive-keyring.gpg' %}
+{%-   set default_repo_pubkey_filename  = 'SALTSTACK-GPG-KEY.pub' %}
+{%-   set default_repo_keyring_hash     = 'sha256=ea38e0cdbd8dc53e1af154a8d711a2a321a69f81188062dc5cde9d54df2b8c47' %}
+{%- endif %}
+{%- set salt_repo                  = salt['pillar.get']('salt:repo', default_repo) %}
+{%- set salt_repo_keyring_filename = salt['pillar.get']('salt:repo_keyring_filename', default_repo_keyring_filename) %}
+{%- set salt_repo_pubkey_filename  = salt['pillar.get']('salt:repo_keyring_filename', default_repo_pubkey_filename) %}
+{%- set salt_repo_keyring_hash     = salt['pillar.get']('salt:repo_keyring_hash', default_repo_keyring_hash) %}
+
+
 Fedora:
   pygit2: python2-pygit2
 
@@ -22,13 +41,13 @@ Amazon:
   pkgrepo_name: saltstack-amzn-repo
   pkgrepo_humanname: SaltStack repo for Amazon Linux 2
   pkgrepo: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/amazon/2/$basearch/{{ salt_release }}'
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/amazon/2/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/amazon/2/$basearch/{{ salt_release }}/{{ salt_repo_pubkey_filename }}'
 
 Ubuntu:
   pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64] {{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
   pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/salt-archive-keyring.gpg'
   pkgrepo_keyring_hash: sha256=ea38e0cdbd8dc53e1af154a8d711a2a321a69f81188062dc5cde9d54df2b8c47
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/{{ salt_repo_keyring_filename }}'
   pygit2: python-pygit2
   gitfs:
     pygit2:
@@ -39,7 +58,7 @@ Ubuntu:
 
 Raspbian:
   pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=armhf] {{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }} {{ oscodename }} main'
-  pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }}/salt-archive-keyring.gpg'
+  pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ os_family_lower }}/{{ osmajorrelease }}/armhf/{{ salt_release }}/{{ salt_repo_keyring_filename }}'
 
 SmartOS:
   salt_master: salt
