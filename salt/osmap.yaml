@@ -59,7 +59,7 @@ Ubuntu:
   pkgrepo: 'deb [signed-by=/usr/share/keyrings/{{ salt_repo_keyring_filename}} arch=amd64] {{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
   pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/{{ salt_repo_keyring_filename }}'
   pkgrepo_keyring_hash: '{{ salt_repo_keyring_hash }}'
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/{{ salt_repo_keyring_filename }}'
+  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'apt' }}/{{ os_lower }}/{{ osrelease }}/amd64/{{ salt_release }}/{{ salt_repo_pubkey_filename }}'
   pygit2: python-pygit2
   gitfs:
     pygit2:
