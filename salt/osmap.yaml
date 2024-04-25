@@ -2,7 +2,6 @@
 # vim: ft=yaml
 ---
 
-{%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
 
 {%- set osrelease = salt['grains.get']('osrelease', '') %}
 {%- set salt_release = salt['pillar.get']('salt:release', 'latest') | string %}
@@ -22,16 +21,29 @@
 {%-   set default_repo_keyring_filename = 'SALT-PROJECT-GPG-PUBKEY-2023.gpg' %}
 {%-   set default_repo_pubkey_filename  = 'SALT-PROJECT-GPG-PUBKEY-2023.pub' %}
 {%-   set default_repo_keyring_hash     = 'sha256=c6f6cbcd96fdb130b1dde8dcfc05d46a3a3f322ff0514f98e2e6473896243472' %}
+{%-   set default_pyver_or_apt          = 'py3' %}
+{%-   set default_pyver_or_yum          = 'py3' %}
 {%- else %}
 {%-   set default_repo                  = 'https://repo.saltproject.io' %}
 {%-   set default_repo_keyring_filename = 'salt-archive-keyring.gpg' %}
 {%-   set default_repo_pubkey_filename  = 'SALTSTACK-GPG-KEY.pub' %}
 {%-   set default_repo_keyring_hash     = 'sha256=ea38e0cdbd8dc53e1af154a8d711a2a321a69f81188062dc5cde9d54df2b8c47' %}
+{%-   set default_pyver_or_apt          = 'apt' %}
+{%-   set default_pyver_or_yum          = 'yum' %}
 {%- endif %}
 {%- set salt_repo                  = salt['pillar.get']('salt:repo', default_repo) %}
 {%- set salt_repo_keyring_filename = salt['pillar.get']('salt:repo_keyring_filename', default_repo_keyring_filename) %}
 {%- set salt_repo_pubkey_filename  = salt['pillar.get']('salt:repo_keyring_filename', default_repo_pubkey_filename) %}
 {%- set salt_repo_keyring_hash     = salt['pillar.get']('salt:repo_keyring_hash', default_repo_keyring_hash) %}
+
+{%- if os_family_lower in ["amazon"] %}
+{%-   set py_ver_repr = salt['pillar.get']('salt:py_ver', default_pyver_or_yum) %}
+{%- elif os_family_lower in ["ubuntu", "raspbian"] %}
+{%-   set py_ver_repr = salt['pillar.get']('salt:py_ver', default_pyver_or_apt) %}
+{%- else %}
+{%-   set py_ver_repr = 'py3' %}
+{%- endif %}
+
 
 
 Fedora:
