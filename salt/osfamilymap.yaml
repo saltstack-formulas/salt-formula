@@ -33,7 +33,6 @@
 {%- set salt_repo_keyring_hash     = salt['pillar.get']('salt:repo_keyring_hash', default_repo_keyring_hash) %}
 
 
-
 #from template-formula
 {%- if grains.os_family == 'MacOS' %}
 {%-   set rootuser = salt['cmd.run']("stat -f '%Su' /dev/console") %}
@@ -63,8 +62,8 @@ Debian:
 RedHat:
   pkgrepo_name: saltstack
   pkgrepo_humanname: SaltStack repo for RHEL/CentOS $releasever
-  pkgrepo: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/redhat/$releasever/$basearch/{{ salt_release }}'
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/redhat/$releasever/$basearch/{{ salt_release }}/{{ salt_repo_pubkey_filename }}'
+  pkgrepo: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/redhat/$releasever/$basearch/{{ salt_release }}'
+  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/redhat/$releasever/$basearch/{{ salt_release }}/{{ salt_repo_pubkey_filename }}'
   pygit2: python-pygit2
   python_git: GitPython
   gitfs:
