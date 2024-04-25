@@ -44,9 +44,10 @@
 
 
 Debian:
-  pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64] {{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
+  pkgrepo: 'deb [signed-by=/usr/share/keyrings/{{ salt_repo_keyring_filename }} arch=amd64] {{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
   pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }}/{{ salt_repo_keyring_filename }}' #' <- vim syntax highlight fix
   pkgrepo_keyring_hash: {{ salt_repo_keyring_hash }}
+  pkgrepo_keyring_filename: {{ salt_repo_keyring_filename }}
   libgit2: libgit2-22
   pyinotify: python-pyinotify
   gitfs:
