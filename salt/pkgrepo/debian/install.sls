@@ -2,6 +2,12 @@
 # vim: ft=sls
 {% from "salt/map.jinja" import salt_settings with context %}
 
+salt-pkgrepo-install-dependency-gnupg:
+  pkg.installed:
+    - name: gnupg
+    - require_in:
+      - file: salt-pkgrepo-install-saltstack-debian-keyring
+
 salt-pkgrepo-install-saltstack-debian-keyring:
   file.managed:
     - name: /usr/share/keyrings/{{ salt_settings.pkgrepo_keyring_filename }}
