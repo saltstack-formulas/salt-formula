@@ -14,7 +14,7 @@
 
 # Different salt versions have different repo's, keyrings, pubkeys and hashes.
 # 'latest' cannot be coerced into an integer and it's result will be int(0).
-{%- if salt_release.split('.')[0] | int >= 3005 or salt_release.split('.')[0] | int == 0 %}
+{%- if salt_release.split('.')[0] | int >= 3006 or salt_release.split('.')[0] | int == 0 %}
 {%-   set default_repo                  = 'https://repo.saltproject.io/salt' %}
 {%-   set default_repo_keyring_filename = 'SALT-PROJECT-GPG-PUBKEY-2023.gpg' %}
 {%-   set default_repo_pubkey_filename  = 'SALT-PROJECT-GPG-PUBKEY-2023.pub' %}
