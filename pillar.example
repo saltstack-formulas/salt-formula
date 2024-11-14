@@ -22,7 +22,7 @@ salt:
   install_packages: true
 
   # Optional: set salt version (if install_packages is set to true)
-  version: 2017.7.2-1.el7
+  version: '3006.9'
 
   # Pin version provided under 'version' key by using apt-pinning
   # available only on Debian family OS-es
@@ -37,15 +37,18 @@ salt:
     salt_ssh: 'salt-ssh'
     pyinotify: 'python-pyinotify'  # the package to be installed for pyinotify
 
-  # Set which salt repository to use, default to https://repo.saltproject.io
-  # For older releases use https://archive.repo.saltproject.io
-  repo: 'https://archive.repo.saltproject.io'
+  # Set which salt repository to use
+  #   -> defaults to https://packages.broadcom.com/artifactory
+  repo: 'https://packages.broadcom.com/artifactory'
+  # yamllint disable rule:line-length
+  repo_key_url: 'https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public'
+  # yamllint enable rule:line-length
 
   # Set which release of SaltStack to use, default to 'latest'
   # To get the available releases:
-  # * http://repo.saltproject.io/yum/redhat/7/x86_64/
-  # * http://repo.saltproject.io/apt/debian/8/amd64/
-  release: '2018.3'
+  # * https://packages.broadcom.com/artifactory/saltproject-rpm/
+  # * https://packages.broadcom.com/artifactory/saltproject-deb
+  release: '3006'
 
   # MacOS has no package management.
   # Instead, we use file.managed to download an appropriate .pkg file and
@@ -57,8 +60,8 @@ salt:
   # NOTE: salt_minion_pkg_hash, if set, will be passed into file.managed's
   # source_hash, use URL or hash string
   # yamllint disable rule:line-length
-  salt_minion_pkg_source: 'https://repo.saltproject.io/osx/salt-2017.7.4-py3-x86_64.pkg'
-  salt_minion_pkg_hash: 'https://repo.saltproject.io/osx/salt-2017.7.4-py3-x86_64.pkg.md5'
+  salt_minion_pkg_source: 'https://packages.broadcom.com/artifactory/saltproject-generic/macos/3006.9/salt-3006.9-py3-x86_64.pkg'
+  salt_minion_pkg_hash: 'sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
   # yamllint enable rule:line-length
 
   # tofs:

@@ -10,4 +10,4 @@ salt-pkgrepo-clean-saltstack-debian:
 
 salt-pkgrepo-clean-saltstack-debian-apt-key:
   file.absent:
-    - name: /usr/share/keyrings/salt-archive-keyring.gpg
+    - name: /etc/apt/keyrings/salt-archive-keyring.pgp

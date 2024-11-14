@@ -4,7 +4,7 @@
 
 salt-pkgrepo-install-saltstack-debian-keyring:
   file.managed:
-    - name: /usr/share/keyrings/salt-archive-keyring.gpg
+    - name: /etc/apt/keyrings/salt-archive-keyring.pgp
     - source: {{ salt_settings.pkgrepo_keyring }}
     - source_hash: {{ salt_settings.pkgrepo_keyring_hash }}
     - require_in:
