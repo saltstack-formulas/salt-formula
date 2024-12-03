@@ -5,15 +5,9 @@
 {%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
 
 {%- set osrelease = salt['grains.get']('osrelease', '') %}
-{%- set salt_release = salt['pillar.get']('salt:release', 'latest') %}
-{%- if salt_release.split('.')|length >= 3 %}
-{%-   set salt_release = 'archive/' ~ salt_release %}
-{%- endif %}
-{%- set osfamily_lower =  salt['grains.get']('os_family')|lower %}
-{%- set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
-{%- set oscodename = salt['grains.get']('oscodename') %}
 {%- set opensuse_repo_suffix = 'Leap_' ~ osrelease if salt['grains.get']('osfinger', '') == 'Leap-15' else 'Tumbleweed' %}
-{%- set salt_repo = salt['pillar.get']('salt:repo', 'https://repo.saltproject.io') %}
+{%- set salt_repo = salt['pillar.get']('salt:repo', 'https://packages.broadcom.com/artifactory') %}
+{%- set salt_repo_key_url = salt['pillar.get']('salt:repo_key_url', salt_repo ~ '/api/security/keypair/SaltProjectKey/public') %}
 
 #from template-formula
 {%- if grains.os_family == 'MacOS' %}
@@ -25,9 +19,9 @@
 
 
 Debian:
-  pkgrepo: 'deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64] {{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }} {{ oscodename }} main'
-  pkgrepo_keyring: '{{ salt_repo }}/{{ py_ver_repr or 'py3' }}/{{ osfamily_lower }}/{{ osmajorrelease }}/amd64/{{ salt_release }}/salt-archive-keyring.gpg'
-  pkgrepo_keyring_hash: sha256=ea38e0cdbd8dc53e1af154a8d711a2a321a69f81188062dc5cde9d54df2b8c47
+  pkgrepo: 'deb [signed-by=/etc/apt/keyrings/salt-archive-keyring.pgp arch=amd64] {{ salt_repo }}/saltproject-deb stable main'
+  pkgrepo_keyring: '{{ salt_repo_key_url }}'
+  pkgrepo_keyring_hash: sha256=36decef986477acb8ba2a1fc4041bcf9f22229ef6c939d0317c9e36a9d142b34
   libgit2: libgit2-22
   pyinotify: python-pyinotify
   gitfs:
@@ -41,10 +35,10 @@ Debian:
         install_from_source: false
 
 RedHat:
-  pkgrepo_name: saltstack
-  pkgrepo_humanname: SaltStack repo for RHEL/CentOS $releasever
-  pkgrepo: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/redhat/$releasever/$basearch/{{ salt_release }}'
-  key_url: '{{ salt_repo }}/{{ py_ver_repr or 'yum' }}/redhat/$releasever/$basearch/{{ salt_release }}/SALTSTACK-GPG-KEY.pub'
+  pkgrepo_name: salt-repo-latest
+  pkgrepo_humanname: Salt Repo for Salt LATEST release
+  pkgrepo: '{{ salt_repo }}/saltproject-rpm/'
+  key_url: '{{ salt_repo_key_url }}'
   pygit2: python-pygit2
   python_git: GitPython
   gitfs:

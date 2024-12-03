@@ -8,11 +8,12 @@ salt-pkgrepo-install-saltstack-redhat:
     - name: {{ salt_settings.pkgrepo_name }}
     - humanname: {{ salt_settings.pkgrepo_humanname }}
     - baseurl: {{ salt_settings.pkgrepo }}
+    - priority: 10
     - enabled: 1
+    - enabled_metadata: 1
     - gpgcheck: 1
     - gpgkey: {{ salt_settings.key_url }}
     {%- if grains['os']|lower in ['amazon'] %}
     - failovermethod: priority
-    - priority: 10
     {%- endif %}
 {%- endif %}
