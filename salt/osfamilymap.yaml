@@ -56,7 +56,7 @@ Suse:
   pkgrepo_humanname: 'Salt releases for SLE-based SUSE products (openSUSE_{{ opensuse_repo_suffix }})'
   pkgrepo: 'https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_{{ opensuse_repo_suffix }}/'
   key_url: 'https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_{{ opensuse_repo_suffix }}/repodata/repomd.xml.key'
-  pygit2: python-pygit2
+  pygit2: python3-pygit2
   pyinotify: python-pyinotify
   gitfs:
     pygit2:
