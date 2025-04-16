@@ -62,6 +62,39 @@ Install a minion
 
 Install a master.
 
+This state can't be run on Windows OS, the ``salt.windows-excluded``
+is used as a safeguard dependency.
+
+``salt.master.package``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Install the master package.
+
+This state can't be run on Windows OS, the ``salt.windows-excluded``
+is used as a safeguard dependency.
+
+``salt.master.config``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Configure the master service.
+
+This state can't be run on Windows OS, the ``salt.windows-excluded``
+is used as a safeguard dependency.
+
+``salt.master.service``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Manage the salt master service if
+``salt_settings.master_service_details.state`` is not ``ignore``:
+
+- enable and start the salt master service if
+  ``salt_settings.master_service_details.state`` is ``running``, the default.
+- stop and disable the salt master service if
+  ``salt_settings.master_service_details.state`` is ``dead``.
+
+This state can't be run on Windows OS, the ``salt.windows-excluded``
+is used as a safeguard dependency.
+
 ``salt.syndic``
 ^^^^^^^^^^^^^^^
 
@@ -159,6 +192,14 @@ If you configure the state to download the formulas from repositories that
 you control, then you can safely enable the
 ``salt_formulas:git_opts:default:update`` pillar setting to ``True``.
 
+``salt.windows-excluded``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Safeguard state to exclude Windows OS, used by ``salt.master`` states
+and sub states.
+
+It fails using ``test.fail_without_changes`` on Windows OS and succeed
+with ``test.succeed_without_changes`` on others.
 
 Configuration
 -------------
