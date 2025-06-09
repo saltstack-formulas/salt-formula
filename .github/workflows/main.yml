@@ -1,0 +1,60 @@
+---
+# yamllint disable rule:comments
+name: Test & release
+
+'on':
+  - pull_request
+  - push
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != format('refs/heads/{0}',
+                          github.event.repository.default_branch) }}
+
+jobs:
+  should-run:
+    name: Prep / Should run
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      should-run: ${{ steps.action.outputs.should-run }}
+    steps:
+      - id: action
+        uses:
+          # yamllint disable-line rule:line-length
+          techneg-it/should-workflow-run@dcbb88600d59ec2842778ef1e2d41f680f876329 # v1.0.0
+  pre-commit:
+    name: Lint / `pre-commit`
+    needs: should-run
+    if: fromJSON(needs.should-run.outputs.should-run)
+    container: techneg/ci-pre-commit:v2.3.3
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Export `CI_CACHE_ID` from container
+        run: echo "CI_CACHE_ID=$(cat /.ci_cache_id)" >> $GITHUB_ENV
+      - uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+        with:
+          path: ~/.cache/pre-commit
+          key: "${{ env.CI_CACHE_ID }}|\
+                ${{ hashFiles('.pre-commit-config.yaml') }}"
+      - name: Run `pre-commit`
+        run: |
+          git config --global --add safe.directory $(pwd)
+          pre-commit run --all-files --color always --verbose
+          pre-commit run --color always --hook-stage manual commitlint-ci
+  results:
+    name: Release / Collect results
+    permissions:
+      checks: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      # yamllint disable-line rule:line-length
+      - uses: poseidon/wait-for-status-checks@899c768d191b56eef585c18f8558da19e1f3e707 # v0.6.0
+        with:
+          ignore: Release / Collect results
+          ignore_pattern: ^GitLab CI
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: echo "::notice ::Workflow success!"

@@ -2,10 +2,12 @@
 # vim: ft=yaml
 ---
 
-{%- set osrelease = salt['grains.get']('osrelease', '') %}
-{%- set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
-{%- set salt_repo = salt['pillar.get']('salt:repo', 'https://packages.broadcom.com/artifactory') %}
-{%- set salt_repo_key_url = salt['pillar.get']('salt:repo_key_url', salt_repo ~ '/api/security/keypair/SaltProjectKey/public') %}
+# yamllint disable rule:line-length
+# {%- set osrelease = salt['grains.get']('osrelease', '') %}
+# {%- set osmajorrelease = salt['grains.get']('osmajorrelease', osrelease)|string %}
+# {%- set salt_repo = salt['pillar.get']('salt:repo', 'https://packages.broadcom.com/artifactory') %}
+# {%- set salt_repo_key_url = salt['pillar.get']('salt:repo_key_url', salt_repo ~ '/api/security/keypair/SaltProjectKey/public') %}
+# yamllint enable rule:line-length
 
 Oracle Linux Server-7:
   pkgrepo_humanname: SaltStack repo for RHEL/CentOS {{ osmajorrelease }}

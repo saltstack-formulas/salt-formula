@@ -2,10 +2,11 @@
 # vim: ft=yaml
 ---
 
-{%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
-
-{%- set salt_repo = salt['pillar.get']('salt:repo', 'https://packages.broadcom.com/artifactory') %}
-{%- set salt_repo_key_url = salt['pillar.get']('salt:repo_key_url', salt_repo ~ '/api/security/keypair/SaltProjectKey/public') %}
+# {%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
+# yamllint disable rule:line-length
+# {%- set salt_repo = salt['pillar.get']('salt:repo', 'https://packages.broadcom.com/artifactory') %}
+# {%- set salt_repo_key_url = salt['pillar.get']('salt:repo_key_url', salt_repo ~ '/api/security/keypair/SaltProjectKey/public') %}
+# yamllint enable rule:line-length
 
 Fedora:
   pygit2: python2-pygit2
@@ -17,9 +18,11 @@ Amazon:
   key_url: '{{ salt_repo_key_url }}'
 
 Ubuntu:
-  pkgrepo: 'deb [signed-by=/etc/apt/keyrings/salt-archive-keyring.pgp arch=amd64] {{ salt_repo }}/saltproject-deb stable main'
+  pkgrepo: 'deb [signed-by=/etc/apt/keyrings/salt-archive-keyring.pgp arch=amd64]
+              {{ salt_repo }}/saltproject-deb stable main'
   pkgrepo_keyring: '{{ salt_repo_key_url }}'
-  pkgrepo_keyring_hash: sha256=36decef986477acb8ba2a1fc4041bcf9f22229ef6c939d0317c9e36a9d142b34
+  pkgrepo_keyring_hash:
+    sha256=36decef986477acb8ba2a1fc4041bcf9f22229ef6c939d0317c9e36a9d142b34
   key_url: '{{ salt_repo_key_url }}'
   pygit2: python-pygit2
   gitfs:
@@ -30,7 +33,8 @@ Ubuntu:
         install_from_package: Null
 
 Raspbian:
-  pkgrepo: 'deb [signed-by=/etc/apt/keyrings/salt-archive-keyring.pgp arch=armhf] {{ salt_repo }}/saltproject-deb stable main'
+  pkgrepo: 'deb [signed-by=/etc/apt/keyrings/salt-archive-keyring.pgp arch=armhf]
+              {{ salt_repo }}/saltproject-deb stable main'
   pkgrepo_keyring: '{{ salt_repo_key_url }}'
 
 SmartOS:
@@ -43,7 +47,7 @@ SmartOS:
   minion_service: 'salt:minion'
   master_service: 'salt:master'
   api_service: 'salt:api'
-  python_dulwich: {{ py_ver_repr or 'py27' }}{{ '-dulwich' }}
+  python_dulwich: '{{ py_ver_repr or "py27" }}{{ "-dulwich" }}'
   gitfs:
     dulwich:
       install_from_source: false
@@ -54,8 +58,10 @@ SmartOS:
 MacOS:
   minion_service: com.saltstack.salt.minion
   master_service: com.saltstack.salt.master
-  salt_master_macos_plist_hash: 8435331b2d48ca8f0759f216e5b15ec9171a4216b1441328c732c6906728b7c9
-  salt_minion_macos_plist_hash: 26b33da12e0d8960ee96b488c8352002c22a377c19bf3df3f986a1e49eca8b20
+  salt_master_macos_plist_hash:
+    8435331b2d48ca8f0759f216e5b15ec9171a4216b1441328c732c6906728b7c9
+  salt_minion_macos_plist_hash:
+    26b33da12e0d8960ee96b488c8352002c22a377c19bf3df3f986a1e49eca8b20
 
 FreeBSD:
   salt_master: py39-salt
