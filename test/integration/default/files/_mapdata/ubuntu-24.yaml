@@ -1,5 +1,5 @@
 # yamllint disable rule:indentation rule:line-length
-# openSUSE Tumbleweed-yyyymmdd
+# Ubuntu-24.04
 ---
 values:
   formulas_settings:
@@ -32,17 +32,18 @@ values:
         install_from_source: false
       pygit2:
         git:
-          install_from_package: git
+          install_from_package: null
           require_state: false
         install_from_source: false
         libgit2:
           build_parent_dir: /usr/src/
           download_hash: 683d1164e361e2a0a8d52652840e2340
-          install_from_source: true
+          install_from_source: false
           version: 0.23.0
-        version: 0.23.0
+        version: 0.22.1
     install_packages: true
-    key_url: https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_Tumbleweed/repodata/repomd.xml.key
+    key_url: https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public
+    libgit2: libgit2-22
     master:
       ext_pillar:
       - cmd_yaml: cat /etc/salt/yaml
@@ -58,7 +59,7 @@ values:
         - /srv/salt
       fileserver_backend:
       - rootfs
-      gitfs_provider: pygit2
+      gitfs_provider: gitpython
       pillar_roots:
         base:
         - /srv/pillar
@@ -87,8 +88,10 @@ values:
       state: running
     parallel: true
     pin_version: false
-    pkgrepo: https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_Tumbleweed/
-    pkgrepo_humanname: Salt releases for SLE-based SUSE products (openSUSE_Tumbleweed)
+    pkgrepo: deb [signed-by=/etc/apt/keyrings/salt-archive-keyring.pgp arch=amd64]
+      https://packages.broadcom.com/artifactory/saltproject-deb stable main
+    pkgrepo_keyring: https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public
+    pkgrepo_keyring_hash: sha256=36decef986477acb8ba2a1fc4041bcf9f22229ef6c939d0317c9e36a9d142b34
     py_ver: py3
     pygit2: python-pygit2
     pyinotify: python-pyinotify

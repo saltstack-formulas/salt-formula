@@ -42,7 +42,7 @@ values:
           version: 0.23.0
         version: 0.23.0
     install_packages: true
-    key_url: https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_Leap_15.3/repodata/repomd.xml.key
+    key_url: https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_Leap_15.6/repodata/repomd.xml.key
     master:
       ext_pillar:
       - cmd_yaml: cat /etc/salt/yaml
@@ -87,14 +87,13 @@ values:
       state: running
     parallel: true
     pin_version: false
-    pkgrepo: https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_Leap_15.3/
-    pkgrepo_humanname: Salt releases for SLE-based SUSE products (openSUSE_Leap_15.3)
+    pkgrepo: https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_Leap_15.6/
+    pkgrepo_humanname: Salt releases for SLE-based SUSE products (openSUSE_Leap_15.6)
     py_ver: py3
     pygit2: python-pygit2
     pyinotify: python-pyinotify
     python_dulwich: python-dulwich
     python_git: python-git
-    release: '3004'
     restart_via_at: false
     retry_options:
       attempts: 5
