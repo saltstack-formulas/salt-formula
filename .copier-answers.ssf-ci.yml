@@ -1,5 +1,5 @@
 # Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
-_commit: v2.0.0
+_commit: v2.0.1
 _src_path: https://github.com/dafyddj/copier-ssf-ci
 failure_permitted_ignored: []
 failure_permitted_patterns: []

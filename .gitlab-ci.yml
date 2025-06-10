@@ -15,15 +15,15 @@
   stage_test: &stage_test 'test'
   # `image`
   # yamllint disable rule:line-length
-  image_commitlint: &image_commitlint 'techneg/ci-commitlint:v1.1.90@sha256:8334132f86e7241ed7eb5ac6469aa1a44c68f2b0923349209e7a7f403de18c97'
-  image_dindruby: &image_dindruby 'techneg/ci-docker-python-ruby:v2.2.59@sha256:df2308e9c162f73c2094a913dcd29baccb07e3fd677418a74437e7780a7bcd1b'
-  image_dindrubybionic: &image_dindrubybionic 'techneg/ci-docker-python-ruby:v2.2.59@sha256:df2308e9c162f73c2094a913dcd29baccb07e3fd677418a74437e7780a7bcd1b'
-  image_precommit: &image_precommit 'techneg/ci-pre-commit:v2.4.24@sha256:0508ba9bb36bbfe9c12da5745cfb85159cdfbf8453c64fb63c9ca4d6e6cca679'
+  image_commitlint: &image_commitlint 'techneg/ci-commitlint:v1.1.91@sha256:02574d0409adafb76d5a40a7d08202073e5377f4a7c4bfe9e198d1203ff94a8c'
+  image_dindruby: &image_dindruby 'techneg/ci-docker-python-ruby:v2.2.60@sha256:de98b8d1d3cf86639fe69bfc4f0416115d18300759c5ed2948ac56f973dd944f'
+  image_dindrubybionic: &image_dindrubybionic 'techneg/ci-docker-python-ruby:v2.2.60@sha256:de98b8d1d3cf86639fe69bfc4f0416115d18300759c5ed2948ac56f973dd944f'
+  image_precommit: &image_precommit 'techneg/ci-pre-commit:v2.4.25@sha256:ff5192e893c1079fbf70e3ce6bfc3773815041786a75659793158be930ba7803'
   image_rubocop: &image_rubocop 'pipelinecomponents/rubocop:latest@sha256:fe69f9642c7edde46bbd78326d2c42c6e13fc73694efb142e92e206725479328'
   image_semantic-release: &image_semanticrelease 'myii/ssf-semantic-release:15.14@sha256:374f588420087517a3cc0235e11293bffd72d7a59da3d98d5e69f014ff2a7761'
   # `services`
   services_docker_dind: &services_docker_dind
-    - 'docker:28.2.2-dind@sha256:bbc590727c1e4fe707877314ff4f0f977bdda2985c485f2b044db0e18979efb3'
+    - 'docker:28.2.2-dind@sha256:d4668861cabc1691635d98e827a81cfa834a416f8fe0f4efc609f9f806d86d82'
   # yamllint enable rule:line-length
   # `variables`
   # https://forum.gitlab.com/t/gitlab-com-ci-caching-rubygems/5627/3
@@ -176,7 +176,6 @@ debian-11-master: {extends: '.test_instance_failure_permitted'}
 fedora-41-master: {extends: '.test_instance_failure_permitted'}
 fedora-40-master: {extends: '.test_instance_failure_permitted'}
 opensuse-leap-156-master: {extends: '.test_instance_failure_permitted'}
-opensuse-leap-155-master: {extends: '.test_instance_failure_permitted'}
 opensuse-tmbl-latest-master: {extends: '.test_instance_failure_permitted'}
 oraclelinux-9-master: {extends: '.test_instance_failure_permitted'}
 oraclelinux-8-master: {extends: '.test_instance_failure_permitted'}
@@ -195,7 +194,6 @@ debian-11-3007-3: {extends: '.test_instance'}
 fedora-41-3007-3: {extends: '.test_instance_failure_permitted'}
 fedora-40-3007-3: {extends: '.test_instance'}
 opensuse-leap-156-3007-3: {extends: '.test_instance'}
-opensuse-leap-155-3007-3: {extends: '.test_instance'}
 opensuse-tmbl-latest-3007-3: {extends: '.test_instance'}
 oraclelinux-9-3007-3: {extends: '.test_instance'}
 oraclelinux-8-3007-3: {extends: '.test_instance'}
@@ -214,7 +212,6 @@ debian-11-3006-11: {extends: '.test_instance'}
 fedora-41-3006-11: {extends: '.test_instance_failure_permitted'}
 fedora-40-3006-11: {extends: '.test_instance'}
 opensuse-leap-156-3006-11: {extends: '.test_instance'}
-opensuse-leap-155-3006-11: {extends: '.test_instance'}
 opensuse-tmbl-latest-3006-11: {extends: '.test_instance'}
 oraclelinux-9-3006-11: {extends: '.test_instance'}
 oraclelinux-8-3006-11: {extends: '.test_instance'}
