@@ -1,5 +1,5 @@
 # yamllint disable rule:indentation rule:line-length
-# openSUSE Tumbleweed-yyyymmdd
+# Oracle Linux Server-9
 ---
 values:
   formulas_settings:
@@ -42,7 +42,7 @@ values:
           version: 0.23.0
         version: 0.23.0
     install_packages: true
-    key_url: https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_Tumbleweed/repodata/repomd.xml.key
+    key_url: https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public
     master:
       ext_pillar:
       - cmd_yaml: cat /etc/salt/yaml
@@ -87,13 +87,13 @@ values:
       state: running
     parallel: true
     pin_version: false
-    pkgrepo: https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_Tumbleweed/
-    pkgrepo_humanname: Salt releases for SLE-based SUSE products (openSUSE_Tumbleweed)
+    pkgrepo: https://packages.broadcom.com/artifactory/saltproject-rpm/
+    pkgrepo_humanname: Salt Repo for Salt LATEST release
+    pkgrepo_name: salt-repo-latest
     py_ver: py3
     pygit2: python-pygit2
-    pyinotify: python-pyinotify
     python_dulwich: python-dulwich
-    python_git: python-git
+    python_git: GitPython
     restart_via_at: false
     retry_options:
       attempts: 5

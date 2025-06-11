@@ -2,26 +2,29 @@
 # vim: ft=yaml
 ---
 
-{%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
+# {%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
+# yamllint disable rule:line-length
+# {%- set osrelease = salt['grains.get']('osrelease', '') %}
+# {%- set opensuse_repo_suffix = 'Leap_' ~ osrelease if salt['grains.get']('osfinger', '') == 'Leap-15' else 'Tumbleweed' %}
+# {%- set salt_repo = salt['pillar.get']('salt:repo', 'https://packages.broadcom.com/artifactory') %}
+# {%- set salt_repo_key_url = salt['pillar.get']('salt:repo_key_url', salt_repo ~ '/api/security/keypair/SaltProjectKey/public') %}
+# yamllint enable rule:line-length
 
-{%- set osrelease = salt['grains.get']('osrelease', '') %}
-{%- set opensuse_repo_suffix = 'Leap_' ~ osrelease if salt['grains.get']('osfinger', '') == 'Leap-15' else 'Tumbleweed' %}
-{%- set salt_repo = salt['pillar.get']('salt:repo', 'https://packages.broadcom.com/artifactory') %}
-{%- set salt_repo_key_url = salt['pillar.get']('salt:repo_key_url', salt_repo ~ '/api/security/keypair/SaltProjectKey/public') %}
-
-#from template-formula
-{%- if grains.os_family == 'MacOS' %}
-{%-   set rootuser = salt['cmd.run']("stat -f '%Su' /dev/console") %}
-{%-   set rootgroup = salt['cmd.run']("stat -f '%Sg' /dev/console") %}
-{%- elif grains.os_family == 'Windows' %}
-{%-   set rootuser = salt['cmd.run']("whoami").split("\\")[1] %}
-{%- endif %}
+# From `template-formula`
+# {%- if grains.os_family == 'MacOS' %}
+# {%-   set rootuser = salt['cmd.run']("stat -f '%Su' /dev/console") %}
+# {%-   set rootgroup = salt['cmd.run']("stat -f '%Sg' /dev/console") %}
+# {%- elif grains.os_family == 'Windows' %}
+# {%-   set rootuser = salt['cmd.run']("whoami").split("\\")[1] %}
+# {%- endif %}
 
 
 Debian:
-  pkgrepo: 'deb [signed-by=/etc/apt/keyrings/salt-archive-keyring.pgp arch=amd64] {{ salt_repo }}/saltproject-deb stable main'
+  pkgrepo: 'deb [signed-by=/etc/apt/keyrings/salt-archive-keyring.pgp arch=amd64]
+              {{ salt_repo }}/saltproject-deb stable main'
   pkgrepo_keyring: '{{ salt_repo_key_url }}'
-  pkgrepo_keyring_hash: sha256=36decef986477acb8ba2a1fc4041bcf9f22229ef6c939d0317c9e36a9d142b34
+  pkgrepo_keyring_hash:
+    sha256=36decef986477acb8ba2a1fc4041bcf9f22229ef6c939d0317c9e36a9d142b34
   libgit2: libgit2-22
   pyinotify: python-pyinotify
   gitfs:
@@ -53,9 +56,12 @@ RedHat:
     gitfs_provider: pygit2
 
 Suse:
-  pkgrepo_humanname: 'Salt releases for SLE-based SUSE products (openSUSE_{{ opensuse_repo_suffix }})'
-  pkgrepo: 'https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_{{ opensuse_repo_suffix }}/'
-  key_url: 'https://download.opensuse.org/repositories/systemsmanagement:/saltstack/openSUSE_{{ opensuse_repo_suffix }}/repodata/repomd.xml.key'
+  pkgrepo_humanname:
+    'Salt releases for SLE-based SUSE products (openSUSE_{{ opensuse_repo_suffix }})'
+  pkgrepo: "https://download.opensuse.org/repositories/systemsmanagement:\
+              /saltstack/openSUSE_{{ opensuse_repo_suffix }}/"
+  key_url: "https://download.opensuse.org/repositories/systemsmanagement:\
+              /saltstack/openSUSE_{{ opensuse_repo_suffix }}/repodata/repomd.xml.key"
   pygit2: python-pygit2
   pyinotify: python-pyinotify
   gitfs:
@@ -99,14 +105,14 @@ Alpine:
 
 FreeBSD:
   rootgroup: wheel
-  salt_master: {{ py_ver_repr or 'py27' }}-salt
-  salt_minion: {{ py_ver_repr or 'py27' }}-salt
-  salt_syndic: {{ py_ver_repr or 'py27' }}-salt
-  salt_cloud: {{ py_ver_repr or 'py27' }}-salt
-  salt_api: {{ py_ver_repr or 'py27' }}-salt
-  salt_ssh: {{ py_ver_repr or 'py27' }}-salt
-  python_git: {{ py_ver_repr or 'py27' }}-GitPython
-  pygit2: {{ py_ver_repr or 'py27' }}-pygit2
+  salt_master: '{{ py_ver_repr or "py27" }}-salt'
+  salt_minion: '{{ py_ver_repr or "py27" }}-salt'
+  salt_syndic: '{{ py_ver_repr or "py27" }}-salt'
+  salt_cloud: '{{ py_ver_repr or "py27" }}-salt'
+  salt_api: '{{ py_ver_repr or "py27" }}-salt'
+  salt_ssh: '{{ py_ver_repr or "py27" }}-salt'
+  python_git: '{{ py_ver_repr or "py27" }}-GitPython'
+  pygit2: '{{ py_ver_repr or "py27" }}-pygit2'
   config_path: /usr/local/etc/salt
   minion_service: salt_minion
   master_service: salt_master
@@ -129,7 +135,7 @@ Windows:
   salt_minion: salt-minion{{ '-' ~ py_ver_repr if py_ver_repr else '' }}
   config_path: 'C:\salt\conf'
   minion_service: salt-minion
-  rootuser: {{ rootuser | d('') }}
+  rootuser: '{{ rootuser | d("") }}'
 
 MacOS:
   salt_master: saltstack
@@ -139,5 +145,5 @@ MacOS:
   config_path: /private/etc/salt
   minion_service: com.saltstack.salt.minion
   ## from template-formula
-  rootuser: {{ rootuser | d('') }}
-  rootgroup: {{ rootgroup | d('') }}
+  rootuser: '{{ rootuser | d("") }}'
+  rootgroup: '{{ rootgroup | d("") }}'

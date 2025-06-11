@@ -20,434 +20,219 @@ provisioner:
   pillars_from_directories:
     - test/salt/pillar
 
-platforms:
-  ## SALT `tiamat`
-  - name: debian-11-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:debian-11
-      run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: debian-10-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:debian-10
-      run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: debian-9-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:debian-9
-      run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: ubuntu-2204-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:ubuntu-22.04
-      run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: ubuntu-2004-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:ubuntu-20.04
-      run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: ubuntu-1804-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:ubuntu-18.04
-      run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: centos-stream8-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:centos-stream8
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: centos-7-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:centos-7
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: amazonlinux-2-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:amazonlinux-2
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: oraclelinux-8-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:oraclelinux-8
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: oraclelinux-7-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:oraclelinux-7
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: almalinux-8-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:almalinux-8
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: rockylinux-8-tiamat-py3
-    driver:
-      image: saltimages/salt-tiamat-py3:rockylinux-8
-    verifier:
-      inputs:
-        saltmajorversion: 3004
+transport:
+  # Avoid lengthy waits when a container does not launch correctly
+  max_wait_until_ready: 60
 
+platforms:
   ## SALT `master`
-  - name: debian-11-master-py3
+  - name: debian-12-master
+    driver:
+      image: saltimages/salt-master-py3:debian-12
+      run_command: /lib/systemd/systemd
+  - name: debian-11-master
     driver:
       image: saltimages/salt-master-py3:debian-11
       run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: debian-10-master-py3
+  - name: ubuntu-2404-master
     driver:
-      image: saltimages/salt-master-py3:debian-10
+      image: saltimages/salt-master-py3:ubuntu-24.04
       run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: debian-9-master-py3
-    driver:
-      image: saltimages/salt-master-py3:debian-9
-      run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: ubuntu-2204-master-py3
+  - name: ubuntu-2204-master
     driver:
       image: saltimages/salt-master-py3:ubuntu-22.04
       run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: ubuntu-2004-master-py3
+  - name: ubuntu-2004-master
     driver:
       image: saltimages/salt-master-py3:ubuntu-20.04
       run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: ubuntu-1804-master-py3
+  - name: centos-stream9-master
     driver:
-      image: saltimages/salt-master-py3:ubuntu-18.04
-      run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: centos-stream8-master-py3
+      image: saltimages/salt-master-py3:centos-stream9
+  - name: opensuse-leap-156-master
     driver:
-      image: saltimages/salt-master-py3:centos-stream8
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: centos-7-master-py3
-    driver:
-      image: saltimages/salt-master-py3:centos-7
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: fedora-36-master-py3
-    driver:
-      image: saltimages/salt-master-py3:fedora-36
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: fedora-35-master-py3
-    driver:
-      image: saltimages/salt-master-py3:fedora-35
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: opensuse-leap-153-master-py3
-    driver:
-      image: saltimages/salt-master-py3:opensuse-leap-15.3
-    # Workaround to avoid intermittent failures on `opensuse-leap-15.3`:
+      image: saltimages/salt-master-py3:opensuse-leap-15.6
+    # Workaround to avoid intermittent failures on `opensuse-leap-15.6`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: opensuse-tmbl-latest-master-py3
+  - name: opensuse-tmbl-latest-master
     driver:
       image: saltimages/salt-master-py3:opensuse-tumbleweed-latest
     # Workaround to avoid intermittent failures on `opensuse-tumbleweed`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: amazonlinux-2-master-py3
+  - name: fedora-41-master
     driver:
-      image: saltimages/salt-master-py3:amazonlinux-2
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: oraclelinux-8-master-py3
+      image: saltimages/salt-master-py3:fedora-41
+  - name: fedora-40-master
+    driver:
+      image: saltimages/salt-master-py3:fedora-40
+  - name: amazonlinux-2023-master
+    driver:
+      image: saltimages/salt-master-py3:amazonlinux-2023
+  - name: oraclelinux-9-master
+    driver:
+      image: saltimages/salt-master-py3:oraclelinux-9
+  - name: oraclelinux-8-master
     driver:
       image: saltimages/salt-master-py3:oraclelinux-8
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: oraclelinux-7-master-py3
+  - name: almalinux-9-master
     driver:
-      image: saltimages/salt-master-py3:oraclelinux-7
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: arch-base-latest-master-py3
-    driver:
-      image: saltimages/salt-master-py3:arch-base-latest
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: gentoo-stage3-latest-master-py3
-    driver:
-      image: saltimages/salt-master-py3:gentoo-stage3-latest
-      run_command: /sbin/init
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: gentoo-stage3-systemd-master-py3
-    driver:
-      image: saltimages/salt-master-py3:gentoo-stage3-systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: almalinux-8-master-py3
+      image: saltimages/salt-master-py3:almalinux-9
+  - name: almalinux-8-master
     driver:
       image: saltimages/salt-master-py3:almalinux-8
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: rockylinux-8-master-py3
+  - name: rockylinux-9-master
+    driver:
+      image: saltimages/salt-master-py3:rockylinux-9
+  - name: rockylinux-8-master
     driver:
       image: saltimages/salt-master-py3:rockylinux-8
-    verifier:
-      inputs:
-        saltmajorversion: 3004
 
-  ## SALT `3004.1`
-  - name: debian-11-3004-1-py3
+  ## SALT `3007.3`
+  - name: debian-12-3007-3
     driver:
-      image: saltimages/salt-3004.1-py3:debian-11
+      image: saltimages/salt-3007.3-py3:debian-12
       run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: debian-10-3004-1-py3
+  - name: debian-11-3007-3
     driver:
-      image: saltimages/salt-3004.1-py3:debian-10
+      image: saltimages/salt-3007.3-py3:debian-11
       run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: debian-9-3004-1-py3
+  - name: ubuntu-2404-3007-3
     driver:
-      image: saltimages/salt-3004.1-py3:debian-9
+      image: saltimages/salt-3007.3-py3:ubuntu-24.04
       run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: ubuntu-2204-3004-1-py3
+  - name: ubuntu-2204-3007-3
     driver:
-      image: saltimages/salt-3004.1-py3:ubuntu-22.04
+      image: saltimages/salt-3007.3-py3:ubuntu-22.04
       run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: ubuntu-2004-3004-1-py3
+  - name: ubuntu-2004-3007-3
     driver:
-      image: saltimages/salt-3004.1-py3:ubuntu-20.04
+      image: saltimages/salt-3007.3-py3:ubuntu-20.04
       run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: ubuntu-1804-3004-1-py3
+  - name: centos-stream9-3007-3
     driver:
-      image: saltimages/salt-3004.1-py3:ubuntu-18.04
-      run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: centos-stream8-3004-1-py3
+      image: saltimages/salt-3007.3-py3:centos-stream9
+  - name: opensuse-leap-156-3007-3
     driver:
-      image: saltimages/salt-3004.1-py3:centos-stream8
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: centos-7-3004-1-py3
-    driver:
-      image: saltimages/salt-3004.1-py3:centos-7
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: fedora-36-3004-1-py3
-    driver:
-      image: saltimages/salt-3004.1-py3:fedora-36
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: fedora-35-3004-1-py3
-    driver:
-      image: saltimages/salt-3004.1-py3:fedora-35
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: amazonlinux-2-3004-1-py3
-    driver:
-      image: saltimages/salt-3004.1-py3:amazonlinux-2
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: oraclelinux-8-3004-1-py3
-    driver:
-      image: saltimages/salt-3004.1-py3:oraclelinux-8
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: oraclelinux-7-3004-1-py3
-    driver:
-      image: saltimages/salt-3004.1-py3:oraclelinux-7
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: arch-base-latest-3004-1-py3
-    driver:
-      image: saltimages/salt-3004.1-py3:arch-base-latest
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: gentoo-stage3-latest-3004-1-py3
-    driver:
-      image: saltimages/salt-3004.1-py3:gentoo-stage3-latest
-      run_command: /sbin/init
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: gentoo-stage3-systemd-3004-1-py3
-    driver:
-      image: saltimages/salt-3004.1-py3:gentoo-stage3-systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: almalinux-8-3004-1-py3
-    driver:
-      image: saltimages/salt-3004.1-py3:almalinux-8
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: rockylinux-8-3004-1-py3
-    driver:
-      image: saltimages/salt-3004.1-py3:rockylinux-8
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-
-  ## SALT `3004.0`
-  - name: opensuse-leap-153-3004-0-py3
-    driver:
-      image: saltimages/salt-3004.0-py3:opensuse-leap-15.3
-    # Workaround to avoid intermittent failures on `opensuse-leap-15.3`:
+      image: saltimages/salt-3007.3-py3:opensuse-leap-15.6
+    # Workaround to avoid intermittent failures on `opensuse-leap-15.6`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: opensuse-tmbl-latest-3004-0-py3
+  - name: opensuse-tmbl-latest-3007-3
     driver:
-      image: saltimages/salt-3004.0-py3:opensuse-tumbleweed-latest
+      image: saltimages/salt-3007.3-py3:opensuse-tumbleweed-latest
     # Workaround to avoid intermittent failures on `opensuse-tumbleweed`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
-    verifier:
-      inputs:
-        saltmajorversion: 3004
+  - name: fedora-41-3007-3
+    driver:
+      image: saltimages/salt-3007.3-py3:fedora-41
+  - name: fedora-40-3007-3
+    driver:
+      image: saltimages/salt-3007.3-py3:fedora-40
+  - name: amazonlinux-2023-3007-3
+    driver:
+      image: saltimages/salt-3007.3-py3:amazonlinux-2023
+  - name: amazonlinux-2-3007-3
+    driver:
+      image: saltimages/salt-3007.3-py3:amazonlinux-2
+  - name: oraclelinux-9-3007-3
+    driver:
+      image: saltimages/salt-3007.3-py3:oraclelinux-9
+  - name: oraclelinux-8-3007-3
+    driver:
+      image: saltimages/salt-3007.3-py3:oraclelinux-8
+  - name: almalinux-9-3007-3
+    driver:
+      image: saltimages/salt-3007.3-py3:almalinux-9
+  - name: almalinux-8-3007-3
+    driver:
+      image: saltimages/salt-3007.3-py3:almalinux-8
+  - name: rockylinux-9-3007-3
+    driver:
+      image: saltimages/salt-3007.3-py3:rockylinux-9
+  - name: rockylinux-8-3007-3
+    driver:
+      image: saltimages/salt-3007.3-py3:rockylinux-8
 
-  ## SALT `3003.4`
-  - name: debian-10-3003-4-py3
+  ## SALT `3006.11`
+  - name: debian-12-3006-11
     driver:
-      image: saltimages/salt-3003.4-py3:debian-10
+      image: saltimages/salt-3006.11-py3:debian-12
       run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3003
-  - name: debian-9-3003-4-py3
+  - name: debian-11-3006-11
     driver:
-      image: saltimages/salt-3003.4-py3:debian-9
+      image: saltimages/salt-3006.11-py3:debian-11
       run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3003
-  - name: ubuntu-2004-3003-4-py3
+  - name: ubuntu-2404-3006-11
     driver:
-      image: saltimages/salt-3003.4-py3:ubuntu-20.04
+      image: saltimages/salt-3006.11-py3:ubuntu-24.04
       run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3003
-  - name: ubuntu-1804-3003-4-py3
+  - name: ubuntu-2204-3006-11
     driver:
-      image: saltimages/salt-3003.4-py3:ubuntu-18.04
+      image: saltimages/salt-3006.11-py3:ubuntu-22.04
       run_command: /lib/systemd/systemd
-    verifier:
-      inputs:
-        saltmajorversion: 3003
-  - name: centos-stream8-3003-4-py3
+  - name: ubuntu-2004-3006-11
     driver:
-      image: saltimages/salt-3003.4-py3:centos-stream8
-    verifier:
-      inputs:
-        saltmajorversion: 3003
-  - name: centos-7-3003-4-py3
+      image: saltimages/salt-3006.11-py3:ubuntu-20.04
+      run_command: /lib/systemd/systemd
+  - name: centos-stream9-3006-11
     driver:
-      image: saltimages/salt-3003.4-py3:centos-7
-    verifier:
-      inputs:
-        saltmajorversion: 3003
-  - name: amazonlinux-2-3003-4-py3
+      image: saltimages/salt-3006.11-py3:centos-stream9
+  - name: opensuse-tmbl-latest-3006-11
     driver:
-      image: saltimages/salt-3003.4-py3:amazonlinux-2
-    verifier:
-      inputs:
-        saltmajorversion: 3003
-  - name: oraclelinux-8-3003-4-py3
+      image: saltimages/salt-3006.11-py3:opensuse-tumbleweed-latest
+    # Workaround to avoid intermittent failures on `opensuse-tumbleweed`:
+    # => SCP did not finish successfully (255):  (Net::SCP::Error)
+    transport:
+      max_ssh_sessions: 1
+  - name: opensuse-leap-156-3006-11
     driver:
-      image: saltimages/salt-3003.4-py3:oraclelinux-8
-    verifier:
-      inputs:
-        saltmajorversion: 3003
-  - name: oraclelinux-7-3003-4-py3
+      image: saltimages/salt-3006.11-py3:opensuse-leap-15.6
+    # Workaround to avoid intermittent failures on `opensuse-leap-15.6`:
+    # => SCP did not finish successfully (255):  (Net::SCP::Error)
+    transport:
+      max_ssh_sessions: 1
+  - name: fedora-41-3006-11
     driver:
-      image: saltimages/salt-3003.4-py3:oraclelinux-7
-    verifier:
-      inputs:
-        saltmajorversion: 3003
-  - name: almalinux-8-3003-4-py3
+      image: saltimages/salt-3006.11-py3:fedora-41
+  - name: fedora-40-3006-11
     driver:
-      image: saltimages/salt-3003.4-py3:almalinux-8
-    verifier:
-      inputs:
-        saltmajorversion: 3003
+      image: saltimages/salt-3006.11-py3:fedora-40
+  - name: amazonlinux-2023-3006-11
+    driver:
+      image: saltimages/salt-3006.11-py3:amazonlinux-2023
+  - name: amazonlinux-2-3006-11
+    driver:
+      image: saltimages/salt-3006.11-py3:amazonlinux-2
+  - name: oraclelinux-9-3006-11
+    driver:
+      image: saltimages/salt-3006.11-py3:oraclelinux-9
+  - name: oraclelinux-8-3006-11
+    driver:
+      image: saltimages/salt-3006.11-py3:oraclelinux-8
+  - name: almalinux-9-3006-11
+    driver:
+      image: saltimages/salt-3006.11-py3:almalinux-9
+  - name: almalinux-8-3006-11
+    driver:
+      image: saltimages/salt-3006.11-py3:almalinux-8
+  - name: rockylinux-9-3006-11
+    driver:
+      image: saltimages/salt-3006.11-py3:rockylinux-9
+  - name: rockylinux-8-3006-11
+    driver:
+      image: saltimages/salt-3006.11-py3:rockylinux-8
+
+##########################################################
+# This file is managed as part of a Copier template.     #
+# Please make your own changes below this comment.       #
+##########################################################
 
 verifier:
   # https://www.inspec.io/

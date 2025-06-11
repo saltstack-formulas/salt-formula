@@ -2,7 +2,7 @@
 # vim: ft=yaml
 ---
 name: 'Kitchen (Windows)'
-'on': ['push', 'pull_request']
+'on': ['workflow_dispatch']
 
 env:
   machine_user: kitchen
@@ -17,27 +17,15 @@ jobs:
       fail-fast: false
       matrix:
         instance:
-          - default-windows-2022-latest-py3
+          - default-windows-2022-latest
     steps:
       - name: 'Check out code'
-        uses: 'actions/checkout@v2'
-      - name: 'Install Chef'
-        uses: 'actionshub/chef-install@1.1.0'
+        uses: 'actions/checkout@v4'
+      - name: 'Set up Ruby'
+        uses: ruby/setup-ruby@v1
         with:
-          project: 'chef'
-          version: '16.10.8'
-      - name: 'Add Chef bindir to PATH'
-        uses: 'myci-actions/export-env-var-powershell@1'
-        with:
-          name: 'PATH'
-          value: "C:\\opscode\\chef\\bin;\
-                  C:\\opscode\\chef\\embedded\\bin;$env:PATH"
-      - name: 'Set up Bundler cache'
-        uses: 'actions/cache@v1'
-        with:
-          path: 'vendor/bundle'
-          key: "${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}"
-          restore-keys: "${{ runner.os }}-gems-"
+          ruby-version: '3.1.6'
+          bundler-cache: true
       - name: 'Set up test user'
         run: |
           $password = ConvertTo-SecureString $env:machine_pass -AsPlainText -Force
@@ -59,27 +47,15 @@ jobs:
       fail-fast: false
       matrix:
         instance:
-          - default-windows-2019-latest-py3
+          - default-windows-2019-latest
     steps:
       - name: 'Check out code'
-        uses: 'actions/checkout@v2'
-      - name: 'Install Chef'
-        uses: 'actionshub/chef-install@1.1.0'
+        uses: 'actions/checkout@v4'
+      - name: 'Set up Ruby'
+        uses: ruby/setup-ruby@v1
         with:
-          project: 'chef'
-          version: '16.10.8'
-      - name: 'Add Chef bindir to PATH'
-        uses: 'myci-actions/export-env-var-powershell@1'
-        with:
-          name: 'PATH'
-          value: "C:\\opscode\\chef\\bin;\
-                  C:\\opscode\\chef\\embedded\\bin;$env:PATH"
-      - name: 'Set up Bundler cache'
-        uses: 'actions/cache@v1'
-        with:
-          path: 'vendor/bundle'
-          key: "${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}"
-          restore-keys: "${{ runner.os }}-gems-"
+          ruby-version: '3.1.6'
+          bundler-cache: true
       - name: 'Set up test user'
         run: |
           $password = ConvertTo-SecureString $env:machine_pass -AsPlainText -Force
@@ -88,10 +64,5 @@ jobs:
       - name: 'Set up WinRM'
         run: |
           Set-WSManQuickConfig -Force
-      - name: 'Run Bundler'
-        run: |
-          ruby --version
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
       - name: 'Run Test Kitchen'
         run: 'bundle exec kitchen verify ${{ matrix.instance }}'

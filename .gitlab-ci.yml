@@ -9,45 +9,82 @@
   only_branch_master_parent_repo: &only_branch_master_parent_repo
     - 'master@saltstack-formulas/salt-formula'
   # `stage`
+  stage_cache: &stage_cache 'cache'
   stage_lint: &stage_lint 'lint'
   stage_release: &stage_release 'release'
   stage_test: &stage_test 'test'
   # `image`
-  image_commitlint: &image_commitlint 'myii/ssf-commitlint:11'
-  image_dindruby: &image_dindruby 'dafyddj/ci-dind-python-ruby:2.0.2'
-  image_precommit: &image_precommit 'dafyddj/ci-pre-commit:2.1.0'
-  image_rubocop: &image_rubocop 'pipelinecomponents/rubocop:latest'
-  image_semantic-release: &image_semanticrelease 'myii/ssf-semantic-release:15.14'
+  # yamllint disable rule:line-length
+  image_commitlint: &image_commitlint 'techneg/ci-commitlint:v1.1.91@sha256:02574d0409adafb76d5a40a7d08202073e5377f4a7c4bfe9e198d1203ff94a8c'
+  image_dindruby: &image_dindruby 'techneg/ci-docker-python-ruby:v2.2.60@sha256:de98b8d1d3cf86639fe69bfc4f0416115d18300759c5ed2948ac56f973dd944f'
+  image_dindrubybionic: &image_dindrubybionic 'techneg/ci-docker-python-ruby:v2.2.60@sha256:de98b8d1d3cf86639fe69bfc4f0416115d18300759c5ed2948ac56f973dd944f'
+  image_precommit: &image_precommit 'techneg/ci-pre-commit:v2.4.25@sha256:ff5192e893c1079fbf70e3ce6bfc3773815041786a75659793158be930ba7803'
+  image_rubocop: &image_rubocop 'pipelinecomponents/rubocop:latest@sha256:fe69f9642c7edde46bbd78326d2c42c6e13fc73694efb142e92e206725479328'
+  image_semantic-release: &image_semanticrelease 'myii/ssf-semantic-release:15.14@sha256:374f588420087517a3cc0235e11293bffd72d7a59da3d98d5e69f014ff2a7761'
   # `services`
   services_docker_dind: &services_docker_dind
-    - 'docker:dind'
+    - 'docker:28.2.2-dind@sha256:d4668861cabc1691635d98e827a81cfa834a416f8fe0f4efc609f9f806d86d82'
+  # yamllint enable rule:line-length
   # `variables`
   # https://forum.gitlab.com/t/gitlab-com-ci-caching-rubygems/5627/3
-  # https://bundler.io/v1.16/bundle_config.html
+  # https://bundler.io/v2.3/man/bundle-config.1.html
   variables_bundler: &variables_bundler
-    BUNDLE_CACHE_PATH: '${CI_PROJECT_DIR}/.cache/bundler'
-    BUNDLE_WITHOUT: 'production'
-  # `cache`
+    BUNDLE_PATH: '${CI_PROJECT_DIR}/.cache/bundler'
+    BUNDLE_DEPLOYMENT: 'true'
+  bundle_install: &bundle_install
+    - 'bundle version'
+    - 'bundle config list'
+    # `--no-cache` means don't bother caching the downloaded .gem files
+    - 'time bundle install --no-cache'
   cache_bundler: &cache_bundler
-    key: '${CI_JOB_STAGE}'
+    key:
+      files:
+        - 'Gemfile.lock'
+      prefix: 'bundler'
     paths:
-      - '${BUNDLE_CACHE_PATH}'
+      - '${BUNDLE_PATH}'
+  # https://pre-commit.com/#gitlab-ci-example
+  variables_pre-commit: &variables_pre-commit
+    PRE_COMMIT_HOME: '${CI_PROJECT_DIR}/.cache/pre-commit'
+  cache_pre-commit: &cache_pre-commit
+    key:
+      files:
+        - '.pre-commit-config.yaml'
+      prefix: 'pre-commit'
+    paths:
+      - '${PRE_COMMIT_HOME}'
 
 ###############################################################################
 # Define stages and global variables
 ###############################################################################
 stages:
+  - *stage_cache
   - *stage_lint
   - *stage_test
   - *stage_release
 variables:
   DOCKER_DRIVER: 'overlay2'
 
+
+###############################################################################
+# `cache` stage: build up the bundler cache required before the `test` stage
+###############################################################################
+build-cache:
+  stage: *stage_cache
+  image: *image_dindruby
+  variables: *variables_bundler
+  cache: *cache_bundler
+  script: *bundle_install
+
 ###############################################################################
 # `lint` stage: `commitlint`, `pre-commit` & `rubocop` (latest, failure allowed)
 ###############################################################################
-commitlint:
+.lint_job:
   stage: *stage_lint
+  needs: []
+
+commitlint:
+  extends: '.lint_job'
   image: *image_commitlint
   script:
     # Add `upstream` remote to get access to `upstream/master`
@@ -72,17 +109,14 @@ commitlint:
                   --verbose'
 
 pre-commit:
-  stage: *stage_lint
+  extends: '.lint_job'
   image: *image_precommit
   # https://pre-commit.com/#gitlab-ci-example
-  variables:
-    PRE_COMMIT_HOME: '${CI_PROJECT_DIR}/.cache/pre-commit'
-  cache:
-    key: '${CI_JOB_NAME}'
-    paths:
-      - '${PRE_COMMIT_HOME}'
+  variables: *variables_pre-commit
+  cache: *cache_pre-commit
   script:
     - 'pre-commit run --all-files --color always --verbose'
+    - 'pre-commit run --color always --hook-stage manual commitlint-ci'
 
 # Use a separate job for `rubocop` other than the one potentially run by `pre-commit`
 # - The `pre-commit` check will only be available for formulas that pass the default
@@ -91,8 +125,8 @@ pre-commit:
 # - Furthermore, this job uses all of the latest `rubocop` features & cops,
 #   which will help when upgrading the `rubocop` linter used in `pre-commit`
 rubocop:
+  extends: '.lint_job'
   allow_failure: true
-  stage: *stage_lint
   image: *image_rubocop
   script:
     - 'rubocop -d -P -S --enable-pending-cops'
@@ -105,12 +139,10 @@ rubocop:
   image: *image_dindruby
   services: *services_docker_dind
   variables: *variables_bundler
-  cache: *cache_bundler
-  before_script:
-    # TODO: This should work from the env vars above automatically
-    - 'bundle config set path "${BUNDLE_CACHE_PATH}"'
-    - 'bundle config set without "${BUNDLE_WITHOUT}"'
-    - 'bundle install'
+  cache:
+    <<: *cache_bundler
+    policy: 'pull'
+  before_script: *bundle_install
   script:
     # Alternative value to consider: `${CI_JOB_NAME}`
     - 'bin/kitchen verify "${DOCKER_ENV_CI_JOB_NAME}"'
@@ -129,69 +161,65 @@ rubocop:
 # Make sure the instances listed below match up with
 # the `platforms` defined in `kitchen.yml`
 # yamllint disable rule:line-length
-# default-debian-11-tiamat-py3: {extends: '.test_instance'}
-# default-debian-10-tiamat-py3: {extends: '.test_instance'}
-# default-debian-9-tiamat-py3: {extends: '.test_instance'}
-# default-ubuntu-2204-tiamat-py3: {extends: '.test_instance_failure_permitted'}
-# default-ubuntu-2004-tiamat-py3: {extends: '.test_instance'}
-# default-ubuntu-1804-tiamat-py3: {extends: '.test_instance'}
-# default-centos-stream8-tiamat-py3: {extends: '.test_instance_failure_permitted'}
-# default-centos-7-tiamat-py3: {extends: '.test_instance'}
-# default-amazonlinux-2-tiamat-py3: {extends: '.test_instance'}
-# default-oraclelinux-8-tiamat-py3: {extends: '.test_instance'}
-# default-oraclelinux-7-tiamat-py3: {extends: '.test_instance'}
-# default-almalinux-8-tiamat-py3: {extends: '.test_instance'}
-# default-rockylinux-8-tiamat-py3: {extends: '.test_instance'}
-# default-debian-11-master-py3: {extends: '.test_instance'}
-# default-debian-10-master-py3: {extends: '.test_instance'}
-# default-debian-9-master-py3: {extends: '.test_instance'}
-# default-ubuntu-2204-master-py3: {extends: '.test_instance_failure_permitted'}
-# default-ubuntu-2004-master-py3: {extends: '.test_instance'}
-# default-ubuntu-1804-master-py3: {extends: '.test_instance'}
-# default-centos-stream8-master-py3: {extends: '.test_instance_failure_permitted'}
-# default-centos-7-master-py3: {extends: '.test_instance'}
-# default-fedora-36-master-py3: {extends: '.test_instance_failure_permitted'}
-# default-fedora-35-master-py3: {extends: '.test_instance'}
-# default-opensuse-leap-153-master-py3: {extends: '.test_instance'}
-# default-opensuse-tmbl-latest-master-py3: {extends: '.test_instance_failure_permitted'}
-# default-amazonlinux-2-master-py3: {extends: '.test_instance'}
-# default-oraclelinux-8-master-py3: {extends: '.test_instance'}
-# default-oraclelinux-7-master-py3: {extends: '.test_instance'}
-# default-arch-base-latest-master-py3: {extends: '.test_instance'}
-# default-gentoo-stage3-latest-master-py3: {extends: '.test_instance'}
-# default-gentoo-stage3-systemd-master-py3: {extends: '.test_instance'}
-# default-almalinux-8-master-py3: {extends: '.test_instance'}
-# default-rockylinux-8-master-py3: {extends: '.test_instance'}
-default-debian-11-3004-1-py3: {extends: '.test_instance'}
-# default-debian-10-3004-1-py3: {extends: '.test_instance'}
-# default-debian-9-3004-1-py3: {extends: '.test_instance'}
-default-ubuntu-2204-3004-1-py3: {extends: '.test_instance_failure_permitted'}
-default-ubuntu-2004-3004-1-py3: {extends: '.test_instance'}
-# default-ubuntu-1804-3004-1-py3: {extends: '.test_instance'}
-default-centos-stream8-3004-1-py3: {extends: '.test_instance_failure_permitted'}
-# default-centos-7-3004-1-py3: {extends: '.test_instance'}
-default-fedora-36-3004-1-py3: {extends: '.test_instance_failure_permitted'}
-default-fedora-35-3004-1-py3: {extends: '.test_instance'}
-default-amazonlinux-2-3004-1-py3: {extends: '.test_instance'}
-default-oraclelinux-8-3004-1-py3: {extends: '.test_instance'}
-# default-oraclelinux-7-3004-1-py3: {extends: '.test_instance'}
-default-arch-base-latest-3004-1-py3: {extends: '.test_instance'}
-default-gentoo-stage3-latest-3004-1-py3: {extends: '.test_instance'}
-default-gentoo-stage3-systemd-3004-1-py3: {extends: '.test_instance'}
-default-almalinux-8-3004-1-py3: {extends: '.test_instance'}
-default-rockylinux-8-3004-1-py3: {extends: '.test_instance'}
-default-opensuse-leap-153-3004-0-py3: {extends: '.test_instance'}
-default-opensuse-tmbl-latest-3004-0-py3: {extends: '.test_instance_failure_permitted'}
-default-debian-10-3003-4-py3: {extends: '.test_instance'}
-default-debian-9-3003-4-py3: {extends: '.test_instance'}
-# default-ubuntu-2004-3003-4-py3: {extends: '.test_instance'}
-default-ubuntu-1804-3003-4-py3: {extends: '.test_instance'}
-# default-centos-stream8-3003-4-py3: {extends: '.test_instance_failure_permitted'}
-default-centos-7-3003-4-py3: {extends: '.test_instance'}
-# default-amazonlinux-2-3003-4-py3: {extends: '.test_instance'}
-# default-oraclelinux-8-3003-4-py3: {extends: '.test_instance'}
-default-oraclelinux-7-3003-4-py3: {extends: '.test_instance'}
-# default-almalinux-8-3003-4-py3: {extends: '.test_instance'}
+# Fedora 41+ will permit failure until this PR is merged into kitchen-docker
+# https://github.com/test-kitchen/kitchen-docker/pull/427 is merged
+# OpenSUSE master branch will fail until zypperpkg module is back in salt core
+# https://github.com/saltstack/great-module-migration/issues/14
+#
+almalinux-9-master: {extends: '.test_instance_failure_permitted'}
+almalinux-8-master: {extends: '.test_instance_failure_permitted'}
+amazonlinux-2023-master: {extends: '.test_instance_failure_permitted'}
+amazonlinux-2-master: {extends: '.test_instance_failure_permitted'}
+centos-stream9-master: {extends: '.test_instance_failure_permitted'}
+debian-12-master: {extends: '.test_instance_failure_permitted'}
+debian-11-master: {extends: '.test_instance_failure_permitted'}
+fedora-41-master: {extends: '.test_instance_failure_permitted'}
+fedora-40-master: {extends: '.test_instance_failure_permitted'}
+opensuse-leap-156-master: {extends: '.test_instance_failure_permitted'}
+opensuse-tmbl-latest-master: {extends: '.test_instance_failure_permitted'}
+oraclelinux-9-master: {extends: '.test_instance_failure_permitted'}
+oraclelinux-8-master: {extends: '.test_instance_failure_permitted'}
+rockylinux-9-master: {extends: '.test_instance_failure_permitted'}
+rockylinux-8-master: {extends: '.test_instance_failure_permitted'}
+ubuntu-2404-master: {extends: '.test_instance_failure_permitted'}
+ubuntu-2204-master: {extends: '.test_instance_failure_permitted'}
+ubuntu-2004-master: {extends: '.test_instance_failure_permitted'}
+almalinux-9-3007-3: {extends: '.test_instance'}
+almalinux-8-3007-3: {extends: '.test_instance'}
+amazonlinux-2023-3007-3: {extends: '.test_instance'}
+amazonlinux-2-3007-3: {extends: '.test_instance_failure_permitted'}
+centos-stream9-3007-3: {extends: '.test_instance'}
+debian-12-3007-3: {extends: '.test_instance'}
+debian-11-3007-3: {extends: '.test_instance'}
+fedora-41-3007-3: {extends: '.test_instance_failure_permitted'}
+fedora-40-3007-3: {extends: '.test_instance'}
+opensuse-leap-156-3007-3: {extends: '.test_instance'}
+opensuse-tmbl-latest-3007-3: {extends: '.test_instance'}
+oraclelinux-9-3007-3: {extends: '.test_instance'}
+oraclelinux-8-3007-3: {extends: '.test_instance'}
+rockylinux-9-3007-3: {extends: '.test_instance'}
+rockylinux-8-3007-3: {extends: '.test_instance'}
+ubuntu-2404-3007-3: {extends: '.test_instance'}
+ubuntu-2204-3007-3: {extends: '.test_instance'}
+ubuntu-2004-3007-3: {extends: '.test_instance'}
+almalinux-9-3006-11: {extends: '.test_instance'}
+almalinux-8-3006-11: {extends: '.test_instance'}
+amazonlinux-2023-3006-11: {extends: '.test_instance'}
+amazonlinux-2-3006-11: {extends: '.test_instance_failure_permitted'}
+centos-stream9-3006-11: {extends: '.test_instance'}
+debian-12-3006-11: {extends: '.test_instance'}
+debian-11-3006-11: {extends: '.test_instance'}
+fedora-41-3006-11: {extends: '.test_instance_failure_permitted'}
+fedora-40-3006-11: {extends: '.test_instance'}
+opensuse-leap-156-3006-11: {extends: '.test_instance'}
+opensuse-tmbl-latest-3006-11: {extends: '.test_instance'}
+oraclelinux-9-3006-11: {extends: '.test_instance'}
+oraclelinux-8-3006-11: {extends: '.test_instance'}
+rockylinux-9-3006-11: {extends: '.test_instance'}
+rockylinux-8-3006-11: {extends: '.test_instance'}
+ubuntu-2404-3006-11: {extends: '.test_instance'}
+ubuntu-2204-3006-11: {extends: '.test_instance'}
+ubuntu-2004-3006-11: {extends: '.test_instance'}
 # yamllint enable rule:line-length
 
 ###############################################################################

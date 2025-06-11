@@ -8,18 +8,9 @@ provisioner:
   sudo: true
   salt_install: bootstrap
   salt_bootstrap_options: -P stable latest
-  salt_call_command: /opt/salt/bin/salt-call
+  salt_bootstrap_url: "https://github.com/saltstack/salt-bootstrap\
+                       /releases/latest/download/bootstrap-salt.sh"
+  salt_call_command: /opt/salt/salt-call
 
 platforms:
-  - name: macos-12-latest-py3
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: macos-11-latest-py3
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: macos-1015-latest-py3
-    verifier:
-      inputs:
-        saltmajorversion: 3004
+  - name: macos-13-latest

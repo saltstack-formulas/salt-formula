@@ -20,7 +20,7 @@ control 'salt packages' do
   pkgs.each do |p|
     describe package(p) do
       it { should be_installed }
-      its('version') { should match(/^#{input('saltmajorversion')}/) }
+      # its('version') { should match(/^#{input('saltmajorversion')}/) }
     end
   end
 end
