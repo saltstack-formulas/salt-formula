@@ -59,9 +59,9 @@ MacOS:
   minion_service: com.saltstack.salt.minion
   master_service: com.saltstack.salt.master
   salt_master_macos_plist_hash:
-    8435331b2d48ca8f0759f216e5b15ec9171a4216b1441328c732c6906728b7c9
+    97666226c14ec2fd755edb5d909688540a36408dfe9fb34a1c15676020376ace
   salt_minion_macos_plist_hash:
-    26b33da12e0d8960ee96b488c8352002c22a377c19bf3df3f986a1e49eca8b20
+    17d9556b5742a785eaddaec117132be99af138cab7157dbacbda2058538b6e69
 
 FreeBSD:
   salt_master: py39-salt
