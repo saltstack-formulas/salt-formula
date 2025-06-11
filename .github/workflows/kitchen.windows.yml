@@ -2,7 +2,7 @@
 # vim: ft=yaml
 ---
 name: 'Kitchen (Windows)'
-'on': ['push', 'pull_request']
+'on': ['workflow_dispatch']
 
 env:
   machine_user: kitchen

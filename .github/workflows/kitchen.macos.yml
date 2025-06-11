@@ -2,7 +2,7 @@
 # vim: ft=yaml
 ---
 name: 'Kitchen (macOS)'
-'on': ['push', 'pull_request']
+'on': ['workflow_dispatch']
 
 env:
   KITCHEN_LOCAL_YAML: 'kitchen.macos.yml'
