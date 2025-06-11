@@ -1,5 +1,20 @@
 # Changelog
 
+## [1.13.1](https://github.com/saltstack-formulas/salt-formula/compare/v1.13.0...v1.13.1) (2025-06-11)
+
+
+### Continuous Integration
+
+* **workflows:** disable as non-functioning ([518db2e](https://github.com/saltstack-formulas/salt-formula/commit/518db2ea27281bf34c78536eb6488977af46557e))
+* **workflows:** update `kitchen.macos.yml` ([8b2d182](https://github.com/saltstack-formulas/salt-formula/commit/8b2d18255de601fb76d8239076b03a58ac189383))
+* **workflows:** update `kitchen.windows.yml` ([2232038](https://github.com/saltstack-formulas/salt-formula/commit/223203857de7eb9a11bd51c45eb2694bd22606e0))
+
+
+### Tests
+
+* **_mapdata:** update to latest versions ([4419c79](https://github.com/saltstack-formulas/salt-formula/commit/4419c79a87712d6c59aaf14faa7f431c00e14e1f))
+* do not test installed Salt version ([f1e36d6](https://github.com/saltstack-formulas/salt-formula/commit/f1e36d6d8f40b38473ef07ab0b703a7f40417418))
+
 # [1.12.0](https://github.com/saltstack-formulas/salt-formula/compare/v1.11.0...v1.12.0) (2022-08-26)
 
 
