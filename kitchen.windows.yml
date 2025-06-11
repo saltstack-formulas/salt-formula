@@ -11,21 +11,15 @@ driver:
 
 provisioner:
   salt_install: bootstrap
-  salt_bootstrap_options: -pythonVersion 3 -version 3004.1-1
-  # yamllint disable rule:line-length
+  salt_bootstrap_url: "https://github.com/saltstack/salt-bootstrap\
+                       /releases/latest/download/bootstrap-salt.ps1"
+  salt_call_command: C:\Program Files\Salt Project\Salt\salt-call
   init_environment: |
-    salt-call --local state.single file.managed `
+    '"C:\Program Files\Salt Project\Salt\salt-call" --local state.single file.managed `
       C:\Users\kitchen\AppData\Local\Temp\kitchen\srv\salt\win\repo-ng\salt-minion.sls `
       source=https://github.com/saltstack/salt-winrepo-ng/raw/master/salt-minion.sls `
-      skip_verify=True makedirs=True
-  # yamllint enable rule:line-length
+      skip_verify=True makedirs=True'
 
 platforms:
-  - name: windows-2022-latest-py3
-    verifier:
-      inputs:
-        saltmajorversion: 3004
-  - name: windows-2019-latest-py3
-    verifier:
-      inputs:
-        saltmajorversion: 3004
+  - name: windows-2022-latest
+  - name: windows-2019-latest
