@@ -1,5 +1,4 @@
 ---
-# yamllint disable rule:comments
 name: Test & release
 
 'on':
@@ -20,30 +19,42 @@ jobs:
       should-run: ${{ steps.action.outputs.should-run }}
     steps:
       - id: action
-        uses:
-          # yamllint disable-line rule:line-length
-          techneg-it/should-workflow-run@dcbb88600d59ec2842778ef1e2d41f680f876329 # v1.0.0
+        # yamllint disable-line rule:line-length
+        uses: techneg-it/should-workflow-run@eff19348eb884f57e05bc6f05ae48ece3af14714 # v1.0.1
   pre-commit:
     name: Lint / `pre-commit`
     needs: should-run
     if: fromJSON(needs.should-run.outputs.should-run)
-    container: techneg/ci-pre-commit:v2.3.3
+    container: techneg/ci-pre-commit:v2.4.28@sha256:3a5b362f2fdf60e3a6c614a919c67cc8ae5d34208e287d293fc30c150a919ac6
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - run: | # Needed because of bug #2031 in `actions/checkout`
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+          filter: tree:0
       - name: Export `CI_CACHE_ID` from container
         run: echo "CI_CACHE_ID=$(cat /.ci_cache_id)" >> $GITHUB_ENV
-      - uses: actions/cache@1bd1e32a3bdc45362d1e726936510720a7c30a57 # v4.2.0
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: ~/.cache/pre-commit
           key: "${{ env.CI_CACHE_ID }}|\
                 ${{ hashFiles('.pre-commit-config.yaml') }}"
+          restore-keys: |
+            ${{ env.CI_CACHE_ID }}|
+      - name: Build cache
+        shell: bash
+        run: |
+          pre-commit gc
+          echo "Installing hook environments"
+          time pre-commit install-hooks
       - name: Run `pre-commit`
         run: |
-          git config --global --add safe.directory $(pwd)
           pre-commit run --all-files --color always --verbose
-          pre-commit run --color always --hook-stage manual commitlint-ci
+          pre-commit run --color always --hook-stage manual --verbose commitlint-ci
   results:
     name: Release / Collect results
     permissions:
@@ -54,7 +65,8 @@ jobs:
       # yamllint disable-line rule:line-length
       - uses: poseidon/wait-for-status-checks@899c768d191b56eef585c18f8558da19e1f3e707 # v0.6.0
         with:
-          ignore: Release / Collect results
+          ignore: >
+            Release / Collect results
           ignore_pattern: ^GitLab CI
           token: ${{ secrets.GITHUB_TOKEN }}
       - run: echo "::notice ::Workflow success!"

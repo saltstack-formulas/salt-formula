@@ -15,15 +15,15 @@
   stage_test: &stage_test 'test'
   # `image`
   # yamllint disable rule:line-length
-  image_commitlint: &image_commitlint 'techneg/ci-commitlint:v1.1.91@sha256:02574d0409adafb76d5a40a7d08202073e5377f4a7c4bfe9e198d1203ff94a8c'
-  image_dindruby: &image_dindruby 'techneg/ci-docker-python-ruby:v2.2.60@sha256:de98b8d1d3cf86639fe69bfc4f0416115d18300759c5ed2948ac56f973dd944f'
-  image_dindrubybionic: &image_dindrubybionic 'techneg/ci-docker-python-ruby:v2.2.60@sha256:de98b8d1d3cf86639fe69bfc4f0416115d18300759c5ed2948ac56f973dd944f'
-  image_precommit: &image_precommit 'techneg/ci-pre-commit:v2.4.25@sha256:ff5192e893c1079fbf70e3ce6bfc3773815041786a75659793158be930ba7803'
+  image_commitlint: &image_commitlint 'techneg/ci-commitlint:v1.1.94@sha256:3913ba70632c591b1accf8f65324008cfcbfb231e03a34908dd92022b3cd9fe4'
+  image_dindruby: &image_dindruby 'techneg/ci-docker-python-ruby:v2.2.63@sha256:d2dd81049d7c0c8e369c744d57824685ae089403c53b1c767d9cfe1c691d9327'
+  image_dindrubybionic: &image_dindrubybionic 'techneg/ci-docker-python-ruby:v2.2.63@sha256:d2dd81049d7c0c8e369c744d57824685ae089403c53b1c767d9cfe1c691d9327'
+  image_precommit: &image_precommit 'techneg/ci-pre-commit:v2.4.28@sha256:3a5b362f2fdf60e3a6c614a919c67cc8ae5d34208e287d293fc30c150a919ac6'
   image_rubocop: &image_rubocop 'pipelinecomponents/rubocop:latest@sha256:fe69f9642c7edde46bbd78326d2c42c6e13fc73694efb142e92e206725479328'
   image_semantic-release: &image_semanticrelease 'myii/ssf-semantic-release:15.14@sha256:374f588420087517a3cc0235e11293bffd72d7a59da3d98d5e69f014ff2a7761'
   # `services`
   services_docker_dind: &services_docker_dind
-    - 'docker:28.2.2-dind@sha256:d4668861cabc1691635d98e827a81cfa834a416f8fe0f4efc609f9f806d86d82'
+    - 'docker:28.3.0-dind@sha256:d33eb93fe02683e984e6f8a93c0b3d85bb74f56ec83922bc39fb34ba23ab42bc'
   # yamllint enable rule:line-length
   # `variables`
   # https://forum.gitlab.com/t/gitlab-com-ci-caching-rubygems/5627/3
@@ -184,42 +184,42 @@ rockylinux-8-master: {extends: '.test_instance_failure_permitted'}
 ubuntu-2404-master: {extends: '.test_instance_failure_permitted'}
 ubuntu-2204-master: {extends: '.test_instance_failure_permitted'}
 ubuntu-2004-master: {extends: '.test_instance_failure_permitted'}
-almalinux-9-3007-3: {extends: '.test_instance'}
-almalinux-8-3007-3: {extends: '.test_instance'}
-amazonlinux-2023-3007-3: {extends: '.test_instance'}
-amazonlinux-2-3007-3: {extends: '.test_instance_failure_permitted'}
-centos-stream9-3007-3: {extends: '.test_instance'}
-debian-12-3007-3: {extends: '.test_instance'}
-debian-11-3007-3: {extends: '.test_instance'}
-fedora-41-3007-3: {extends: '.test_instance_failure_permitted'}
-fedora-40-3007-3: {extends: '.test_instance'}
-opensuse-leap-156-3007-3: {extends: '.test_instance'}
-opensuse-tmbl-latest-3007-3: {extends: '.test_instance'}
-oraclelinux-9-3007-3: {extends: '.test_instance'}
-oraclelinux-8-3007-3: {extends: '.test_instance'}
-rockylinux-9-3007-3: {extends: '.test_instance'}
-rockylinux-8-3007-3: {extends: '.test_instance'}
-ubuntu-2404-3007-3: {extends: '.test_instance'}
-ubuntu-2204-3007-3: {extends: '.test_instance'}
-ubuntu-2004-3007-3: {extends: '.test_instance'}
-almalinux-9-3006-11: {extends: '.test_instance'}
-almalinux-8-3006-11: {extends: '.test_instance'}
-amazonlinux-2023-3006-11: {extends: '.test_instance'}
-amazonlinux-2-3006-11: {extends: '.test_instance_failure_permitted'}
-centos-stream9-3006-11: {extends: '.test_instance'}
-debian-12-3006-11: {extends: '.test_instance'}
-debian-11-3006-11: {extends: '.test_instance'}
-fedora-41-3006-11: {extends: '.test_instance_failure_permitted'}
-fedora-40-3006-11: {extends: '.test_instance'}
-opensuse-leap-156-3006-11: {extends: '.test_instance'}
-opensuse-tmbl-latest-3006-11: {extends: '.test_instance'}
-oraclelinux-9-3006-11: {extends: '.test_instance'}
-oraclelinux-8-3006-11: {extends: '.test_instance'}
-rockylinux-9-3006-11: {extends: '.test_instance'}
-rockylinux-8-3006-11: {extends: '.test_instance'}
-ubuntu-2404-3006-11: {extends: '.test_instance'}
-ubuntu-2204-3006-11: {extends: '.test_instance'}
-ubuntu-2004-3006-11: {extends: '.test_instance'}
+almalinux-9-3007-5: {extends: '.test_instance'}
+almalinux-8-3007-5: {extends: '.test_instance'}
+amazonlinux-2023-3007-5: {extends: '.test_instance'}
+amazonlinux-2-3007-5: {extends: '.test_instance_failure_permitted'}
+centos-stream9-3007-5: {extends: '.test_instance'}
+debian-12-3007-5: {extends: '.test_instance'}
+debian-11-3007-5: {extends: '.test_instance'}
+fedora-41-3007-5: {extends: '.test_instance_failure_permitted'}
+fedora-40-3007-5: {extends: '.test_instance'}
+opensuse-leap-156-3007-5: {extends: '.test_instance'}
+opensuse-tmbl-latest-3007-5: {extends: '.test_instance'}
+oraclelinux-9-3007-5: {extends: '.test_instance'}
+oraclelinux-8-3007-5: {extends: '.test_instance'}
+rockylinux-9-3007-5: {extends: '.test_instance'}
+rockylinux-8-3007-5: {extends: '.test_instance'}
+ubuntu-2404-3007-5: {extends: '.test_instance'}
+ubuntu-2204-3007-5: {extends: '.test_instance'}
+ubuntu-2004-3007-5: {extends: '.test_instance'}
+almalinux-9-3006-13: {extends: '.test_instance'}
+almalinux-8-3006-13: {extends: '.test_instance'}
+amazonlinux-2023-3006-13: {extends: '.test_instance'}
+amazonlinux-2-3006-13: {extends: '.test_instance_failure_permitted'}
+centos-stream9-3006-13: {extends: '.test_instance'}
+debian-12-3006-13: {extends: '.test_instance'}
+debian-11-3006-13: {extends: '.test_instance'}
+fedora-41-3006-13: {extends: '.test_instance_failure_permitted'}
+fedora-40-3006-13: {extends: '.test_instance'}
+opensuse-leap-156-3006-13: {extends: '.test_instance'}
+opensuse-tmbl-latest-3006-13: {extends: '.test_instance'}
+oraclelinux-9-3006-13: {extends: '.test_instance'}
+oraclelinux-8-3006-13: {extends: '.test_instance'}
+rockylinux-9-3006-13: {extends: '.test_instance'}
+rockylinux-8-3006-13: {extends: '.test_instance'}
+ubuntu-2404-3006-13: {extends: '.test_instance'}
+ubuntu-2204-3006-13: {extends: '.test_instance'}
+ubuntu-2004-3006-13: {extends: '.test_instance'}
 # yamllint enable rule:line-length
 
 ###############################################################################

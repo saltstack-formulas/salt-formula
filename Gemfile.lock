@@ -324,6 +324,7 @@ GEM
       ms_rest_azure (~> 0.12.0)
     base64 (0.2.0)
     bcrypt_pbkdf (1.1.1)
+    bcrypt_pbkdf (1.1.1-x64-mingw-ucrt)
     benchmark (0.4.0)
     bigdecimal (3.1.9)
     bson (4.15.0)
@@ -410,6 +411,9 @@ GEM
     faraday_middleware (1.0.0)
       faraday (~> 1.0)
     ffi (1.16.3)
+    ffi (1.16.3-x64-mingw-ucrt)
+    ffi-win32-extensions (1.0.4)
+      ffi
     fuzzyurl (0.9.0)
     google-apis-admin_directory_v1 (0.46.0)
       google-apis-core (>= 0.11.0, < 2.a)
@@ -459,9 +463,9 @@ GEM
     json (2.12.0)
     jwt (2.10.1)
       base64
-    kitchen-inspec (2.6.2)
+    kitchen-inspec (3.0.0)
       hashie (>= 3.4, <= 5.0)
-      inspec (>= 2.2.64, < 6.0)
+      inspec (>= 2.2.64, < 7.0)
       test-kitchen (>= 2.7, < 4)
     kitchen-salt (0.7.2)
       hashie (>= 3.5)
@@ -492,6 +496,11 @@ GEM
       ffi (>= 1.15.5)
     mixlib-shellout (3.3.9)
       chef-utils
+    mixlib-shellout (3.3.9-x64-mingw-ucrt)
+      chef-utils
+      ffi-win32-extensions (~> 1.0.3)
+      win32-process (~> 0.9)
+      wmi-lite (~> 1.0)
     mixlib-versioning (1.2.12)
     mongo (2.13.2)
       bson (>= 4.8.2, < 5.0.0)
@@ -514,6 +523,8 @@ GEM
       net-ssh (>= 4.0.0)
     nokogiri (1.18.8)
       mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
+    nokogiri (1.18.8-x64-mingw-ucrt)
       racc (~> 1.4)
     nori (2.7.0)
       bigdecimal
@@ -606,7 +617,7 @@ GEM
       unicode-display_width (>= 1.5, < 3.0)
       unicode_utils (~> 1.4)
     strings-ansi (0.2.0)
-    test-kitchen (3.6.0)
+    test-kitchen (3.7.0)
       bcrypt_pbkdf (~> 1.0)
       chef-utils (>= 16.4.35)
       ed25519 (~> 1.2)
@@ -759,6 +770,8 @@ GEM
     uber (0.1.0)
     unicode-display_width (2.6.0)
     unicode_utils (1.4.0)
+    win32-process (0.10.0)
+      ffi (>= 1.0.0)
     winrm (2.3.8)
       builder (>= 2.1.2)
       erubi (~> 1.8)
@@ -779,17 +792,19 @@ GEM
       rubyzip (~> 2.0)
       winrm (~> 2.0)
     wisper (2.0.1)
+    wmi-lite (1.0.7)
 
 PLATFORMS
   ruby
+  x64-mingw-ucrt
 
 DEPENDENCIES
   inspec!
   kitchen-docker!
-  kitchen-inspec (= 2.6.2)
+  kitchen-inspec (= 3.0.0)
   kitchen-salt (= 0.7.2)
   net-ssh (>= 7.0.0)
-  test-kitchen (= 3.6.0)
+  test-kitchen (= 3.7.0)
 
 BUNDLED WITH
    2.3.7

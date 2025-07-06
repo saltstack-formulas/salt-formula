@@ -5,6 +5,8 @@
 extends: 'default'
 
 rules:
+  comments:
+    min-spaces-from-content: 1
   empty-values:
     forbid-in-block-mappings: true
     forbid-in-flow-mappings: true
@@ -12,6 +14,7 @@ rules:
     # Increase from default of `80`
     # Based on https://github.com/PyCQA/flake8-bugbear#opinionated-warnings (`B950`)
     max: 88
+    allow-non-breakable-inline-mappings: true
   octal-values:
     forbid-implicit-octal: true
     forbid-explicit-octal: true
