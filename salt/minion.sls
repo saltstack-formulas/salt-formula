@@ -181,6 +181,12 @@ salt-minion-beacon-inotify:
 remove-default-minion-conf-file:
   file.absent:
     - name: {{ salt_settings.config_path }}/minion
+    {% elif salt_settings.minion_empty_config %}
+empty-default-minion-conf-file:
+  file.managed:
+    - name: {{ salt_settings.config_path }}/master
+    - contents: |
+        # Configuration is managed by Salt
     {% endif %}
 
 # clean up old _defaults.conf file if they have it around
