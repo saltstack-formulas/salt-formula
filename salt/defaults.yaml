@@ -16,7 +16,9 @@ salt:
   config_path: /etc/salt
 
   minion_remove_config: false
+  minion_empty_config: false
   master_remove_config: false
+  master_empty_config: false
   minion_config_use_TOFS: false
   master_config_use_TOFS: false
 
