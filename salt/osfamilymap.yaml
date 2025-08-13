@@ -72,6 +72,7 @@ Suse:
         install_from_package: git
   master:
     gitfs_provider: pygit2
+  restart_via_systemd: true
 
 Gentoo:
   salt_master: app-admin/salt
