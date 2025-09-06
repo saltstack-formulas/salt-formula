@@ -25,20 +25,20 @@ jobs:
     name: Lint / `pre-commit`
     needs: should-run
     if: fromJSON(needs.should-run.outputs.should-run)
-    container: techneg/ci-pre-commit:v2.4.32@sha256:fa9eef397583add95f4fccefa6ecbbf7a3845d6168f07393da7bc619696b246b
+    container: techneg/ci-pre-commit:v2.5.5@sha256:9d92b83a64378da3f9363668b0da244d9f12039d86579881d649ddb40ce261f3
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - run: | # Needed because of bug #2031 in `actions/checkout`
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
           fetch-depth: 0
           fetch-tags: true
           filter: tree:0
       - name: Export `CI_CACHE_ID` from container
         run: echo "CI_CACHE_ID=$(cat /.ci_cache_id)" >> $GITHUB_ENV
-      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+      - uses: actions/cache@0400d5f644dc74513175e3cd8d07132dd4860809 # v4.2.4
         with:
           path: ~/.cache/pre-commit
           key: "${{ env.CI_CACHE_ID }}|\
@@ -46,11 +46,10 @@ jobs:
           restore-keys: |
             ${{ env.CI_CACHE_ID }}|
       - name: Build cache
-        shell: bash
         run: |
           pre-commit gc
-          echo "Installing hook environments"
-          time pre-commit install-hooks
+          echo "Installing hook environments..."
+          time -f "Hook installation took %E" pre-commit install-hooks
       - name: Run `pre-commit`
         run: |
           pre-commit run --all-files --color always --verbose
@@ -62,13 +61,13 @@ jobs:
       issues: write
       pull-requests: write
       checks: read
-    container: techneg/ci-semantic-release:v1.1.0
+    container: techneg/ci-semantic-release:v1.2.4@sha256:e7cfe36054a56382568c0824d2539a67a956711d7b674093db320815e928ee27
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - run: |  # Needed due to bug actions/checkout#2031
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       # yamllint disable-line rule:line-length
       - uses: poseidon/wait-for-status-checks@899c768d191b56eef585c18f8558da19e1f3e707 # v0.6.0
         with:

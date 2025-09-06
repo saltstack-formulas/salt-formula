@@ -11,7 +11,8 @@ sed -i -e "s_^\(version:\).*_\1 ${1}_" FORMULA
 # (B) Update `AUTHORS.md`
 ###############################################################################
 
-maintainer contributor --ignore-contributors semantic-release-bot,renovate[bot]
+maintainer contributor \
+  --ignore-contributors dependabot[bot],renovate[bot],semantic-release-bot
 
 ###############################################################################
 # (C) Use `m2r` to convert automatically produced `.md` docs to `.rst`
