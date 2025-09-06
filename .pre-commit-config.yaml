@@ -18,7 +18,7 @@ ci:
 default_stages: [pre-commit]
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-merge-conflict
         name: Check for Git merge conflicts
@@ -30,7 +30,7 @@ repos:
       - id: commitlint
       - id: commitlint-ci
   - repo: https://github.com/rubocop-hq/rubocop
-    rev: v1.79.0
+    rev: v1.80.1
     hooks:
       - id: rubocop
         name: Check Ruby files with rubocop
@@ -100,12 +100,12 @@ repos:
             )$
         additional_dependencies: [pygments==2.16.1]
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 41.43.0
+    rev: 41.93.2
     hooks:
       - id: renovate-config-validator
         name: Check Renovate config with renovate-config-validator
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.33.2
+    rev: 0.33.3
     hooks:
       - id: check-github-workflows
         name: Check GitHub workflows with check-jsonschema

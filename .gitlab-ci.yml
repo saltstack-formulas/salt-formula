@@ -15,15 +15,15 @@
   stage_test: &stage_test 'test'
   # `image`
   # yamllint disable rule:line-length
-  image_commitlint: &image_commitlint 'techneg/ci-commitlint:v1.1.98@sha256:f227ba6da3c684b5506fa338bdb82b17e7a7a3f75f56b2407632b43a7e7276a2'
-  image_dindruby: &image_dindruby 'techneg/ci-docker-python-ruby:v2.2.67@sha256:2887fb02ee694a97241777b043b1942b7e6803080e06dd18633f083eed463844'
-  image_dindrubybionic: &image_dindrubybionic 'techneg/ci-docker-python-ruby:v2.2.67@sha256:2887fb02ee694a97241777b043b1942b7e6803080e06dd18633f083eed463844'
-  image_precommit: &image_precommit 'techneg/ci-pre-commit:v2.4.32@sha256:fa9eef397583add95f4fccefa6ecbbf7a3845d6168f07393da7bc619696b246b'
+  image_commitlint: &image_commitlint 'techneg/ci-commitlint:v1.1.103@sha256:3a2bf514e461769ed7b8880213e9637186bb7e17e0653b4a6ad3f249e4a60d33'
+  image_dindruby: &image_dindruby 'techneg/ci-docker-python-ruby:v2.2.72@sha256:20873e73badc9d5ea93e20ef745f64fe957625a755a60c91e3dad600217e2c76'
+  image_dindrubybionic: &image_dindrubybionic 'techneg/ci-docker-python-ruby:v2.2.72@sha256:20873e73badc9d5ea93e20ef745f64fe957625a755a60c91e3dad600217e2c76'
+  image_precommit: &image_precommit 'techneg/ci-pre-commit:v2.5.5@sha256:9d92b83a64378da3f9363668b0da244d9f12039d86579881d649ddb40ce261f3'
   image_rubocop: &image_rubocop 'pipelinecomponents/rubocop:latest@sha256:fe69f9642c7edde46bbd78326d2c42c6e13fc73694efb142e92e206725479328'
-  image_semantic-release: &image_semanticrelease 'techneg/ci-semantic-release:v1.1.0'
+  image_semantic-release: &image_semanticrelease 'techneg/ci-semantic-release:v1.2.4@sha256:e7cfe36054a56382568c0824d2539a67a956711d7b674093db320815e928ee27'
   # `services`
   services_docker_dind: &services_docker_dind
-    - 'docker:28.3.2-dind@sha256:44383404ebf0c36243f5969f0dddd23c204ea3bb185e7473a4141f6ccfd07b53'
+    - 'docker:28.3.3-dind@sha256:a56b3bdde89315ed2cc0e4906e582b5033d93bf20d9cb9510c2cdd4e7f7690b1'
   # yamllint enable rule:line-length
   # `variables`
   # https://forum.gitlab.com/t/gitlab-com-ci-caching-rubygems/5627/3
@@ -94,15 +94,6 @@ commitlint:
     # Set default commit hashes for `--from` and `--to`
     - 'export COMMITLINT_FROM="$(git merge-base upstream/master HEAD)"'
     - 'export COMMITLINT_TO="${CI_COMMIT_SHA}"'
-    # `coqbot` adds a merge commit to test PRs on top of the latest commit in
-    # the repo; amend this merge commit message to avoid failure
-    - |
-      if [ "${GITLAB_USER_LOGIN}" = "coqbot" ] \
-      && [ "${CI_COMMIT_BRANCH}" != "master" ]; then
-        git commit --amend -m \
-          'chore: reword coqbot merge commit message for commitlint'
-        export COMMITLINT_TO=HEAD
-      fi
     # Run `commitlint`
     - 'commitlint --from "${COMMITLINT_FROM}"
                   --to   "${COMMITLINT_TO}"
@@ -184,42 +175,42 @@ rockylinux-8-master: {extends: '.test_instance_failure_permitted'}
 ubuntu-2404-master: {extends: '.test_instance_failure_permitted'}
 ubuntu-2204-master: {extends: '.test_instance_failure_permitted'}
 ubuntu-2004-master: {extends: '.test_instance_failure_permitted'}
-almalinux-9-3007-6: {extends: '.test_instance'}
-almalinux-8-3007-6: {extends: '.test_instance'}
-amazonlinux-2023-3007-6: {extends: '.test_instance'}
-amazonlinux-2-3007-6: {extends: '.test_instance_failure_permitted'}
-centos-stream9-3007-6: {extends: '.test_instance'}
-debian-12-3007-6: {extends: '.test_instance'}
-debian-11-3007-6: {extends: '.test_instance'}
-fedora-41-3007-6: {extends: '.test_instance_failure_permitted'}
-fedora-40-3007-6: {extends: '.test_instance'}
-opensuse-leap-156-3007-6: {extends: '.test_instance'}
-opensuse-tmbl-latest-3007-6: {extends: '.test_instance'}
-oraclelinux-9-3007-6: {extends: '.test_instance'}
-oraclelinux-8-3007-6: {extends: '.test_instance'}
-rockylinux-9-3007-6: {extends: '.test_instance'}
-rockylinux-8-3007-6: {extends: '.test_instance'}
-ubuntu-2404-3007-6: {extends: '.test_instance'}
-ubuntu-2204-3007-6: {extends: '.test_instance'}
-ubuntu-2004-3007-6: {extends: '.test_instance'}
-almalinux-9-3006-14: {extends: '.test_instance'}
-almalinux-8-3006-14: {extends: '.test_instance'}
-amazonlinux-2023-3006-14: {extends: '.test_instance'}
-amazonlinux-2-3006-14: {extends: '.test_instance_failure_permitted'}
-centos-stream9-3006-14: {extends: '.test_instance'}
-debian-12-3006-14: {extends: '.test_instance'}
-debian-11-3006-14: {extends: '.test_instance'}
-fedora-41-3006-14: {extends: '.test_instance_failure_permitted'}
-fedora-40-3006-14: {extends: '.test_instance'}
-opensuse-leap-156-3006-14: {extends: '.test_instance'}
-opensuse-tmbl-latest-3006-14: {extends: '.test_instance'}
-oraclelinux-9-3006-14: {extends: '.test_instance'}
-oraclelinux-8-3006-14: {extends: '.test_instance'}
-rockylinux-9-3006-14: {extends: '.test_instance'}
-rockylinux-8-3006-14: {extends: '.test_instance'}
-ubuntu-2404-3006-14: {extends: '.test_instance'}
-ubuntu-2204-3006-14: {extends: '.test_instance'}
-ubuntu-2004-3006-14: {extends: '.test_instance'}
+almalinux-9-3007-7: {extends: '.test_instance'}
+almalinux-8-3007-7: {extends: '.test_instance'}
+amazonlinux-2023-3007-7: {extends: '.test_instance'}
+amazonlinux-2-3007-7: {extends: '.test_instance_failure_permitted'}
+centos-stream9-3007-7: {extends: '.test_instance'}
+debian-12-3007-7: {extends: '.test_instance'}
+debian-11-3007-7: {extends: '.test_instance'}
+fedora-41-3007-7: {extends: '.test_instance_failure_permitted'}
+fedora-40-3007-7: {extends: '.test_instance'}
+opensuse-leap-156-3007-7: {extends: '.test_instance'}
+opensuse-tmbl-latest-3007-7: {extends: '.test_instance'}
+oraclelinux-9-3007-7: {extends: '.test_instance'}
+oraclelinux-8-3007-7: {extends: '.test_instance'}
+rockylinux-9-3007-7: {extends: '.test_instance'}
+rockylinux-8-3007-7: {extends: '.test_instance'}
+ubuntu-2404-3007-7: {extends: '.test_instance'}
+ubuntu-2204-3007-7: {extends: '.test_instance'}
+ubuntu-2004-3007-7: {extends: '.test_instance'}
+almalinux-9-3006-15: {extends: '.test_instance'}
+almalinux-8-3006-15: {extends: '.test_instance'}
+amazonlinux-2023-3006-15: {extends: '.test_instance'}
+amazonlinux-2-3006-15: {extends: '.test_instance_failure_permitted'}
+centos-stream9-3006-15: {extends: '.test_instance'}
+debian-12-3006-15: {extends: '.test_instance'}
+debian-11-3006-15: {extends: '.test_instance'}
+fedora-41-3006-15: {extends: '.test_instance_failure_permitted'}
+fedora-40-3006-15: {extends: '.test_instance'}
+opensuse-leap-156-3006-15: {extends: '.test_instance'}
+opensuse-tmbl-latest-3006-15: {extends: '.test_instance'}
+oraclelinux-9-3006-15: {extends: '.test_instance'}
+oraclelinux-8-3006-15: {extends: '.test_instance'}
+rockylinux-9-3006-15: {extends: '.test_instance'}
+rockylinux-8-3006-15: {extends: '.test_instance'}
+ubuntu-2404-3006-15: {extends: '.test_instance'}
+ubuntu-2204-3006-15: {extends: '.test_instance'}
+ubuntu-2004-3006-15: {extends: '.test_instance'}
 # yamllint enable rule:line-length
 
 ###############################################################################

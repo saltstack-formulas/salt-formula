@@ -91,143 +91,143 @@ platforms:
     driver:
       image: saltimages/salt-master-py3:rockylinux-8
 
-  ## SALT `3007.6`
-  - name: debian-12-3007-6
+  ## SALT `3007.7`
+  - name: debian-12-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:debian-12
+      image: saltimages/salt-3007.7-py3:debian-12
       run_command: /lib/systemd/systemd
-  - name: debian-11-3007-6
+  - name: debian-11-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:debian-11
+      image: saltimages/salt-3007.7-py3:debian-11
       run_command: /lib/systemd/systemd
-  - name: ubuntu-2404-3007-6
+  - name: ubuntu-2404-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:ubuntu-24.04
+      image: saltimages/salt-3007.7-py3:ubuntu-24.04
       run_command: /lib/systemd/systemd
-  - name: ubuntu-2204-3007-6
+  - name: ubuntu-2204-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:ubuntu-22.04
+      image: saltimages/salt-3007.7-py3:ubuntu-22.04
       run_command: /lib/systemd/systemd
-  - name: ubuntu-2004-3007-6
+  - name: ubuntu-2004-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:ubuntu-20.04
+      image: saltimages/salt-3007.7-py3:ubuntu-20.04
       run_command: /lib/systemd/systemd
-  - name: centos-stream9-3007-6
+  - name: centos-stream9-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:centos-stream9
-  - name: opensuse-leap-156-3007-6
+      image: saltimages/salt-3007.7-py3:centos-stream9
+  - name: opensuse-leap-156-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:opensuse-leap-15.6
+      image: saltimages/salt-3007.7-py3:opensuse-leap-15.6
     # Workaround to avoid intermittent failures on `opensuse-leap-15.6`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
-  - name: opensuse-tmbl-latest-3007-6
+  - name: opensuse-tmbl-latest-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:opensuse-tumbleweed-latest
+      image: saltimages/salt-3007.7-py3:opensuse-tumbleweed-latest
     # Workaround to avoid intermittent failures on `opensuse-tumbleweed`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
-  - name: fedora-41-3007-6
+  - name: fedora-41-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:fedora-41
-  - name: fedora-40-3007-6
+      image: saltimages/salt-3007.7-py3:fedora-41
+  - name: fedora-40-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:fedora-40
-  - name: amazonlinux-2023-3007-6
+      image: saltimages/salt-3007.7-py3:fedora-40
+  - name: amazonlinux-2023-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:amazonlinux-2023
-  - name: amazonlinux-2-3007-6
+      image: saltimages/salt-3007.7-py3:amazonlinux-2023
+  - name: amazonlinux-2-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:amazonlinux-2
-  - name: oraclelinux-9-3007-6
+      image: saltimages/salt-3007.7-py3:amazonlinux-2
+  - name: oraclelinux-9-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:oraclelinux-9
-  - name: oraclelinux-8-3007-6
+      image: saltimages/salt-3007.7-py3:oraclelinux-9
+  - name: oraclelinux-8-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:oraclelinux-8
-  - name: almalinux-9-3007-6
+      image: saltimages/salt-3007.7-py3:oraclelinux-8
+  - name: almalinux-9-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:almalinux-9
-  - name: almalinux-8-3007-6
+      image: saltimages/salt-3007.7-py3:almalinux-9
+  - name: almalinux-8-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:almalinux-8
-  - name: rockylinux-9-3007-6
+      image: saltimages/salt-3007.7-py3:almalinux-8
+  - name: rockylinux-9-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:rockylinux-9
-  - name: rockylinux-8-3007-6
+      image: saltimages/salt-3007.7-py3:rockylinux-9
+  - name: rockylinux-8-3007-7
     driver:
-      image: saltimages/salt-3007.6-py3:rockylinux-8
+      image: saltimages/salt-3007.7-py3:rockylinux-8
 
-  ## SALT `3006.14`
-  - name: debian-12-3006-14
+  ## SALT `3006.15`
+  - name: debian-12-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:debian-12
+      image: saltimages/salt-3006.15-py3:debian-12
       run_command: /lib/systemd/systemd
-  - name: debian-11-3006-14
+  - name: debian-11-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:debian-11
+      image: saltimages/salt-3006.15-py3:debian-11
       run_command: /lib/systemd/systemd
-  - name: ubuntu-2404-3006-14
+  - name: ubuntu-2404-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:ubuntu-24.04
+      image: saltimages/salt-3006.15-py3:ubuntu-24.04
       run_command: /lib/systemd/systemd
-  - name: ubuntu-2204-3006-14
+  - name: ubuntu-2204-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:ubuntu-22.04
+      image: saltimages/salt-3006.15-py3:ubuntu-22.04
       run_command: /lib/systemd/systemd
-  - name: ubuntu-2004-3006-14
+  - name: ubuntu-2004-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:ubuntu-20.04
+      image: saltimages/salt-3006.15-py3:ubuntu-20.04
       run_command: /lib/systemd/systemd
-  - name: centos-stream9-3006-14
+  - name: centos-stream9-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:centos-stream9
-  - name: opensuse-tmbl-latest-3006-14
+      image: saltimages/salt-3006.15-py3:centos-stream9
+  - name: opensuse-tmbl-latest-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:opensuse-tumbleweed-latest
+      image: saltimages/salt-3006.15-py3:opensuse-tumbleweed-latest
     # Workaround to avoid intermittent failures on `opensuse-tumbleweed`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
-  - name: opensuse-leap-156-3006-14
+  - name: opensuse-leap-156-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:opensuse-leap-15.6
+      image: saltimages/salt-3006.15-py3:opensuse-leap-15.6
     # Workaround to avoid intermittent failures on `opensuse-leap-15.6`:
     # => SCP did not finish successfully (255):  (Net::SCP::Error)
     transport:
       max_ssh_sessions: 1
-  - name: fedora-41-3006-14
+  - name: fedora-41-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:fedora-41
-  - name: fedora-40-3006-14
+      image: saltimages/salt-3006.15-py3:fedora-41
+  - name: fedora-40-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:fedora-40
-  - name: amazonlinux-2023-3006-14
+      image: saltimages/salt-3006.15-py3:fedora-40
+  - name: amazonlinux-2023-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:amazonlinux-2023
-  - name: amazonlinux-2-3006-14
+      image: saltimages/salt-3006.15-py3:amazonlinux-2023
+  - name: amazonlinux-2-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:amazonlinux-2
-  - name: oraclelinux-9-3006-14
+      image: saltimages/salt-3006.15-py3:amazonlinux-2
+  - name: oraclelinux-9-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:oraclelinux-9
-  - name: oraclelinux-8-3006-14
+      image: saltimages/salt-3006.15-py3:oraclelinux-9
+  - name: oraclelinux-8-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:oraclelinux-8
-  - name: almalinux-9-3006-14
+      image: saltimages/salt-3006.15-py3:oraclelinux-8
+  - name: almalinux-9-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:almalinux-9
-  - name: almalinux-8-3006-14
+      image: saltimages/salt-3006.15-py3:almalinux-9
+  - name: almalinux-8-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:almalinux-8
-  - name: rockylinux-9-3006-14
+      image: saltimages/salt-3006.15-py3:almalinux-8
+  - name: rockylinux-9-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:rockylinux-9
-  - name: rockylinux-8-3006-14
+      image: saltimages/salt-3006.15-py3:rockylinux-9
+  - name: rockylinux-8-3006-15
     driver:
-      image: saltimages/salt-3006.14-py3:rockylinux-8
+      image: saltimages/salt-3006.15-py3:rockylinux-8
 
 ##########################################################
 # This file is managed as part of a Copier template.     #
