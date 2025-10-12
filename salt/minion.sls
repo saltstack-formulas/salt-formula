@@ -212,6 +212,9 @@ permissions-minion-config:
     - replace: False
     {% endif %}
 
+{#- we assume a group with the same name as the user exists #}
+{%- set syndic_user = salt_settings.get('master', {}).get('syndic_user') %}
+
 salt-minion-pki-dir:
   file.directory:
 {% if 'pki_dir' in salt_settings.minion %}
@@ -221,13 +224,22 @@ salt-minion-pki-dir:
 {% endif %}
     - user: {{ salt_settings.rootuser }}
     - group:
+      {%- if syndic_user is none %}
         {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
         wheel
         {%- else %}
         {{ salt_settings.rootgroup }}
         {%- endif %}
+      {%- else %}
+        {{ syndic_user }}
+      {%- endif %}
     {%- if grains['kernel'] != 'Windows' %}
-    - mode: 700
+    - mode:
+      {%- if syndic_user is none %}
+        700
+      {%- else %}
+        750
+      {%- endif %}
     {% endif %}
     - makedirs: True
 
@@ -238,7 +250,7 @@ permissions-minion.pem:
 {% else %}
     - name: {{ salt_settings.config_path | path_join('pki', 'minion', 'minion.pem') }}
 {% endif %}
-    - user: {{ salt_settings.rootuser }}
+    - user: {{ salt_settings.rootuser if syndic_user is none else syndic_user }}
     - group:
         {%- if grains['kernel'] in ['FreeBSD', 'OpenBSD', 'NetBSD'] %}
         wheel
