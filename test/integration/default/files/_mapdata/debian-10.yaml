@@ -63,6 +63,7 @@ values:
         base:
         - /srv/pillar
     master_config_use_TOFS: false
+    master_empty_config: false
     master_remove_config: false
     master_service: salt-master
     master_service_details:
@@ -80,6 +81,7 @@ values:
         base:
         - /srv/pillar
     minion_config_use_TOFS: false
+    minion_empty_config: false
     minion_remove_config: false
     minion_service: salt-minion
     minion_service_details:
