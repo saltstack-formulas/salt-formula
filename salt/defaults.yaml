@@ -11,6 +11,7 @@ salt:
   use_pip: false
   clean_config_d_dir: true
   restart_via_at: false
+  restart_via_systemd: false
   parallel: true   # salt.git module argument
 
   config_path: /etc/salt
