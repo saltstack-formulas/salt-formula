@@ -323,7 +323,7 @@ GEM
     bigdecimal (3.3.1)
     bson (4.15.0)
     builder (3.3.0)
-    cgi (0.5.0)
+    cgi (0.5.1)
     chef-config (18.7.6)
       addressable
       chef-utils (= 18.7.6)
@@ -374,7 +374,7 @@ GEM
     domain_name (0.6.20240107)
     drb (2.2.1)
     ed25519 (1.4.0)
-    erb (4.0.4)
+    erb (4.0.4.1)
       cgi (>= 0.3.3)
     erubi (1.13.1)
     excon (1.2.5)
