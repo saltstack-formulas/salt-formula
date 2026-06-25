@@ -24,6 +24,8 @@ control 'salt._mapdata' do
   # Load the mapdata from profile, into a YAML structure
   # https://docs.chef.io/inspec/profiles/#profile-files
   mapdata_file_yaml = YAML.load(inspec.profile.file(mapdata_file_path))
+  # salt_settings.version is pinned to the kitchen image's salt, so drop it
+  mapdata_file_yaml.dig('values', 'salt_settings')&.delete('version')
   # Dump the YAML back into a string for comparison
   mapdata_file_dump = YAML.dump(mapdata_file_yaml)
 
@@ -36,6 +38,8 @@ control 'salt._mapdata' do
   # Load the output into a YAML structure using InSpec's `yaml` resource
   # https://github.com/inspec/inspec/blob/49b7d10/lib/inspec/resources/yaml.rb#L29
   output_file_yaml = yaml(output_file_path).params
+  # drop the image-pinned salt_settings.version here too
+  output_file_yaml.dig('values', 'salt_settings')&.delete('version')
   # Dump the YAML back into a string for comparison
   output_file_dump = YAML.dump(output_file_yaml)
 
