@@ -249,7 +249,7 @@ suites:
         base:
           '*':
             - salt._mapdata
-            - salt.pkgrepo
+            # no salt.pkgrepo: it upgrades image's salt to latest in place and crashes
             - salt.master
             - salt.minion
     verifier:
