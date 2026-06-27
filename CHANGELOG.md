@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.13.3](https://github.com/saltstack-formulas/salt-formula/compare/v1.13.2...v1.13.3) (2026-06-27)
+
+### Testing
+
+* fix failing kitchen suites by pinning salt to the image version ([5c894b9](https://github.com/saltstack-formulas/salt-formula/commit/5c894b9753edcde371f0a8cc18ea3433cb28fb3c))
+* ignore the pinned salt version in the _mapdata reference check ([f418e6d](https://github.com/saltstack-formulas/salt-formula/commit/f418e6d8d8b5301b01f9d49ec63bd6e6ba8a25cc))
+
+### Maintenance
+
+* **copier:** update template https://github.com/dafyddj/copier-ssf-ci to v2.10.3 ([c7ad2d9](https://github.com/saltstack-formulas/salt-formula/commit/c7ad2d9311bec4d87038ba11614450d7fe4cf411))
+* **copier:** update template https://github.com/dafyddj/copier-ssf-ci to v2.10.6 ([dc1ae1f](https://github.com/saltstack-formulas/salt-formula/commit/dc1ae1f2b854a06df51da7ae064f7d7c41ab1512))
+
 ## [1.13.2](https://github.com/saltstack-formulas/salt-formula/compare/v1.13.1...v1.13.2) (2025-10-13)
 
 
