@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.13.4](https://github.com/saltstack-formulas/salt-formula/compare/v1.13.3...v1.13.4) (2026-06-27)
+
+### Bug Fixes
+
+* **minion:** correct master_failback config option name ([231aa55](https://github.com/saltstack-formulas/salt-formula/commit/231aa55c9813d0e2e4a5a940f9779a625c545b3e))
+
 ## [1.13.3](https://github.com/saltstack-formulas/salt-formula/compare/v1.13.2...v1.13.3) (2026-06-27)
 
 ### Testing
