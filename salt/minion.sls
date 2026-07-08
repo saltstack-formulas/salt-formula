@@ -40,7 +40,9 @@ download-salt-minion:
 
 salt-minion-macos:
   file.managed:
-    - onlyif: {{ grains.os == 'MacOS' }}
+    - onlyif:
+      - fun: match.grain
+        tgt: 'os:MacOS'
     - name: /Library/LaunchDaemons/com.saltstack.salt.minion.plist
     - source: https://raw.githubusercontent.com/saltstack/salt/master/pkg/macos/scripts/com.saltstack.salt.master.plist
     - source_hash: {{ salt_settings.salt_minion_macos_plist_hash }}
