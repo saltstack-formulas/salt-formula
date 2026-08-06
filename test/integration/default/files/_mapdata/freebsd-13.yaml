@@ -93,6 +93,7 @@ values:
     python_git: py39-gitpython
     release: '3004'
     restart_via_at: false
+    restart_via_systemd: false
     retry_options:
       attempts: 5
       interval: 10
