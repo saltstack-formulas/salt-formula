@@ -20,7 +20,7 @@
 
 
 Debian:
-  pkgrepo: 'deb [signed-by=/etc/apt/keyrings/salt-archive-keyring.pgp arch=amd64]
+  pkgrepo: 'deb [signed-by=/etc/apt/keyrings/salt-archive-keyring.gpg]
               {{ salt_repo }}/saltproject-deb stable main'
   pkgrepo_keyring: '{{ salt_repo_key_url }}'
   pkgrepo_keyring_hash:
