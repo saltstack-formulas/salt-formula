@@ -1,24 +1,25 @@
 # frozen_string_literal: true
 
+# This is a placeholder version to remind us to update the Gemfile
+# when a new stable Chef Workstation is released
+# renovate: chef-workstation 25.14.2
+
 source ENV.fetch('PROXY_RUBYGEMSORG', 'https://rubygems.org')
 
 # Install the `inspec` gem using `git` because versions after `4.22.22`
 # suppress diff output; this version fixes this for our uses.
-# rubocop:disable Layout/LineLength
+# rubocop:disable-next Layout/LineLength
 gem 'inspec', git: 'https://gitlab.com/saltstack-formulas/infrastructure/inspec', branch: 'ssf'
-# rubocop:enable Layout/LineLength
 
-# Install the `kitchen-docker` gem using `git` in order to gain a performance
-# improvement: avoid package installations which are already covered by the
-# `salt-image-builder` (i.e. the pre-salted images that we're using)
-# rubocop:disable Layout/LineLength
-gem 'kitchen-docker', git: 'https://github.com/test-kitchen/kitchen-docker', ref: '511e4ad36856b9e2eccceb56603586e6cebd296a'
-# rubocop:enable Layout/LineLength
+# Install the `kitchen-docker` gem using `git` in order to avoid an upstream
+# error caused by `kitchen-docker.gemspec`.
+# TODO: correct the error upstream
+# rubocop:disable-next Layout/LineLength
+gem 'kitchen-docker', git: 'https://github.com/dafyddj/kitchen-docker', branch: 'chore/gemspec'
 
-gem 'kitchen-inspec', '3.0.0'
+gem 'kitchen-inspec', '3.1.0'
 gem 'kitchen-salt', '0.7.2'
 
-# Avoid the error 'pkeys are immutable on OpenSSL 3.0'
-gem 'net-ssh', '>= 7.0.0'
+gem 'net-ssh', '7.3.2'
 
-gem 'test-kitchen', '3.9.0'
+gem 'test-kitchen', '4.0.0'

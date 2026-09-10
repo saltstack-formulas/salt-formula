@@ -29,12 +29,12 @@ repos:
     hooks:
       - id: commitlint
       - id: commitlint-ci
-  - repo: https://github.com/rubocop-hq/rubocop
-    rev: v1.84.1
+  - repo: https://github.com/rubocop/rubocop
+    rev: v1.90.0
     hooks:
       - id: rubocop
         name: Check Ruby files with rubocop
-        args: [--debug]
+        args: [--debug, --display-style-guide]
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.9.0.6
     hooks:
@@ -80,7 +80,7 @@ repos:
         name: Check Salt files using salt-lint
         files: ^.*\.(sls|jinja|j2|tmpl|tst)$
   - repo: https://github.com/rstcheck/rstcheck
-    rev: v6.2.5
+    rev: v6.3.0
     hooks:
       - id: rstcheck
         name: Check reST files using rstcheck
@@ -100,12 +100,12 @@ repos:
             )$
         additional_dependencies: [pygments==2.16.1]
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 42.95.1
+    rev: 44.69.12
     hooks:
       - id: renovate-config-validator
         name: Check Renovate config with renovate-config-validator
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.36.1
+    rev: 0.38.0
     hooks:
       - id: check-github-workflows
         name: Check GitHub workflows with check-jsonschema
