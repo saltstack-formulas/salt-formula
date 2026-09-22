@@ -25,20 +25,20 @@ jobs:
     name: Lint / `pre-commit`
     needs: should-run
     if: fromJSON(needs.should-run.outputs.should-run)
-    container: techneg/ci-pre-commit:v2.5.28@sha256:fb14ff152879618c500efa8eac55a6937b34f10e3b86e6d4869b7eb532618c09
+    container: techneg/ci-pre-commit:v2.5.58@sha256:56e0bf7d16560020b738a2378240643ccb399350a540e906ca1e27009ffe2d68
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - run: | # Needed because of bug #2031 in `actions/checkout`
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           fetch-tags: true
           filter: tree:0
       - name: Export `CI_CACHE_ID` from container
         run: echo "CI_CACHE_ID=$(cat /.ci_cache_id)" >> $GITHUB_ENV
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.cache/pre-commit
           key: "${{ env.CI_CACHE_ID }}|\
@@ -61,18 +61,19 @@ jobs:
       issues: write
       pull-requests: write
       checks: read
-    container: techneg/ci-semantic-release:v1.2.26@sha256:e736e32f69db7c51205c06fd5538731fddfa9c6339d0571e7ec8ce9250b8f962
+    container: techneg/ci-semantic-release:v1.2.58@sha256:723edbddfa534c7c137f09adec5fb2dfd6286d3fcb9c63688d7e5265ca4dd77e
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - run: |  # Needed due to bug actions/checkout#2031
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       # yamllint disable-line rule:line-length
-      - uses: poseidon/wait-for-status-checks@899c768d191b56eef585c18f8558da19e1f3e707 # v0.6.0
+      - uses: poseidon/wait-for-status-checks@e7e24423722c5b8e97a6dd5848827d2a412f812d # v0.7.0
         with:
           ignore: >
-            Release / Collect results
+            Dependabot,
+            Release / Collect results,
           ignore_pattern: ^GitLab CI
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run `semantic-release`
