@@ -5,7 +5,7 @@
 # {%- set py_ver_repr = salt['pillar.get']('salt:py_ver', '') %}
 # yamllint disable rule:line-length
 # {%- set osrelease = salt['grains.get']('osrelease', '') %}
-# {%- set opensuse_repo_suffix = 'Leap_' ~ osrelease if salt['grains.get']('osfinger', '') == 'Leap-15' else 'Tumbleweed' %}
+# {%- set opensuse_repo = osrelease if salt['grains.get']('osfinger', '').startswith('Leap-') else 'openSUSE_Tumbleweed' %}
 # {%- set salt_repo = salt['pillar.get']('salt:repo', 'https://packages.broadcom.com/artifactory') %}
 # {%- set salt_repo_key_url = salt['pillar.get']('salt:repo_key_url', salt_repo ~ '/api/security/keypair/SaltProjectKey/public') %}
 # yamllint enable rule:line-length
@@ -57,11 +57,11 @@ RedHat:
 
 Suse:
   pkgrepo_humanname:
-    'Salt releases for SLE-based SUSE products (openSUSE_{{ opensuse_repo_suffix }})'
+    'Salt releases for SLE-based SUSE products ({{ opensuse_repo }})'
   pkgrepo: "https://download.opensuse.org/repositories/systemsmanagement:\
-              /saltstack/openSUSE_{{ opensuse_repo_suffix }}/"
+              /saltstack/{{ opensuse_repo }}/"
   key_url: "https://download.opensuse.org/repositories/systemsmanagement:\
-              /saltstack/openSUSE_{{ opensuse_repo_suffix }}/repodata/repomd.xml.key"
+              /saltstack/{{ opensuse_repo }}/repodata/repomd.xml.key"
   pygit2: python3-pygit2
   pyinotify: python-pyinotify
   gitfs:
