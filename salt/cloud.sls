@@ -22,7 +22,7 @@ salt-cloud:
   pkg.installed:
     - name: {{ salt_settings.salt_cloud }}
     {%- if salt_settings.version is defined %}
-    - version: {{ salt_settings.version }}
+    - version: {{ salt_settings.version | json }}
     {%- endif %}
     {%- if salt_settings.use_pip %}
     - require:

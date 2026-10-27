@@ -25,7 +25,7 @@ salt-master:
   pkg.installed:
     - name: {{ salt_settings.salt_master }}
        {%- if salt_settings.version is defined %}
-    - version: {{ salt_settings.version }}
+    - version: {{ salt_settings.version | json }}
        {%- endif %}
        {% if salt_settings.master_service_details.state != 'ignore' %}
     - require_in:
