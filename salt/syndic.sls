@@ -8,7 +8,7 @@ salt-syndic:
   pkg.installed:
     - name: {{ salt_settings.salt_syndic }}
   {%- if salt_settings.version is defined %}
-    - version: {{ salt_settings.version }}
+    - version: {{ salt_settings.version | json }}
   {%- endif %}
     - require_in:
       - service: salt-syndic
