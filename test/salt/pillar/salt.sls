@@ -7,7 +7,7 @@ salt:
   # don't upgrade it to the repo's "latest" in place mid-converge — swapping the
   # running onedir breaks the post-install module refresh, which raises:
   #   ModuleNotFoundError: spec not found for the module 'site'
-  version: "{{ salt['grains.get']('saltversion') }}"
+  version: !!str "{{ salt['grains.get']('saltversion') }}"
   # Override used for FreeBSD minion service
   retry_options:
     attempts: 5

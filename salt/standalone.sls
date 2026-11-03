@@ -6,7 +6,7 @@ salt-minion-standalone:
   pkg.installed:
     - name: {{ salt_settings.salt_minion }}
      {%- if salt_settings.version is defined %}
-    - version: {{ salt_settings.version }}
+    - version: !!str {{ salt_settings.version }}
      {%- endif %}
   {% endif %}
   file.recurse:

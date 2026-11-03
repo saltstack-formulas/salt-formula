@@ -22,7 +22,7 @@ salt:
   install_packages: true
 
   # Optional: set salt version (if install_packages is set to true)
-  version: '3006.9'
+  version: !!str '3006.9'
 
   # Pin version provided under 'version' key by using apt-pinning
   # available only on Debian family OS-es
@@ -48,7 +48,7 @@ salt:
   # To get the available releases:
   # * https://packages.broadcom.com/artifactory/saltproject-rpm/
   # * https://packages.broadcom.com/artifactory/saltproject-deb
-  release: '3006'
+  release: !!str '3006'
 
   # MacOS has no package management.
   # Instead, we use file.managed to download an appropriate .pkg file and
