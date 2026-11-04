@@ -87,7 +87,7 @@ values:
       state: running
     parallel: true
     pin_version: false
-    pkgrepo: deb [signed-by=/etc/apt/keyrings/salt-archive-keyring.pgp arch=amd64]
+    pkgrepo: deb [signed-by=/etc/apt/keyrings/salt-archive-keyring.gpg]
       https://packages.broadcom.com/artifactory/saltproject-deb stable main
     pkgrepo_keyring: https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public
     pkgrepo_keyring_hash: sha256=36decef986477acb8ba2a1fc4041bcf9f22229ef6c939d0317c9e36a9d142b34

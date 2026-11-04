@@ -6,7 +6,7 @@ ensure-salt-ssh-is-installed:
   pkg.installed:
     - name: {{ salt_settings.salt_ssh }}
   {%- if salt_settings.version is defined %}
-    - version: {{ salt_settings.version }}
+    - version: !!str {{ salt_settings.version }}
   {%- endif %}
 {% endif %}
 

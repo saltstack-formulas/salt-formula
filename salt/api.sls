@@ -8,7 +8,7 @@ salt-api:
   pkg.installed:
     - name: {{ salt_settings.salt_api }}
   {%- if salt_settings.version is defined %}
-    - version: {{ salt_settings.version }}
+    - version: !!str {{ salt_settings.version }}
   {%- endif %}
 {% endif %}
 {% if salt_settings.api_service_details.state != 'ignore' %}
