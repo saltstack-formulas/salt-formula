@@ -2,6 +2,35 @@
 Changelog
 =========
 
+`2.0.0 <https://github.com/saltstack-formulas/salt-formula/compare/v1.13.4...v2.0.0>`_ (2026-11-04)
+-------------------------------------------------------------------------------------------------------
+
+⚠ BREAKING CHANGES
+^^^^^^^^^^^^^^^^^^
+
+
+* **suse:** match newer Leap versions
+
+Bug Fixes
+^^^^^^^^^
+
+
+* enforce string values for versions (\ `ad6e2b3 <https://github.com/saltstack-formulas/salt-formula/commit/ad6e2b36677305f122cbefc840c79b0bd410d3fe>`_\ )
+* **pkgrepo.debian:** bring into line with latest install docs (\ `336bde8 <https://github.com/saltstack-formulas/salt-formula/commit/336bde8799d731b0f37909ac52d8fef2ef59812c>`_\ ), closes `salt-bootstrap#2121 <https://github.com/saltstack-formulas/salt-bootstrap/issues/2121>`_
+* **suse:** match newer Leap versions (\ `a9fe3c2 <https://github.com/saltstack-formulas/salt-formula/commit/a9fe3c2807911b5efff59758e7207900c8a6ad15>`_\ )
+
+Testing
+^^^^^^^
+
+
+* **_mapdata:** update to latest versions (\ `b6b9aa3 <https://github.com/saltstack-formulas/salt-formula/commit/b6b9aa3e8cadc66d46e7ea73d90a8bdcc814cb4c>`_\ )
+
+Maintenance
+^^^^^^^^^^^
+
+
+* **copier:** update template https://github.com/dafyddj/copier-ssf-ci to v2.12.1 (\ `9d687df <https://github.com/saltstack-formulas/salt-formula/commit/9d687df156eb6580065ea7e68013a12053e97080>`_\ )
+
 `1.13.4 <https://github.com/saltstack-formulas/salt-formula/compare/v1.13.3...v1.13.4>`_ (2026-06-27)
 ---------------------------------------------------------------------------------------------------------
 
