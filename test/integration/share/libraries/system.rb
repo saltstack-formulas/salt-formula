@@ -4,7 +4,7 @@
 # Author: Daniel Dehennin <daniel.dehennin@ac-dijon.fr>
 # Copyright (C) 2020 Daniel Dehennin <daniel.dehennin@ac-dijon.fr>
 
-# rubocop:disable Metrics/ClassLength
+# rubocop:disable-next Metrics/ClassLength
 class SystemResource < Inspec.resource(1)
   name 'system'
 
@@ -47,7 +47,7 @@ class SystemResource < Inspec.resource(1)
     end
   end
 
-  # rubocop:disable Metrics/MethodLength,Metrics/AbcSize,Metrics/CyclomaticComplexity
+  # rubocop:disable-next Metrics/MethodLength,Metrics/AbcSize,Metrics/CyclomaticComplexity
   def build_platform_release
     case inspec.platform[:name]
     when 'amazon'
@@ -60,9 +60,9 @@ class SystemResource < Inspec.resource(1)
     when 'mac_os_x'
       inspec.command('sw_vers -productVersion').stdout.to_s
     when 'opensuse'
-      # rubocop:disable Style/NumericLiterals,Layout/LineLength
-      inspec.platform[:release].to_i > 20210101 ? 'tumbleweed' : inspec.platform[:release]
-      # rubocop:enable Style/NumericLiterals,Layout/LineLength
+      release = inspec.platform[:release]
+      # rubocop:disable-next Style/NumericLiterals
+      release.to_i > 20210101 ? 'tumbleweed' : release
     when 'windows_8.1_pro'
       '8.1'
     when 'windows_server_2022_datacenter'
@@ -75,7 +75,6 @@ class SystemResource < Inspec.resource(1)
       inspec.platform[:release]
     end
   end
-  # rubocop:enable Metrics/MethodLength,Metrics/AbcSize,Metrics/CyclomaticComplexity
 
   def derive_gentoo_init_system
     inspec.command('systemctl').exist? ? 'sysd' : 'sysv'
@@ -94,7 +93,7 @@ class SystemResource < Inspec.resource(1)
     end
   end
 
-  # rubocop:disable Metrics/MethodLength,Metrics/CyclomaticComplexity
+  # rubocop:disable-next Metrics/MethodLength,Metrics/CyclomaticComplexity
   def build_platform_codename
     case build_platform_finger
     when 'ubuntu-22.04'
@@ -133,6 +132,4 @@ class SystemResource < Inspec.resource(1)
       ''
     end
   end
-  # rubocop:enable Metrics/MethodLength,Metrics/CyclomaticComplexity
 end
-# rubocop:enable Metrics/ClassLength
