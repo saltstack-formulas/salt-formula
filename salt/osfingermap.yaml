@@ -9,6 +9,17 @@
 # {%- set salt_repo_key_url = salt['pillar.get']('salt:repo_key_url', salt_repo ~ '/api/security/keypair/SaltProjectKey/public') %}
 # yamllint enable rule:line-length
 
+Debian-11:
+  pygit2: python-pygit2
+  gitfs:
+    pygit2:
+      install_from_source: true
+      version: 1.9.0
+      git:
+        require_state: false
+        install_from_package: Null
+  libgit2: libgit2-glib-1.0-0
+
 Oracle Linux Server-7:
   pkgrepo_humanname: SaltStack repo for RHEL/CentOS {{ osmajorrelease }}
   pkgrepo: '{{ salt_repo }}/saltproject-rpm/'
